@@ -77,7 +77,7 @@ $config = [
         ],
         'db' => $db,
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\UserOld',
             'enableAutoLogin' => false,
         ],
     ],
