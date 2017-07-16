@@ -8,7 +8,7 @@
 
 namespace app\api\modules\v1\controllers;
 
-use app\api\modules\v1\models\SALON_MODEL;
+use app\api\modules\v1\models\SERVICE_MODEL;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -19,12 +19,12 @@ use app\models\ContactForm;
 use yii\rest\Controller;
 use yii\web\Response;
 
-class SalonController extends ActiveController
+class ServiceController extends ActiveController
 {
 	/**
 	 * @var object
 	 */
-	public $modelClass = 'app\api\modules\v1\models\SALON_MODEL';
+	public $modelClass = 'app\api\modules\v1\models\SERVICE_MODEL';
 
 	public function behaviors()
 	{
@@ -36,7 +36,7 @@ class SalonController extends ActiveController
 	public function actionIndex()
 	{
 		return new ActiveDataProvider([
-			'query' => SALON_MODEL::findOne(4),
+			'query' => SERVICE_MODEL::findOne(4),
 		]);
 	}
 

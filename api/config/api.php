@@ -56,7 +56,15 @@ $config = [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'v1/salon',
-                        'v1/book',
+                        'v1/service', //
+                        'v1/offeredservice', //offered services
+                        'v1/reservation',
+                        'v1/reserved',
+                        'v1/payment',
+                        'v1/staff',
+                        'v1/user',
+	                    'v1/account',
+	                    'v1/status',
                     ],
                     //'GET,HEAD <id:\d+>/booth' => 'booth/all-booths',
                     'tokens' => [
