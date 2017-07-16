@@ -55,7 +55,7 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                        'v1/spa',
+                        'v1/salon',
                         'v1/book',
                     ],
                     //'GET,HEAD <id:\d+>/booth' => 'booth/all-booths',
@@ -65,7 +65,8 @@ $config = [
                     'extraPatterns' => [
                         //'GET query' => 'query',
                         //'GET users' => 'citizens',
-                        //'GET all-booths' => 'all-booths',
+                        'GET all' => 'all',
+                        'POST all' => 'all',
                         //'GET all/{id}' => 'all',
                         //'GET summary/{id}' => 'summary',
                         //post actions
