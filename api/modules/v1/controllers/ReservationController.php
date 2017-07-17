@@ -55,12 +55,19 @@ class ReservationController extends ActiveController
 		$transaction = $db->beginTransaction();
 		if ($reservation->validate() && $reservation->save()) {
 			//next save the selected services
-			foreach ($services as $service) {
+			foreach ($services as $key => $service) {
+				/* @var $serviceObj RESERVED_SERVICE_MODEL */
+				$serviceObj = (object)$service;
+
 				$reserved_services->isNewRecord = true;
 				$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
+				$reserved_services->OFFERED_SERVICE_ID = $serviceObj->OFFERED_SERVICE_ID;
+				$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_AMOUNT;
 			}
+
 			if ($reserved_services->validate() && $reserved_services->save()) {
 				$message = [$reservation, $reserved_services];
+				$transaction->commit();
 			} else {
 				$errors = $reserved_services->getErrors();
 				foreach ($errors as $key => $error) {
@@ -103,12 +110,7 @@ class ReservationController extends ActiveController
 		$user->MOBILE_NO = isset($request->MOBILE_NO) ? $request->MOBILE_NO : $user->MOBILE_NO;
 		$user->OTHER_NAMES = isset($request->OTHER_NAMES) ? $request->OTHER_NAMES : $user->OTHER_NAMES;
 
-		if ($user->validate() && $user->save()) {
-			$message = [
-				'id' => $user->USER_ID,
-				'password' => $user->PASSWORD
-			];
-		} else {
+		if (!$user->validate() && !$user->save()) {
 			$errors = $user->getErrors();
 			foreach ($errors as $key => $error) {
 				$message[] = [

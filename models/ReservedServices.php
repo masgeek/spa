@@ -35,10 +35,9 @@ class ReservedServices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['RESERVED_SERVICE_ID', 'OFFERED_SERVICE_ID', 'RESERVATION_ID'], 'required'],
-            [['RESERVED_SERVICE_ID', 'OFFERED_SERVICE_ID', 'STAFF_ID', 'RESERVATION_ID', 'STATUS_ID'], 'integer'],
+            [['OFFERED_SERVICE_ID', 'RESERVATION_ID'], 'required'],
+            [['OFFERED_SERVICE_ID', 'STAFF_ID', 'RESERVATION_ID', 'STATUS_ID'], 'integer'],
             [['SERVICE_AMOUNT'], 'number'],
-            [['RESERVED_SERVICE_ID'], 'unique'],
             [['RESERVATION_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Reservations::className(), 'targetAttribute' => ['RESERVATION_ID' => 'RESERVATION_ID']],
             [['OFFERED_SERVICE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => OfferedServices::className(), 'targetAttribute' => ['OFFERED_SERVICE_ID' => 'OFFERED_SERVICE_ID']],
             [['STAFF_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Staff::className(), 'targetAttribute' => ['STAFF_ID' => 'STAFF_ID']],
