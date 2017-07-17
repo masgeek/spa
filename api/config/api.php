@@ -73,7 +73,7 @@ $config = [
                     'extraPatterns' => [
                         'GET,POST all' => 'all',
                         'POST register' => 'register',
-                        'PUT update/{id}' => 'update',
+                        'PUT,POST update/{id}' => 'update',
                         //'GET all/{id}' => 'all',
                         //'GET summary/{id}' => 'summary',
                         //post actions

@@ -16,12 +16,13 @@ class USER_MODEL extends User
 	public $CHANGE_PASSWORD;
 
 	const SCENARIO_CREATE = 'create';
+	const SCENARIO_UPDATE = 'update';
 
 	public function rules()
 	{
 		$rules = parent::rules();
 
-		$rules[] = [['EMAIL'], 'unique', 'on' => self::SCENARIO_CREATE];
+		$rules[] = [['EMAIL'], 'unique', 'on' => [self::SCENARIO_CREATE,self::SCENARIO_UPDATE]];
 		return $rules;
 	}
 
@@ -29,6 +30,7 @@ class USER_MODEL extends User
 	{
 		$scenarios = parent::scenarios();
 		$scenarios[self::SCENARIO_CREATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_STATUS', 'ACCOUNT_TYPE_ID'];
+		$scenarios[self::SCENARIO_UPDATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_TYPE_ID'];
 
 		return $scenarios;
 	}
