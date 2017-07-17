@@ -15,8 +15,8 @@ use Yii;
  * @property int $STATUS_ID
  *
  * @property Payments[] $payments
- * @property User $uSER
  * @property Status $sTATUS
+ * @property User $uSER
  * @property ReservedServices[] $reservedServices
  */
 class Reservations extends \yii\db\ActiveRecord
@@ -35,12 +35,12 @@ class Reservations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['USER_ID', 'RESERVATION_DATE', 'RESERVATION_TIME', 'TOTAL_COST'], 'required'],
             [['USER_ID', 'STATUS_ID'], 'integer'],
-            [['USER_ID','RESERVATION_DATE', 'RESERVATION_TIME'], 'required'],
             [['RESERVATION_DATE', 'RESERVATION_TIME'], 'safe'],
             [['TOTAL_COST'], 'number'],
-            [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
             [['STATUS_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['STATUS_ID' => 'STATUS_ID']],
+            [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
         ];
     }
 
@@ -70,17 +70,17 @@ class Reservations extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUSER()
+    public function getSTATUS()
     {
-        return $this->hasOne(User::className(), ['USER_ID' => 'USER_ID']);
+        return $this->hasOne(Status::className(), ['STATUS_ID' => 'STATUS_ID']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSTATUS()
+    public function getUSER()
     {
-        return $this->hasOne(Status::className(), ['STATUS_ID' => 'STATUS_ID']);
+        return $this->hasOne(User::className(), ['USER_ID' => 'USER_ID']);
     }
 
     /**
