@@ -19,6 +19,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 class UserController extends ActiveController
@@ -92,7 +93,11 @@ class UserController extends ActiveController
 		/* @var $request USER_MODEL */
 		$message = [];
 
+
 		$user = USER_MODEL::findOne($id);
+		if ($user == null) {
+			throw new NotFoundHttpException('Data not found');;
+		}
 		$user->setScenario(USER_MODEL::SCENARIO_UPDATE);
 		if (!Yii::$app->request->isPut) {
 			throw new BadRequestHttpException('Please use PUT');
