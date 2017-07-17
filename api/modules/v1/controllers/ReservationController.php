@@ -2,31 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: RONIN
- * Date: 7/16/2017
- * Time: 8:47 PM
+ * Date: 7/17/2017
+ * Time: 3:45 PM
  */
 
 namespace app\api\modules\v1\controllers;
 
-use app\api\modules\v1\models\SERVICE_MODEL;
-use app\api\modules\v1\models\USER_MODEL;
-use Yii;
-use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
-use yii\rest\ActiveController;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
-use yii\rest\Controller;
-use yii\web\BadRequestHttpException;
-use yii\web\Response;
 
-class UserController extends ActiveController
+use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
+use Yii;
+use app\api\modules\v1\models\RESERVATION_MODEL;
+use yii\db\Expression;
+use yii\rest\ActiveController;
+use yii\web\BadRequestHttpException;
+
+class ReservationController extends ActiveController
 {
 	/**
 	 * @var object
 	 */
-	public $modelClass = 'app\api\modules\v1\models\USER_MODEL';
+	public $modelClass = 'app\api\modules\v1\models\RESERVATION_MODEL';
 
 	public function actions()
 	{
@@ -35,48 +30,35 @@ class UserController extends ActiveController
 		return $actions;
 	}
 
-	public function actionLogin()
+	public function actionReserve()
 	{
-
-	}
-
-	public function actionRecover()
-	{
-
-	}
-
-	public function actionRegister()
-	{
-		/* @var $request USER_MODEL */
+		/* @var $request RESERVATION_MODEL */
 		$message = [];
+		$db = Yii::$app->db;
 
 		if (!Yii::$app->request->isPost) {
 			throw new BadRequestHttpException('Please use POST');
 		}
 		$request = (object)Yii::$app->request->post();
 
+		$reservation = new RESERVATION_MODEL();
+		$reserved_services = new RESERVED_SERVICE_MODEL();
 
-		$user = new USER_MODEL();
-		$user->setScenario(USER_MODEL::SCENARIO_CREATE);
+		//$reservation->setScenario(RESERVATION_MODEL::SCENARIO_CREATE);
 		//assign the post data values
-		$user->SURNAME = isset($request->SURNAME) ? $request->SURNAME : null;
-		$user->EMAIL = isset($request->EMAIL) ? $request->EMAIL : null;
-		$user->MOBILE_NO = isset($request->MOBILE_NO) ? $request->MOBILE_NO : null;
-		$user->OTHER_NAMES = isset($request->OTHER_NAMES) ? $request->OTHER_NAMES : $user->OTHER_NAMES;
-		$user->ACCOUNT_TYPE_ID = isset($request->ACCOUNT_TYPE_ID) ? $request->ACCOUNT_TYPE_ID : 1;
+		$reservation->USER_ID = isset($request->USER_ID) ? $request->USER_ID : null;
+		$reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
+		$reservation->RESERVATION_TIME = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : new Expression('NOW()');
+		$reservation->TOTAL_COST = isset($request->TOTAL_COST) ? $request->TOTAL_COST : 0;
 
-		//we will need to encrypt this password bit
-		$user->PASSWORD = $request->PASSWORD;
-
-		if ($user->validate()) {
-			if ($user->save()) {
-				$message = [
-					'id' => $user->USER_ID,
-					'password' => $user->PASSWORD
-				];
+		$transaction = $db->beginTransaction();
+		if ($reservation->validate()) {
+			if ($reservation->save()) {
+				//next save the selected services
+				$message =$reservation;
 			}
 		} else {
-			$errors = $user->getErrors();
+			$errors = $reservation->getErrors();
 			foreach ($errors as $key => $error) {
 				$message[] = [
 					'field' => $key,
@@ -84,6 +66,7 @@ class UserController extends ActiveController
 				];
 			}
 		}
+		$transaction->rollback();
 		return $message;
 	}
 

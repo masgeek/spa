@@ -34,14 +34,7 @@ class OfferedserviceController extends ActiveController
 		return $behaviors;
 	}
 
-	public function actionIndex()
-	{
-		return new ActiveDataProvider([
-			'query' => OFFERED_SERVICE_MODEL::findOne(4),
-		]);
-	}
-
-	public function actionAll()
+	public function actionAddService()
 	{
 
 	}

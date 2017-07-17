@@ -33,14 +33,12 @@ class SalonController extends ActiveController
 		return $behaviors;
 	}
 
-	public function actionIndex()
+	public function actionAdd()
 	{
-		return new ActiveDataProvider([
-			'query' => SALON_MODEL::findOne(4),
-		]);
+
 	}
 
-	public function actionAll()
+	public function actionUpdate($id)
 	{
 
 	}
