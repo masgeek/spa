@@ -13,5 +13,20 @@ use app\models\OfferedServices;
 
 class OFFERED_SERVICE_MODEL extends OfferedServices
 {
+	public $SALON;
 
+	public function fields()
+	{
+		$fields = parent::fields();
+
+		$fields['SALON'] = function ($model) {
+			/* @var $model OFFERED_SERVICE_MODEL */
+			return [
+				'SALON_NAME' => $model->sALON->SALON_NAME,
+				'SALON_LOCATION' => $model->sALON->SALON_LOCATION,
+			];
+		};
+		//unset($fields['SERVICE_COST']);
+		return $fields;
+	}
 }
