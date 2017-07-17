@@ -16,6 +16,7 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 	public function rules()
 	{
 		$rules = parent::rules();
+
 		return $rules;
 	}
 }

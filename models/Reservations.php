@@ -36,7 +36,7 @@ class Reservations extends \yii\db\ActiveRecord
     {
         return [
             [['USER_ID', 'STATUS_ID'], 'integer'],
-            [['RESERVATION_DATE', 'RESERVATION_TIME'], 'required'],
+            [['USER_ID','RESERVATION_DATE', 'RESERVATION_TIME'], 'required'],
             [['RESERVATION_DATE', 'RESERVATION_TIME'], 'safe'],
             [['TOTAL_COST'], 'number'],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],

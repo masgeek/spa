@@ -46,7 +46,7 @@ class ReservationController extends ActiveController
 
 		//$reservation->setScenario(RESERVATION_MODEL::SCENARIO_CREATE);
 		//assign the post data values
-		$reservation->USER_ID = isset($request->USER_ID) ? $request->USER_ID : null;
+		//$reservation->USER_ID = isset($request->USER_ID) ? $request->USER_ID : null;
 		$reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
 		$reservation->RESERVATION_TIME = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : new Expression('NOW()');
 		$reservation->TOTAL_COST = isset($request->TOTAL_COST) ? $request->TOTAL_COST : 0;
