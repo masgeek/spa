@@ -53,26 +53,25 @@ class ReservationController extends ActiveController
 
 		$services = isset($request->SERVICES) ? $request->SERVICES : [];
 		$transaction = $db->beginTransaction();
-		if ($reservation->validate()) {
-			if ($reservation->save()) {
-				//next save the selected services
-				foreach ($services as $service) {
-					$reserved_services->isNewRecord = true;
-					$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
-				}
-				if ($reserved_services->validate() && $reserved_services->save()) {
-					$message = [$reservation, $reserved_services];
-				} else {
-					$errors = $reserved_services->getErrors();
-					foreach ($errors as $key => $error) {
-						$message[] = [
-							'field' => $key,
-							'message' => $error[0]
-						];
-					}
-					$transaction->rollback();
-				}
+		if ($reservation->validate() && $reservation->save()) {
+			//next save the selected services
+			foreach ($services as $service) {
+				$reserved_services->isNewRecord = true;
+				$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
 			}
+			if ($reserved_services->validate() && $reserved_services->save()) {
+				$message = [$reservation, $reserved_services];
+			} else {
+				$errors = $reserved_services->getErrors();
+				foreach ($errors as $key => $error) {
+					$message[] = [
+						'field' => $key,
+						'message' => $error[0]
+					];
+				}
+				$transaction->rollback();
+			}
+
 		} else {
 			$transaction->rollback();
 			$errors = $reservation->getErrors();
