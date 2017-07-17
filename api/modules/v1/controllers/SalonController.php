@@ -26,13 +26,6 @@ class SalonController extends ActiveController
 	 */
 	public $modelClass = 'app\api\modules\v1\models\SALON_MODEL';
 
-	public function behaviors()
-	{
-		$behaviors = parent::behaviors();
-		$behaviors['rateLimiter']['enableRateLimitHeaders'] = false;
-		return $behaviors;
-	}
-
 	public function actionAdd()
 	{
 
