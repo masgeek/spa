@@ -71,10 +71,9 @@ $config = [
                         '{id}' => '<id:\\w+>',
                     ],
                     'extraPatterns' => [
-                        //'GET query' => 'query',
-                        //'GET users' => 'citizens',
-                        'GET all' => 'all',
-                        'POST all' => 'all',
+                        'GET,POST all' => 'all',
+                        'POST register' => 'register',
+                        'PUT update/{id}' => 'update',
                         //'GET all/{id}' => 'all',
                         //'GET summary/{id}' => 'summary',
                         //post actions
