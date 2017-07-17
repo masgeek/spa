@@ -34,18 +34,38 @@ class UserController extends ActiveController
 		return $actions;
 	}
 
+	public function actionLogin()
+	{
+
+	}
+
 	public function actionRegister()
 	{
+		/* @var $request USER_MODEL */
 		$message = [];
 
-		$request = Yii::$app->request->post();
+		$request = (object)Yii::$app->request->post();
 
 
 		$user = new USER_MODEL();
+		$user->setScenario(USER_MODEL::SCENARIO_CREATE);
+		//assign the post data values
+		$user->SURNAME = $request->SURNAME;
+		$user->EMAIL = $request->EMAIL;
+		$user->MOBILE_NO = $request->MOBILE_NO;
+		$user->OTHER_NAMES = $request->OTHER_NAMES;
+		$user->ACCOUNT_TYPE_ID = isset($request->ACCOUNT_TYPE_ID) ? $request->ACCOUNT_TYPE_ID : 1;
 
-		return $request;
+		//we will need to encrypt this password bit
+		$user->PASSWORD = $request->PASSWORD;
+
 		if ($user->validate()) {
-
+			if ($user->save()) {
+				$message = [
+					'id' => $user->USER_ID,
+					'password' => $user->PASSWORD
+				];
+			}
 		} else {
 			$errors = $user->getErrors();
 			foreach ($errors as $key => $error) {

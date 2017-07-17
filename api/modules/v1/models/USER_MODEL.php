@@ -13,10 +13,24 @@ use app\models\User;
 
 class USER_MODEL extends User
 {
+	public $CHANGE_PASSWORD;
+
+	const SCENARIO_CREATE = 'create';
+
 	public function rules()
 	{
 		$rules = parent::rules();
+
+		$rules[] = [['EMAIL'], 'unique', 'on' => self::SCENARIO_CREATE];
 		return $rules;
+	}
+
+	public function scenarios()
+	{
+		$scenarios = parent::scenarios();
+		$scenarios[self::SCENARIO_CREATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_STATUS', 'ACCOUNT_TYPE_ID'];
+
+		return $scenarios;
 	}
 
 	public function attributeLabels()
@@ -24,6 +38,21 @@ class USER_MODEL extends User
 		$labels = parent::attributeLabels();
 
 		return $labels;
+	}
+
+	public function beforeSave($insert)
+	{
+		if (parent::beforeSave($insert)) {
+			if ($this->isNewRecord) {
+				$this->PASSWORD = sha1($this->PASSWORD); //hash the user password
+			}
+			if ($this->CHANGE_PASSWORD == 'true' || $this->CHANGE_PASSWORD == 1) { //when checkbox is checked to indicate password changed
+				//it is in update mode check if password change was requested
+				$this->PASSWORD = sha1($this->PASSWORD); //hash the user password
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public function fields()
