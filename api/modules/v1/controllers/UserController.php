@@ -93,16 +93,16 @@ class UserController extends ActiveController
 		/* @var $request USER_MODEL */
 		$message = [];
 
-
-		$user = USER_MODEL::findOne($id);
-		if ($user == null) {
-			throw new NotFoundHttpException('Data not found');;
-		}
-		$user->setScenario(USER_MODEL::SCENARIO_UPDATE);
 		if (!Yii::$app->request->isPut) {
 			throw new BadRequestHttpException('Please use PUT');
 		}
 
+		$user = USER_MODEL::findOne($id);
+		if ($user == null) {
+			throw new NotFoundHttpException('Data not found', 5);
+		}
+
+		$user->setScenario(USER_MODEL::SCENARIO_UPDATE);
 		$request = (object)Yii::$app->request->bodyParams;
 		$user->SURNAME = isset($request->SURNAME) ? $request->SURNAME : $user->SURNAME;
 		$user->EMAIL = isset($request->EMAIL) ? $request->EMAIL : $user->EMAIL;
