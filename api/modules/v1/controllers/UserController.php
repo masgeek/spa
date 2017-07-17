@@ -99,7 +99,7 @@ class UserController extends ActiveController
 
 		$user = USER_MODEL::findOne($id);
 		if ($user == null) {
-			throw new NotFoundHttpException('Data not found', 5);
+			throw new NotFoundHttpException('User not found', 5);
 		}
 
 		$user->setScenario(USER_MODEL::SCENARIO_UPDATE);
