@@ -47,7 +47,6 @@ class UserController extends ActiveController
 		}
 		$request = (object)Yii::$app->request->post();
 
-		return null;
 		$email = $request->EMAIL;
 		$password = sha1($request->PASSWORD);
 		$user = USER_MODEL::findOne(['EMAIL' => $email/*, 'PASSWORD' => $password*/]);
