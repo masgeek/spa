@@ -72,6 +72,7 @@ $config = [
 					],
 					'extraPatterns' => [
 						'GET,POST all' => 'all',
+						'POST login' => 'login',
 						'POST register' => 'register',
 						'POST add' => 'add',
 						'POST reserve' => 'reserve',

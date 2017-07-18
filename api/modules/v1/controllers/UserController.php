@@ -38,12 +38,37 @@ class UserController extends ActiveController
 
 	public function actionLogin()
 	{
+		/* @var $request USER_MODEL */
+		$message = [];
 
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
 	}
 
 	public function actionRecover()
 	{
+		/* @var $request USER_MODEL */
+		$message = [];
 
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
+		$request = (object)Yii::$app->request->post();
+		$email = $request->EMAIL;
+		$password = sha1($request->PASSWORD);
+
+		$user = USER_MODEL::find(['EMAIL' => $email, 'PASSWORD' => $password]);
+		if ($user != null) {
+			$message = $user;
+		} else {
+			$message = [
+				'status' => false,
+				'message' => 'Invalid Username/Password'
+			];
+		}
+
+		return $message;
 	}
 
 	public function actionRegister()
