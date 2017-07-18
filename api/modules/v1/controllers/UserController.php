@@ -51,7 +51,7 @@ class UserController extends ActiveController
 		$password = sha1($request->PASSWORD);
 		$user = USER_MODEL::findOne(['EMAIL' => $email, 'PASSWORD' => $password]);
 		if ($user != null) {
-			if ($user->ACCOUNT_STATUS === 5) {
+			if ($user->ACCOUNT_STATUS === 1) {
 				$message = $user;
 			} else {
 				$message = [
