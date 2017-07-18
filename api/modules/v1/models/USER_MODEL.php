@@ -65,7 +65,7 @@ class USER_MODEL extends User
 			/* @var $model USER_MODEL */
 			return $model->aCCOUNTTYPE->ACCOUNT_NAME;
 		};
-		unset($fields['PASSWORD']);
+		//unset($fields['PASSWORD']);
 		return $fields;
 	}
 }
