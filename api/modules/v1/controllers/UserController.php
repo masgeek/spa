@@ -129,6 +129,7 @@ class UserController extends ActiveController
 		$user->EMAIL = isset($request->EMAIL) ? $request->EMAIL : $user->EMAIL;
 		$user->MOBILE_NO = isset($request->MOBILE_NO) ? $request->MOBILE_NO : $user->MOBILE_NO;
 		$user->OTHER_NAMES = isset($request->OTHER_NAMES) ? $request->OTHER_NAMES : $user->OTHER_NAMES;
+		$user->CHANGE_PASSWORD = isset($request->CHANGE_PASSWORD) ? $request->CHANGE_PASSWORD : 0;
 
 		if ($user->validate() && $user->save()) {
 			$message = [
