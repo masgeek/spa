@@ -49,9 +49,16 @@ class UserController extends ActiveController
 
 		$email = $request->EMAIL;
 		$password = sha1($request->PASSWORD);
-		$user = USER_MODEL::findOne(['EMAIL' => $email/*, 'PASSWORD' => $password*/]);
+		$user = USER_MODEL::findOne(['EMAIL' => $email, 'PASSWORD' => $password]);
 		if ($user != null) {
-			$message = $user;
+			if ($user->ACCOUNT_STATUS === 5) {
+				$message = $user;
+			} else {
+				$message = [
+					'status' => false,
+					'message' => 'Your account has been suspended, please contact the Administrator'
+				];
+			}
 		} else {
 			$message = [
 				'status' => false,
