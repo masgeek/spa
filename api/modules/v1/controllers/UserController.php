@@ -53,6 +53,7 @@ class UserController extends ActiveController
 		if ($user != null) {
 			if ($user->ACCOUNT_STATUS === 1) {
 				$message = $user;
+				//let us tell the user login is a sucess and add session to shared preferences
 			} else {
 				$message = [
 					'status' => false,

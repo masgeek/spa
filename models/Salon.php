@@ -14,6 +14,7 @@ use Yii;
  * @property string $SALON_EMAIL
  * @property string $SALON_WEBSITE
  * @property string $SALON_IMAGE
+ * @property string $DESCRIPTION
  *
  * @property OfferedServices[] $offeredServices
  * @property Staff[] $staff
@@ -35,6 +36,7 @@ class Salon extends \yii\db\ActiveRecord
     {
         return [
             [['SALON_NAME', 'SALON_TEL'], 'required'],
+            [['DESCRIPTION'], 'string'],
             [['SALON_NAME', 'SALON_TEL', 'SALON_LOCATION', 'SALON_EMAIL', 'SALON_WEBSITE', 'SALON_IMAGE'], 'string', 'max' => 255],
         ];
     }
@@ -52,6 +54,7 @@ class Salon extends \yii\db\ActiveRecord
             'SALON_EMAIL' => 'Salon  Email',
             'SALON_WEBSITE' => 'Salon  Website',
             'SALON_IMAGE' => 'Salon  Image',
+            'DESCRIPTION' => 'Description',
         ];
     }
 
