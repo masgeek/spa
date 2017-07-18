@@ -41,6 +41,7 @@ class UserController extends ActiveController
 		/* @var $request USER_MODEL */
 		$message = [];
 
+		var_dump($_SERVER);
 		if (!Yii::$app->request->isPost) {
 			throw new BadRequestHttpException('Please use POST');
 		}
