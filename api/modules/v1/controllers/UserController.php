@@ -91,10 +91,7 @@ class UserController extends ActiveController
 
 		if ($user->validate()) {
 			if ($user->save()) {
-				$message = [
-					'id' => $user->USER_ID,
-					'password' => $user->PASSWORD
-				];
+				$message = $user;
 			}
 		} else {
 			$errors = $user->getErrors();
