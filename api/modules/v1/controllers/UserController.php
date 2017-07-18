@@ -45,6 +45,8 @@ class UserController extends ActiveController
 		if (!Yii::$app->request->isPost) {
 			throw new BadRequestHttpException('Please use POST');
 		}
+
+		var_dump($request);
 		$request = (object)Yii::$app->request->post();
 		$email = $request->EMAIL;
 		$password = sha1($request->PASSWORD);
