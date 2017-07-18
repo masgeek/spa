@@ -44,21 +44,10 @@ class UserController extends ActiveController
 		if (!Yii::$app->request->isPost) {
 			throw new BadRequestHttpException('Please use POST');
 		}
-	}
-
-	public function actionRecover()
-	{
-		/* @var $request USER_MODEL */
-		$message = [];
-
-		if (!Yii::$app->request->isPost) {
-			throw new BadRequestHttpException('Please use POST');
-		}
 		$request = (object)Yii::$app->request->post();
 		$email = $request->EMAIL;
 		$password = sha1($request->PASSWORD);
-
-		$user = USER_MODEL::find(['EMAIL' => $email, 'PASSWORD' => $password]);
+		$user = USER_MODEL::findOne(['EMAIL' => $email/*, 'PASSWORD' => $password*/]);
 		if ($user != null) {
 			$message = $user;
 		} else {
@@ -69,6 +58,11 @@ class UserController extends ActiveController
 		}
 
 		return $message;
+	}
+
+	public function actionRecover()
+	{
+
 	}
 
 	public function actionRegister()
