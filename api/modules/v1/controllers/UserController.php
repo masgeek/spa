@@ -86,9 +86,8 @@ class UserController extends ActiveController
 		$user->MOBILE_NO = isset($request->MOBILE_NO) ? $request->MOBILE_NO : null;
 		$user->OTHER_NAMES = isset($request->OTHER_NAMES) ? $request->OTHER_NAMES : $user->OTHER_NAMES;
 		$user->ACCOUNT_TYPE_ID = isset($request->ACCOUNT_TYPE_ID) ? $request->ACCOUNT_TYPE_ID : 1;
-
 		//we will need to encrypt this password bit
-		$user->PASSWORD = $request->PASSWORD;
+		$user->PASSWORD = sha1($request->PASSWORD);
 
 		if ($user->validate()) {
 			if ($user->save()) {
@@ -123,19 +122,19 @@ class UserController extends ActiveController
 			throw new NotFoundHttpException('User not found', 5);
 		}
 
+
 		$user->setScenario(USER_MODEL::SCENARIO_UPDATE);
 		$request = (object)Yii::$app->request->bodyParams;
 		$user->SURNAME = isset($request->SURNAME) ? $request->SURNAME : $user->SURNAME;
 		$user->EMAIL = isset($request->EMAIL) ? $request->EMAIL : $user->EMAIL;
 		$user->MOBILE_NO = isset($request->MOBILE_NO) ? $request->MOBILE_NO : $user->MOBILE_NO;
 		$user->OTHER_NAMES = isset($request->OTHER_NAMES) ? $request->OTHER_NAMES : $user->OTHER_NAMES;
-		$user->CHANGE_PASSWORD = isset($request->CHANGE_PASSWORD) ? $request->CHANGE_PASSWORD : 0;
+		if (isset($request->CHANGE_PASSWORD)) {
+			$user->PASSWORD = sha1($request->PASSWORD);
+		}
 
 		if ($user->validate() && $user->save()) {
-			$message = [
-				'id' => $user->USER_ID,
-				'password' => $user->PASSWORD
-			];
+			$message = $user;
 		} else {
 			$errors = $user->getErrors();
 			foreach ($errors as $key => $error) {

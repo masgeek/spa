@@ -42,21 +42,6 @@ class USER_MODEL extends User
 		return $labels;
 	}
 
-	public function beforeSave($insert)
-	{
-		if (parent::beforeSave($insert)) {
-			if ($this->isNewRecord) {
-				$this->PASSWORD = sha1($this->PASSWORD); //hash the user password
-			}
-			if ($this->CHANGE_PASSWORD == 'true' || $this->CHANGE_PASSWORD == 1) { //when checkbox is checked to indicate password changed
-				//it is in update mode check if password change was requested
-				$this->PASSWORD = sha1($this->PASSWORD); //hash the user password
-			}
-			return true;
-		}
-		return false;
-	}
-
 	public function fields()
 	{
 		$fields = parent::fields();
