@@ -40,7 +40,7 @@ class ServiceController extends ActiveController
         if (!Yii::$app->request->isGet) {
             throw new BadRequestHttpException('Please use GET');
         }
-        $data = OFFERED_SERVICE_MODEL::findOne(['SALON_ID']);
+        $data = OFFERED_SERVICE_MODEL::findOne(['SALON_ID'=>$id]);
 
         return $data;
     }
