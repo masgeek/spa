@@ -8,6 +8,7 @@
 
 namespace app\api\modules\v1\controllers;
 
+use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\SERVICE_MODEL;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -39,6 +40,9 @@ class ServiceController extends ActiveController
         if (!Yii::$app->request->isGet) {
             throw new BadRequestHttpException('Please use GET');
         }
+        $data = OFFERED_SERVICE_MODEL::findOne(['SALON_ID']);
+
+        return $data;
     }
 	public function actionAll()
 	{
