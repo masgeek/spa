@@ -26,13 +26,6 @@ class ServiceController extends ActiveController
 	 */
 	public $modelClass = 'app\api\modules\v1\models\SERVICE_MODEL';
 
-	public function behaviors()
-	{
-		$behaviors = parent::behaviors();
-		$behaviors['rateLimiter']['enableRateLimitHeaders'] = false;
-		return $behaviors;
-	}
-
 	public function actionIndex()
 	{
 		return new ActiveDataProvider([
@@ -40,6 +33,13 @@ class ServiceController extends ActiveController
 		]);
 	}
 
+	public function actionSalonService($id){
+        //get the services associated with a salon
+        $message = [];
+        if (!Yii::$app->request->isGet) {
+            throw new BadRequestHttpException('Please use GET');
+        }
+    }
 	public function actionAll()
 	{
 
