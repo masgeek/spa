@@ -34,8 +34,16 @@ class OfferedserviceController extends ActiveController
 		return $behaviors;
 	}
 
-	public function actionAddService()
-	{
 
+	public function actionServiceSalon($id)
+	{
+		//get the services associated with a salon
+		$message = [];
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+		$data = OFFERED_SERVICE_MODEL::findOne(['SERVICE_ID' => $id]);
+
+		return $data;
 	}
 }
