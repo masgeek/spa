@@ -35,7 +35,7 @@ class OfferedserviceController extends ActiveController
 	}
 
 
-	public function actionServiceSalon($id)
+	public function actionSalons($id)
 	{
 		//get the services associated with a salon
 		$message = [];
