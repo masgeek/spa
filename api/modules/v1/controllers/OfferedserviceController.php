@@ -42,8 +42,23 @@ class OfferedserviceController extends ActiveController
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
 		}
-		$data = OFFERED_SERVICE_MODEL::findOne(['SERVICE_ID' => $id]);
+		/*$data = OFFERED_SERVICE_MODEL::findOne(['SERVICE_ID' => $id]);
 
-		return $data;
+		return $data;*/
+		$query = OFFERED_SERVICE_MODEL::find()->where(['SERVICE_ID' => $id]);
+
+		$provider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => [
+				'pageSize' => 20,
+			],
+			'sort' => [
+				'defaultOrder' => [
+					'SALON_ID' => SORT_DESC,
+				]
+			],
+		]);
+
+		return $provider;
 	}
 }
