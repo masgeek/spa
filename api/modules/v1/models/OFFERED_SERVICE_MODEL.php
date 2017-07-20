@@ -23,7 +23,7 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 	{
 		$fields = parent::fields();
 
-		$fields['SERVICE'] = function ($model) {
+		$fields['SERVICE_NAME'] = function ($model) {
 			/* @var $model OFFERED_SERVICE_MODEL */
 			return $model->sERVICE->SERVICE_NAME;
 		};
