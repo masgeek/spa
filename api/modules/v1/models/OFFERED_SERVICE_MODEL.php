@@ -27,7 +27,7 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 			];
 		};
 
-        $fields['SERVICE'] = $this->sERVICE->SERVICE_NAME;
+        $fields['SERVICE_NAME'] = $this->sERVICE->SERVICE_NAME;
 		//unset($fields['SERVICE_COST']);
 		return $fields;
 	}
