@@ -24,13 +24,13 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 			return $model->sERVICE->SERVICE_NAME;
 		};
 
-		$fields['DESCRIPTION'] = function ($model) {
+		$fields['SERVICE_DESCRIPTION'] = function ($model) {
 			/* @var $model OFFERED_SERVICE_MODEL */
 			return $model->sERVICE->DESCRIPTION;
 		};
-		$fields['SALON'] = function ($model) {
+		$fields['SALON_NAME'] = function ($model) {
 			/* @var $model OFFERED_SERVICE_MODEL */
-			return $model->sALON;
+			return $model->sALON->SALON_NAME;
 		};
 
 
