@@ -77,7 +77,7 @@ $config = [
 						'POST add' => 'add',
 						'POST reserve' => 'reserve',
 						'PUT {id}/update' => 'update',
-						'GET {id}/salon-service' => 'salon-service',
+						'GET services/{id}/service-salon' => 'service-salon',
 						//'GET all/{id}' => 'all',
 						//'GET summary/{id}' => 'summary',
 						//post actions

@@ -28,10 +28,10 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 		};
 
         $fields['SERVICE'] = function ($model) {
-            /* @var $model SERVICE_MODEL */
+            /* @var $model OFFERED_SERVICE_MODEL */
             return [
-                'SALON_NAME' => $model->SERVICE_NAME,
-                'SALON_LOCATION' => $model->SERVICE_ID,
+                'SALON_NAME' => $model->sALON->SALON_NAME,
+                'SALON_LOCATION' => $model->sALON->SALON_LOCATION,
             ];
         };
 		//unset($fields['SERVICE_COST']);
