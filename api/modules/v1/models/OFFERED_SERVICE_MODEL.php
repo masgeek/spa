@@ -10,11 +10,7 @@ namespace app\api\modules\v1\models;
 
 
 use app\models\OfferedServices;
-/**
-*
-* @property Services $sERVICE
-* @property Salon $sALON
-*/
+
 class OFFERED_SERVICE_MODEL extends OfferedServices
 {
 	public $SALON;
@@ -26,6 +22,11 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 		$fields['SERVICE_NAME'] = function ($model) {
 			/* @var $model OFFERED_SERVICE_MODEL */
 			return $model->sERVICE->SERVICE_NAME;
+		};
+
+		$fields['DESCRIPTION'] = function ($model) {
+			/* @var $model OFFERED_SERVICE_MODEL */
+			return $model->sERVICE->DESCRIPTION;
 		};
 		$fields['SALON'] = function ($model) {
 			/* @var $model OFFERED_SERVICE_MODEL */
