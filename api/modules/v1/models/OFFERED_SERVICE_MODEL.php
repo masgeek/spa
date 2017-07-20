@@ -19,6 +19,7 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 	{
 		$fields = parent::fields();
 
+		$fields['SERVICE_NAME'] = $this->sERVICE->SERVICE_NAME;
 		$fields['SALON'] = function ($model) {
 			/* @var $model OFFERED_SERVICE_MODEL */
 			return [
@@ -26,8 +27,6 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 				'SALON_LOCATION' => $model->sALON->SALON_LOCATION,
 			];
 		};
-
-        $fields['SERVICE_NAME'] = $this->sERVICE->SERVICE_NAME;
 		//unset($fields['SERVICE_COST']);
 		return $fields;
 	}
