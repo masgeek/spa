@@ -19,15 +19,17 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 	{
 		$fields = parent::fields();
 
-		return $fields;
-
+		$fields['SERVICE'] = function ($model) {
+			/* @var $model OFFERED_SERVICE_MODEL */
+			return $model->sERVICE->SERVICE_NAME;
+		};
 		$fields['SALON'] = function ($model) {
 			/* @var $model OFFERED_SERVICE_MODEL */
-			/*return [
-				'SALON_NAME' => $model->sALON->SALON_NAME,
-				'SALON_LOCATION' => $model->sALON->SALON_LOCATION,
-			];*/
 			return $model->sALON;
 		};
+
+
+		//unset($fields['SERVICE_COST']);
+		return $fields;
 	}
 }
