@@ -31,7 +31,7 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 		$fields['SALON_NAME'] = function ($model) {
 			/* @var $model RESERVED_SERVICE_MODEL */
 			if ($model->oFFEREDSERVICE != null) {
-				return $model->oFFEREDSERVICE->sALON;
+				return $model->oFFEREDSERVICE->sALON->SALON_NAME;
 			}
 		};
 
@@ -39,7 +39,7 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 			/* @var $model RESERVED_SERVICE_MODEL */
 			$staff = 'Not Assigned';
 			if ($model->sTAFF != null) {
-				$staff = $model->sTAFF;
+				$staff = $model->sTAFF->STAFF_NAME;
 			}
 
 			return $staff;
