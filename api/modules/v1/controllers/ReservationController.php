@@ -9,7 +9,7 @@
 namespace app\api\modules\v1\controllers;
 
 
-use app\api\modules\v1\models\MY_RESERVED_SERVICES;
+use app\api\modules\v1\models\MY_RESERVATIONS;
 use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
@@ -144,7 +144,25 @@ class ReservationController extends ActiveController
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
 		}
-		$query = MY_RESERVED_SERVICES::find()->where(['USER_ID' => $id]);
+		$query = MY_RESERVATIONS::find()->where(['USER_ID' => $id]);
+
+		$provider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => [
+				'pageSize' => 20,
+			]
+		]);
+
+		return $provider;
+	}
+
+	public function actionMyServices($id)
+	{
+		//get reservations made by the user
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+		$query = MY_RESERVATIONS::find()->where(['RESERVATION_ID' => $id]);
 
 		$provider = new ActiveDataProvider([
 			'query' => $query,

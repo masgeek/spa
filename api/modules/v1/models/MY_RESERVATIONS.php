@@ -11,7 +11,7 @@ namespace app\api\modules\v1\models;
 
 use app\models\VwMyReservedServices;
 
-class MY_RESERVED_SERVICES extends VwMyReservedServices
+class MY_RESERVATIONS extends VwMyReservedServices
 {
 
 }
