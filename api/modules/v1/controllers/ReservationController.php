@@ -11,6 +11,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
+use app\api\modules\v1\models\USER_MODEL;
 use Psr\Log\NullLogger;
 use Yii;
 use app\api\modules\v1\models\RESERVATION_MODEL;
