@@ -25,7 +25,7 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 		$fields = parent::fields();
 		$fields['SERVICE_NAME'] = function ($model) {
 			/* @var $model RESERVED_SERVICE_MODEL */
-			return SERVICE_MODEL::findOne($model->OFFERED_SERVICE_ID);
+			return SERVICE_MODEL::findOne($model->OFFERED_SERVICE_ID)->SERVICE_NAME;
 		};
 
 		$fields['SALON_NAME'] = function ($model) {
