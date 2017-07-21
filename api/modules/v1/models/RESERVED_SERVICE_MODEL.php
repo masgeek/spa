@@ -30,8 +30,8 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 
 		$fields['SALON_NAME'] = function ($model) {
 			/* @var $model RESERVED_SERVICE_MODEL */
-			if($model->sTAFF !=null) {
-				return $model->sTAFF->sALON;
+			if ($model->oFFEREDSERVICE != null) {
+				return $model->oFFEREDSERVICE->sALON;
 			}
 		};
 
