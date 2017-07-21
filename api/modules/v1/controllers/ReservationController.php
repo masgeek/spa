@@ -9,16 +9,18 @@
 namespace app\api\modules\v1\controllers;
 
 
-use app\api\modules\v1\models\MY_RESERVATIONS;
-use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
-use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
-use app\api\modules\v1\models\USER_MODEL;
+
 use Yii;
-use app\api\modules\v1\models\RESERVATION_MODEL;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
 use yii\rest\ActiveController;
 use yii\web\BadRequestHttpException;
+
+use app\api\modules\v1\models\MY_RESERVATIONS;
+use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
+use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
+use app\api\modules\v1\models\USER_MODEL;
+use app\api\modules\v1\models\RESERVATION_MODEL;
 
 class ReservationController extends ActiveController
 {
@@ -162,7 +164,7 @@ class ReservationController extends ActiveController
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
 		}
-		$query = MY_RESERVATIONS::find()->where(['RESERVATION_ID' => $id]);
+		$query = RESERVED_SERVICE_MODEL::find()->where(['RESERVATION_ID' => $id]);
 
 		$provider = new ActiveDataProvider([
 			'query' => $query,

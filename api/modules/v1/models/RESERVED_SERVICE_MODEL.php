@@ -19,4 +19,37 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 
 		return $rules;
 	}
+
+	public function fields()
+	{
+		$fields = parent::fields();
+		$fields['SERVICE_NAME'] = function ($model) {
+			/* @var $model RESERVED_SERVICE_MODEL */
+			return SERVICE_MODEL::findOne($model->OFFERED_SERVICE_ID);
+		};
+
+		$fields['SALON_NAME'] = function ($model) {
+			/* @var $model RESERVED_SERVICE_MODEL */
+			if($model->sTAFF !=null) {
+				return $model->sTAFF->sALON;
+			}
+		};
+
+		$fields['STAFF'] = function ($model) {
+			/* @var $model RESERVED_SERVICE_MODEL */
+			return $model->sTAFF;
+		};
+
+		$fields['STATUS'] = function ($model) {
+			/* @var $model RESERVED_SERVICE_MODEL */
+			$status = 'Pending';
+			if ($model->sTATUS != null) {
+				$status = $model->sTATUS->STATUS_NAME;
+			}
+			return $status;
+		};
+		unset($fields['STAFF_ID']);
+		unset($fields['STATUS_ID']);
+		return $fields;
+	}
 }
