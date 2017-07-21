@@ -11,6 +11,7 @@ use Yii;
  * @property int $OFFERED_SERVICE_ID
  * @property int $STAFF_ID
  * @property int $RESERVATION_ID
+ * @property string $RESERVATION_DATE
  * @property string $RESERVATION_TIME
  * @property string $SERVICE_AMOUNT
  * @property int $STATUS_ID
@@ -36,9 +37,9 @@ class ReservedServices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['OFFERED_SERVICE_ID', 'RESERVATION_ID', 'RESERVATION_TIME'], 'required'],
+            [['OFFERED_SERVICE_ID', 'RESERVATION_ID', 'RESERVATION_DATE', 'RESERVATION_TIME', 'SERVICE_AMOUNT'], 'required'],
             [['OFFERED_SERVICE_ID', 'STAFF_ID', 'RESERVATION_ID', 'STATUS_ID'], 'integer'],
-            [['RESERVATION_TIME'], 'safe'],
+            [['RESERVATION_DATE', 'RESERVATION_TIME'], 'safe'],
             [['SERVICE_AMOUNT'], 'number'],
             [['RESERVATION_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Reservations::className(), 'targetAttribute' => ['RESERVATION_ID' => 'RESERVATION_ID']],
             [['OFFERED_SERVICE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => OfferedServices::className(), 'targetAttribute' => ['OFFERED_SERVICE_ID' => 'OFFERED_SERVICE_ID']],
@@ -57,6 +58,7 @@ class ReservedServices extends \yii\db\ActiveRecord
             'OFFERED_SERVICE_ID' => 'Offered  Service  ID',
             'STAFF_ID' => 'Staff  ID',
             'RESERVATION_ID' => 'Reservation  ID',
+            'RESERVATION_DATE' => 'Reservation  Date',
             'RESERVATION_TIME' => 'Reservation  Time',
             'SERVICE_AMOUNT' => 'Service  Amount',
             'STATUS_ID' => 'Status  ID',

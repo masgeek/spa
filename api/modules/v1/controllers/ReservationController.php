@@ -9,6 +9,7 @@
 namespace app\api\modules\v1\controllers;
 
 
+use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use Psr\Log\NullLogger;
 use Yii;
@@ -40,6 +41,7 @@ class ReservationController extends ActiveController
 		if (!Yii::$app->request->isPost) {
 			throw new BadRequestHttpException('Please use POST');
 		}
+
 		$request = (object)Yii::$app->request->post();
 
 		$reservation = new RESERVATION_MODEL();
@@ -54,32 +56,39 @@ class ReservationController extends ActiveController
 
 		$services = isset($request->SERVICES) ? $request->SERVICES : [];
 		$transaction = $db->beginTransaction();
+		$servicesTotal = [];
 		if ($reservation->validate() && $reservation->save()) {
 			//next save the selected services
-			foreach ($services as $key => $service) {
-				/* @var $serviceObj RESERVED_SERVICE_MODEL */
-				$serviceObj = (object)$service;
-
+			foreach ($services as $key => $offered_service_id) {
+				/* @var $serviceObj OFFERED_SERVICE_MODEL */
+				$serviceObj = OFFERED_SERVICE_MODEL::findOne($offered_service_id);
 				$reserved_services->isNewRecord = true;
+				$reserved_services->RESERVED_SERVICE_ID = null;
 				$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
 				$reserved_services->OFFERED_SERVICE_ID = $serviceObj->OFFERED_SERVICE_ID;
-				$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_AMOUNT;
-			}
+				$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_COST;
+				$reserved_services->RESERVATION_TIME = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : new Expression('NOW()');
+				$reserved_services->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
 
-			if ($reserved_services->validate() && $reserved_services->save()) {
-				$message = [$reservation, $reserved_services];
-				$transaction->commit();
-			} else {
-				$errors = $reserved_services->getErrors();
-				foreach ($errors as $key => $error) {
-					$message[] = [
-						'field' => $key,
-						'message' => $error[0]
-					];
+				$servicesTotal[] = $serviceObj->SERVICE_COST;
+				//save the data
+				if ($reserved_services->validate() && $reserved_services->save()) {
+					$message = [$reservation, $reserved_services];
+				} else {
+					$errors = $reserved_services->getErrors();
+					foreach ($errors as $key => $error) {
+						$message[] = [
+							'field' => $key,
+							'message' => $error[0]
+						];
+					}
+					$transaction->rollback();
+					return $message;
 				}
-				$transaction->rollback();
 			}
-
+			$transaction->commit();
+			//next do the total for the services
+			RESERVATION_MODEL::updateAll(['TOTAL_COST' => array_sum($servicesTotal)], "RESERVATION_ID = $reservation->RESERVATION_ID");
 		} else {
 			$transaction->rollback();
 			$errors = $reservation->getErrors();
