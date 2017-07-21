@@ -19,4 +19,16 @@ class RESERVATION_MODEL extends Reservations
 		$rules = parent::rules();
 		return $rules;
 	}
+
+	public function fields()
+	{
+		$fields = parent::fields();
+
+		$fields['RESERVED_SERVICES'] = function ($model) {
+			/* @var $model RESERVATION_MODEL */
+			return $model->reservedServices;
+		};
+		//unset($fields['SERVICE_COST']);
+		return $fields;
+	}
 }

@@ -12,9 +12,9 @@ namespace app\api\modules\v1\controllers;
 use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
-use Psr\Log\NullLogger;
 use Yii;
 use app\api\modules\v1\models\RESERVATION_MODEL;
+use yii\data\ActiveDataProvider;
 use yii\db\Expression;
 use yii\rest\ActiveController;
 use yii\web\BadRequestHttpException;
@@ -135,5 +135,23 @@ class ReservationController extends ActiveController
 		}
 
 		return $message;
+	}
+
+	public function actionMyReservations($id)
+	{
+		//get reservations made by the user
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+		$query = RESERVATION_MODEL::find()->where(['USER_ID' => $id]);
+
+		$provider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => [
+				'pageSize' => 20,
+			]
+		]);
+
+		return $provider;
 	}
 }
