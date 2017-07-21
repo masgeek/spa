@@ -10,7 +10,6 @@ use Yii;
  * @property int $RESERVATION_ID
  * @property int $USER_ID
  * @property string $RESERVATION_DATE
- * @property string $RESERVATION_TIME
  * @property string $TOTAL_COST
  * @property int $STATUS_ID
  *
@@ -35,9 +34,9 @@ class Reservations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['USER_ID', 'RESERVATION_DATE', 'RESERVATION_TIME', 'TOTAL_COST'], 'required'],
+            [['USER_ID', 'RESERVATION_DATE', 'TOTAL_COST'], 'required'],
             [['USER_ID', 'STATUS_ID'], 'integer'],
-            [['RESERVATION_DATE', 'RESERVATION_TIME'], 'safe'],
+            [['RESERVATION_DATE'], 'safe'],
             [['TOTAL_COST'], 'number'],
             [['STATUS_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['STATUS_ID' => 'STATUS_ID']],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
@@ -53,7 +52,6 @@ class Reservations extends \yii\db\ActiveRecord
             'RESERVATION_ID' => 'Reservation  ID',
             'USER_ID' => 'User  ID',
             'RESERVATION_DATE' => 'Reservation  Date',
-            'RESERVATION_TIME' => 'Reservation  Time',
             'TOTAL_COST' => 'Total  Cost',
             'STATUS_ID' => 'Status  ID',
         ];
