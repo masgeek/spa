@@ -58,7 +58,7 @@ class ReservationController extends ActiveController
 		$DateTime = \DateTime::createFromFormat('Y-m-d', $reservation_date_raw);
 		$reservation_date = $DateTime->format('Y-m-d');
 
-		$services = isset($request->SERVICES) ? $request->SERVICES : [];
+		$services = isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
 		$transaction = $db->beginTransaction();
 		$servicesTotal = [];
 		if ($reservation->validate() && $reservation->save()) {
