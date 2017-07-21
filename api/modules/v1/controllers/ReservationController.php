@@ -77,7 +77,7 @@ class ReservationController extends ActiveController
 				$servicesTotal[] = $serviceObj->SERVICE_COST;
 				//save the data
 				if ($reserved_services->validate() && $reserved_services->save()) {
-					$message = [$reservation, $reserved_services];
+					$message = [$reservation];
 				} else {
 					$errors = $reserved_services->getErrors();
 					foreach ($errors as $key => $error) {
