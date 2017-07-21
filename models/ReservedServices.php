@@ -36,7 +36,7 @@ class ReservedServices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['OFFERED_SERVICE_ID', 'RESERVATION_ID'], 'required'],
+            [['OFFERED_SERVICE_ID', 'RESERVATION_ID', 'RESERVATION_TIME'], 'required'],
             [['OFFERED_SERVICE_ID', 'STAFF_ID', 'RESERVATION_ID', 'STATUS_ID'], 'integer'],
             [['RESERVATION_TIME'], 'safe'],
             [['SERVICE_AMOUNT'], 'number'],
