@@ -37,7 +37,7 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 
 		$fields['STAFF'] = function ($model) {
 			/* @var $model RESERVED_SERVICE_MODEL */
-			$staff = 0;//'Not Assigned';
+			$staff = null;//'Not Assigned';
 			if ($model->sTAFF != null) {
 				$staff = $model->sTAFF;
 			}
