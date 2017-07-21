@@ -13,5 +13,13 @@ use app\models\VwMyReservedServices;
 
 class MY_RESERVATIONS extends VwMyReservedServices
 {
-
+	public function fields()
+	{
+		$fields = parent::fields();
+		$fields['SERVICES_RESERVED'] = function ($model) {
+			/* @var $model RESERVED_SERVICE_MODEL */
+			return RESERVED_SERVICE_MODEL::find()->where(['RESERVATION_ID' => $model->RESERVATION_ID])->count();
+		};
+		return $fields;
+	}
 }
