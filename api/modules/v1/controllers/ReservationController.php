@@ -51,9 +51,12 @@ class ReservationController extends ActiveController
 		//$reservation->setScenario(RESERVATION_MODEL::SCENARIO_CREATE);
 		//assign the post data values
 		$reservation->USER_ID = isset($request->USER_ID) ? $request->USER_ID : null;
-		$reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
-		//$reservation->RESERVATION_TIME = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : new Expression('NOW()');
 		$reservation->TOTAL_COST = isset($request->TOTAL_COST) ? $request->TOTAL_COST : 0;
+
+		$reservation_date_raw = $reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
+		//convert string to date format
+		$DateTime = \DateTime::createFromFormat('Y-m-d', $reservation_date_raw);
+		$reservation_date = $DateTime->format('Y-m-d');
 
 		$services = isset($request->SERVICES) ? $request->SERVICES : [];
 		$transaction = $db->beginTransaction();
@@ -69,7 +72,7 @@ class ReservationController extends ActiveController
 				$reserved_services->OFFERED_SERVICE_ID = $serviceObj->OFFERED_SERVICE_ID;
 				$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_COST;
 				$reserved_services->RESERVATION_TIME = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : new Expression('NOW()');
-				$reserved_services->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
+				$reserved_services->RESERVATION_DATE = $reservation_date;
 
 				$servicesTotal[] = $serviceObj->SERVICE_COST;
 				//save the data
