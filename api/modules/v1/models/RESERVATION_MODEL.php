@@ -23,7 +23,6 @@ class RESERVATION_MODEL extends Reservations
 	public function fields()
 	{
 		$fields = parent::fields();
-
 		$fields['RESERVED_SERVICES'] = function ($model) {
 			/* @var $model RESERVATION_MODEL */
 			return $model->reservedServices;
