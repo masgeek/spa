@@ -42,14 +42,14 @@ class SalonController extends ActiveController
 		if (!Yii::$app->request->isPost) {
 			throw new BadRequestHttpException('Please use POST');
 		}
-		$model = new SALON_MODEL();
+		$salonModel = new SALON_MODEL();
 		$request = Yii::$app->request->post();
 		$salonArr = ['SALON_MODEL' => $request];
-		if ($model->load($salonArr)) {
-			if ($model->save() && $model->validate()) {
-
+		if ($salonModel->load($salonArr)) {
+			if ($salonModel->save() && $salonModel->validate()) {
+				$message = [$salonModel];
 			} else {
-				$errors = $model->getErrors();
+				$errors = $salonModel->getErrors();
 				foreach ($errors as $key => $error) {
 					$message[] = [
 						'field' => $key,
