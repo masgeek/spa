@@ -39,9 +39,7 @@ class SalonController extends ActiveController
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
 		}
-		/*$data = OFFERED_SERVICE_MODEL::findOne(['SERVICE_ID' => $id]);
 
-		return $data;*/
 		$query = OFFERED_SERVICE_MODEL::find()->where(['SALON_ID' => $id]);
 
 		$provider = new ActiveDataProvider([
