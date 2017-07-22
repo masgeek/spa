@@ -80,6 +80,8 @@ $config = [
 						'PUT {id}/update' => 'update',
 						'GET {id}/salons' => 'salons',
 						'GET {id}/salon-services' => 'salon-services',
+
+						'GET {id}/my-salons' => 'my-salons',
 						'GET {id}/my-services' => 'my-services',
 						'GET {id}/my-reservations' => 'my-reservations',
 						//'GET all/{id}' => 'all',

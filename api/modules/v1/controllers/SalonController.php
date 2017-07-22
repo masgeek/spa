@@ -88,4 +88,15 @@ class SalonController extends ActiveController
 
 		return $provider;
 	}
+
+	public function actionMySalons($id)
+	{
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+
+		$mysalons = SALON_MODEL::find()->where(['OWNER_ID' => $id]);
+
+		return $mysalons;
+	}
 }
