@@ -9,7 +9,6 @@
 namespace app\api\modules\v1\controllers;
 
 
-
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
@@ -21,6 +20,7 @@ use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
 use app\api\modules\v1\models\RESERVATION_MODEL;
+use yii\web\NotFoundHttpException;
 
 class ReservationController extends ActiveController
 {
@@ -34,6 +34,65 @@ class ReservationController extends ActiveController
 		$actions = parent::actions();
 		unset($actions['update']);
 		return $actions;
+	}
+
+	public function actionAddService($id)
+	{
+		/* @var $request RESERVATION_MODEL */
+		$message = [];
+		$db = Yii::$app->db;
+
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
+		$request = (object)Yii::$app->request->post();
+
+		$reservation = RESERVATION_MODEL::findOne($id);
+		$reserved_services = new RESERVED_SERVICE_MODEL();
+
+		if ($reservation === null) {
+			throw new NotFoundHttpException("Reservation not found");
+		}
+
+		$reservation_date_raw = $reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
+		$reservation_time = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : null;
+		//convert string to date format
+		$DateTime = \DateTime::createFromFormat('Y-m-d', $reservation_date_raw);
+		$reservation_date = $DateTime->format('Y-m-d');
+
+		//now let us add the data then update the total
+		$services = isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
+		$transaction = $db->beginTransaction();
+
+		foreach ($services as $key => $offered_service_id) {
+			/* @var $serviceObj OFFERED_SERVICE_MODEL */
+			$serviceObj = OFFERED_SERVICE_MODEL::findOne($offered_service_id);
+			$reserved_services->isNewRecord = true;
+			$reserved_services->RESERVED_SERVICE_ID = null;
+			$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
+			$reserved_services->OFFERED_SERVICE_ID = $serviceObj->OFFERED_SERVICE_ID;
+			$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_COST;
+			$reserved_services->RESERVATION_TIME = $reservation_time;
+			$reserved_services->RESERVATION_DATE = $reservation_date;
+			//save the data
+			if ($reserved_services->validate() && $reserved_services->save()) {
+				$transaction->commit();
+				$this->UpdateTotalCost($reservation->RESERVATION_ID);
+				$message = [$reservation];
+			} else {
+				$errors = $reserved_services->getErrors();
+				foreach ($errors as $key => $error) {
+					$message[] = [
+						'field' => $key,
+						'message' => $error[0]
+					];
+				}
+				$transaction->rollback();
+				return $message;
+			}
+		}
+
+		return $message;
 	}
 
 	public function actionReserve()
@@ -57,6 +116,7 @@ class ReservationController extends ActiveController
 		$reservation->TOTAL_COST = isset($request->TOTAL_COST) ? $request->TOTAL_COST : 0;
 
 		$reservation_date_raw = $reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
+		$reservation_time = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : null;
 		//convert string to date format
 		$DateTime = \DateTime::createFromFormat('Y-m-d', $reservation_date_raw);
 		$reservation_date = $DateTime->format('Y-m-d');
@@ -74,10 +134,8 @@ class ReservationController extends ActiveController
 				$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
 				$reserved_services->OFFERED_SERVICE_ID = $serviceObj->OFFERED_SERVICE_ID;
 				$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_COST;
-				$reserved_services->RESERVATION_TIME = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : new Expression('NOW()');
+				$reserved_services->RESERVATION_TIME = $reservation_time;
 				$reserved_services->RESERVATION_DATE = $reservation_date;
-
-				$servicesTotal[] = $serviceObj->SERVICE_COST;
 				//save the data
 				if ($reserved_services->validate() && $reserved_services->save()) {
 					$message = [$reservation];
@@ -95,7 +153,7 @@ class ReservationController extends ActiveController
 			}
 			$transaction->commit();
 			//next do the total for the services
-			RESERVATION_MODEL::updateAll(['TOTAL_COST' => array_sum($servicesTotal)], "RESERVATION_ID = $reservation->RESERVATION_ID");
+			$this->UpdateTotalCost($reservation->RESERVATION_ID);
 		} else {
 			$transaction->rollback();
 			$errors = $reservation->getErrors();
@@ -174,5 +232,19 @@ class ReservationController extends ActiveController
 		]);
 
 		return $provider;
+	}
+
+	/**
+	 * Update the final cost
+	 * @param $reservation_id
+	 */
+	private function UpdateTotalCost($reservation_id)
+	{
+		$raw_total = RESERVED_SERVICE_MODEL::find()
+			->select(['SERVICE_AMOUNT'])
+			->where(['RESERVATION_ID' => $reservation_id])->sum('SERVICE_AMOUNT');
+		$sum_total = (float)$raw_total;
+
+		RESERVATION_MODEL::updateAll(['TOTAL_COST' => $sum_total], "RESERVATION_ID = $reservation_id");
 	}
 }
