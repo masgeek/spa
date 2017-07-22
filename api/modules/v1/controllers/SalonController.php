@@ -95,7 +95,7 @@ class SalonController extends ActiveController
 			throw new BadRequestHttpException('Please use GET');
 		}
 
-		$mysalons = SALON_MODEL::find()->where(['OWNER_ID' => $id]);
+		$mysalons = SALON_MODEL::find()->where(['OWNER_ID' => $id])->all();
 
 		return $mysalons;
 	}
