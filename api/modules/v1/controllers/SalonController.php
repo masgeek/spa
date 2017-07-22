@@ -9,17 +9,14 @@
 namespace app\api\modules\v1\controllers;
 
 use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
-use app\api\modules\v1\models\SALON_MODEL;
+
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
+
 use yii\rest\ActiveController;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
-use yii\rest\Controller;
+
 use yii\web\BadRequestHttpException;
-use yii\web\Response;
+
 
 class SalonController extends ActiveController
 {
@@ -27,11 +24,6 @@ class SalonController extends ActiveController
 	 * @var object
 	 */
 	public $modelClass = 'app\api\modules\v1\models\SALON_MODEL';
-
-	public function actionAdd()
-	{
-
-	}
 
 	public function actionSalonServices($id)
 	{
