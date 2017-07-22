@@ -25,6 +25,13 @@ class SalonController extends ActiveController
 	 */
 	public $modelClass = 'app\api\modules\v1\models\SALON_MODEL';
 
+	public function actions()
+	{
+		$actions = parent::actions();
+		unset($actions['update']);
+		unset($actions['create']);
+		return $actions;
+	}
 	public function actionSalonServices($id)
 	{
 		$message = [];
