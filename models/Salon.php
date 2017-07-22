@@ -15,8 +15,10 @@ use Yii;
  * @property string $SALON_WEBSITE
  * @property string $SALON_IMAGE
  * @property string $DESCRIPTION
+ * @property int $OWNER_ID
  *
  * @property OfferedServices[] $offeredServices
+ * @property User $oWNER
  * @property Staff[] $staff
  */
 class Salon extends \yii\db\ActiveRecord
@@ -35,9 +37,11 @@ class Salon extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['SALON_NAME', 'SALON_TEL'], 'required'],
+            [['SALON_NAME', 'SALON_TEL', 'OWNER_ID'], 'required'],
             [['DESCRIPTION'], 'string'],
+            [['OWNER_ID'], 'integer'],
             [['SALON_NAME', 'SALON_TEL', 'SALON_LOCATION', 'SALON_EMAIL', 'SALON_WEBSITE', 'SALON_IMAGE'], 'string', 'max' => 255],
+            [['OWNER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['OWNER_ID' => 'USER_ID']],
         ];
     }
 
@@ -55,6 +59,7 @@ class Salon extends \yii\db\ActiveRecord
             'SALON_WEBSITE' => 'Salon  Website',
             'SALON_IMAGE' => 'Salon  Image',
             'DESCRIPTION' => 'Description',
+            'OWNER_ID' => 'Owner  ID',
         ];
     }
 
@@ -64,6 +69,14 @@ class Salon extends \yii\db\ActiveRecord
     public function getOfferedServices()
     {
         return $this->hasMany(OfferedServices::className(), ['SALON_ID' => 'SALON_ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOWNER()
+    {
+        return $this->hasOne(User::className(), ['USER_ID' => 'OWNER_ID']);
     }
 
     /**

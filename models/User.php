@@ -17,6 +17,7 @@ use Yii;
  * @property string $PASSWORD
  *
  * @property Reservations[] $reservations
+ * @property Salon[] $salons
  * @property AccountType $aCCOUNTTYPE
  */
 class User extends \yii\db\ActiveRecord
@@ -68,6 +69,14 @@ class User extends \yii\db\ActiveRecord
     public function getReservations()
     {
         return $this->hasMany(Reservations::className(), ['USER_ID' => 'USER_ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSalons()
+    {
+        return $this->hasMany(Salon::className(), ['OWNER_ID' => 'USER_ID']);
     }
 
     /**
