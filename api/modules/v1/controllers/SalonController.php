@@ -31,7 +31,7 @@ class SalonController extends ActiveController
 	public function actions()
 	{
 		$actions = parent::actions();
-		unset($actions['update']);
+		//unset($actions['update']);
 		unset($actions['create']);
 		return $actions;
 	}
