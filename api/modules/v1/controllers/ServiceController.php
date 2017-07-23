@@ -49,6 +49,7 @@ class ServiceController extends ActiveController
 		if ((bool)$all) {
 			$salon_services = [];
 		} else {
+			//get already added services
 			$salon_services = OFFERED_SERVICE_MODEL::find()
 				->select(['SERVICE_ID'])
 				->where(['SALON_ID' => $id])
