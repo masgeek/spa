@@ -46,16 +46,13 @@ class ServiceController extends ActiveController
 
 	public function actionServiceList($id, $all = 0)
 	{
-		if ((bool)$all) {
-			$salon_services = [];
-		} else {
-			//get already added services
-			$salon_services = OFFERED_SERVICE_MODEL::find()
-				->select(['SERVICE_ID'])
-				->where(['SALON_ID' => $id])
-				->asArray()
-				->all();
-		}
+		//get already added services
+		$salon_services = OFFERED_SERVICE_MODEL::find()
+			->select(['SERVICE_ID'])
+			->where(['SALON_ID' => $id])
+			->asArray()
+			->all();
+
 		$available_services = SERVICE_MODEL::find()
 			->where(['NOT IN', 'SERVICE_ID', $salon_services])
 			->orderBy(['SERVICE_NAME' => SORT_ASC])
