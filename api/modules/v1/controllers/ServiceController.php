@@ -10,6 +10,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\SERVICE_MODEL;
+use function GuzzleHttp\Promise\all;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -34,18 +35,21 @@ class ServiceController extends ActiveController
 		]);
 	}
 
-	public function actionServiceList($id)
+	public function actionServiceList($id, $all = 0)
 	{
-		$salon_services = OFFERED_SERVICE_MODEL::find()
-			->select(['SERVICE_ID'])
-			->where(['SALON_ID' => $id])
-			->asArray()
-			->all();
-
+		if ((bool)$all) {
+			$salon_services = [];
+		} else {
+			$salon_services = OFFERED_SERVICE_MODEL::find()
+				->select(['SERVICE_ID'])
+				->where(['SALON_ID' => $id])
+				->asArray()
+				->all();
+		}
 		$available_services = SERVICE_MODEL::find()
 			->where(['NOT IN', 'SERVICE_ID', $salon_services])
-			->all();
-		
+			->count();
+
 		return $available_services;
 	}
 }
