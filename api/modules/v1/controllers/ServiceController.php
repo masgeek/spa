@@ -35,6 +35,9 @@ class ServiceController extends ActiveController
 		]);
 	}
 
+	/**
+	 * @return array|\yii\db\ActiveRecord[]
+	 */
 	public function actionAll()
 	{
 		$available_services = SERVICE_MODEL::find()
@@ -44,6 +47,11 @@ class ServiceController extends ActiveController
 		return $available_services;
 	}
 
+	/**
+	 * @param  int $id
+	 * @param int  $all
+	 * @return array|\yii\db\ActiveRecord[]
+	 */
 	public function actionServiceList($id, $all = 0)
 	{
 		//get already added services
