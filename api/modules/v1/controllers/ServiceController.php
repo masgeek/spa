@@ -37,7 +37,9 @@ class ServiceController extends ActiveController
 
 	public function actionAll()
 	{
-		$available_services = SERVICE_MODEL::find()->all();
+		$available_services = SERVICE_MODEL::find()
+			->orderBy(['SERVICE_NAME' => SORT_ASC])
+			->all();
 
 		return $available_services;
 	}
@@ -55,6 +57,7 @@ class ServiceController extends ActiveController
 		}
 		$available_services = SERVICE_MODEL::find()
 			->where(['NOT IN', 'SERVICE_ID', $salon_services])
+			->orderBy(['SERVICE_NAME' => SORT_ASC])
 			->all();
 
 		return $available_services;
