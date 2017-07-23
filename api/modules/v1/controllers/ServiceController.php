@@ -34,8 +34,18 @@ class ServiceController extends ActiveController
 		]);
 	}
 
-	public function actionAll()
+	public function actionServiceList($id)
 	{
+		$salon_services = OFFERED_SERVICE_MODEL::find()
+			->select(['SERVICE_ID'])
+			->where(['SALON_ID' => $id])
+			->asArray()
+			->all();
 
+		$available_services = SERVICE_MODEL::find()
+			->where(['NOT IN', 'SERVICE_ID', $salon_services])
+			->all();
+		
+		return $available_services;
 	}
 }
