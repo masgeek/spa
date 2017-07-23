@@ -35,6 +35,13 @@ class ServiceController extends ActiveController
 		]);
 	}
 
+	public function actionAll()
+	{
+		$available_services = SERVICE_MODEL::find()->all();
+
+		return $available_services;
+	}
+
 	public function actionServiceList($id, $all = 0)
 	{
 		if ((bool)$all) {
