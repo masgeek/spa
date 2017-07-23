@@ -48,7 +48,7 @@ class ServiceController extends ActiveController
 		}
 		$available_services = SERVICE_MODEL::find()
 			->where(['NOT IN', 'SERVICE_ID', $salon_services])
-			->count();
+			->all();
 
 		return $available_services;
 	}
