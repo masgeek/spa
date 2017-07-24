@@ -10,6 +10,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 
+use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\SALON_MODEL;
 use http\Exception\BadConversionException;
 use Yii;
@@ -65,7 +66,46 @@ class SalonController extends ActiveController
 
 	}
 
-	public function actionSalonServices($id)
+	public function actionAddService($id)
+	{
+		$message = [];
+
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
+
+		$request = Yii::$app->request->post();
+
+		$salon = SALON_MODEL::findOne($id);
+
+		$post_arr = ['OFFERED_SERVICE_MODEL' => $request];
+
+		if ($salon === null) {
+			$message[] = ['field' => 'Not found', 'message' => 'Salon Not found'];
+		} else {
+
+			$offered_service = new OFFERED_SERVICE_MODEL();
+
+			if ($offered_service->load($post_arr)) {
+				
+				if ($offered_service->validate() && $offered_service->save()) {
+					$message = [$offered_service];
+				} else {
+					$errors = $offered_service->getErrors();
+					foreach ($errors as $key => $error) {
+						$message[] = [
+							'field' => $key,
+							'message' => $error[0]
+						];
+					}
+				}
+			}
+			return $message;
+		}
+	}
+
+	public
+	function actionSalonServices($id)
 	{
 		$message = [];
 		if (!Yii::$app->request->isGet) {
@@ -89,7 +129,8 @@ class SalonController extends ActiveController
 		return $provider;
 	}
 
-	public function actionMySalons($id)
+	public
+	function actionMySalons($id)
 	{
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');

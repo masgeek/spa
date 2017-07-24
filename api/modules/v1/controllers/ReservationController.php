@@ -37,54 +37,6 @@ class ReservationController extends ActiveController
 		return $actions;
 	}
 
-	public function actionAddService($id)
-	{
-		$message = [];
-
-		if (!Yii::$app->request->isPost) {
-			throw new BadRequestHttpException('Please use POST');
-		}
-
-		$request = Yii::$app->request->post();
-
-		$reservation = RESERVATION_MODEL::findOne($id);
-
-		$post_arr = ['RESERVED_SERVICE_MODEL' => $request];
-
-		if ($reservation === null) {
-			$message[] = ['field' => 'Not found', 'message' => 'Reservation Not found'];
-		} else {
-
-			$reserved_services = new RESERVED_SERVICE_MODEL();
-			$reserved_services->RESERVATION_ID = $id;
-			//return $post_arr;
-			$selected_services = $request['SELECTED_SERVICES'];
-			$service_cost = $request['SERVICE_COST'];
-
-			if ($reserved_services->load($post_arr)) {
-
-				foreach ($selected_services as $key => $offered_service_id) {
-					$reserved_services->OFFERED_SERVICE_ID = $offered_service_id;
-					$reserved_services->SERVICE_AMOUNT = $service_cost;
-
-					if ($reserved_services->validate() && $reserved_services->save()) {
-						$this->UpdateTotalCost($reserved_services->RESERVATION_ID);
-						$message = [$reserved_services];
-					} else {
-						$errors = $reserved_services->getErrors();
-						foreach ($errors as $key => $error) {
-							$message[] = [
-								'field' => $key,
-								'message' => $error[0]
-							];
-						}
-					}
-				}
-			}
-		}
-		return $message;
-	}
-
 	public function actionReserve()
 	{
 		/* @var $request RESERVATION_MODEL */
