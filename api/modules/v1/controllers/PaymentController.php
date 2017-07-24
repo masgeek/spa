@@ -41,27 +41,36 @@ class PaymentController extends ActiveController
 		}
 		$request = Yii::$app->request->post();
 
+
 		$account_ref = Yii::$app->request->post();
 
-		$model_post = [
+		$payment_post = [
 			'PAYMENT_MODEL' => $request
 		];
 		$reservation = RESERVATION_MODEL::find()
 			->where(['RESERVATION_ID' => $id, 'ACCOUNT_REF' => $account_ref])
 			->one();
+
+
 		if ($reservation == null) {
 			$message[] = [
 				'field' => "Not Found",
 				'message' => "Reservation Not Found"
 			];
 		} else {
+			$booking = (float)Yii::$app->request->post('BOOKING_AMOUNT', 0);
+			$total = (float)$reservation->TOTAL_COST;
+			$balance = ($total - $booking);
+
+
 			$model = new PAYMENT_MODEL();
 			//process the payment
 			$model->RESERVATION_ID = $id;
 			$model->DATE_PAID = new Expression('NOW()');
-			if ($model->load($model_post)) {
+			$model->BALANCE = $balance;
+			if ($model->load($payment_post)) {
 				if ($model->validate() && $model->save()) {
-					$model->attributes;
+					$message = [$model];
 				} else {
 					return $errors = $model->getErrors();
 					foreach ($errors as $key => $error) {

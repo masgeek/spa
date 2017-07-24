@@ -13,6 +13,8 @@ use Yii;
  * @property string $FINAL_AMOUNT
  * @property string $DATE_PAID
  * @property string $PAYMENT_REF
+ * @property int $FINALIZED
+ * @property string $BALANCE
  *
  * @property Reservations $rESERVATION
  */
@@ -32,9 +34,9 @@ class Payments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF'], 'required'],
-            [['RESERVATION_ID'], 'integer'],
-            [['BOOKING_AMOUNT', 'FINAL_AMOUNT'], 'number'],
+            [['RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE'], 'required'],
+            [['RESERVATION_ID', 'FINALIZED'], 'integer'],
+            [['BOOKING_AMOUNT', 'FINAL_AMOUNT', 'BALANCE'], 'number'],
             [['DATE_PAID'], 'safe'],
             [['PAYMENT_REF'], 'string', 'max' => 50],
             [['RESERVATION_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Reservations::className(), 'targetAttribute' => ['RESERVATION_ID' => 'RESERVATION_ID']],
@@ -53,6 +55,8 @@ class Payments extends \yii\db\ActiveRecord
             'FINAL_AMOUNT' => 'Final  Amount',
             'DATE_PAID' => 'Date  Paid',
             'PAYMENT_REF' => 'Payment  Ref',
+            'FINALIZED' => 'Finalized',
+            'BALANCE' => 'Balance',
         ];
     }
 

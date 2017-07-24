@@ -19,4 +19,11 @@ class PAYMENT_MODEL extends Payments
 
 		return $fields;
 	}
+
+	public function rules()
+	{
+		$rules = parent::rules();
+		$rules[] = [['PAYMENT_REF'], 'unique','message'=>'Payment reference {value}  has already been used'];
+		return $rules;
+	}
 }
