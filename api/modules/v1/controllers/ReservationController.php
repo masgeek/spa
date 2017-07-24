@@ -58,18 +58,22 @@ class ReservationController extends ActiveController
 			$reserved_services = new RESERVED_SERVICE_MODEL();
 			$reserved_services->RESERVATION_ID = $id;
 			//return $post_arr;
+			$selected_services = $post_arr['SELECTED_SERVICES'];
 			if ($reserved_services->load($post_arr)) {
 
-				return $reserved_services;
-				if ($reserved_services->validate() && $reserved_services->save()) {
-					$message = [$reserved_services];
-				} else {
-					$errors = $reserved_services->getErrors();
-					foreach ($errors as $key => $error) {
-						$message[] = [
-							'field' => $key,
-							'message' => $error[0]
-						];
+				foreach ($selected_services as $key => $offered_service_id) {
+					$reserved_services->OFFERED_SERVICE_ID = $offered_service_id;
+
+					if ($reserved_services->validate() && $reserved_services->save()) {
+						$message = [$reserved_services];
+					} else {
+						$errors = $reserved_services->getErrors();
+						foreach ($errors as $key => $error) {
+							$message[] = [
+								'field' => $key,
+								'message' => $error[0]
+							];
+						}
 					}
 				}
 			}
