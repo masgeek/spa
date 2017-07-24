@@ -12,6 +12,7 @@ class CUSTOM_HELPER
 {
 	public static function GenerateRandomRef()
 	{
-		return $rand = substr(md5(microtime()), rand(0, 26), 5);
+		$rand = substr(md5(microtime()), rand(0, 26), 5);
+		return strtoupper($rand);
 	}
 }
