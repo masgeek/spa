@@ -12,6 +12,8 @@ use Yii;
  * @property string $RESERVATION_DATE
  * @property string $TOTAL_COST
  * @property int $STATUS_ID
+ * @property string $ACCOUNT_REF
+ * @property string $BOOKING_AMOUNT
  *
  * @property Payments[] $payments
  * @property Status $sTATUS
@@ -34,10 +36,11 @@ class Reservations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['USER_ID', 'RESERVATION_DATE', 'TOTAL_COST'], 'required'],
+            [['USER_ID', 'RESERVATION_DATE', 'TOTAL_COST', 'ACCOUNT_REF'], 'required'],
             [['USER_ID', 'STATUS_ID'], 'integer'],
             [['RESERVATION_DATE'], 'safe'],
-            [['TOTAL_COST'], 'number'],
+            [['TOTAL_COST', 'BOOKING_AMOUNT'], 'number'],
+            [['ACCOUNT_REF'], 'string', 'max' => 50],
             [['STATUS_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['STATUS_ID' => 'STATUS_ID']],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
         ];
@@ -54,6 +57,8 @@ class Reservations extends \yii\db\ActiveRecord
             'RESERVATION_DATE' => 'Reservation  Date',
             'TOTAL_COST' => 'Total  Cost',
             'STATUS_ID' => 'Status  ID',
+            'ACCOUNT_REF' => 'Account  Ref',
+            'BOOKING_AMOUNT' => 'Booking  Amount',
         ];
     }
 
