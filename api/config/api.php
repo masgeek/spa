@@ -81,6 +81,7 @@ $config = [
 						'GET {id}/salons' => 'salons',
 						'GET {id}/salon-services' => 'salon-services',
 						'GET {id}/service-list' => 'service-list',
+						'GET account-type' => 'account-type',
 
 						'GET {id}/my-salons' => 'my-salons',
 						'GET {id}/my-services' => 'my-services',

@@ -8,6 +8,7 @@
 
 namespace app\api\modules\v1\controllers;
 
+use app\api\modules\v1\models\ACCOUNT_TYPE_MODEL;
 use app\api\modules\v1\models\SERVICE_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
 use Yii;
@@ -155,6 +156,11 @@ class UserController extends ActiveController
 
     public function actionAccountType()
     {
+        $accountTypes = ACCOUNT_TYPE_MODEL::find()
+            ->where(['FOR_MOBILE' => 1])
+            ->orderBy(['ACCOUNT_NAME' => SORT_ASC])
+            ->all();
 
+        return $accountTypes;
     }
 }
