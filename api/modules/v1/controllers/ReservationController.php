@@ -68,6 +68,7 @@ class ReservationController extends ActiveController
 					$reserved_services->SERVICE_AMOUNT = $service_cost;
 
 					if ($reserved_services->validate() && $reserved_services->save()) {
+						$this->UpdateTotalCost($reserved_services->RESERVATION_ID);
 						$message = [$reserved_services];
 					} else {
 						$errors = $reserved_services->getErrors();
