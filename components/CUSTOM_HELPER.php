@@ -6,7 +6,9 @@
  * Time: 10:57 PM
  */
 
-class HELPER
+namespace app\components;
+
+class CUSTOM_HELPER
 {
 	public static function GenerateRandomRef()
 	{

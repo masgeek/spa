@@ -10,6 +10,7 @@ namespace app\api\modules\v1\controllers;
 
 
 use app\api\modules\v1\models\SALON_MODEL;
+use app\components\CUSTOM_HELPER;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
@@ -21,7 +22,6 @@ use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
 use app\api\modules\v1\models\RESERVATION_MODEL;
-use yii\web\NotFoundHttpException;
 
 class ReservationController extends ActiveController
 {
@@ -94,8 +94,8 @@ class ReservationController extends ActiveController
 		//assign the post data values
 		$reservation->USER_ID = isset($request->USER_ID) ? $request->USER_ID : null;
 		$reservation->TOTAL_COST = isset($request->TOTAL_COST) ? $request->TOTAL_COST : 0;
-		$reservation->ACCOUNT_REF = \HELPER::GenerateRandomRef();
-		
+		$reservation->ACCOUNT_REF = CUSTOM_HELPER::GenerateRandomRef();
+
 		$reservation_date_raw = $reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
 		$reservation_time = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : null;
 		//convert string to date format
