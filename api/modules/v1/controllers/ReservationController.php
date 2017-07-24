@@ -59,11 +59,13 @@ class ReservationController extends ActiveController
 			$reserved_services->RESERVATION_ID = $id;
 			//return $post_arr;
 			$selected_services = $request['SELECTED_SERVICES'];
+			$service_cost = $request['SERVICE_COST'];
 
 			if ($reserved_services->load($post_arr)) {
 
 				foreach ($selected_services as $key => $offered_service_id) {
 					$reserved_services->OFFERED_SERVICE_ID = $offered_service_id;
+					$reserved_services->SERVICE_AMOUNT = $service_cost;
 
 					if ($reserved_services->validate() && $reserved_services->save()) {
 						$message = [$reserved_services];
