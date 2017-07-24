@@ -49,20 +49,20 @@ class ReservationController extends ActiveController
 
 		$reservation = RESERVATION_MODEL::findOne($id);
 
-		$post_arr = ['OFFERED_SERVICE_MODEL' => $request];
+		$post_arr = ['RESERVED_SERVICE_MODEL' => $request];
 
 		if ($reservation === null) {
 			$message[] = ['field' => 'Not found', 'message' => 'Reservation Not found'];
 		} else {
 
-			$offered_services = new OFFERED_SERVICE_MODEL();
-			$offered_services->SALON_ID = $id;
+			$reserved_services = new RESERVED_SERVICE_MODEL();
+			$reserved_services->RESERVATION_ID = $id;
 			//return $post_arr;
-			if ($offered_services->load($post_arr)) {
-				if ($offered_services->validate() && $offered_services->save()) {
-					$message = [$offered_services];
+			if ($reserved_services->load($post_arr)) {
+				if ($reserved_services->validate() && $reserved_services->save()) {
+					$message = [$reserved_services];
 				} else {
-					$errors = $offered_services->getErrors();
+					$errors = $reserved_services->getErrors();
 					foreach ($errors as $key => $error) {
 						$message[] = [
 							'field' => $key,
