@@ -52,21 +52,22 @@ class ReservationController extends ActiveController
 		$post_arr = ['OFFERED_SERVICE_MODEL'=>$request];
 
 		if ($salon === null) {
-			return [];
-		}
+			$message = ['field'=>'Not found','message'=>'Salon Not found'];
+		}else {
 
-		$offered_services = new OFFERED_SERVICE_MODEL();
+            $offered_services = new OFFERED_SERVICE_MODEL();
 
-		if($offered_services->load($post_arr)){
-		    if($offered_services->validate()&&$offered_services->save()){
-		        $message = [$offered_services];
-            }else{
-                $errors = $offered_services->getErrors();
-                foreach ($errors as $key => $error) {
-                    $message[] = [
-                        'field' => $key,
-                        'message' => $error[0]
-                    ];
+            if ($offered_services->load($post_arr)) {
+                if ($offered_services->validate() && $offered_services->save()) {
+                    $message = [$offered_services];
+                } else {
+                    $errors = $offered_services->getErrors();
+                    foreach ($errors as $key => $error) {
+                        $message[] = [
+                            'field' => $key,
+                            'message' => $error[0]
+                        ];
+                    }
                 }
             }
         }
