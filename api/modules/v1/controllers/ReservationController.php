@@ -47,12 +47,12 @@ class ReservationController extends ActiveController
 
 		$request = Yii::$app->request->post();
 
-		$salon = SALON_MODEL::findOne($id);
+		$reservation = RESERVATION_MODEL::findOne($id);
 
 		$post_arr = ['OFFERED_SERVICE_MODEL' => $request];
 
-		if ($salon === null) {
-			$message = ['field' => 'Not found', 'message' => 'Salon Not found'];
+		if ($reservation === null) {
+			$message[] = ['field' => 'Not found', 'message' => 'Reservation Not found'];
 		} else {
 
 			$offered_services = new OFFERED_SERVICE_MODEL();
