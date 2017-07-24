@@ -24,7 +24,7 @@ class PAYMENT_MODEL extends Payments
 	{
 		$rules = parent::rules();
 		$rules[] = [['PAYMENT_REF'], 'unique', 'message' => 'Payment reference {value}  has already been used'];
-		$rules[] = [['RESERVATION_ID'], 'unique', 'message' => 'Payment for reservation {value}  has already been made, please update balance'];
+		//$rules[] = [['RESERVATION_ID'], 'unique', 'message' => 'Payment for reservation {value}  has already been made, please update balance'];
 		return $rules;
 	}
 }
