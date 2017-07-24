@@ -94,7 +94,8 @@ class ReservationController extends ActiveController
 		//assign the post data values
 		$reservation->USER_ID = isset($request->USER_ID) ? $request->USER_ID : null;
 		$reservation->TOTAL_COST = isset($request->TOTAL_COST) ? $request->TOTAL_COST : 0;
-
+		$reservation->ACCOUNT_REF = \HELPER::GenerateRandomRef();
+		
 		$reservation_date_raw = $reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
 		$reservation_time = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : null;
 		//convert string to date format
@@ -225,11 +226,9 @@ class ReservationController extends ActiveController
 			->where(['RESERVATION_ID' => $reservation_id])->sum('SERVICE_AMOUNT');
 		$sum_total = (float)$raw_total;
 		$booking_total = $sum_total * 0.3; //30% of total
-		$account_ref = \HELPER::GenerateRandomRef();
 
 		RESERVATION_MODEL::updateAll([
 			'TOTAL_COST' => $sum_total,
-			'ACCOUNT_REF' => $account_ref,
 			'BOOKING_AMOUNT' => $booking_total
 		], "RESERVATION_ID = $reservation_id");
 	}
