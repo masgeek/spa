@@ -32,7 +32,7 @@ class Payments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['RESERVATION_ID'], 'required'],
+            [['RESERVATION_ID', 'DATE_PAID', 'PAYMENT_REF'], 'required'],
             [['RESERVATION_ID'], 'integer'],
             [['BOOKING_AMOUNT', 'FINAL_AMOUNT'], 'number'],
             [['DATE_PAID'], 'safe'],
