@@ -72,7 +72,7 @@ class PaymentController extends ActiveController
 				if ($model->validate() && $model->save()) {
 					$message = [$model];
 				} else {
-					return $errors = $model->getErrors();
+					$errors = $model->getErrors();
 					foreach ($errors as $key => $error) {
 						$message[] = [
 							'field' => $key,
