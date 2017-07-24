@@ -23,49 +23,53 @@ use yii\web\Response;
 
 class ServiceController extends ActiveController
 {
-	/**
-	 * @var object
-	 */
-	public $modelClass = 'app\api\modules\v1\models\SERVICE_MODEL';
+    /**
+     * @var object
+     */
+    public $modelClass = 'app\api\modules\v1\models\SERVICE_MODEL';
 
-	public function actionIndex()
-	{
-		return new ActiveDataProvider([
-			'query' => SERVICE_MODEL::findOne(4),
-		]);
-	}
+    public function actionIndex()
+    {
+        return new ActiveDataProvider([
+            'query' => SERVICE_MODEL::findOne(4),
+        ]);
+    }
 
-	/**
-	 * @return array|\yii\db\ActiveRecord[]
-	 */
-	public function actionAll()
-	{
-		$available_services = SERVICE_MODEL::find()
-			->orderBy(['SERVICE_NAME' => SORT_ASC])
-			->all();
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function actionAll()
+    {
+        return $this->QueryServices();
+    }
 
-		return $available_services;
-	}
+    /**
+     * @param  int $id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function actionServiceList($id)
+    {
+        //get already added services
+        $salon_services = OFFERED_SERVICE_MODEL::find()
+            ->select(['SERVICE_ID'])
+            ->where(['SALON_ID' => $id])
+            ->asArray()
+            ->all();
+        return $this->QueryServices($salon_services);
+    }
 
-	/**
-	 * @param  int $id
-	 * @param int  $all
-	 * @return array|\yii\db\ActiveRecord[]
-	 */
-	public function actionServiceList($id, $all = 0)
-	{
-		//get already added services
-		$salon_services = OFFERED_SERVICE_MODEL::find()
-			->select(['SERVICE_ID'])
-			->where(['SALON_ID' => $id])
-			->asArray()
-			->all();
+    /**
+     * @param array $exclusion_list
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    private function QueryServices($exclusion_list = [])
+    {
 
-		$available_services = SERVICE_MODEL::find()
-			->where(['NOT IN', 'SERVICE_ID', $salon_services])
-			->orderBy(['SERVICE_NAME' => SORT_ASC])
-			->all();
+        $available_services = SERVICE_MODEL::find()
+            ->where(['NOT IN', 'SERVICE_ID', $exclusion_list])
+            ->orderBy(['SERVICE_NAME' => SORT_ASC])
+            ->all();
 
-		return $available_services;
-	}
+        return $available_services;
+    }
 }
