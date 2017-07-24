@@ -200,7 +200,7 @@ class ReservationController extends ActiveController
 		$provider = new ActiveDataProvider([
 			'query' => $query,
 			'pagination' => [
-				'pageSize' => 20,
+				'pageSize' => 100,
 			]
 		]);
 
