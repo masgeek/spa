@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $ACCOUNT_TYPE_ID
  * @property string $ACCOUNT_NAME
+ * @property int $FOR_MOBILE
  *
  * @property User[] $users
  */
@@ -28,6 +29,7 @@ class AccountType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['FOR_MOBILE'], 'integer'],
             [['ACCOUNT_NAME'], 'string', 'max' => 10],
         ];
     }
@@ -40,6 +42,7 @@ class AccountType extends \yii\db\ActiveRecord
         return [
             'ACCOUNT_TYPE_ID' => 'Account  Type  ID',
             'ACCOUNT_NAME' => 'Account  Name',
+            'FOR_MOBILE' => 'For  Mobile',
         ];
     }
 
