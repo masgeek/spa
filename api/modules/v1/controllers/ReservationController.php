@@ -51,6 +51,7 @@ class ReservationController extends ActiveController
 
 		$post_arr = ['RESERVED_SERVICE_MODEL' => $request];
 
+		return $post_arr;
 		if ($reservation === null) {
 			$message[] = ['field' => 'Not found', 'message' => 'Reservation Not found'];
 		} else {
