@@ -46,7 +46,6 @@ class PaymentController extends ActiveController
 		$model_post = [
 			'PAYMENT_MODEL' => $request
 		];
-		$payments = new PAYMENT_MODEL();
 		$reservation = RESERVATION_MODEL::find()
 			->where(['RESERVATION_ID' => $id, 'ACCOUNT_REF' => $account_ref])
 			->one();
@@ -56,14 +55,21 @@ class PaymentController extends ActiveController
 				'message' => "Reservation Not Found"
 			];
 		} else {
+			$model = new PAYMENT_MODEL();
 			//process the payment
-			$payments->RESERVATION_ID = $id;
-			$payments->DATE_PAID = new Expression('NOW()');
-			if ($payments->load($model_post)) {
-				if($payments->validate()) {
-					return $payments->attributes;
-				}else{
-
+			$model->RESERVATION_ID = $id;
+			$model->DATE_PAID = new Expression('NOW()');
+			if ($model->load($model_post)) {
+				if ($model->validate() && $model->save()) {
+					$model->attributes;
+				} else {
+					return $errors = $model->getErrors();
+					foreach ($errors as $key => $error) {
+						$message[] = [
+							'field' => $key,
+							'message' => $error[0]
+						];
+					}
 				}
 			}
 		}

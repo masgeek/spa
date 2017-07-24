@@ -12,4 +12,11 @@ namespace app\api\modules\v1\models;
 use app\models\Payments;
 
 class PAYMENT_MODEL extends Payments
-{}
+{
+	public function fields()
+	{
+		$fields = parent::fields();
+
+		return $fields;
+	}
+}
