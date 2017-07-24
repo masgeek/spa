@@ -59,6 +59,8 @@ class ReservationController extends ActiveController
 			$reserved_services->RESERVATION_ID = $id;
 			//return $post_arr;
 			$selected_services = $post_arr['SELECTED_SERVICES'];
+
+			return $selected_services;
 			if ($reserved_services->load($post_arr)) {
 
 				foreach ($selected_services as $key => $offered_service_id) {
