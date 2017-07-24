@@ -51,7 +51,6 @@ class ReservationController extends ActiveController
 
 		$post_arr = ['RESERVED_SERVICE_MODEL' => $request];
 
-		return $post_arr;
 		if ($reservation === null) {
 			$message[] = ['field' => 'Not found', 'message' => 'Reservation Not found'];
 		} else {
@@ -60,6 +59,8 @@ class ReservationController extends ActiveController
 			$reserved_services->RESERVATION_ID = $id;
 			//return $post_arr;
 			if ($reserved_services->load($post_arr)) {
+
+				return $reserved_services;
 				if ($reserved_services->validate() && $reserved_services->save()) {
 					$message = [$reserved_services];
 				} else {
