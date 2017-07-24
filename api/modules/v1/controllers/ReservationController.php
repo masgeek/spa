@@ -9,6 +9,7 @@
 namespace app\api\modules\v1\controllers;
 
 
+use app\api\modules\v1\models\SALON_MODEL;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
@@ -38,60 +39,37 @@ class ReservationController extends ActiveController
 
 	public function actionAddService($id)
 	{
-		/* @var $request RESERVATION_MODEL */
 		$message = [];
-		$db = Yii::$app->db;
 
 		if (!Yii::$app->request->isPost) {
 			throw new BadRequestHttpException('Please use POST');
 		}
+
 		$request = (object)Yii::$app->request->post();
 
-		$reservation = RESERVATION_MODEL::findOne($id);
-		$reserved_services = new RESERVED_SERVICE_MODEL();
+		$salon = SALON_MODEL::findOne($id);
 
-		if ($reservation === null) {
-			throw new NotFoundHttpException("Reservation not found");
+		$post_arr = ['OFFERED_SERVICE_MODEL'=>$request];
+
+		if ($salon === null) {
+			return [];
 		}
 
-		$reservation_date_raw = $reservation->RESERVATION_DATE = isset($request->RESERVATION_DATE) ? $request->RESERVATION_DATE : null;
-		$reservation_time = isset($request->RESERVATION_TIME) ? $request->RESERVATION_TIME : null;
-		//convert string to date format
-		$DateTime = \DateTime::createFromFormat('Y-m-d', $reservation_date_raw);
-		$reservation_date = $DateTime->format('Y-m-d');
+		$offered_services = new OFFERED_SERVICE_MODEL();
 
-		//now let us add the data then update the total
-		$services = isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
-		$transaction = $db->beginTransaction();
-
-		foreach ($services as $key => $offered_service_id) {
-			/* @var $serviceObj OFFERED_SERVICE_MODEL */
-			$serviceObj = OFFERED_SERVICE_MODEL::findOne($offered_service_id);
-			$reserved_services->isNewRecord = true;
-			$reserved_services->RESERVED_SERVICE_ID = null;
-			$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
-			$reserved_services->OFFERED_SERVICE_ID = $serviceObj->OFFERED_SERVICE_ID;
-			$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_COST;
-			$reserved_services->RESERVATION_TIME = $reservation_time;
-			$reserved_services->RESERVATION_DATE = $reservation_date;
-			//save the data
-			if ($reserved_services->validate() && $reserved_services->save()) {
-				$transaction->commit();
-				$this->UpdateTotalCost($reservation->RESERVATION_ID);
-				$message = [$reservation];
-			} else {
-				$errors = $reserved_services->getErrors();
-				foreach ($errors as $key => $error) {
-					$message[] = [
-						'field' => $key,
-						'message' => $error[0]
-					];
-				}
-				$transaction->rollback();
-				return $message;
-			}
-		}
-
+		if($offered_services->load($post_arr)){
+		    if($offered_services->validate()&&$offered_services->save()){
+		        $message = [$offered_services];
+            }else{
+                $errors = $offered_services->getErrors();
+                foreach ($errors as $key => $error) {
+                    $message[] = [
+                        'field' => $key,
+                        'message' => $error[0]
+                    ];
+                }
+            }
+        }
 		return $message;
 	}
 
