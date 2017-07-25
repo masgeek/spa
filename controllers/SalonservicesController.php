@@ -33,10 +33,10 @@ class SalonservicesController extends Controller
      * Lists all MY_SERVICES models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => MY_SERVICES::find(),
+            'query' => MY_SERVICES::find()->where(['SALON_ID' => $id]),
         ]);
 
         return $this->render('index', [
@@ -67,7 +67,7 @@ class SalonservicesController extends Controller
         $model->SALON_ID = $id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->OFFERED_SERVICE_ID]);
+            return $this->redirect(['create', 'id' => $model->SALON_ID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -86,7 +86,7 @@ class SalonservicesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->OFFERED_SERVICE_ID]);
+            return $this->redirect(['index', 'id' => $model->SALON_ID]);
         } else {
             return $this->render('update', [
                 'model' => $model,

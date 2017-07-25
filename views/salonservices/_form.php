@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'SERVICE_ID')->textInput() ?>
+    <?= $form->field($model, 'SERVICE_ID')->dropDownList(\app\model_extended\MY_SERVICES::SalonDropdown($model->SALON_ID),['prompt'=>'--Select service to add--']) ?>
 
     <?= $form->field($model, 'SALON_ID')->hiddenInput()->label(false) ?>
 

@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'OFFERED_SERVICE_ID',
-            'SERVICE_ID',
-            'SALON_ID',
+            //'OFFERED_SERVICE_ID',
+            'sERVICE.SERVICE_NAME',
+            'sALON.SALON_NAME',
             'SERVICE_COST',
 
             ['class' => 'yii\grid\ActionColumn'],
