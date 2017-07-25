@@ -37,6 +37,17 @@ class ReservationController extends ActiveController
 		return $actions;
 	}
 
+	public function actionAddService($id){
+        if (!Yii::$app->request->isPost) {
+            throw new BadRequestHttpException('Please use POST');
+        }
+
+        $reservation = RESERVATION_MODEL::findOne($id); //check to see if the reservation exists
+        $request = (object)Yii::$app->request->post();
+
+        return $request;
+
+    }
 	public function actionReserve()
 	{
 		/* @var $request RESERVATION_MODEL */
