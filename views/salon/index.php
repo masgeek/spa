@@ -25,6 +25,9 @@ $gridColumns = [
     'OWNER_ID',
     [
         'class' => '\kartik\grid\ActionColumn',
+    ],
+    [
+        'class' => '\kartik\grid\ActionColumn',
         'template' => '{approve}',
         'buttons' => [
             'approve' => function ($url, $model, $key) {
@@ -35,7 +38,7 @@ $gridColumns = [
             $url = '#';
             if ($action === 'approve') {
                 $action = 'Add Service';
-                $url = \yii\helpers\Url::toRoute(['//add-service','id'=>$model->SALON_ID]);
+                $url = \yii\helpers\Url::toRoute(['//add-service', 'id' => $model->SALON_ID]);
             }
 
             return Html::a($action, $url, [
@@ -43,8 +46,8 @@ $gridColumns = [
                 //'data-confirm' => 'Are you sure?',
                 //'id' => 'act-btn',
                 //'data-params' => [
-                    //'ID' => $model->SALON_ID,
-                    //'_csrf' => Yii::$app->request->csrfToken
+                //'ID' => $model->SALON_ID,
+                //'_csrf' => Yii::$app->request->csrfToken
                 //],
                 'class' => 'btn btn-success btn-xs btn-block']);
         },
