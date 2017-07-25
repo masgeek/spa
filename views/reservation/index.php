@@ -22,13 +22,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'RESERVATION_ID',
-            'USER_ID',
-            'RESERVATION_DATE',
+            //'RESERVATION_ID',
+            //'OWNER_ID',
+            'RESERVATION_DATE:date',
+            ///'STATUS_ID',
+            [
+                //lets build the document link
+                'attribute' => 'STATUS_ID',
+                'format' => 'raw',
+                'value' => function ($model, $key, $index) {
+                    $data = 'Pending';
+                    if ($model->STATUS_ID != null) {
+                        $data = \app\model_extended\STATUS_MODEL::findOne($model->STATUS_ID)->STATUS_NAME;
+                    }
+                    return $data;
+                }
+            ],
             'TOTAL_COST',
-            'STATUS_ID',
-            // 'ACCOUNT_REF',
-            // 'BOOKING_AMOUNT',
+            'BOOKING_AMOUNT',
+            'ACCOUNT_REF',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
