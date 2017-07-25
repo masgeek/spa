@@ -69,7 +69,7 @@ class ReservationController extends ActiveController
                 }
             }
         }
-        return $request;
+        return $message;
 
     }
 	public function actionReserve()
