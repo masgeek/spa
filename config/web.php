@@ -51,9 +51,9 @@ $config = [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 //custom rules
                 '/' => 'site/index',
-                'my-salons' => 'salons/my-salons',
+                'my-salons' => 'salon/my-salons',
                 'my-staff' => 'staff/my-staff',
-                'my-payments' => 'payments/my-payments',
+                'my-payments' => 'payment/my-payments',
                 'my-bookings' => 'reservation/my-reservation',
                 'confirm' => 'reservation/confirm',
                 'services' => 'service/index',
