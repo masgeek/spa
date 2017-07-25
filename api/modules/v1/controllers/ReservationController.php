@@ -43,6 +43,7 @@ class ReservationController extends ActiveController
         }
 
         $reservation = RESERVATION_MODEL::findOne($id); //check to see if the reservation exists
+        $reserved_service = new RESERVED_SERVICE_MODEL();
         $request = (object)Yii::$app->request->post();
 
         return $request;
@@ -87,7 +88,7 @@ class ReservationController extends ActiveController
 				$reserved_services->RESERVED_SERVICE_ID = null;
 				$reserved_services->RESERVATION_ID = $reservation->RESERVATION_ID;
 				$reserved_services->OFFERED_SERVICE_ID = $serviceObj->OFFERED_SERVICE_ID;
-				$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_COST;
+				$reserved_services->SERVICE_AMOUNT = $serviceObj->SERVICE_AMOUNT;
 				$reserved_services->RESERVATION_TIME = $reservation_time;
 				$reserved_services->RESERVATION_DATE = $reservation_date;
 				//save the data
