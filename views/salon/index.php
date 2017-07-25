@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
-    'SALON_ID',
+    //'SALON_ID',
     'SALON_NAME',
     'SALON_TEL',
     'SALON_LOCATION',
@@ -22,7 +22,6 @@ $gridColumns = [
     'SALON_WEBSITE',
     'SALON_IMAGE',
     'DESCRIPTION:ntext',
-    'OWNER_ID',
     [
         'class' => '\kartik\grid\ActionColumn',
     ],
