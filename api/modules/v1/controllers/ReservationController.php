@@ -65,7 +65,6 @@ class ReservationController extends ActiveController
                             'message' => $error[0]
                         ];
                     }
-                    return $message;
                 }
             }
         }
