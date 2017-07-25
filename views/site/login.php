@@ -10,28 +10,24 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-    <p>Please fill out the following fields to login:</p>
-
+<div class="site-login col-md-8 col-md-offset-2" style="margin-top: 50px;">
+    <div class="col-md-12 text-center"><h2>Login</h2></div>
+    <div class="col-md-12 text-center">
+        <h4>You need to login in order to proceed</h4>
+    </div>
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-           // 'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-           // 'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
+        //'layout' => 'horizontal',
     ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-        </div>
-
+    <div class="row">
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label(false)->hint('Username/Email') ?>
+    </div>
+    <div class="row">
+        <?= $form->field($model, 'password')->passwordInput()->label(false)->hint('Password') ?>
+    </div>
+    <div class="row">
+        <?= Html::submitButton('Login', ['class' => 'btn btn-success btn-lg btn-block', 'name' => 'login-button']) ?>
+    </div>
     <?php ActiveForm::end(); ?>
 </div>
