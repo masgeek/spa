@@ -31,10 +31,8 @@ class Staff extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['STAFF_ID'], 'required'],
-            [['STAFF_ID', 'SALON_ID'], 'integer'],
+            [['SALON_ID'], 'integer'],
             [['STAFF_NAME', 'STAFF_TEL'], 'string', 'max' => 255],
-            [['STAFF_ID'], 'unique'],
             [['SALON_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Salon::className(), 'targetAttribute' => ['SALON_ID' => 'SALON_ID']],
         ];
     }

@@ -52,9 +52,9 @@ $config = [
                 //custom rules
                 '/' => 'site/index',
                 'my-salons' => 'salon/index',
-                'my-staff' => 'staff/my-staff',
-                'my-payments' => 'payment/my-payments',
-                'my-bookings' => 'reservation/my-reservation',
+                'my-staff' => 'staff/index',
+                'my-payments' => 'payment/index',
+                'my-bookings' => 'reservation/index',
                 'confirm' => 'reservation/confirm',
                 'services' => 'service/index',
             ],

@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\model_extended\MY_SALONS;
+use app\model_extended\STAFF_MODEL;
 use Yii;
 use app\models\Staff;
 use yii\data\ActiveDataProvider;
@@ -63,7 +65,8 @@ class StaffController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Staff();
+
+        $model = new STAFF_MODEL();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->STAFF_ID]);
