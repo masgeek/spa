@@ -13,6 +13,7 @@ use app\models\Reservations;
 
 class MY_RESERVATIONS extends Reservations
 {
+    public $USER_NAME;
     public function attributeLabels()
     {
         $labels = parent::attributeLabels();

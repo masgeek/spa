@@ -2,19 +2,17 @@
 
 namespace app\controllers;
 
-use app\model_extended\MY_RESERVATIONS;
-use app\model_extended\MY_RESERVATIONS_VIEW;
-use app\models\Reservations;
 use Yii;
+use app\model_extended\RESERVED_SERVICES;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ReservationController implements the CRUD actions for Reservations model.
+ * BookedController implements the CRUD actions for RESERVED_SERVICES model.
  */
-class ReservationController extends Controller
+class BookedController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,17 +30,13 @@ class ReservationController extends Controller
     }
 
     /**
-     * Lists all Reservations models.
+     * Lists all RESERVED_SERVICES models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            //'query' => Reservations::find(),
-            'query' => MY_RESERVATIONS_VIEW::find(),
-            'key' => function ($model) {
-                return $model->RESERVATION_ID;
-            }
+            'query' => RESERVED_SERVICES::find(),
         ]);
 
         return $this->render('index', [
@@ -50,8 +44,19 @@ class ReservationController extends Controller
         ]);
     }
 
+    public function actionAssignStaff($reservation_id)
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => RESERVED_SERVICES::find()
+                ->where(['RESERVATION_ID'=>$reservation_id]),
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
     /**
-     * Displays a single Reservations model.
+     * Displays a single RESERVED_SERVICES model.
      * @param integer $id
      * @return mixed
      */
@@ -63,16 +68,16 @@ class ReservationController extends Controller
     }
 
     /**
-     * Creates a new Reservations model.
+     * Creates a new RESERVED_SERVICES model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new MY_RESERVATIONS();
+        $model = new RESERVED_SERVICES();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->RESERVATION_ID]);
+            return $this->redirect(['view', 'id' => $model->RESERVED_SERVICE_ID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -81,7 +86,7 @@ class ReservationController extends Controller
     }
 
     /**
-     * Updates an existing Reservations model.
+     * Updates an existing RESERVED_SERVICES model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,8 +96,7 @@ class ReservationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->RESERVATION_ID]);
-            return $this->redirect(['booked/assign-staff', 'reservation_id' => $model->RESERVATION_ID]);
+            return $this->redirect(['view', 'id' => $model->RESERVED_SERVICE_ID]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -101,7 +105,7 @@ class ReservationController extends Controller
     }
 
     /**
-     * Deletes an existing Reservations model.
+     * Deletes an existing RESERVED_SERVICES model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +118,15 @@ class ReservationController extends Controller
     }
 
     /**
-     * Finds the Reservations model based on its primary key value.
+     * Finds the RESERVED_SERVICES model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Reservations the loaded model
+     * @return RESERVED_SERVICES the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = MY_RESERVATIONS::findOne($id)) !== null) {
+        if (($model = RESERVED_SERVICES::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
