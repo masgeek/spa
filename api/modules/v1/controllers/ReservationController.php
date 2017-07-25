@@ -57,7 +57,7 @@ class ReservationController extends ActiveController
                 $reserved_service->SERVICE_AMOUNT = Yii::$app->request->post('SERVICE_COST');
                 $reserved_service->RESERVATION_ID = $id;
                 if ($reserved_service->validate() && $reserved_service->save()) {
-                    $message = [$reservation];
+                    $message = [$reserved_service];
                 } else {
                     foreach ( $reserved_service->getErrors() as $key => $error) {
                         $message[] = [
