@@ -37,9 +37,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'My Salon', 'url' => ['/my-salons'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
+            ['label' => 'My Staff', 'url' => ['/my-staff'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
+            ['label' => 'Reservations', 'url' => ['/my-booking'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
+            ['label' => 'Payments', 'url' => ['/my-payments'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
+            ['label' => 'Services', 'url' => ['/services'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

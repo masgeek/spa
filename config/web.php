@@ -18,8 +18,8 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'app\model_extended\USERS_MODEL',
+            'enableAutoLogin' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -46,6 +46,17 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                //custom rules
+                '/' => 'site/index',
+                'my-salons' => 'salons/my-salons',
+                'my-staff' => 'staff/my-staff',
+                'my-payments' => 'payments/my-payments',
+                'my-bookings' => 'reservation/my-reservation',
+                'confirm' => 'reservation/confirm',
+                'services' => 'service/index',
             ],
         ],
 

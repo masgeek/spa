@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\model_extended\USERS_MODEL;
 use Yii;
 use yii\base\Model;
 
@@ -68,12 +69,12 @@ class LoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return UserOld|null
+     * @return USERS_MODEL|null
      */
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = UserOld::findByUsername($this->username);
+            $this->_user = USERS_MODEL::findByUsername($this->username);
         }
 
         return $this->_user;

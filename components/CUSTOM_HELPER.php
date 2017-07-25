@@ -10,6 +10,9 @@ namespace app\components;
 
 class CUSTOM_HELPER
 {
+    const ADMIN_ACCOUNT = 'ADMIN';
+    const SALON_ADMIN = 'BUSINESS';
+
 	public static function GenerateRandomRef()
 	{
 		$rand = substr(md5(microtime()), rand(0, 26), 5);
