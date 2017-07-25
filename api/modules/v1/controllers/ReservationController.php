@@ -49,6 +49,7 @@ class ReservationController extends ActiveController
         $add_post = ['RESERVED_SERVICE_MODEL'=>$request];
 
         if($reserved_service->load($add_post)){
+            $reserved_service->SERVICE_AMOUNT = Yii::$app->request->post('SERVICE_COST');
             return $reserved_service;
         }
         return $request;
