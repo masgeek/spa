@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Services;
+use app\model_extended\MY_SERVICES;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ServiceController implements the CRUD actions for Services model.
+ * SalonservicesController implements the CRUD actions for MY_SERVICES model.
  */
-class ServiceController extends Controller
+class SalonservicesController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,13 +30,13 @@ class ServiceController extends Controller
     }
 
     /**
-     * Lists all Services models.
+     * Lists all MY_SERVICES models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Services::find(),
+            'query' => MY_SERVICES::find(),
         ]);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ServiceController extends Controller
     }
 
     /**
-     * Displays a single Services model.
+     * Displays a single MY_SERVICES model.
      * @param integer $id
      * @return mixed
      */
@@ -57,15 +57,17 @@ class ServiceController extends Controller
     }
 
     /**
-     * Creates a new Services model.
+     * Creates a new MY_SERVICES model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new Services();
+        $model = new MY_SERVICES();
+        $model->SALON_ID = $id;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->SERVICE_ID]);
+            return $this->redirect(['view', 'id' => $model->OFFERED_SERVICE_ID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,7 +76,7 @@ class ServiceController extends Controller
     }
 
     /**
-     * Updates an existing Services model.
+     * Updates an existing MY_SERVICES model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -84,7 +86,7 @@ class ServiceController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->SERVICE_ID]);
+            return $this->redirect(['view', 'id' => $model->OFFERED_SERVICE_ID]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,7 +95,7 @@ class ServiceController extends Controller
     }
 
     /**
-     * Deletes an existing Services model.
+     * Deletes an existing MY_SERVICES model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,15 +108,15 @@ class ServiceController extends Controller
     }
 
     /**
-     * Finds the Services model based on its primary key value.
+     * Finds the MY_SERVICES model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Services the loaded model
+     * @return MY_SERVICES the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Services::findOne($id)) !== null) {
+        if (($model = MY_SERVICES::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -39,6 +39,36 @@ $gridColumns = [
     'RESERVATION_TIME',
     'SERVICE_AMOUNT',
     'STATUS_ID',
+    [
+        'class' => '\kartik\grid\ActionColumn',
+        'template' => '{approve}',
+        'buttons' => [
+            'approve' => function ($url, $model, $key) {
+                return $url;
+            },
+        ],
+        'urlCreator' => function ($action, $model, $key, $index) {
+            $url = '#';
+            if ($action === 'approve') {
+                $action = 'Add Service';
+                $url = \yii\helpers\Url::toRoute(['//add-service']);
+            }
+
+            return Html::a($action, $url, [
+                'data-method' => 'post',
+                //'data-confirm' => 'Are you sure?',
+                'id' => 'act-btn',
+                'data-params' => [
+                    'ACTION' => 'APPROVE',
+                    'ID' => $model['ID'],
+                    'TIMESTAMP' => $model['SUBMISSION_TIME'],
+                    'EVENT_DETAIL_ID' => $model['EVENT_DETAIL_ID'],
+                    'REGISTRATION_NUMBER' => $model['REGISTRATION_NUMBER'],
+                    '_csrf' => Yii::$app->request->csrfToken
+                ],
+                'class' => 'btn btn-success btn-xs btn-block']);
+        },
+    ],
 ];
 // the GridView widget (you must use kartik\grid\GridView)
 
