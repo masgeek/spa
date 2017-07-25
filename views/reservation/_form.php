@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'TOTAL_COST')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'STATUS_ID')->textInput() ?>
+    <?= $form->field($model, 'STATUS_ID')->dropDownList(\app\model_extended\STATUS_MODEL::GetStatus(),['prompt'=>'--- SELECT STATUS --']) ?>
 
     <?= $form->field($model, 'ACCOUNT_REF')->textInput(['maxlength' => true]) ?>
 

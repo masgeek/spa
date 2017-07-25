@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\model_extended\MY_RESERVATIONS;
+use app\model_extended\MY_RESERVATIONS_VIEW;
 use app\models\Reservations;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -38,7 +39,7 @@ class ReservationController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             //'query' => Reservations::find(),
-            'query' => MY_RESERVATIONS::find(),
+            'query' => MY_RESERVATIONS_VIEW::find(),
             'key' => function ($model) {
                 return $model->RESERVATION_ID;
             }
@@ -68,7 +69,7 @@ class ReservationController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Reservations();
+        $model = new MY_RESERVATIONS();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->RESERVATION_ID]);
@@ -120,7 +121,7 @@ class ReservationController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Reservations::findOne($id)) !== null) {
+        if (($model = MY_RESERVATIONS::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
