@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\model_extended\MY_SERVICES */
 
-$this->title = 'Update My  Services: ' . $model->OFFERED_SERVICE_ID;
-$this->params['breadcrumbs'][] = ['label' => 'My  Services', 'url' => ['index']];
+$this->title = 'Update Service: ' . $model->sERVICE->SERVICE_NAME;
+$this->params['breadcrumbs'][] = ['label' => 'My  Services', 'url' => ['index','id'=>$model->SALON_ID]];
 $this->params['breadcrumbs'][] = ['label' => $model->OFFERED_SERVICE_ID, 'url' => ['view', 'id' => $model->OFFERED_SERVICE_ID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
