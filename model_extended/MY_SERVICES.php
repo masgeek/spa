@@ -31,9 +31,12 @@ class MY_SERVICES extends OfferedServices
         return $excl;
     }
 
-    public static function SalonDropdown($salon_id)
+    public static function SalonDropdown($salon_id, $new_record)
     {
-        $excl_arr = self::GetSalonServices($salon_id);
+        $excl_arr = [];
+        if ($new_record) {
+            $excl_arr = self::GetSalonServices($salon_id);
+        }
 
         $services = Services::find()
             ->where(['NOT IN', 'SERVICE_ID', $excl_arr])
