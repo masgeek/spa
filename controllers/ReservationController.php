@@ -2,8 +2,9 @@
 
 namespace app\controllers;
 
-use Yii;
+use app\model_extended\MY_RESERVATIONS;
 use app\models\Reservations;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -36,7 +37,11 @@ class ReservationController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Reservations::find(),
+            //'query' => Reservations::find(),
+            'query' => MY_RESERVATIONS::find(),
+            'key' => function ($model) {
+                return $model->RESERVATION_ID;
+            }
         ]);
 
         return $this->render('index', [

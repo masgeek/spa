@@ -24,7 +24,7 @@ $salon_items = \app\model_extended\MY_SALONS::SalonDropdown($userid);
     <?= $form->field($model, 'STAFF_TEL')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Add Staff' : 'Update', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Add Staff' : 'Update', ['class' => 'btn btn-success btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

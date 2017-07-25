@@ -37,8 +37,10 @@ class StaffController extends Controller
      */
     public function actionIndex()
     {
+        $userid = Yii::$app->user->identity->id;
         $dataProvider = new ActiveDataProvider([
-            'query' => Staff::find(),
+            'query' => Staff::find()
+                ->where(['SALON_ID'=>MY_SALONS::GetOwnerSalons($userid)])
         ]);
 
         return $this->render('index', [

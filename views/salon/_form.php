@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'DESCRIPTION')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'OWNER_ID')->textInput() ?>
+    <?= $form->field($model, 'OWNER_ID')->hiddenInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

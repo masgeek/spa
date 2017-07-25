@@ -37,7 +37,7 @@ class SalonController extends Controller
     {
         $userid = Yii::$app->user->identity->id;
         $dataProvider = new ActiveDataProvider([
-            'query' => Salon::find()->where(['OWNER_ID'=>$userid]),
+            'query' => Salon::find()->where(['OWNER_ID' => $userid]),
         ]);
 
         return $this->render('index', [
@@ -66,6 +66,7 @@ class SalonController extends Controller
     {
         $model = new Salon();
 
+        $model->OWNER_ID = Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->SALON_ID]);
         } else {
