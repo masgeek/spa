@@ -52,7 +52,6 @@ class ReservationController extends ActiveController
         $add_post = ['RESERVED_SERVICE_MODEL'=>$request];
         $services =  Yii::$app->request->post('SELECTED_SERVICES');//isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
 
-        return $services;
         foreach ($services as $key => $offered_service_id) {
             $reserved_service->isNewRecord = true;
             if ($reserved_service->load($add_post)) {
