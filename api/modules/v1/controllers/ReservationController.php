@@ -38,6 +38,9 @@ class ReservationController extends ActiveController
 	}
 
 	public function actionAddService($id){
+
+        $message = [];
+
         if (!Yii::$app->request->isPost) {
             throw new BadRequestHttpException('Please use POST');
         }
@@ -47,11 +50,24 @@ class ReservationController extends ActiveController
         $request = Yii::$app->request->post();
 
         $add_post = ['RESERVED_SERVICE_MODEL'=>$request];
-
-        if($reserved_service->load($add_post)){
-            $reserved_service->SERVICE_AMOUNT = Yii::$app->request->post('SERVICE_COST');
-            $reserved_service->RESERVATION_ID = $id;
-            return $reserved_service;
+        $services = isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
+        foreach ($services as $key => $offered_service_id) {
+            $reserved_service->isNewRecord = true;
+            if ($reserved_service->load($add_post)) {
+                $reserved_service->SERVICE_AMOUNT = Yii::$app->request->post('SERVICE_COST');
+                $reserved_service->RESERVATION_ID = $id;
+                if ($reserved_service->validate() && $reserved_service->save()) {
+                    $message = [$reservation];
+                } else {
+                    foreach ( $reserved_service->getErrors() as $key => $error) {
+                        $message[] = [
+                            'field' => $key,
+                            'message' => $error[0]
+                        ];
+                    }
+                    return $message;
+                }
+            }
         }
         return $request;
 
