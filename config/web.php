@@ -60,6 +60,7 @@ $config = [
                 'my-staff' => 'staff/index',
                 'my-payments' => 'payment/index',
                 'my-bookings' => 'reservation/index',
+                'assign-service' => 'booked/assign-service',
                 'confirm' => 'reservation/confirm',
                 'services' => 'service/index',
             ],

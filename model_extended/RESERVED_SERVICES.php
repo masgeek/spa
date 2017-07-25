@@ -13,5 +13,12 @@ use app\models\ReservedServices;
 
 class RESERVED_SERVICES extends ReservedServices
 {
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
 
+        $labels['STAFF_ID'] = 'Assigned Staff';
+
+        return $labels;
+    }
 }

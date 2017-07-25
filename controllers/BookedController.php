@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\model_extended\RESERVED_SERVICES;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -44,17 +45,44 @@ class BookedController extends Controller
         ]);
     }
 
+    public function actionAssignService()
+    {
+
+        $editable = (bool)Yii::$app->request->post('hasEditable');
+        $out = Json::encode(['output' => '', 'message' => '']);
+
+        if ($editable) {
+            $reservation_id = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($reservation_id);
+
+            $services_arr = Yii::$app->request->post('RESERVED_SERVICES');
+            foreach ($services_arr as $services) {
+                $model->STAFF_ID = $services['STAFF_ID'];
+
+                if ($model->save()) {
+                    $out = ['output' => $model->sTAFF->STAFF_NAME, 'message' => ''];
+                } else {
+                    $out = ['output' => '', 'message' => 'Unable to save'];
+                }
+            }
+
+        }
+
+        echo Json::encode($out);
+    }
+
     public function actionAssignStaff($reservation_id)
     {
         $dataProvider = new ActiveDataProvider([
             'query' => RESERVED_SERVICES::find()
-                ->where(['RESERVATION_ID'=>$reservation_id]),
+                ->where(['RESERVATION_ID' => $reservation_id]),
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
+
     /**
      * Displays a single RESERVED_SERVICES model.
      * @param integer $id
