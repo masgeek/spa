@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "vw_my_reservations".
  *
  * @property int $RESERVATION_ID
- * @property int $USER_ID
  * @property string $RESERVATION_DATE
  * @property string $TOTAL_COST
  * @property int $STATUS_ID
@@ -16,6 +15,7 @@ use Yii;
  * @property string $BOOKING_AMOUNT
  * @property string $SALON_NAME
  * @property string $SURNAME
+ * @property int $OWNER_ID
  */
 class VwMyReservations extends \yii\db\ActiveRecord
 {
@@ -33,8 +33,8 @@ class VwMyReservations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['RESERVATION_ID', 'USER_ID', 'STATUS_ID'], 'integer'],
-            [['USER_ID', 'RESERVATION_DATE', 'TOTAL_COST', 'ACCOUNT_REF', 'SALON_NAME', 'SURNAME'], 'required'],
+            [['RESERVATION_ID', 'STATUS_ID', 'OWNER_ID'], 'integer'],
+            [['RESERVATION_DATE', 'TOTAL_COST', 'ACCOUNT_REF', 'SALON_NAME', 'SURNAME'], 'required'],
             [['RESERVATION_DATE'], 'safe'],
             [['TOTAL_COST', 'BOOKING_AMOUNT'], 'number'],
             [['ACCOUNT_REF'], 'string', 'max' => 50],
@@ -50,7 +50,6 @@ class VwMyReservations extends \yii\db\ActiveRecord
     {
         return [
             'RESERVATION_ID' => 'Reservation  ID',
-            'USER_ID' => 'User  ID',
             'RESERVATION_DATE' => 'Reservation  Date',
             'TOTAL_COST' => 'Total  Cost',
             'STATUS_ID' => 'Status  ID',
@@ -58,6 +57,7 @@ class VwMyReservations extends \yii\db\ActiveRecord
             'BOOKING_AMOUNT' => 'Booking  Amount',
             'SALON_NAME' => 'Salon  Name',
             'SURNAME' => 'Surname',
+            'OWNER_ID' => 'Owner  ID',
         ];
     }
 }

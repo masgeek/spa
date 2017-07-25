@@ -21,6 +21,7 @@ $gridColumns = [
         'class' => 'kartik\grid\EditableColumn',
         'attribute' => 'STAFF_ID',
         'value' => function ($model, $key, $index, $widget) {
+            /* @var $model \app\model_extended\RESERVED_SERVICES */
             return $model->sTAFF->STAFF_NAME;
         },
         'pageSummary' => true,
