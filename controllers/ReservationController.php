@@ -7,6 +7,7 @@ use app\model_extended\MY_RESERVATIONS_VIEW;
 use app\models\Reservations;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -16,6 +17,7 @@ use yii\filters\VerbFilter;
  */
 class ReservationController extends Controller
 {
+
     /**
      * @inheritdoc
      */
@@ -26,6 +28,17 @@ class ReservationController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
                 ],
             ],
         ];
