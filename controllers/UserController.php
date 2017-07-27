@@ -68,12 +68,18 @@ class UserController extends Controller
             $user_id = Yii::$app->request->post('editableKey');
             $model = $this->findModel($user_id);
 
-            $services_arr = Yii::$app->request->post('ACCOUNT_STATUS');
+            $services_arr = Yii::$app->request->post('USERS_MODEL');
+
+
             foreach ($services_arr as $services) {
-                $model->ACCOUNT_STATUS = $services['ACCOUNT_STATUS'];
+                $model->ACCOUNT_STATUS = isset($services['ACCOUNT_STATUS']) ? $services['ACCOUNT_STATUS'] : $model->ACCOUNT_TYPE_ID;
+
+                $model->ACCOUNT_TYPE_ID = isset($services['ACCOUNT_TYPE_ID']) ? $services['ACCOUNT_TYPE_ID'] : $model->ACCOUNT_TYPE_ID;
+
 
                 if ($model->save()) {
-                    $out = ['output' => $model->aCCOUNTSTATUS->STATUS_NAME, 'message' =>  $model->aCCOUNTSTATUS->STATUS_NAME];
+                    $return_val = isset($services['ACCOUNT_TYPE_ID']) ? $model->aCCOUNTTYPE->ACCOUNT_NAME : $model->aCCOUNTSTATUS->STATUS_NAME;
+                    $out = ['output' => $return_val, 'message' => ''];
                 } else {
                     $out = ['output' => '', 'message' => 'Unable to save'];
                 }
@@ -83,6 +89,7 @@ class UserController extends Controller
 
         echo Json::encode($out);
     }
+
     /**
      * Displays a single USERS_MODEL model.
      * @param integer $id

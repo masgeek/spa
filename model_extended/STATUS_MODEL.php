@@ -15,7 +15,18 @@ use yii\helpers\ArrayHelper;
 class STATUS_MODEL extends Status
 {
 
-    public static function GetStatus(){
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+
+        $labels['STATUS_ID'] = 'Status';
+
+        return $labels;
+    }
+
+
+    public static function GetStatus()
+    {
         $arr = self::find()->asArray()->all();
 
         $items = ArrayHelper::map($arr, 'STATUS_ID', 'STATUS_NAME');

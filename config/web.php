@@ -68,6 +68,16 @@ $config = [
                 'user-status' => 'user/user-status',
             ],
         ],
+        //formatting class
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            //'dateFormat' => 'dd.MM.yyyy',
+            'decimalSeparator' => '.',
+            'thousandSeparator' => ',',
+            //'timeZone' => 'GMT', //default time zones and format
+            'currencyCode' => 'KES',
+            'nullDisplay' => '0'
+        ],
 
     ],
     'params' => $params,

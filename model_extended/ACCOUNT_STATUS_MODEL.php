@@ -10,6 +10,7 @@ namespace app\model_extended;
 
 
 use app\models\AccountStatus;
+use app\models\AccountType;
 use yii\helpers\ArrayHelper;
 
 class ACCOUNT_STATUS_MODEL extends AccountStatus
@@ -29,6 +30,25 @@ class ACCOUNT_STATUS_MODEL extends AccountStatus
         $arr = self::GetStatusArr();
 
         $items = ArrayHelper::map($arr, 'ACCOUNT_STATUS_ID', 'STATUS_NAME');
+
+        return $items;
+    }
+
+    public static function GetTypeArr()
+    {
+        $salons = AccountType::find()
+            ->asArray()
+            ->all();
+
+        return $salons;
+    }
+
+    public static function TypeDropdown()
+    {
+
+        $arr = self::GetTypeArr();
+
+        $items = ArrayHelper::map($arr, 'ACCOUNT_TYPE_ID', 'ACCOUNT_NAME');
 
         return $items;
     }

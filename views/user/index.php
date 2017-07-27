@@ -10,19 +10,36 @@ use kartik\dialog\Dialog;
 $this->title = 'Reserved  Services';
 $this->params['breadcrumbs'][] = $this->title;
 
-$StatusList = \app\model_extended\ACCOUNT_STATUS_MODEL::StatusDropdown();
+$accountType = \app\model_extended\ACCOUNT_STATUS_MODEL::TypeDropdown();
+$accountStatus = \app\model_extended\ACCOUNT_STATUS_MODEL::StatusDropdown();
 
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
-    'USER_ID',
+    //'USER_ID',
     'SURNAME',
     'OTHER_NAMES',
     'EMAIL:email',
     'MOBILE_NO',
-    'ACCOUNT_STATUS',
-    'ACCOUNT_TYPE_ID',
-    'PASSWORD',
+    //'ACCOUNT_STATUS',
+    //'ACCOUNT_TYPE_ID',
+    //'PASSWORD',
+    [
+        'class' => 'kartik\grid\EditableColumn',
+        'attribute' => 'ACCOUNT_TYPE_ID',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model \app\model_extended\USERS_MODEL */
+            return $model->aCCOUNTTYPE->ACCOUNT_NAME;
+        },
+        'pageSummary' => true,
+        'editableOptions' => [
+            'header' => 'Select Account Type',
+            'formOptions' => ['action' => ['/user-status']],
+            'format' => \kartik\editable\Editable::FORMAT_BUTTON,
+            'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+            'data' => $accountType,
+        ]
+    ],
     [
         'class' => 'kartik\grid\EditableColumn',
         'attribute' => 'ACCOUNT_STATUS',
@@ -36,7 +53,7 @@ $gridColumns = [
             'formOptions' => ['action' => ['/user-status']],
             'format' => \kartik\editable\Editable::FORMAT_BUTTON,
             'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-            'data' => $StatusList,
+            'data' => $accountStatus,
         ]
     ],
 ];
@@ -44,7 +61,6 @@ $gridColumns = [
 
 //show the gridview
 ?>
-<?= Html::a('Create Reserved  Services', ['create'], ['class' => 'btn btn-success']) ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

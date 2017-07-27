@@ -14,10 +14,18 @@ use app\models\VwMyReservations;
 class MY_RESERVATIONS_VIEW extends VwMyReservations
 {
     public $USER_ID;
-    
+
     public function getPrimaryKey($asArray = false)
     {
         return 'RESERVATION_ID';
+    }
+
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels['STATUS_ID'] = 'Reservation Status';
+
+        return $labels;
     }
 
 }
