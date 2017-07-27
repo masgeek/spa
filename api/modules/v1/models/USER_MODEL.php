@@ -13,44 +13,44 @@ use app\models\User;
 
 class USER_MODEL extends User
 {
-	public $CHANGE_PASSWORD;
+    public $CHANGE_PASSWORD;
 
-	const SCENARIO_CREATE = 'create';
-	const SCENARIO_UPDATE = 'update';
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'update';
 
-	public function rules()
-	{
-		$rules = parent::rules();
+    public function rules()
+    {
+        $rules = parent::rules();
 
-		$rules[] = [['EMAIL'], 'unique', 'on' => [self::SCENARIO_CREATE,self::SCENARIO_UPDATE]];
-		return $rules;
-	}
+        $rules[] = [['EMAIL'], 'unique', 'on' => [self::SCENARIO_CREATE, self::SCENARIO_UPDATE]];
+        return $rules;
+    }
 
-	public function scenarios()
-	{
-		$scenarios = parent::scenarios();
-		$scenarios[self::SCENARIO_CREATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_STATUS', 'ACCOUNT_TYPE_ID'];
-		$scenarios[self::SCENARIO_UPDATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_TYPE_ID'];
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_CREATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_STATUS', 'ACCOUNT_TYPE_ID'];
+        $scenarios[self::SCENARIO_UPDATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_TYPE_ID'];
 
-		return $scenarios;
-	}
+        return $scenarios;
+    }
 
-	public function attributeLabels()
-	{
-		$labels = parent::attributeLabels();
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
 
-		return $labels;
-	}
+        return $labels;
+    }
 
-	public function fields()
-	{
-		$fields = parent::fields();
+    public function fields()
+    {
+        $fields = parent::fields();
 
-		$fields['ACCOUNT_TYPE'] = function ($model) {
-			/* @var $model USER_MODEL */
-			return $model->aCCOUNTTYPE->ACCOUNT_NAME;
-		};
-		unset($fields['PASSWORD']);
-		return $fields;
-	}
+        $fields['ACCOUNT_TYPE'] = function ($model) {
+            /* @var $model USER_MODEL */
+            return $model->aCCOUNTTYPE->ACCOUNT_NAME;
+        };
+        unset($fields['PASSWORD']); //remove the password field
+        return $fields;
+    }
 }

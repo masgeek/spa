@@ -52,14 +52,31 @@ class UserController extends ActiveController
         $password = sha1($request->PASSWORD);
         $user = USER_MODEL::findOne(['EMAIL' => $email, 'PASSWORD' => $password]);
         if ($user != null) {
-            if ($user->ACCOUNT_STATUS === 1) {
-                $message = $user;
-                //let us tell the user login is a sucess and add session to shared preferences
-            } else {
-                $message = [
-                    'status' => false,
-                    'message' => 'Your account has been suspended, please contact the Administrator'
-                ];
+            $account_status = (int)$user->ACCOUNT_STATUS;
+            switch ($account_status) {
+                default: //default action
+                case 0: //Not activated
+                    $message = [
+                        'status' => false,
+                        'message' => 'Your account has not been activated. Please contact the Administrator'
+                    ];
+                    break;
+                case 1: //Activated
+                    $message = $user;
+                    break;
+                case 2: //suspended
+                    $message = [
+                        'status' => false,
+                        'message' => 'Your account has been suspended, please contact the Administrator'
+                    ];
+                    break;
+                case 3: //deactivated
+                    $message = [
+                        'status' => false,
+                        'message' => 'Your account has been deactivated, please contact the Administrator'
+                    ];
+                    break;
+
             }
         } else {
             $message = [
