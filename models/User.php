@@ -12,13 +12,14 @@ use Yii;
  * @property string $OTHER_NAMES
  * @property string $EMAIL
  * @property string $MOBILE_NO
- * @property int $ACCOUNT_STATUS
+ * @property int $ACCOUNT_STATUS 0 inactive, 1 active, 2 suspended, 3 deactivated
  * @property int $ACCOUNT_TYPE_ID
  * @property string $PASSWORD
  *
  * @property Reservations[] $reservations
  * @property Salon[] $salons
  * @property AccountType $aCCOUNTTYPE
+ * @property AccountStatus $aCCOUNTSTATUS
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -43,6 +44,7 @@ class User extends \yii\db\ActiveRecord
             [['MOBILE_NO'], 'string', 'max' => 15],
             [['PASSWORD'], 'string', 'max' => 300],
             [['ACCOUNT_TYPE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => AccountType::className(), 'targetAttribute' => ['ACCOUNT_TYPE_ID' => 'ACCOUNT_TYPE_ID']],
+            [['ACCOUNT_STATUS'], 'exist', 'skipOnError' => true, 'targetClass' => AccountStatus::className(), 'targetAttribute' => ['ACCOUNT_STATUS' => 'ACCOUNT_STATUS_ID']],
         ];
     }
 
@@ -85,5 +87,13 @@ class User extends \yii\db\ActiveRecord
     public function getACCOUNTTYPE()
     {
         return $this->hasOne(AccountType::className(), ['ACCOUNT_TYPE_ID' => 'ACCOUNT_TYPE_ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getACCOUNTSTATUS()
+    {
+        return $this->hasOne(AccountStatus::className(), ['ACCOUNT_STATUS_ID' => 'ACCOUNT_STATUS']);
     }
 }

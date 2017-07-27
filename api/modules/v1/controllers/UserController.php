@@ -55,22 +55,22 @@ class UserController extends ActiveController
             $account_status = (int)$user->ACCOUNT_STATUS;
             switch ($account_status) {
                 default: //default action
-                case 0: //Not activated
+                case 1: //Not activated
                     $message = [
                         'status' => false,
                         'message' => 'Your account has not been activated. Please contact the Administrator'
                     ];
                     break;
-                case 1: //Activated
+                case 2: //Activated
                     $message = $user;
                     break;
-                case 2: //suspended
+                case 3: //suspended
                     $message = [
                         'status' => false,
                         'message' => 'Your account has been suspended, please contact the Administrator'
                     ];
                     break;
-                case 3: //deactivated
+                case 4: //deactivated
                     $message = [
                         'status' => false,
                         'message' => 'Your account has been deactivated, please contact the Administrator'
