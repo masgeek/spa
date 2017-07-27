@@ -17,7 +17,7 @@ class STAFF_MODEL extends Staff
     public static function GetStaffArr($salon_id)
     {
         $salons = STAFF_MODEL::find()
-            // ->where(['SALON_ID' => $salon_id])
+            ->where(['SALON_ID' => $salon_id])
             ->asArray()
             ->all();
 

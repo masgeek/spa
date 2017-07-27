@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\model_extended\USERS_MODEL;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,8 +28,20 @@ class UserController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
+                ],
+            ],
         ];
     }
+
 
     /**
      * Lists all USERS_MODEL models.
@@ -44,6 +58,31 @@ class UserController extends Controller
         ]);
     }
 
+    public function actionUserStatus()
+    {
+
+        $editable = (bool)Yii::$app->request->post('hasEditable');
+        $out = Json::encode(['output' => '', 'message' => '']);
+
+        if ($editable) {
+            $user_id = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($user_id);
+
+            $services_arr = Yii::$app->request->post('ACCOUNT_STATUS');
+            foreach ($services_arr as $services) {
+                $model->ACCOUNT_STATUS = $services['ACCOUNT_STATUS'];
+
+                if ($model->save()) {
+                    $out = ['output' => $model->aCCOUNTSTATUS->STATUS_NAME, 'message' =>  $model->aCCOUNTSTATUS->STATUS_NAME];
+                } else {
+                    $out = ['output' => '', 'message' => 'Unable to save'];
+                }
+            }
+
+        }
+
+        echo Json::encode($out);
+    }
     /**
      * Displays a single USERS_MODEL model.
      * @param integer $id

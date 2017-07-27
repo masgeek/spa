@@ -13,6 +13,7 @@ namespace app\model_extended;
 use app\api\modules\v1\models\USER_MODEL;
 use app\models\User;
 use phpDocumentor\Reflection\Types\This;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 class USERS_MODEL extends User implements IdentityInterface

@@ -65,6 +65,7 @@ $config = [
                 'confirm' => 'reservation/confirm',
                 'services' => 'service/index',
                 'manage-users' => 'user/index',
+                'user-status' => 'user/user-status',
             ],
         ],
 
