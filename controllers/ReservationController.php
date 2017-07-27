@@ -50,9 +50,13 @@ class ReservationController extends Controller
      */
     public function actionIndex()
     {
+        $owner = Yii::$app->user->id;
+
+
         $dataProvider = new ActiveDataProvider([
             //'query' => Reservations::find(),
-            'query' => MY_RESERVATIONS_VIEW::find(),
+            'query' => MY_RESERVATIONS_VIEW::find()
+                ->where(['OWNER_ID' => $owner]),
             'key' => function ($model) {
                 return $model->RESERVATION_ID;
             }

@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'RESERVATION_ID',
+            'SALON_NAME',
             //'OWNER_ID',
             'RESERVATION_DATE:date',
             ///'STATUS_ID',

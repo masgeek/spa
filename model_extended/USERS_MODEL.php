@@ -9,8 +9,9 @@
 namespace app\model_extended;
 
 
-
+use app\api\modules\v1\models\SALON_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
+use app\components\CUSTOM_HELPER;
 use app\models\User;
 use phpDocumentor\Reflection\Types\This;
 use yii\helpers\ArrayHelper;
@@ -23,6 +24,7 @@ class USERS_MODEL extends User implements IdentityInterface
     //public $EMAIL_ADDRESS;
     public $ACCOUNT_AUTH_KEY;
     public $PASSWORD_RESET_TOKEN;
+
     /**
      * Finds an identity by the given ID.
      * @param string|int $id the ID to be looked for
@@ -60,7 +62,7 @@ class USERS_MODEL extends User implements IdentityInterface
 
     public function validateAuthKey($authKey)
     {
-            return $this->getAuthKey() === $authKey;
+        return $this->getAuthKey() === $authKey;
     }
 
     public static function findByUsername($username)
@@ -98,6 +100,7 @@ class USERS_MODEL extends User implements IdentityInterface
     {
         return $this->PASSWORD;
     }
+
     /**
      * Generates a password reset token
      */
@@ -133,5 +136,15 @@ class USERS_MODEL extends User implements IdentityInterface
     public function getUserType()
     {
         return $this->aCCOUNTTYPE->ACCOUNT_NAME;
+    }
+
+    public function getMySalons()
+    {
+        $my_salons = [];
+        if ($this->aCCOUNTTYPE->ACCOUNT_NAME === CUSTOM_HELPER::SALON_ADMIN) {
+            $my_salons = MY_SALONS::SalonDropdown($this->USER_ID);
+        }
+
+        return $my_salons;
     }
 }
