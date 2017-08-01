@@ -75,6 +75,31 @@ $gridColumns = [
         }
     ],
     'ACCOUNT_REF',
+    [
+        'class' => '\kartik\grid\ActionColumn',
+        'template' => '{assign}',
+        'buttons' => [
+            'assign' => function ($url, $model, $key) {
+                return $url;
+            },
+        ],
+        'urlCreator' => function ($action, $model, $key, $index) {
+            $url = '#';
+            if ($action === 'assign') {
+                $action = 'Assign Staff';
+                $url = \yii\helpers\Url::toRoute(['booked/assign-staff']);
+            }
+
+            return Html::a($action, $url, [
+                'data-method' => 'get',
+                'id' => 'act-btn',
+                'data-params' => [
+                    'reservation_id' => $model->RESERVATION_ID,
+                    //'_csrf' => Yii::$app->request->csrfToken
+                ],
+                'class' => 'btn btn-success btn-xs btn-block']);
+        },
+    ],
 ];
 ?>
 <div class="reservations-index">

@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use kartik\dialog\Dialog;
 
 $this->title = 'Reserved  Services';
+$this->params['breadcrumbs'][] = ['label' => 'My Reservations', 'url' => ['/my-bookings']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $salonList = Yii::$app->user->identity->mysalons;
