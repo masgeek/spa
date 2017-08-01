@@ -33,4 +33,16 @@ class MY_SALONS extends Salon
 
         return $items;
     }
+
+    public static function SalonList($owner_id)
+    {
+
+        $arr = self::GetOwnerSalons($owner_id);
+        $items = [];
+        foreach ($arr as $key => $value) {
+            $items[] = $value['SALON_ID'];
+        }
+
+        return $items;
+    }
 }

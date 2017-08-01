@@ -142,7 +142,7 @@ class USERS_MODEL extends User implements IdentityInterface
     {
         $my_salons = [];
         if ($this->aCCOUNTTYPE->ACCOUNT_NAME === CUSTOM_HELPER::SALON_ADMIN) {
-            $my_salons = MY_SALONS::SalonDropdown($this->USER_ID);
+            $my_salons = MY_SALONS::SalonList($this->USER_ID);
         }
 
         return $my_salons;

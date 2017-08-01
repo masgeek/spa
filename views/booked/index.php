@@ -10,8 +10,10 @@ use kartik\dialog\Dialog;
 $this->title = 'Reserved  Services';
 $this->params['breadcrumbs'][] = $this->title;
 
-$StatusList = \app\model_extended\STAFF_MODEL::StaffDropdown(null);
+$salonList = Yii::$app->user->identity->mysalons;
 
+
+$staffList = \app\model_extended\STAFF_MODEL::StaffDropdown($mysalons);
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
@@ -22,7 +24,12 @@ $gridColumns = [
         'attribute' => 'STAFF_ID',
         'value' => function ($model, $key, $index, $widget) {
             /* @var $model \app\model_extended\RESERVED_SERVICES */
-            return $model->sTAFF->STAFF_NAME;
+            $staff_name = 'Not Assigned';
+            if($model->sTAFF !=null) {
+                $staff_name = $model->sTAFF->STAFF_NAME;
+            }
+
+            return $staff_name;
         },
         'pageSummary' => true,
         'editableOptions' => [
@@ -30,7 +37,7 @@ $gridColumns = [
             'formOptions' => ['action' => ['/assign-service']],
             'format' => \kartik\editable\Editable::FORMAT_BUTTON,
             'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-            'data' => $StatusList,
+            'data' => $staffList,
         ]
     ],
     //'STAFF_ID',
@@ -41,7 +48,7 @@ $gridColumns = [
     'STATUS_ID',
     [
         'class' => '\kartik\grid\ActionColumn',
-        'template' => '{approve}',
+        'template' => '{update}',
         'buttons' => [
             'approve' => function ($url, $model, $key) {
                 return $url;
@@ -60,10 +67,10 @@ $gridColumns = [
                 'id' => 'act-btn',
                 'data-params' => [
                     'ACTION' => 'APPROVE',
-                    'ID' => $model['ID'],
-                    'TIMESTAMP' => $model['SUBMISSION_TIME'],
-                    'EVENT_DETAIL_ID' => $model['EVENT_DETAIL_ID'],
-                    'REGISTRATION_NUMBER' => $model['REGISTRATION_NUMBER'],
+                    //'ID' => $model['ID'],
+                    //'TIMESTAMP' => $model['SUBMISSION_TIME'],
+                    //'EVENT_DETAIL_ID' => $model['EVENT_DETAIL_ID'],
+                    //'REGISTRATION_NUMBER' => $model['REGISTRATION_NUMBER'],
                     '_csrf' => Yii::$app->request->csrfToken
                 ],
                 'class' => 'btn btn-success btn-xs btn-block']);
