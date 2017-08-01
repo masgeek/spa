@@ -12,7 +12,7 @@ use Yii;
  * @property string $OTHER_NAMES
  * @property string $EMAIL
  * @property string $MOBILE_NO
- * @property int $ACCOUNT_STATUS 0 inactive, 1 active, 2 suspended, 3 deactivated
+ * @property int $ACCOUNT_STATUS
  * @property int $ACCOUNT_TYPE_ID
  * @property string $PASSWORD
  *
