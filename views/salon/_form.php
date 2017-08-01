@@ -18,15 +18,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'SALON_LOCATION')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'SALON_EMAIL')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'SALON_EMAIL')->textInput(['maxlength' => true,'type'=>'email']) ?>
 
     <?= $form->field($model, 'SALON_WEBSITE')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'SALON_IMAGE')->textInput(['maxlength' => true]) ?>
+    <!--?= $form->field($model, 'SALON_IMAGE')->textInput(['maxlength' => true]) ?-->
 
     <?= $form->field($model, 'DESCRIPTION')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'OWNER_ID')->hiddenInput() ?>
+    <?= $form->field($model, 'OWNER_ID')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
