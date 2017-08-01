@@ -20,7 +20,7 @@ $gridColumns = [
     'SALON_LOCATION',
     'SALON_EMAIL:email',
     'SALON_WEBSITE',
-    'SALON_IMAGE',
+    'SALON_IMAGE:image',
     'DESCRIPTION:ntext',
     [
         'class' => '\kartik\grid\ActionColumn',
