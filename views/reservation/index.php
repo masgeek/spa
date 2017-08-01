@@ -44,7 +44,7 @@ $gridColumns = [
         'pageSummary' => true,
         'editableOptions' => [
             'header' => 'Select Status',
-            'formOptions' => ['action' => ['/confirm-service']],
+            'formOptions' => ['action' => ['/confirm-reservation']],
             'format' => \kartik\editable\Editable::FORMAT_BUTTON,
             'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
             'data' => $statusList,

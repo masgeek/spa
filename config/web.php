@@ -63,6 +63,7 @@ $config = [
                 'add-service' => 'salonservices/create',
                 'assign-service' => 'booked/assign-service',
                 'confirm-service' => 'booked/confirm-service',
+                'confirm-reservation' => 'reservation/confirm-reservation',
                 'confirm' => 'reservation/confirm',
                 'services' => 'service/index',
                 'manage-users' => 'user/index',

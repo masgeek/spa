@@ -90,8 +90,8 @@ class BookedController extends Controller
         $out = Json::encode(['output' => '', 'message' => '']);
 
         if ($editable) {
-            $reservation_id = Yii::$app->request->post('editableKey');
-            $model = $this->findModel($reservation_id);
+            $reserved_service_id = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($reserved_service_id);
 
             $services_arr = Yii::$app->request->post('RESERVED_SERVICES');
             foreach ($services_arr as $services) {

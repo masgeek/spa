@@ -8,6 +8,7 @@ use app\models\Reservations;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -115,6 +116,32 @@ class ReservationController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionConfirmReservation()
+    {
+
+        $editable = (bool)Yii::$app->request->post('hasEditable');
+        $out = Json::encode(['output' => '', 'message' => '']);
+        
+        if ($editable) {
+            $reservation_id = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($reservation_id);
+
+            $services_arr = Yii::$app->request->post('MY_RESERVATIONS_VIEW');
+            foreach ($services_arr as $services) {
+                $model->STATUS_ID = $services['STATUS_ID'];
+
+                if ($model->save()) {
+                    $out = ['output' => $model->sTATUS->STATUS_NAME, 'message' => ''];
+                } else {
+                    $out = ['output' => '', 'message' => 'Unable to save'];
+                }
+            }
+
+        }
+
+        echo Json::encode($out);
     }
 
     /**
