@@ -18,13 +18,6 @@ class USER_MODEL extends User
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
 
-    public function rules()
-    {
-        $rules = parent::rules();
-
-        $rules[] = [['EMAIL'], 'unique', 'on' => [self::SCENARIO_CREATE, self::SCENARIO_UPDATE]];
-        return $rules;
-    }
 
     public function scenarios()
     {
@@ -33,6 +26,15 @@ class USER_MODEL extends User
         $scenarios[self::SCENARIO_UPDATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_TYPE_ID'];
 
         return $scenarios;
+    }
+
+    public function rules()
+    {
+        $rules = parent::rules();
+
+        $rules[] = [['EMAIL'], 'unique', 'on' => [self::SCENARIO_CREATE, self::SCENARIO_UPDATE]];
+        //$rules[] = [['EMAIL'], 'email', 'on' => [self::SCENARIO_CREATE, self::SCENARIO_UPDATE]];
+        return $rules;
     }
 
     public function attributeLabels()
