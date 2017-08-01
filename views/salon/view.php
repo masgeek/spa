@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Salon */
 
-$this->title = $model->SALON_ID;
+$this->title = $model->SALON_NAME;
 $this->params['breadcrumbs'][] = ['label' => 'Salons', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,13 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'SALON_ID',
+            //'SALON_ID',
             'SALON_NAME',
             'SALON_TEL',
             'SALON_LOCATION',
             'SALON_EMAIL:email',
-            'SALON_WEBSITE',
-            'SALON_IMAGE',
+            'SALON_WEBSITE:url',
+            'SALON_IMAGE:image',
             'DESCRIPTION:ntext',
             'OWNER_ID',
         ],
