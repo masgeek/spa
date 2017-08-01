@@ -125,7 +125,7 @@ class USERS_MODEL extends User implements IdentityInterface
 
     public function getFullNames()
     {
-        return $this->SURNAME;
+        return $this->SURNAME . ', ' . $this->OTHER_NAMES;
     }
 
     public function getEmailAddress()
