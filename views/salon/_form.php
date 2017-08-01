@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'SALON_WEBSITE')->textInput(['maxlength' => true]) ?>
 
-    <!--?= $form->field($model, 'SALON_IMAGE')->textInput(['maxlength' => true]) ?-->
+    <?= $form->field($model, 'SALON_IMAGE')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'DESCRIPTION')->textarea(['rows' => 6]) ?>
 
