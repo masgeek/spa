@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'SALON_WEBSITE:url',
             'SALON_IMAGE:image',
             'DESCRIPTION:ntext',
-            'OWNER_ID',
+            //'OWNER_ID',
         ],
     ]) ?>
 
