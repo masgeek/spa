@@ -13,11 +13,14 @@ $this->params['breadcrumbs'][] = $this->title;
 $salonList = Yii::$app->user->identity->mysalons;
 
 
-$staffList = \app\model_extended\STAFF_MODEL::StaffDropdown($mysalons);
+$staffList = \app\model_extended\STAFF_MODEL::StaffDropdown($salonList);
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     'RESERVED_SERVICE_ID',
+    [
+        'attribute' => 'RESERVED_SERVICE_ID'
+    ],
     'OFFERED_SERVICE_ID',
     [
         'class' => 'kartik\grid\EditableColumn',
@@ -25,7 +28,7 @@ $gridColumns = [
         'value' => function ($model, $key, $index, $widget) {
             /* @var $model \app\model_extended\RESERVED_SERVICES */
             $staff_name = 'Not Assigned';
-            if($model->sTAFF !=null) {
+            if ($model->sTAFF != null) {
                 $staff_name = $model->sTAFF->STAFF_NAME;
             }
 
