@@ -19,7 +19,7 @@ $gridColumns = [
     'SALON_TEL',
     'SALON_LOCATION',
     'SALON_EMAIL:email',
-    'SALON_WEBSITE',
+    'SALON_WEBSITE:url',
     'SALON_IMAGE:image',
     'DESCRIPTION:ntext',
     [
