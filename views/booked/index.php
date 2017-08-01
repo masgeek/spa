@@ -14,14 +14,19 @@ $salonList = Yii::$app->user->identity->mysalons;
 
 
 $staffList = \app\model_extended\STAFF_MODEL::StaffDropdown($salonList);
+$statusList = \app\model_extended\STATUS_MODEL::GetStatus();
+
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
-    'RESERVED_SERVICE_ID',
     [
-        'attribute' => 'RESERVED_SERVICE_ID'
+        'attribute' => 'RESERVED_SERVICE_ID',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model \app\model_extended\RESERVED_SERVICES */
+            return $model->oFFEREDSERVICE->sERVICE->SERVICE_NAME;
+        },
     ],
-    'OFFERED_SERVICE_ID',
+    //'OFFERED_SERVICE_ID',
     [
         'class' => 'kartik\grid\EditableColumn',
         'attribute' => 'STAFF_ID',
@@ -48,7 +53,39 @@ $gridColumns = [
     'RESERVATION_DATE',
     'RESERVATION_TIME',
     'SERVICE_AMOUNT',
-    'STATUS_ID',
+    [
+        'class' => 'kartik\grid\EditableColumn',
+        'attribute' => 'STATUS_ID',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model \app\model_extended\RESERVED_SERVICES */
+            $data = 'Pending';
+            if ($model->STATUS_ID != null) {
+                $data = \app\model_extended\STATUS_MODEL::findOne($model->STATUS_ID)->STATUS_NAME;
+            }
+            return $data;
+        },
+        'pageSummary' => true,
+        'editableOptions' => [
+            'header' => 'Select Status',
+            'formOptions' => ['action' => ['/confirm-service']],
+            'format' => \kartik\editable\Editable::FORMAT_BUTTON,
+            'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+            'data' => $statusList,
+        ]
+    ],
+    [
+        //lets build the document link
+        'attribute' => 'STATUS_ID',
+        'format' => 'raw',
+        'value' => function ($model, $key, $index) {
+            $data = 'Pending';
+            if ($model->STATUS_ID != null) {
+                $data = \app\model_extended\STATUS_MODEL::findOne($model->STATUS_ID)->STATUS_NAME;
+            }
+            return $data;
+        }
+    ],
+    //'STATUS_ID',
     [
         'class' => '\kartik\grid\ActionColumn',
         'template' => '{update}',

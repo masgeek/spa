@@ -83,6 +83,32 @@ class BookedController extends Controller
         echo Json::encode($out);
     }
 
+    public function actionConfirmService()
+    {
+
+        $editable = (bool)Yii::$app->request->post('hasEditable');
+        $out = Json::encode(['output' => '', 'message' => '']);
+
+        if ($editable) {
+            $reservation_id = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($reservation_id);
+
+            $services_arr = Yii::$app->request->post('RESERVED_SERVICES');
+            foreach ($services_arr as $services) {
+                $model->STATUS_ID = $services['STATUS_ID'];
+
+                if ($model->save()) {
+                    $out = ['output' => $model->sTATUS->STATUS_NAME, 'message' => ''];
+                } else {
+                    $out = ['output' => '', 'message' => 'Unable to save'];
+                }
+            }
+
+        }
+
+        echo Json::encode($out);
+    }
+
     public function actionAssignStaff($reservation_id)
     {
         $dataProvider = new ActiveDataProvider([
