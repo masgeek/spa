@@ -50,7 +50,7 @@ $gridColumns = [
     ],
     [
         'class' => '\kartik\grid\ActionColumn',
-        'template' => '{delete}',
+        'template' => '{edit}{view}{delete}',
     ],
 ];
 ?>
