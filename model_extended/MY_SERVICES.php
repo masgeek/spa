@@ -15,6 +15,24 @@ use yii\helpers\ArrayHelper;
 
 class MY_SERVICES extends OfferedServices
 {
+
+    public function attributeLabels()
+    {
+        $label = parent::attributeLabels();
+        $label['SERVICE_ID'] = 'Service Name';
+        return $label;
+    }
+
+    public function rules()
+    {
+        $rules = parent::rules();
+
+//['x', 'compare', 'compareValue' => 100, 'operator' => '>='],
+        $rules[] = [['SERVICE_COST'], 'number', 'min' => 1];
+
+        return $rules;
+    }
+
     public static function GetSalonServices($salon_id)
     {
         $excl = [];
