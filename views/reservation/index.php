@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data;
                 }
             ],
-            'TOTAL_COST:decimal',
-            'BOOKING_AMOUNT:decimal',
+            'TOTAL_COST:currency',
+            'BOOKING_AMOUNT:currency',
             'ACCOUNT_REF',
 
             ['class' => 'yii\grid\ActionColumn'],
