@@ -41,8 +41,8 @@ AppAsset::register($this);
 		//'options' => ['class' =>'nav navbar-nav'],
 		'items' => [
 			[
-				'label' => 'My Salon',
-				'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN,
+				'label' => 'Salon',
+				//'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN,
 				'items' => [
 					//'<li class="divider"></li>',
 					//'<li class="dropdown-header">Salon Management</li>',
