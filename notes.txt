@@ -1,0 +1,8 @@
+Reports
+
+Booked services
+Payments
+Most active services
+--number of bookinngs in a service
+--daily reservations
+--daily revenue
