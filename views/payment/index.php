@@ -31,6 +31,7 @@ $gridColumns = [
 		'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
 		'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
 	],*/
+	'RESERVATION_ID',
 	[
 		'attribute'=>'RESERVATION_ID',
 		//'width'=>'100%',
