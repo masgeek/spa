@@ -59,7 +59,7 @@ class PaymentController extends ActiveController
 			];
 		} else {
 			$booking = (float)Yii::$app->request->post('BOOKING_AMOUNT', 0);
-			$mpesaref = (float)Yii::$app->request->post('MPESA_REF', null);
+			$mpesaref = Yii::$app->request->post('MPESA_REF', null);
 			$total = (float)$reservation->TOTAL_COST;
 			$balance = ($total - $booking);
 
