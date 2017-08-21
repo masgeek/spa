@@ -41,7 +41,7 @@ $gridColumns = [
 				//'mergeColumns'=>[[2,2]], // columns to merge in summary
 				'content'=>[             // content to show in each summary cell
 					1=>'Summary',
-					2=>GridView::F_SUM,
+					3=>GridView::F_SUM,
 					4=>"Total Cost {$model->getBalance($total_cost = true)}",
 					5=>"Balance Remaining {$model->getBalance()}",
 					//4=>GridView::F_AVG,
