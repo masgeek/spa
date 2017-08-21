@@ -14,7 +14,7 @@ $gridColumns = [
 	['class' => 'yii\grid\SerialColumn'],
 
 	[
-		'header' => 'Client Name',
+		'header' => 'Reservation',
 		'attribute' => 'RESERVATION_ID',
 		'value' => function ($paymentmodel, $key, $index) {
 			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
@@ -58,7 +58,7 @@ $gridColumns = [
 	],
     //'RESERVATION_ID',
 	[
-		//'header' => 'Client Name',
+		'header' => 'Client Name',
 		'attribute'=>'PAYMENT_ID',
 		//'width'=>'100%',
 		'value'=>function ($paymentmodel, $key, $index, $widget) {
