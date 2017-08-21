@@ -48,8 +48,10 @@ class SalonController extends Controller
     public function actionIndex()
     {
         $userid = Yii::$app->user->identity->id;
+
         $dataProvider = new ActiveDataProvider([
-            'query' => Salon::find()->where(['OWNER_ID' => $userid]),
+            'query' => Salon::find()
+	            ->where(['OWNER_ID' => $userid]),
         ]);
 
         return $this->render('index', [

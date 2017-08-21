@@ -1,0 +1,22 @@
+{
+  "name": "spa",
+  "homepage": "https://github.com/fatelord/spa",
+  "authors": [
+    "Sammy Barasa <barsamms@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

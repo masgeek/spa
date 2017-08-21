@@ -58,4 +58,20 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 			return ($total - $amount_paid);
 		}
 	}
+
+	public static function MyReservationsArr($owner_id)
+	{
+		$data = self::find()
+			->select('RESERVATION_ID')
+			->where(['OWNER_ID' => $owner_id])
+			->asArray()
+			->all();
+
+
+		$reservations = [];
+		foreach ($data as $k => $v) {
+			$reservations[] = $v['RESERVATION_ID'];
+		}
+		return $reservations;
+	}
 }
