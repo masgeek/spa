@@ -13,27 +13,22 @@ $this->params['breadcrumbs'][] = $this->title;
 $gridColumns = [
 	['class' => 'yii\grid\SerialColumn'],
 
-	/*[
+	[
 		'header' => 'Client Name',
 		'attribute' => 'RESERVATION_ID',
 		'format' => 'raw',
 		'value' => function ($paymentmodel, $key, $index) {
-			$model = \app\model_extended\MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $paymentmodel->RESERVATION_ID]);
 			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
-
-			$balance = $model->getAmountToPay();
-
-			$data = "{$names} {$balance}";
+			$data = "{$names}";
 			return $data;
 		},
 		'group'=>true,  // enable grouping,
 		'groupedRow'=>true,                    // move grouped column to a single grouped row
 		'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
 		'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
-	],*/
-	'RESERVATION_ID',
+	],
 	[
-		'attribute'=>'RESERVATION_ID',
+		'attribute'=>'PAYMENT_ID',
 		//'width'=>'100%',
 		'value'=>function ($paymentmodel, $key, $index, $widget) {
 			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
