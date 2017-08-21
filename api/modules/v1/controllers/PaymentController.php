@@ -67,6 +67,9 @@ class PaymentController extends ActiveController
 			//process the payment
 			$model->RESERVATION_ID = $id;
 			$model->DATE_PAID = new Expression('NOW()');
+			if($booking >= $total){
+				$model->FINALIZED = 1;
+			}
 			$model->BALANCE = $balance;
 			if ($model->load($payment_post)) {
 				if ($model->validate() && $model->save()) {
