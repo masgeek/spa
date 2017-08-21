@@ -54,7 +54,8 @@ class PaymentController extends Controller
 
 
 		$dataProvider = new ActiveDataProvider([
-			'query' => MY_PAYMENTS_MODEL::find()->where(['RESERVATION_ID' => $reservartions]),
+			'query' => MY_PAYMENTS_MODEL::find()
+				//->where(['RESERVATION_ID' => $reservartions]),
 		]);
 
 		return $this->render('index', [

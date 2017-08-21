@@ -16,31 +16,21 @@ $gridColumns = [
 	[
 		'header' => 'Client Name',
 		'attribute' => 'RESERVATION_ID',
-		'format' => 'raw',
 		'value' => function ($paymentmodel, $key, $index) {
 			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
-			$data = "{$names}";
+			$data = "{$names}  - Booking number {$paymentmodel->rESERVATION->ACCOUNT_REF}";
 			return $data;
 		},
 		'group'=>true,  // enable grouping,
 		'groupedRow'=>true,                    // move grouped column to a single grouped row
 		'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
 		'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
-	],
-	[
-		'attribute'=>'PAYMENT_ID',
-		//'width'=>'100%',
-		'value'=>function ($paymentmodel, $key, $index, $widget) {
-			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
-			return $names;
-		},
-		'group'=>true,  // enable grouping
 		'groupFooter'=>function ($paymentmodel, $key, $index, $widget) { // Closure method
 			$model = \app\model_extended\MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $paymentmodel->RESERVATION_ID]);
 			return [
 				//'mergeColumns'=>[[2,2]], // columns to merge in summary
 				'content'=>[             // content to show in each summary cell
-					1=>'Summary',
+					1=>"Summary for booking {$paymentmodel->RESERVATION_ID}",
 					3=>GridView::F_SUM,
 					4=>"Total Cost {$model->getBalance($total_cost = true)}",
 					5=>"Balance Remaining {$model->getBalance()}",
@@ -65,6 +55,18 @@ $gridColumns = [
 				'options'=>['class'=>'danger','style'=>'font-weight:bold;']
 			];
 		}
+	],
+    //'RESERVATION_ID',
+	[
+		//'header' => 'Client Name',
+		'attribute'=>'PAYMENT_ID',
+		//'width'=>'100%',
+		'value'=>function ($paymentmodel, $key, $index, $widget) {
+			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
+			return $names;
+		},
+		'group'=>false,  // enable grouping
+        'subGroupOf'=>1,
 	],
 	//'PAYMENT_ID',
 	//'RESERVATION_ID',
