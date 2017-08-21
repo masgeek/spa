@@ -20,6 +20,13 @@ class PAYMENT_MODEL extends Payments
 		return $fields;
 	}
 
+	public function attributeLabels()
+	{
+		$labels =  parent::attributeLabels();
+		$labels['MPESA_REF'] = 'MPesa Reference Number';
+		return $labels;
+	}
+
 	public function rules()
 	{
 		$rules = parent::rules();
