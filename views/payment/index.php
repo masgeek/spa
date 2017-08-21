@@ -90,7 +90,6 @@ $gridColumns = [
 	'MPESA_REF',
 	'DATE_PAID',
 	//'FINALIZED',
-
 	//['class' => 'yii\grid\ActionColumn'],
 ];
 ?>
@@ -105,5 +104,13 @@ $gridColumns = [
 		'responsive' => true,
 		'hover' => true,
 		'toggleData' => true,
+		'panel' => [
+			'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Payment Grouping By Reservations</h3>',
+			'type'=>'primary',
+			//'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
+			'before'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Refresh Grid', ['index'], ['class' => 'btn btn-info']),
+			'showFooter'=>false
+		],
+		//'showPageSummary'=>true,
 	]); ?>
 </div>

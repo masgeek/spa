@@ -55,7 +55,7 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 		if ($total_cost) {
 			return $total;
 		} else {
-			return ($total - $amount_paid);
+			return (float)($total - $amount_paid);
 		}
 	}
 
