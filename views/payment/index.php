@@ -39,25 +39,30 @@ $gridColumns = [
 			return $names;
 		},
 		'group'=>true,  // enable grouping
-		'groupFooter'=>function ($model, $key, $index, $widget) { // Closure method
+		'groupFooter'=>function ($paymentmodel, $key, $index, $widget) { // Closure method
+			$model = \app\model_extended\MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $paymentmodel->RESERVATION_ID]);
 			return [
 				//'mergeColumns'=>[[2,2]], // columns to merge in summary
 				'content'=>[             // content to show in each summary cell
-					1=>'Summary (' . $model->RESERVATION_ID . ')',
+					1=>'Summary',
 					2=>GridView::F_SUM,
-					4=>GridView::F_AVG,
+					4=>"Total Cost {$model->getBalance($total_cost = true)}",
+					5=>"Balance Remaining {$model->getBalance()}",
+					//4=>GridView::F_AVG,
 					//4=>GridView::F_SUM,
 				],
 				'contentFormats'=>[      // content reformatting for each summary cell
 					2=>['format'=>'number', 'decimals'=>2],
 					3=>['format'=>'number', 'decimals'=>2],
-					4=>['format'=>'number', 'decimals'=>2],
+					//4=>['format'=>'number', 'decimals'=>2],
 					//6=>['format'=>'number', 'decimals'=>2],
 				],
 				'contentOptions'=>[      // content html attributes for each summary cell
 					1=>['style'=>'font-variant:small-caps'],
 					2=>['style'=>'text-align:right'],
 					3=>['style'=>'text-align:right'],
+					4=>['style'=>'font-variant:small-caps'],
+					5=>['style'=>'font-variant:small-caps'],
 					//6=>['style'=>'text-align:right'],
 				],
 				// html attributes for group summary row
@@ -81,20 +86,9 @@ $gridColumns = [
 			return $model->getAmountToPay();
 		}
 	],
-	[
-		'header' => 'Total Cost',
-		'attribute' => 'BALANCE',
-		//'format' => 'currency',
-		'visible' => true,
-		'value' => function ($paymentmodel, $key, $index) {
-			/* @var $model \app\model_extended\MY_RESERVATIONS_VIEW */
-			$model = \app\model_extended\MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $paymentmodel->RESERVATION_ID]);
-			return $model->getBalance($total_cost = true);
-		}
-	],
-	'DATE_PAID',
 	'PAYMENT_REF',
 	'MPESA_REF',
+	'DATE_PAID',
 	//'FINALIZED',
 
 	//['class' => 'yii\grid\ActionColumn'],
