@@ -37,8 +37,19 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'My Salon', 'url' => ['/my-salons'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
-            ['label' => 'My Staff', 'url' => ['/my-staff'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
+	        [
+		        'label' => 'My Salon',
+		        //'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::ADMIN_ACCOUNT,
+		        'items' => [
+			        '<li class="divider"></li>',
+			        '<li class="dropdown-header">Salon Management</li>',
+			        ['label' => 'Manage Salons', 'url' => ['/my-salons'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
+			        ['label' => 'Manage Staff', 'url' => ['/my-staff'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
+			        '<li class="divider"></li>',
+			        '<li class="dropdown-header">Dropdown Header</li>',
+			        ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+		        ],
+	        ],
             ['label' => 'Reservations', 'url' => ['/my-bookings'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
             ['label' => 'Payments', 'url' => ['/my-payments'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN],
             ['label' => 'Manage Users', 'url' => ['/manage-users'],'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
