@@ -23,8 +23,8 @@ $gridColumns = [
 		},
 		'group'=>true,  // enable grouping,
 		'groupedRow'=>true,                    // move grouped column to a single grouped row
-		'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
-		'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
+		//'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
+		//'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
 		'groupFooter'=>function ($paymentmodel, $key, $index, $widget) { // Closure method
 			$model = \app\model_extended\MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $paymentmodel->RESERVATION_ID]);
 			return [
@@ -52,7 +52,7 @@ $gridColumns = [
 					//6=>['style'=>'text-align:right'],
 				],
 				// html attributes for group summary row
-				'options'=>['class'=>'danger','style'=>'font-weight:bold;']
+				'options'=>['class'=>'success','style'=>'font-weight:bold;']
 			];
 		}
 	],
@@ -65,8 +65,8 @@ $gridColumns = [
 			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
 			return $names;
 		},
-		'group'=>false,  // enable grouping
-        'subGroupOf'=>1,
+		//'group'=>false,  // enable grouping
+        //'subGroupOf'=>1,
 	],
 	//'PAYMENT_ID',
 	//'RESERVATION_ID',
