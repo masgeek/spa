@@ -29,14 +29,16 @@ AppAsset::register($this);
 <div class="wrap">
 	<?php
 	NavBar::begin([
-		'brandLabel' => 'SPA Admin',
+		'brandLabel' => 'Salon Management',
 		'brandUrl' => Yii::$app->homeUrl,
 		'options' => [
+			//'class' => 'navbar-fixed-top',
 			'class' => 'navbar-inverse navbar-fixed-top',
 		],
 	]);
 	echo Nav::widget([
 		'options' => ['class' => 'navbar-nav navbar-right'],
+		//'options' => ['class' =>'nav navbar-nav'],
 		'items' => [
 			[
 				'label' => 'My Salon',
