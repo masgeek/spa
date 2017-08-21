@@ -70,6 +70,7 @@ class PaymentController extends ActiveController
 			if($booking >= $total){
 				$model->FINALIZED = 1;
 			}
+			$model->FINAL_AMOUNT = $total;
 			$model->BALANCE = $balance;
 			if ($model->load($payment_post)) {
 				if ($model->validate() && $model->save()) {
