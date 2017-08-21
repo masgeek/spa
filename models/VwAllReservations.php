@@ -18,6 +18,7 @@ use Yii;
  * @property string $BALANCE
  * @property string $DATE_PAID
  * @property string $PAYMENT_REF
+ * @property string $MPESA_REF
  * @property int $OWNER_ID
  */
 class VwAllReservations extends \yii\db\ActiveRecord
@@ -42,6 +43,7 @@ class VwAllReservations extends \yii\db\ActiveRecord
             [['STATUS_ID', 'OWNER_ID'], 'integer'],
             [['SALON_NAME', 'SERVICE_NAME'], 'string', 'max' => 255],
             [['PAYMENT_REF'], 'string', 'max' => 50],
+            [['MPESA_REF'], 'string', 'max' => 25],
         ];
     }
 
@@ -62,6 +64,7 @@ class VwAllReservations extends \yii\db\ActiveRecord
             'BALANCE' => 'Balance',
             'DATE_PAID' => 'Date  Paid',
             'PAYMENT_REF' => 'Payment  Ref',
+            'MPESA_REF' => 'Mpesa  Ref',
             'OWNER_ID' => 'Owner  ID',
         ];
     }
