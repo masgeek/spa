@@ -9,34 +9,53 @@
 namespace app\model_extended;
 
 
+use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\models\VwMyReservations;
 
 class MY_RESERVATIONS_VIEW extends VwMyReservations
 {
-    public $USER_ID;
-    public $REMAINING_AMOUNT;
+	public $USER_ID;
+	public $REMAINING_AMOUNT;
 
-    public function getPrimaryKey($asArray = false)
-    {
-        return 'RESERVATION_ID';
-    }
+	public function getPrimaryKey($asArray = false)
+	{
+		return 'RESERVATION_ID';
+	}
 
-    public function attributeLabels()
-    {
-        $labels = parent::attributeLabels();
-        $labels['STATUS_ID'] = 'Reservation Status';
-        $labels['RESERVER_ID'] = 'Reserved By';
-        $labels['BOOKING_AMOUNT'] = 'Amount Paid';
-        $labels['ACCOUNT_REF'] = 'Account Reference';
+	public function attributeLabels()
+	{
+		$labels = parent::attributeLabels();
+		$labels['STATUS_ID'] = 'Reservation Status';
+		$labels['RESERVER_ID'] = 'Reserved By';
+		$labels['BOOKING_AMOUNT'] = 'Amount Paid';
+		$labels['ACCOUNT_REF'] = 'Account Reference';
 
-        return $labels;
-    }
+		return $labels;
+	}
 
-    public function getPaymentInfo()
-    {
-        $data = MY_PAYMENTS_MODEL::findOne(['RESERVATION_ID' => $this->RESERVATION_ID]);
+	public function getAmountToPay()
+	{
+		$amount_paid = MY_PAYMENTS_MODEL::find()
+			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+			->sum('BOOKING_AMOUNT');
 
-        return $data;
-    }
+		return $amount_paid;
+	}
 
+	public function getBalance($total_cost = false)
+	{
+		$total = RESERVED_SERVICE_MODEL::find()
+			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+			->sum('SERVICE_AMOUNT');
+
+		$amount_paid = MY_PAYMENTS_MODEL::find()
+			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+			->sum('BOOKING_AMOUNT');
+
+		if ($total_cost) {
+			return $total;
+		} else {
+			return ($total - $amount_paid);
+		}
+	}
 }
