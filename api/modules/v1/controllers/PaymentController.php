@@ -59,6 +59,7 @@ class PaymentController extends ActiveController
 			];
 		} else {
 			$booking = (float)Yii::$app->request->post('BOOKING_AMOUNT', 0);
+			$mpesaref = (float)Yii::$app->request->post('MPESA_REF', null);
 			$total = (float)$reservation->TOTAL_COST;
 			$balance = ($total - $booking);
 
@@ -67,6 +68,7 @@ class PaymentController extends ActiveController
 			//process the payment
 			$model->RESERVATION_ID = $id;
 			$model->DATE_PAID = new Expression('NOW()');
+			$model->MPESA_REF = $mpesaref;
 			if($booking >= $total){
 				$model->FINALIZED = 1;
 			}
