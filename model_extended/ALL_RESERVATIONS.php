@@ -13,4 +13,5 @@ use app\models\VwAllReservations;
 
 class ALL_RESERVATIONS extends VwAllReservations
 {
+
 }
