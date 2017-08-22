@@ -92,10 +92,10 @@ $gridColumns = [
 		'class' => 'kartik\grid\EditableColumn',
 		'attribute' => 'PAYMENT_STATUS',
 		'value' => function ($model, $key, $index, $widget) {
-			/* @var $model \app\model_extended\RESERVED_SERVICES */
-			$data = 'Pending';
+			/* @var $model \app\model_extended\PAYMENT_STATUS_MODEL */
+			$data = 'PENDING';
 			if ($model->PAYMENT_STATUS != null) {
-				$data = \app\model_extended\STATUS_MODEL::findOne($model->STATUS_ID)->STATUS_NAME;
+				$data = \app\model_extended\PAYMENT_STATUS_MODEL::findOne($model->PAYMENT_STATUS)->STATUS;;
 			}
 			return $data;
 		},
