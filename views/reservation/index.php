@@ -78,6 +78,7 @@ $gridColumns = [
 		]*/
 	],
 	[
+		'header' => '#',
 		'class' => '\kartik\grid\ActionColumn',
 		'template' => '{assign}',
 		'buttons' => [
@@ -100,10 +101,11 @@ $gridColumns = [
 					'reservation_id' => $model->RESERVATION_ID,
 					//'_csrf' => Yii::$app->request->csrfToken
 				],
-				'class' =>$amount!=null ? 'btn btn-primary btn-xs btn-block': 'btn btn-danger btn-xs btn-block disabled']);
+				'class' => $amount != null ? 'btn btn-primary btn-xs btn-block' : 'btn btn-danger btn-xs btn-block disabled']);
 		},
 	],
 	[
+		'header' => '#',
 		'class' => '\kartik\grid\ActionColumn',
 		'template' => '{process}',
 		'buttons' => [
@@ -130,7 +132,7 @@ $gridColumns = [
 					'id' => $model->RESERVATION_ID,
 					//'_csrf' => Yii::$app->request->csrfToken
 				],
-				'class' =>$amount!=null ? 'btn btn-success btn-xs btn-block': 'btn btn-danger btn-xs btn-block disabled']);
+				'class' => $amount != null ? 'btn btn-success btn-xs btn-block' : 'btn btn-danger btn-xs btn-block disabled']);
 		},
 	],
 ];
