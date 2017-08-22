@@ -20,6 +20,7 @@ use Yii;
  * @property string $BALANCE
  * @property string $MPESA_REF
  * @property string $COMMENTS
+ * @property string $STATUS
  */
 class VwSalonPayments extends \yii\db\ActiveRecord
 {
@@ -45,6 +46,7 @@ class VwSalonPayments extends \yii\db\ActiveRecord
             [['ACCOUNT_REF', 'PAYMENT_REF'], 'string', 'max' => 50],
             [['SALON_NAME'], 'string', 'max' => 255],
             [['MPESA_REF'], 'string', 'max' => 25],
+            [['STATUS'], 'string', 'max' => 10],
         ];
     }
 
@@ -67,6 +69,7 @@ class VwSalonPayments extends \yii\db\ActiveRecord
             'BALANCE' => 'Balance',
             'MPESA_REF' => 'Mpesa  Ref',
             'COMMENTS' => 'Comments',
+            'STATUS' => 'Status',
         ];
     }
 }

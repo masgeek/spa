@@ -88,4 +88,11 @@ class PaymentController extends ActiveController
 		}
 		return $message;
 	}
+
+	public function actionMyPayments($id){
+		$message = [];
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+	}
 }
