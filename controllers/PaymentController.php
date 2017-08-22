@@ -73,7 +73,7 @@ class PaymentController extends Controller
 		$dataProvider = new ActiveDataProvider([
 			'query' => MY_PAYMENTS_MODEL::find()
 				->where(['RESERVATION_ID' => $reservartions])
-				->andWhere(['FINALIZED' => 0]),
+				->andWhere(['PAYMENT_STATUS' => 0]),
 		]);
 
 		return $this->render('index', [
@@ -90,7 +90,7 @@ class PaymentController extends Controller
 		$dataProvider = new ActiveDataProvider([
 			'query' => MY_PAYMENTS_MODEL::find()
 				->where(['RESERVATION_ID' => $reservartions])
-				->andWhere(['FINALIZED' => 1]),
+				->andWhere(['PAYMENT_STATUS' => 1]),
 		]);
 
 		return $this->render('index', [
