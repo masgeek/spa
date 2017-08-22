@@ -60,8 +60,16 @@ AppAsset::register($this);
 					['label' => 'Reservation Report', 'url' => ['/reports/all-reservations'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
 				],
 			],
+			[
+				'label' => 'Payments',
+				//'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::ADMIN_ACCOUNT,
+				'items' => [
+					['label' => 'Pending Payments', 'url' => ['/pending-payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
+					'<li class="divider"></li>',
+					['label' => 'Finalized Payments', 'url' => ['/finalized-payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
+				],
+			],
 			['label' => 'Reservations', 'url' => ['/my-bookings'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-			['label' => 'Payments', 'url' => ['/my-payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
 			['label' => 'Manage Users', 'url' => ['/manage-users'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
 			['label' => 'Manage Services', 'url' => ['/services'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
 			Yii::$app->user->isGuest ? (

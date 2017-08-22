@@ -8,6 +8,7 @@ use Yii;
 use app\models\Payments;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,12 +56,78 @@ class PaymentController extends Controller
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => MY_PAYMENTS_MODEL::find()
-				//->where(['RESERVATION_ID' => $reservartions]),
+			//->where(['RESERVATION_ID' => $reservartions]),
 		]);
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
 		]);
+	}
+
+	public function actionPendingPayments()
+	{
+		$userid = Yii::$app->user->identity->id;
+		$reservartions = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
+
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => MY_PAYMENTS_MODEL::find()
+				->where(['RESERVATION_ID' => $reservartions])
+				->andWhere(['FINALIZED' => 0]),
+		]);
+
+		return $this->render('index', [
+			'dataProvider' => $dataProvider,
+		]);
+	}
+
+	public function actionFinalizedPayments()
+	{
+		$userid = Yii::$app->user->identity->id;
+		$reservartions = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
+
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => MY_PAYMENTS_MODEL::find()
+				->where(['RESERVATION_ID' => $reservartions])
+				->andWhere(['FINALIZED' => 1]),
+		]);
+
+		return $this->render('index', [
+			'dataProvider' => $dataProvider,
+		]);
+	}
+
+	public function actionConfirmPayment()
+	{
+
+		$editable = (bool)Yii::$app->request->post('hasEditable');
+		$out = Json::encode(['output' => '', 'message' => '']);
+		$resp = ''
+		if ($editable) {
+			$payment_id = Yii::$app->request->post('editableKey');
+			$model = $this->findModel($payment_id);
+
+			$services_arr = Yii::$app->request->post('MY_PAYMENTS_MODEL');
+			foreach ($services_arr as $services) {
+				if (isset($services['FINALIZED'])) {
+					$model->PAYMENT_STATUS = isset($services['FINALIZED']) ? $services['FINALIZED'] : $model->PAYMENT_STATUS;
+					$resp = $model->pAYMENTSTATUS->STATUS;
+				}
+
+				if (isset($services['COMMENTS'])) {
+					$model->COMMENTS = isset($services['COMMENTS']) ? $services['COMMENTS'] : $model->COMMENTS;
+					$resp = $model->COMMENTS;
+				}
+
+				if ($model->save()) {
+					$out = ['output' => $resp, 'message' => ''];
+				} else {
+					$out = ['output' => '', 'message' => 'Unable to save'];
+				}
+			}
+		}
+		echo Json::encode($out);
 	}
 
 	/**

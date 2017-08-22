@@ -13,11 +13,13 @@ use Yii;
  * @property string $FINAL_AMOUNT
  * @property string $DATE_PAID
  * @property string $PAYMENT_REF
- * @property int $FINALIZED
+ * @property int $PAYMENT_STATUS
  * @property string $BALANCE
  * @property string $MPESA_REF
+ * @property string $COMMENTS
  *
  * @property Reservations $rESERVATION
+ * @property PaymentStatus $pAYMENTSTATUS
  */
 class Payments extends \yii\db\ActiveRecord
 {
@@ -36,12 +38,14 @@ class Payments extends \yii\db\ActiveRecord
     {
         return [
             [['RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE', 'MPESA_REF'], 'required'],
-            [['RESERVATION_ID', 'FINALIZED'], 'integer'],
+            [['RESERVATION_ID', 'PAYMENT_STATUS'], 'integer'],
             [['BOOKING_AMOUNT', 'FINAL_AMOUNT', 'BALANCE'], 'number'],
             [['DATE_PAID'], 'safe'],
+            [['COMMENTS'], 'string'],
             [['PAYMENT_REF'], 'string', 'max' => 50],
             [['MPESA_REF'], 'string', 'max' => 25],
             [['RESERVATION_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Reservations::className(), 'targetAttribute' => ['RESERVATION_ID' => 'RESERVATION_ID']],
+            [['PAYMENT_STATUS'], 'exist', 'skipOnError' => true, 'targetClass' => PaymentStatus::className(), 'targetAttribute' => ['PAYMENT_STATUS' => 'PAYMENT_STATUS_ID']],
         ];
     }
 
@@ -57,9 +61,10 @@ class Payments extends \yii\db\ActiveRecord
             'FINAL_AMOUNT' => 'Final  Amount',
             'DATE_PAID' => 'Date  Paid',
             'PAYMENT_REF' => 'Payment  Ref',
-            'FINALIZED' => 'Finalized',
+            'PAYMENT_STATUS' => 'Payment  Status',
             'BALANCE' => 'Balance',
             'MPESA_REF' => 'Mpesa  Ref',
+            'COMMENTS' => 'Comments',
         ];
     }
 
@@ -69,5 +74,13 @@ class Payments extends \yii\db\ActiveRecord
     public function getRESERVATION()
     {
         return $this->hasOne(Reservations::className(), ['RESERVATION_ID' => 'RESERVATION_ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPAYMENTSTATUS()
+    {
+        return $this->hasOne(PaymentStatus::className(), ['PAYMENT_STATUS_ID' => 'PAYMENT_STATUS']);
     }
 }

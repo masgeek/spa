@@ -10,6 +10,7 @@ use kartik\grid\GridView;
 $this->title = 'Payments';
 $this->params['breadcrumbs'][] = $this->title;
 
+$statusList = \app\model_extended\PAYMENT_STATUS_MODEL::GetStatus();
 $gridColumns = [
 	['class' => 'yii\grid\SerialColumn'],
 
@@ -21,52 +22,52 @@ $gridColumns = [
 			$data = "{$names}  - Booking number {$paymentmodel->rESERVATION->ACCOUNT_REF}";
 			return $data;
 		},
-		'group'=>true,  // enable grouping,
-		'groupedRow'=>true,                    // move grouped column to a single grouped row
+		'group' => true,  // enable grouping,
+		'groupedRow' => true,                    // move grouped column to a single grouped row
 		//'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
 		//'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
-		'groupFooter'=>function ($paymentmodel, $key, $index, $widget) { // Closure method
+		'groupFooter' => function ($paymentmodel, $key, $index, $widget) { // Closure method
 			$model = \app\model_extended\MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $paymentmodel->RESERVATION_ID]);
 			return [
 				//'mergeColumns'=>[[2,2]], // columns to merge in summary
-				'content'=>[             // content to show in each summary cell
-					1=>"Summary for booking {$paymentmodel->RESERVATION_ID}",
-					3=>GridView::F_SUM,
-					4=>"Total Cost {$model->getBalance($total_cost = true)}",
-					5=>"Balance Remaining {$model->getBalance()}",
+				'content' => [             // content to show in each summary cell
+					1 => "Summary for booking {$paymentmodel->RESERVATION_ID}",
+					3 => GridView::F_SUM,
+					4 => "Total Cost {$model->getBalance($total_cost = true)}",
+					5 => "Balance Remaining {$model->getBalance()}",
 					//4=>GridView::F_AVG,
 					//4=>GridView::F_SUM,
 				],
-				'contentFormats'=>[      // content reformatting for each summary cell
-					2=>['format'=>'number', 'decimals'=>2],
-					3=>['format'=>'number', 'decimals'=>2],
+				'contentFormats' => [      // content reformatting for each summary cell
+					2 => ['format' => 'number', 'decimals' => 2],
+					3 => ['format' => 'number', 'decimals' => 2],
 					//4=>['format'=>'number', 'decimals'=>2],
 					//6=>['format'=>'number', 'decimals'=>2],
 				],
-				'contentOptions'=>[      // content html attributes for each summary cell
-					1=>['style'=>'font-variant:small-caps'],
-					2=>['style'=>'text-align:right'],
-					3=>['style'=>'text-align:right'],
-					4=>['style'=>'font-variant:small-caps'],
-					5=>['style'=>'font-variant:small-caps'],
+				'contentOptions' => [      // content html attributes for each summary cell
+					1 => ['style' => 'font-variant:small-caps'],
+					2 => ['style' => 'text-align:right'],
+					3 => ['style' => 'text-align:right'],
+					4 => ['style' => 'font-variant:small-caps'],
+					5 => ['style' => 'font-variant:small-caps'],
 					//6=>['style'=>'text-align:right'],
 				],
 				// html attributes for group summary row
-				'options'=>['class'=>'success','style'=>'font-weight:bold;']
+				'options' => ['class' => 'success', 'style' => 'font-weight:bold;']
 			];
 		}
 	],
-    //'RESERVATION_ID',
+	//'RESERVATION_ID',
 	[
 		'header' => 'Client Name',
-		'attribute'=>'PAYMENT_ID',
+		'attribute' => 'PAYMENT_ID',
 		//'width'=>'100%',
-		'value'=>function ($paymentmodel, $key, $index, $widget) {
+		'value' => function ($paymentmodel, $key, $index, $widget) {
 			$names = "{$paymentmodel->rESERVATION->uSER->SURNAME} {$paymentmodel->rESERVATION->uSER->OTHER_NAMES}";
 			return $names;
 		},
 		//'group'=>false,  // enable grouping
-        //'subGroupOf'=>1,
+		//'subGroupOf'=>1,
 	],
 	//'PAYMENT_ID',
 	//'RESERVATION_ID',
@@ -87,6 +88,37 @@ $gridColumns = [
 	'PAYMENT_REF',
 	'MPESA_REF',
 	'DATE_PAID',
+	[
+		'class' => 'kartik\grid\EditableColumn',
+		'attribute' => 'PAYMENT_STATUS',
+		'value' => function ($model, $key, $index, $widget) {
+			/* @var $model \app\model_extended\RESERVED_SERVICES */
+			$data = 'Pending';
+			if ($model->PAYMENT_STATUS != null) {
+				$data = \app\model_extended\STATUS_MODEL::findOne($model->STATUS_ID)->STATUS_NAME;
+			}
+			return $data;
+		},
+		'pageSummary' => true,
+		'editableOptions' => [
+			'header' => 'Select Status',
+			'formOptions' => ['action' => ['/confirm-payment']],
+			'format' => \kartik\editable\Editable::FORMAT_BUTTON,
+			'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+			'data' => $statusList,
+		]
+	],
+	[
+		'class' => 'kartik\grid\EditableColumn',
+		'attribute' => 'COMMENTS',
+		'editableOptions' => [
+			'header' => 'Select Status',
+			'formOptions' => ['action' => ['/confirm-payment']],
+			'format' => \kartik\editable\Editable::FORMAT_BUTTON,
+			'inputType' => \kartik\editable\Editable::INPUT_TEXTAREA,
+			//'data' => $statusList,
+		]
+	],
 	//'FINALIZED',
 	//['class' => 'yii\grid\ActionColumn'],
 ];
@@ -103,11 +135,11 @@ $gridColumns = [
 		'hover' => true,
 		'toggleData' => true,
 		'panel' => [
-			'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Payment Grouping By Reservations</h3>',
-			'type'=>'primary',
+			'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Payment Grouping By Reservations</h3>',
+			'type' => 'primary',
 			//'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
-			'before'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Refresh Grid', ['/my-payments'], ['class' => 'btn btn-info']),
-			'showFooter'=>false
+			'before' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Refresh Grid', ['/my-payments'], ['class' => 'btn btn-info']),
+			'showFooter' => false
 		],
 		//'showPageSummary'=>true,
 	]); ?>

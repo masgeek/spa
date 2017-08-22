@@ -7,17 +7,19 @@ use Yii;
 /**
  * This is the model class for table "vw_salon_payments".
  *
+ * @property string $ACCOUNT_REF
+ * @property string $SALON_NAME
+ * @property int $OWNER_ID
  * @property int $PAYMENT_ID
  * @property int $RESERVATION_ID
  * @property string $BOOKING_AMOUNT
  * @property string $FINAL_AMOUNT
  * @property string $DATE_PAID
  * @property string $PAYMENT_REF
- * @property int $FINALIZED
+ * @property int $PAYMENT_STATUS
  * @property string $BALANCE
- * @property string $ACCOUNT_REF
- * @property string $SALON_NAME
- * @property int $OWNER_ID
+ * @property string $MPESA_REF
+ * @property string $COMMENTS
  */
 class VwSalonPayments extends \yii\db\ActiveRecord
 {
@@ -35,12 +37,14 @@ class VwSalonPayments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['PAYMENT_ID', 'RESERVATION_ID', 'FINALIZED', 'OWNER_ID'], 'integer'],
-            [['RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE', 'ACCOUNT_REF', 'SALON_NAME', 'OWNER_ID'], 'required'],
+            [['ACCOUNT_REF', 'SALON_NAME', 'OWNER_ID', 'RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE', 'MPESA_REF'], 'required'],
+            [['OWNER_ID', 'PAYMENT_ID', 'RESERVATION_ID', 'PAYMENT_STATUS'], 'integer'],
             [['BOOKING_AMOUNT', 'FINAL_AMOUNT', 'BALANCE'], 'number'],
             [['DATE_PAID'], 'safe'],
-            [['PAYMENT_REF', 'ACCOUNT_REF'], 'string', 'max' => 50],
+            [['COMMENTS'], 'string'],
+            [['ACCOUNT_REF', 'PAYMENT_REF'], 'string', 'max' => 50],
             [['SALON_NAME'], 'string', 'max' => 255],
+            [['MPESA_REF'], 'string', 'max' => 25],
         ];
     }
 
@@ -50,17 +54,19 @@ class VwSalonPayments extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'ACCOUNT_REF' => 'Account  Ref',
+            'SALON_NAME' => 'Salon  Name',
+            'OWNER_ID' => 'Owner  ID',
             'PAYMENT_ID' => 'Payment  ID',
             'RESERVATION_ID' => 'Reservation  ID',
             'BOOKING_AMOUNT' => 'Booking  Amount',
             'FINAL_AMOUNT' => 'Final  Amount',
             'DATE_PAID' => 'Date  Paid',
             'PAYMENT_REF' => 'Payment  Ref',
-            'FINALIZED' => 'Finalized',
+            'PAYMENT_STATUS' => 'Payment  Status',
             'BALANCE' => 'Balance',
-            'ACCOUNT_REF' => 'Account  Ref',
-            'SALON_NAME' => 'Salon  Name',
-            'OWNER_ID' => 'Owner  ID',
+            'MPESA_REF' => 'Mpesa  Ref',
+            'COMMENTS' => 'Comments',
         ];
     }
 }
