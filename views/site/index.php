@@ -7,8 +7,8 @@ $this->title = 'SPA Administration';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>SAP Admin</h1>
-        <p class="lead">Welcome to the Salon Management/Administration module.</p>
+        <h1>Salon/Spa Admin</h1>
+        <p class="lead">Welcome to the Salon/Spa Management/Administration module.</p>
     </div>
 
     <div class="body-content">
