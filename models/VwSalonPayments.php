@@ -8,8 +8,6 @@ use Yii;
  * This is the model class for table "vw_salon_payments".
  *
  * @property string $ACCOUNT_REF
- * @property string $SALON_NAME
- * @property int $OWNER_ID
  * @property int $PAYMENT_ID
  * @property int $RESERVATION_ID
  * @property string $BOOKING_AMOUNT
@@ -21,6 +19,8 @@ use Yii;
  * @property string $MPESA_REF
  * @property string $COMMENTS
  * @property string $STATUS
+ * @property string $SALON_TEL
+ * @property int $OWNER_ID
  */
 class VwSalonPayments extends \yii\db\ActiveRecord
 {
@@ -38,15 +38,15 @@ class VwSalonPayments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ACCOUNT_REF', 'SALON_NAME', 'OWNER_ID', 'RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE', 'MPESA_REF'], 'required'],
-            [['OWNER_ID', 'PAYMENT_ID', 'RESERVATION_ID', 'PAYMENT_STATUS'], 'integer'],
+            [['ACCOUNT_REF', 'RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE', 'MPESA_REF', 'SALON_TEL', 'OWNER_ID'], 'required'],
+            [['PAYMENT_ID', 'RESERVATION_ID', 'PAYMENT_STATUS', 'OWNER_ID'], 'integer'],
             [['BOOKING_AMOUNT', 'FINAL_AMOUNT', 'BALANCE'], 'number'],
             [['DATE_PAID'], 'safe'],
             [['COMMENTS'], 'string'],
             [['ACCOUNT_REF', 'PAYMENT_REF'], 'string', 'max' => 50],
-            [['SALON_NAME'], 'string', 'max' => 255],
             [['MPESA_REF'], 'string', 'max' => 25],
             [['STATUS'], 'string', 'max' => 10],
+            [['SALON_TEL'], 'string', 'max' => 255],
         ];
     }
 
@@ -57,8 +57,6 @@ class VwSalonPayments extends \yii\db\ActiveRecord
     {
         return [
             'ACCOUNT_REF' => 'Account  Ref',
-            'SALON_NAME' => 'Salon  Name',
-            'OWNER_ID' => 'Owner  ID',
             'PAYMENT_ID' => 'Payment  ID',
             'RESERVATION_ID' => 'Reservation  ID',
             'BOOKING_AMOUNT' => 'Booking  Amount',
@@ -70,6 +68,8 @@ class VwSalonPayments extends \yii\db\ActiveRecord
             'MPESA_REF' => 'Mpesa  Ref',
             'COMMENTS' => 'Comments',
             'STATUS' => 'Status',
+            'SALON_TEL' => 'Salon  Tel',
+            'OWNER_ID' => 'Owner  ID',
         ];
     }
 }
