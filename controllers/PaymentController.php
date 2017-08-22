@@ -103,7 +103,7 @@ class PaymentController extends Controller
 
 		$editable = (bool)Yii::$app->request->post('hasEditable');
 		$out = Json::encode(['output' => '', 'message' => '']);
-		$resp = ''
+		$resp = '';
 		if ($editable) {
 			$payment_id = Yii::$app->request->post('editableKey');
 			$model = $this->findModel($payment_id);
