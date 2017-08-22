@@ -19,6 +19,7 @@ class ReportsController extends Controller
      */
     public function actionAllReservations()
     {
+
 	    $title = 'Registered User Report';
 	    
         $searchModel = new ReportSearch();

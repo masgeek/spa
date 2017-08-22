@@ -13,6 +13,49 @@ $this->params['breadcrumbs'][] = $this->title;
 $gridColumns = [
 	['class' => 'yii\grid\SerialColumn'],
 	//'RESERVATION_DATE',
+
+
+	[
+		'attribute' => 'SERVICE_ID',
+		'width' => '310px',
+		'value' => function ($model, $key, $index, $widget) {
+			///$data = \app\model_extended\ALL_SERVICES::findOne($model->SERVICE_ID)->SERVICE_NAME;
+			$data = $model->sERVICE->SERVICE_NAME;
+			return $data;
+		},
+		'group' => true,  // enable grouping
+		'groupedRow' => false,
+		'groupFooter' => function ($model, $key, $index, $widget) { // Closure method
+
+			return [
+				//'mergeColumns'=>[[2,2]], // columns to merge in summary
+				'content' => [             // content to show in each summary cell
+					1 => "Summary for booking [{$model->SERVICE_NAME}]",
+					3 => GridView::F_COUNT,
+					//4 => "Total Cost",
+					//5 => "Balance",
+					//4=>GridView::F_AVG,
+					//4=>GridView::F_SUM,
+				],
+				'contentFormats' => [      // content reformatting for each summary cell
+					3 => ['format' => 'number', 'decimals' => 0],
+					//4=>['format'=>'number', 'decimals'=>2],
+					//6=>['format'=>'number', 'decimals'=>2],
+				],
+				'contentOptions' => [      // content html attributes for each summary cell
+					1 => ['style' => 'font-variant:small-caps'],
+					2 => ['style' => 'text-align:right'],
+					3 => ['style' => 'text-align:right'],
+					4 => ['style' => 'font-variant:small-caps'],
+					5 => ['style' => 'font-variant:small-caps'],
+					//6=>['style'=>'text-align:right'],
+				],
+				// html attributes for group summary row
+				'options' => ['class' => 'success', 'style' => 'font-weight:bold;']
+			];
+		}
+	],
+	//'SERVICE_ID',
 	[
 		'label' => Yii::t('app', "Date"),
 		'attribute' => 'RESERVATION_DATE',
@@ -25,12 +68,12 @@ $gridColumns = [
 			'startAttribute' => 'START_DATE',
 			'endAttribute' => 'END_DATE',
 			//'hideInput'=>true,
-			'presetDropdown'=>true,
+			'presetDropdown' => true,
 			'pluginOptions' => [
 
 				'locale' => [
 					'format' => 'Y-m-d',
-					'separator'=>' TO '
+					'separator' => ' TO '
 				],
 			],
 		]),

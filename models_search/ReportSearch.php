@@ -42,9 +42,14 @@ class ReportSearch extends ALL_RESERVATIONS
 	 */
 	public function search($params)
 	{
+		$owner = Yii::$app->user->id;
 		$query = ALL_RESERVATIONS::find();
 
 		// add conditions that should always apply here
+
+		//$query->groupBy('SERVICE_NAME');
+		$query->where(['OWNER_ID' => $owner]);
+		$query->orderBy(['SERVICE_ID' => SORT_DESC]);
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
@@ -63,7 +68,7 @@ class ReportSearch extends ALL_RESERVATIONS
 			$this->START_DATE = trim($date[0]);
 			$this->END_DATE = trim($date[1]);
 		} else {
-			$this->START_DATE ='2017-07-01'; //date('Y-m-d');
+			$this->START_DATE = '2017-07-01';; //date('Y-m-d');
 			$this->END_DATE = date('Y-m-d');
 		}
 

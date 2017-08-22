@@ -11,7 +11,18 @@ namespace app\model_extended;
 
 use app\models\VwAllReservations;
 
+/**
+ * This is the model class for table "salon".
+ *
+ * @property ALL_SERVICES $sERVICE
+ */
 class ALL_RESERVATIONS extends VwAllReservations
 {
-
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getSERVICE()
+	{
+		return $this->hasOne(ALL_SERVICES::className(), ['SERVICE_ID' => 'SERVICE_ID']);
+	}
 }
