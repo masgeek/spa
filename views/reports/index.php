@@ -18,7 +18,7 @@ $gridColumns = [
 
 	[
 		'attribute' => 'SERVICE_ID',
-		'width' => '310px',
+		//'width' => '10%',
 		'value' => function ($model, $key, $index, $widget) {
 			///$data = \app\model_extended\ALL_SERVICES::findOne($model->SERVICE_ID)->SERVICE_NAME;
 			$data = $model->sERVICE->SERVICE_NAME;
@@ -92,7 +92,8 @@ $gridColumns = [
 		'pageSummaryFunc'=>GridView::F_SUM,
 		'pageSummary' => true,
 	],
-	'STATUS_ID',
+	//'STATUS_ID',
+	'sTATUS.STATUS_NAME',
 	'PAYMENT_REF',
 	'MPESA_REF',
 	[

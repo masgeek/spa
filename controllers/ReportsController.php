@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\model_extended\ALL_RESERVATIONS;
+use app\models_search\PaymentSearch;
 use Yii;
 use app\models_search\ReportSearch;
 use yii\web\Controller;
@@ -30,34 +31,6 @@ class ReportsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-	public function actionIndexTest()
-	{
-
-
-		$fromDate = '2017-07-01'; //$request->input('from_date');
-		$toDate = '2017-07-25';//$request->input('to_date');
-		$sortBy = 'RESERVATION_DATE';//$request->input('sort_by');
-
-		// Report title
-		$title = 'Registered User Report';
-
-		// For displaying filters description on header
-		$meta = [
-			'Registered on' => $fromDate . ' To ' . $toDate,
-			'Sort By' => $sortBy
-		];
-
-		$queryBuilder = ALL_RESERVATIONS::find()
-			->where(['between', 'RESERVATION_DATE', $fromDate, $toDate])
-			//->groupBy(['SALON_NAME']
-			->all();
-
-
-		var_dump($queryBuilder);
-		return 1;
-	}
-
 	public function actionAllReservationsB()
 	{
 		return $this->render('all-reservations');
@@ -70,7 +43,13 @@ class ReportsController extends Controller
 
 	public function actionPayments()
 	{
-		return $this->render('payments');
+		$searchModel = new PaymentSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+		return $this->render('payments', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+		]);
 	}
 
 	public function actionAllServices()
