@@ -26,6 +26,13 @@ class MY_RESERVATIONS extends VwMyReservedServices
 			return Status::findOne($model->STATUS_ID)->STATUS_NAME;
 		};
 
+		$fields['COMMENTS'] = function ($model) {
+			if ($model->COMMENTS == null) {
+				return '';
+			}
+			return Status::findOne($model->STATUS_ID)->STATUS_NAME;
+		};
+
 		$fields['SERVICES_RESERVED'] = function ($model) {
 			/* @var $model RESERVED_SERVICE_MODEL */
 			return RESERVED_SERVICE_MODEL::find()->where(['RESERVATION_ID' => $model->RESERVATION_ID])->count();
