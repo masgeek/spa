@@ -9,7 +9,6 @@ use Yii;
  *
  * @property string $SALON_NAME
  * @property string $SERVICE_NAME
- * @property string $RESERVATION_DATE
  * @property string $SERVICE_COST
  * @property int $STATUS_ID
  * @property string $BOOKING_AMOUNT
@@ -20,6 +19,7 @@ use Yii;
  * @property string $PAYMENT_REF
  * @property string $MPESA_REF
  * @property int $OWNER_ID
+ * @property string $RESERVATION_DATE
  */
 class VwAllReservations extends \yii\db\ActiveRecord
 {
@@ -37,10 +37,10 @@ class VwAllReservations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['SALON_NAME', 'SERVICE_NAME', 'RESERVATION_DATE', 'SERVICE_COST', 'OWNER_ID'], 'required'],
-            [['RESERVATION_DATE', 'DATE_PAID'], 'safe'],
+            [['SALON_NAME', 'SERVICE_NAME', 'SERVICE_COST', 'OWNER_ID'], 'required'],
             [['SERVICE_COST', 'BOOKING_AMOUNT', 'TOTAL_COST', 'AMOUNT_PAID', 'BALANCE'], 'number'],
             [['STATUS_ID', 'OWNER_ID'], 'integer'],
+            [['DATE_PAID', 'RESERVATION_DATE'], 'safe'],
             [['SALON_NAME', 'SERVICE_NAME'], 'string', 'max' => 255],
             [['PAYMENT_REF'], 'string', 'max' => 50],
             [['MPESA_REF'], 'string', 'max' => 25],
@@ -55,7 +55,6 @@ class VwAllReservations extends \yii\db\ActiveRecord
         return [
             'SALON_NAME' => 'Salon  Name',
             'SERVICE_NAME' => 'Service  Name',
-            'RESERVATION_DATE' => 'Reservation  Date',
             'SERVICE_COST' => 'Service  Cost',
             'STATUS_ID' => 'Status  ID',
             'BOOKING_AMOUNT' => 'Booking  Amount',
@@ -66,6 +65,7 @@ class VwAllReservations extends \yii\db\ActiveRecord
             'PAYMENT_REF' => 'Payment  Ref',
             'MPESA_REF' => 'Mpesa  Ref',
             'OWNER_ID' => 'Owner  ID',
+            'RESERVATION_DATE' => 'Reservation  Date',
         ];
     }
 }

@@ -69,9 +69,8 @@ class PaymentController extends ActiveController
 			$model->RESERVATION_ID = $id;
 			$model->DATE_PAID = new Expression('NOW()');
 			$model->MPESA_REF = $mpesaref;
-			if($booking >= $total){
-				$model->FINALIZED = 1;
-			}
+			$model->PAYMENT_STATUS = 0; //mark as not finalized
+
 			$model->FINAL_AMOUNT = $total;
 			$model->BALANCE = $balance;
 			if ($model->load($payment_post)) {
