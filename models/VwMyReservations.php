@@ -17,6 +17,7 @@ use Yii;
  * @property string $SURNAME
  * @property int $OWNER_ID
  * @property int $RESERVER_ID
+ * @property string $COMMENTS
  */
 class VwMyReservations extends \yii\db\ActiveRecord
 {
@@ -38,6 +39,7 @@ class VwMyReservations extends \yii\db\ActiveRecord
             [['RESERVATION_DATE', 'TOTAL_COST', 'ACCOUNT_REF', 'SALON_NAME', 'SURNAME', 'RESERVER_ID'], 'required'],
             [['RESERVATION_DATE'], 'safe'],
             [['TOTAL_COST', 'BOOKING_AMOUNT'], 'number'],
+            [['COMMENTS'], 'string'],
             [['ACCOUNT_REF'], 'string', 'max' => 50],
             [['SALON_NAME'], 'string', 'max' => 255],
             [['SURNAME'], 'string', 'max' => 70],
@@ -60,6 +62,7 @@ class VwMyReservations extends \yii\db\ActiveRecord
             'SURNAME' => 'Surname',
             'OWNER_ID' => 'Owner  ID',
             'RESERVER_ID' => 'Reserver  ID',
+            'COMMENTS' => 'Comments',
         ];
     }
 }

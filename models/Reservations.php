@@ -14,6 +14,7 @@ use Yii;
  * @property int $STATUS_ID
  * @property string $ACCOUNT_REF
  * @property string $BOOKING_AMOUNT
+ * @property string $COMMENTS
  *
  * @property Payments[] $payments
  * @property Status $sTATUS
@@ -40,6 +41,7 @@ class Reservations extends \yii\db\ActiveRecord
             [['USER_ID', 'STATUS_ID'], 'integer'],
             [['RESERVATION_DATE'], 'safe'],
             [['TOTAL_COST', 'BOOKING_AMOUNT'], 'number'],
+            [['COMMENTS'], 'string'],
             [['ACCOUNT_REF'], 'string', 'max' => 50],
             [['STATUS_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['STATUS_ID' => 'STATUS_ID']],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
@@ -59,6 +61,7 @@ class Reservations extends \yii\db\ActiveRecord
             'STATUS_ID' => 'Status  ID',
             'ACCOUNT_REF' => 'Account  Ref',
             'BOOKING_AMOUNT' => 'Booking  Amount',
+            'COMMENTS' => 'Comments',
         ];
     }
 
