@@ -59,8 +59,10 @@ $gridColumns = [
 		}
 
 	],
-	//'SERVICE_ID',
-	'SALON_NAME',
+	[
+		'attribute' => 'SALON_NAME',
+
+	],
 	[
 		'label' => Yii::t('app', "Date"),
 		'attribute' => 'RESERVATION_DATE',
