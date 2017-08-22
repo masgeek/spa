@@ -112,7 +112,7 @@ $gridColumns = [
 		'class' => 'kartik\grid\EditableColumn',
 		'attribute' => 'COMMENTS',
 		'editableOptions' => [
-			'header' => 'Select Status',
+			'header' => 'Leave a comment',
 			'formOptions' => ['action' => ['/confirm-payment']],
 			'format' => \kartik\editable\Editable::FORMAT_BUTTON,
 			'inputType' => \kartik\editable\Editable::INPUT_TEXTAREA,
@@ -138,7 +138,7 @@ $gridColumns = [
 			'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Payment Grouping By Reservations</h3>',
 			'type' => 'primary',
 			//'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
-			'before' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Refresh Grid', ['/my-payments'], ['class' => 'btn btn-info']),
+			//'before' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Refresh Grid', ['/my-payments'], ['class' => 'btn btn-info']),
 			'showFooter' => false
 		],
 		//'showPageSummary'=>true,
