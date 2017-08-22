@@ -17,6 +17,13 @@ class PAYMENT_MODEL extends Payments
 	{
 		$fields = parent::fields();
 
+		$fields['COMMENTS'] = function ($model) {
+			if ($model->COMMENTS == null || strlen($model->COMMENTS) <= 2) {
+				return 'N/A';
+			}
+			return $model->COMMENTS;
+		};
+
 		return $fields;
 	}
 

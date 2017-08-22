@@ -27,10 +27,10 @@ class MY_RESERVATIONS extends VwMyReservedServices
 		};
 
 		$fields['COMMENTS'] = function ($model) {
-			if ($model->COMMENTS == null) {
+			if ($model->COMMENTS == null || strlen($model->COMMENTS) <= 2) {
 				return 'N/A';
 			}
-			return Status::findOne($model->STATUS_ID)->STATUS_NAME;
+			return $model->COMMENTS;
 		};
 
 		$fields['SERVICES_RESERVED'] = function ($model) {
