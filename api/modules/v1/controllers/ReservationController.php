@@ -226,7 +226,7 @@ class ReservationController extends ActiveController
 			->select(['SERVICE_AMOUNT'])
 			->where(['RESERVATION_ID' => $reservation_id])->sum('SERVICE_AMOUNT');
 		$sum_total = (float)$raw_total;
-		$booking_total = $sum_total * 0.3; //30% of total
+		$booking_total = $sum_total * 0.5; //50% of total
 
 		RESERVATION_MODEL::updateAll([
 			'TOTAL_COST' => $sum_total,
