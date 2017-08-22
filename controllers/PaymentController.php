@@ -110,8 +110,8 @@ class PaymentController extends Controller
 
 			$services_arr = Yii::$app->request->post('MY_PAYMENTS_MODEL');
 			foreach ($services_arr as $services) {
-				if (isset($services['FINALIZED'])) {
-					$model->PAYMENT_STATUS = isset($services['FINALIZED']) ? $services['FINALIZED'] : $model->PAYMENT_STATUS;
+				if (isset($services['PAYMENT_STATUS'])) {
+					$model->PAYMENT_STATUS = isset($services['PAYMENT_STATUS']) ? $services['PAYMENT_STATUS'] : $model->PAYMENT_STATUS;
 					$resp = $model->pAYMENTSTATUS->STATUS;
 				}
 
