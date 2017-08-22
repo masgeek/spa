@@ -1,6 +1,7 @@
 <?php
 
-use yii\helpers\Html;
+//use yii\helpers\Html;
+use  kartik\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -11,7 +12,7 @@ $this->title = 'My  Reservations';
 $this->params['breadcrumbs'][] = $this->title;
 
 $gridColumns = [
-	['class' => 'yii\grid\SerialColumn'],
+	['class' => 'kartik\grid\SerialColumn'],
 	//'RESERVATION_DATE',
 
 
@@ -25,6 +26,8 @@ $gridColumns = [
 		},
 		'group' => true,  // enable grouping
 		'groupedRow' => false,
+		'pageSummaryFunc'=>GridView::F_COUNT,
+		'pageSummary' => true,
 		'groupFooter' => function ($model, $key, $index, $widget) { // Closure method
 
 			return [
@@ -54,8 +57,10 @@ $gridColumns = [
 				'options' => ['class' => 'success', 'style' => 'font-weight:bold;']
 			];
 		}
+
 	],
 	//'SERVICE_ID',
+	'SALON_NAME',
 	[
 		'label' => Yii::t('app', "Date"),
 		'attribute' => 'RESERVATION_DATE',
@@ -78,11 +83,23 @@ $gridColumns = [
 			],
 		]),
 	],
-	'TOTAL_COST',
+	[
+		'class' => '\kartik\grid\DataColumn',
+		'attribute' => 'TOTAL_COST',
+		'format'=>'currency',
+		'pageSummaryFunc'=>GridView::F_SUM,
+		'pageSummary' => true,
+	],
 	'STATUS_ID',
 	'PAYMENT_REF',
 	'MPESA_REF',
-	'BOOKING_AMOUNT',
+	[
+		'class' => '\kartik\grid\DataColumn',
+		'attribute' => 'BOOKING_AMOUNT',
+		'format'=>'currency',
+		'pageSummaryFunc'=>GridView::F_SUM,
+		'pageSummary' => true,
+	]
 ]
 ?>
 
@@ -105,7 +122,7 @@ $gridColumns = [
 	'hover' => true,
 	'toggleData' => true,
 	'pjax' => false,
-	'showPageSummary' => false,
+	'showPageSummary' => true,
 	'panel' => [
 		'type' => 'primary',
 		//'heading'=>'Products'
