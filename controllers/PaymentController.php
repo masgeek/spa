@@ -51,7 +51,7 @@ class PaymentController extends Controller
 	public function actionIndex()
 	{
 		$userid = Yii::$app->user->identity->id;
-		$reservartions = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
+		$myReservationsArr = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
 
 
 		$dataProvider = new ActiveDataProvider([
@@ -67,12 +67,12 @@ class PaymentController extends Controller
 	public function actionPendingPayments()
 	{
 		$userid = Yii::$app->user->identity->id;
-		$reservartions = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
+		$myReservationsArr = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
 
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => MY_PAYMENTS_MODEL::find()
-				->where(['RESERVATION_ID' => $reservartions])
+				->where(['RESERVATION_ID' => $myReservationsArr])
 				->andWhere(['PAYMENT_STATUS' => 0]),
 		]);
 
@@ -84,12 +84,12 @@ class PaymentController extends Controller
 	public function actionFinalizedPayments()
 	{
 		$userid = Yii::$app->user->identity->id;
-		$reservartions = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
+		$myReservationsArr = MY_RESERVATIONS_VIEW::MyReservationsArr($userid);
 
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => MY_PAYMENTS_MODEL::find()
-				->where(['RESERVATION_ID' => $reservartions])
+				->where(['RESERVATION_ID' => $myReservationsArr])
 				->andWhere(['PAYMENT_STATUS' => 1]),
 		]);
 

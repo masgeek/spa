@@ -58,6 +58,8 @@ AppAsset::register($this);
 					['label' => 'Revenue Reports', 'url' => ['/reports/payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
 					'<li class="divider"></li>',
 					['label' => 'Reservation Report', 'url' => ['/reports/all-reservations'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
+					'<li class="divider"></li>',
+					['label' => 'Services Report', 'url' => ['/reports/all-services'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
 				],
 			],
 			[
