@@ -148,6 +148,13 @@ $gridColumns = [
 		'responsive' => true,
 		'hover' => true,
 		'toggleData' => true,
+		'panel' => [
+			'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-bell"></i> Reservations</h3>',
+			'type' => 'default',
+			//'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
+			//'before' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Refresh Grid', ['/my-payments'], ['class' => 'btn btn-info']),
+			'showFooter' => false
+		],
 	]); ?>
 
 </div>
