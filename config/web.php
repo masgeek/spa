@@ -67,6 +67,7 @@ $config = [
                 'assign-service' => 'booked/assign-service',
                 'confirm-service' => 'booked/confirm-service',
                 'confirm-reservation' => 'reservation/confirm-reservation',
+                'process-reservation' => 'reservation/process-reservation',
                 'confirm' => 'reservation/confirm',
                 'services' => 'service/index',
                 'manage-users' => 'user/index',

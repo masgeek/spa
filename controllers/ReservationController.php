@@ -68,6 +68,18 @@ class ReservationController extends Controller
         ]);
     }
 
+    public function actionProcessReservation($id){
+	    $model = $this->findModel($id);
+
+	    if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		    //return $this->redirect(['view', 'id' => $model->RESERVATION_ID]);
+		    return $this->redirect(['booked/assign-staff', 'reservation_id' => $model->RESERVATION_ID]);
+	    } else {
+		    return $this->render('update', [
+			    'model' => $model,
+		    ]);
+	    }
+    }
     /**
      * Displays a single Reservations model.
      * @param integer $id

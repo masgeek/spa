@@ -31,26 +31,6 @@ $gridColumns = [
 	//'OWNER_ID',
 	'RESERVATION_DATE:date',
 	[
-		'class' => 'kartik\grid\EditableColumn',
-		'attribute' => 'STATUS_ID',
-		'value' => function ($model, $key, $index, $widget) {
-			/* @var $model \app\model_extended\RESERVED_SERVICES */
-			$data = 'Pending';
-			if ($model->STATUS_ID != null) {
-				$data = \app\model_extended\STATUS_MODEL::findOne($model->STATUS_ID)->STATUS_NAME;
-			}
-			return $data;
-		},
-		'pageSummary' => true,
-		'editableOptions' => [
-			'header' => 'Select Status',
-			'formOptions' => ['action' => ['/confirm-reservation']],
-			'format' => \kartik\editable\Editable::FORMAT_BUTTON,
-			'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-			'data' => $statusList,
-		]
-	],
-	[
 		//'header' => 'Amount Paid',
 		'attribute' => 'BOOKING_AMOUNT',
 		'format' => 'currency',
@@ -78,6 +58,26 @@ $gridColumns = [
 	],
 	'ACCOUNT_REF',
 	[
+		//'class' => 'kartik\grid\EditableColumn',
+		'attribute' => 'STATUS_ID',
+		'value' => function ($model, $key, $index, $widget) {
+			/* @var $model \app\model_extended\RESERVED_SERVICES */
+			$data = 'Pending';
+			if ($model->STATUS_ID != null) {
+				$data = \app\model_extended\STATUS_MODEL::findOne($model->STATUS_ID)->STATUS_NAME;
+			}
+			return $data;
+		},
+		/*'pageSummary' => true,
+		'editableOptions' => [
+			'header' => 'Select Status',
+			'formOptions' => ['action' => ['/confirm-reservation']],
+			'format' => \kartik\editable\Editable::FORMAT_BUTTON,
+			'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+			'data' => $statusList,
+		]*/
+	],
+	[
 		'class' => '\kartik\grid\ActionColumn',
 		'template' => '{assign}',
 		'buttons' => [
@@ -87,6 +87,7 @@ $gridColumns = [
 		],
 		'urlCreator' => function ($action, $model, $key, $index) {
 			$url = '#';
+			$amount = $model->getAmountToPay();
 			if ($action === 'assign') {
 				$action = 'Assign Staff';
 				$url = \yii\helpers\Url::toRoute(['booked/assign-staff']);
@@ -99,7 +100,37 @@ $gridColumns = [
 					'reservation_id' => $model->RESERVATION_ID,
 					//'_csrf' => Yii::$app->request->csrfToken
 				],
-				'class' => 'btn btn-success btn-xs btn-block']);
+				'class' =>$amount!=null ? 'btn btn-primary btn-xs btn-block': 'btn btn-danger btn-xs btn-block disabled']);
+		},
+	],
+	[
+		'class' => '\kartik\grid\ActionColumn',
+		'template' => '{process}',
+		'buttons' => [
+			'process' => function ($url, $model, $key) {
+				return $url;
+			},
+		],
+		'urlCreator' => function ($action, $model, $key, $index) {
+			$amount = $model->getAmountToPay();
+			$url = '#';
+			if ($action === 'process') {
+				if ($amount != null) {
+					$action = 'Process Reservation';
+					$url = \yii\helpers\Url::toRoute(['process-reservation']);
+				} else {
+					$action = 'Payment Pending';
+				}
+			}
+
+			return Html::a($action, $url, [
+				'data-method' => 'get',
+				'id' => 'act-btn',
+				'data-params' => [
+					'id' => $model->RESERVATION_ID,
+					//'_csrf' => Yii::$app->request->csrfToken
+				],
+				'class' =>$amount!=null ? 'btn btn-success btn-xs btn-block': 'btn btn-danger btn-xs btn-block disabled']);
 		},
 	],
 ];

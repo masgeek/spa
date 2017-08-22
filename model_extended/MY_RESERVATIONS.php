@@ -13,13 +13,31 @@ use app\models\Reservations;
 
 class MY_RESERVATIONS extends Reservations
 {
-    public $USER_NAME;
-    public function attributeLabels()
-    {
-        $labels = parent::attributeLabels();
+	public $USER_NAME;
+	const SCENNARIO_CONFIRMATION = 'confirmation';
 
-        $labels['STATUS_ID'] = 'Booking Status';
+	public function scenarios()
+	{
+		$scenarios = parent::scenarios();
+		//$scenarios[self::SCENARIO_CREATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_STATUS', 'ACCOUNT_TYPE_ID'];
+		//$scenarios[self::SCENARIO_UPDATE] = ['SURNAME', 'EMAIL', 'MOBILE_NO', 'PASSWORD', 'ACCOUNT_TYPE_ID', 'ACCOUNT_TYPE_ID'];
 
-        return $labels;
-    }
+		return $scenarios;
+	}
+
+	public function rules()
+	{
+		$rules = parent::rules();
+		$rules[] = [['COMMENTS'], 'required'];
+		return $rules;
+	}
+
+	public function attributeLabels()
+	{
+		$labels = parent::attributeLabels();
+
+		$labels['STATUS_ID'] = 'Reservation Status';
+
+		return $labels;
+	}
 }
