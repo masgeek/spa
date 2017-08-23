@@ -60,13 +60,15 @@ class UserSearch extends USERS_MODEL
         // grid filtering conditions
         $query->andFilterWhere([
             'USER_ID' => $this->USER_ID,
-            'ACCOUNT_STATUS' => $this->ACCOUNT_STATUS,
-            'ACCOUNT_TYPE_ID' => $this->ACCOUNT_TYPE_ID,
+            //'ACCOUNT_STATUS' => $this->ACCOUNT_STATUS,
+            ///'ACCOUNT_TYPE_ID' => $this->ACCOUNT_TYPE_ID,
         ]);
 
         $query->andFilterWhere(['like', 'SURNAME', $this->SURNAME])
             ->andFilterWhere(['like', 'OTHER_NAMES', $this->OTHER_NAMES])
             ->andFilterWhere(['like', 'EMAIL', $this->EMAIL])
+            ->andFilterWhere(['like', 'ACCOUNT_STATUS', $this->ACCOUNT_STATUS])
+            ->andFilterWhere(['like', 'ACCOUNT_TYPE_ID', $this->ACCOUNT_TYPE_ID])
             ->andFilterWhere(['like', 'MOBILE_NO', $this->MOBILE_NO])
             ->andFilterWhere(['like', 'PASSWORD', $this->PASSWORD]);
 

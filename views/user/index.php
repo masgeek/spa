@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 $accountType = \app\model_extended\ACCOUNT_STATUS_MODEL::TypeDropdown();
 $accountStatus = \app\model_extended\ACCOUNT_STATUS_MODEL::StatusDropdown();
 
-
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     //'USER_ID',
@@ -31,7 +30,13 @@ $gridColumns = [
             /* @var $model \app\model_extended\USERS_MODEL */
             return $model->aCCOUNTTYPE->ACCOUNT_NAME;
         },
-        'pageSummary' => true,
+	    'filterType'=>GridView::FILTER_SELECT2,
+	    'filter'=>$accountType,
+	    'filterInputOptions'=>['placeholder'=>'--Account Type--'],
+	    'filterWidgetOptions'=>[
+		    'pluginOptions'=>['allowClear'=>true],
+	    ],
+        'pageSummary' => false,
         'editableOptions' => [
             'header' => 'Select Account Type',
             'formOptions' => ['action' => ['/user-status']],
@@ -47,6 +52,12 @@ $gridColumns = [
             /* @var $model \app\model_extended\USERS_MODEL */
             return $model->aCCOUNTSTATUS->STATUS_NAME;
         },
+	    'filterType'=>GridView::FILTER_SELECT2,
+	    'filter'=>$accountStatus,
+	    'filterInputOptions'=>['placeholder'=>'--Account Status--'],
+	    'filterWidgetOptions'=>[
+		    'pluginOptions'=>['allowClear'=>true],
+	    ],
         'pageSummary' => true,
         'editableOptions' => [
             'header' => 'Select Status',
