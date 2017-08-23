@@ -266,12 +266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "28e8912a41b527e12db596026aaf0a355044d890"
+                "reference": "fcc325311c4c5e11c4453a405344d02adfa64aa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/28e8912a41b527e12db596026aaf0a355044d890",
-                "reference": "28e8912a41b527e12db596026aaf0a355044d890",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/fcc325311c4c5e11c4453a405344d02adfa64aa1",
+                "reference": "fcc325311c4c5e11c4453a405344d02adfa64aa1",
                 "shasum": ""
             },
             "require": {
@@ -318,7 +318,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2017-07-16 21:15:25"
+            "time": "2017-08-22 10:13:04"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1973,12 +1973,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "e8a71970b33410591f664f72dba6bd755fa7bf55"
+                "reference": "0dcea9240098b05c2415e189221f0eed514d8cb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e8a71970b33410591f664f72dba6bd755fa7bf55",
-                "reference": "e8a71970b33410591f664f72dba6bd755fa7bf55",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0dcea9240098b05c2415e189221f0eed514d8cb7",
+                "reference": "0dcea9240098b05c2415e189221f0eed514d8cb7",
                 "shasum": ""
             },
             "require": {
@@ -2013,13 +2013,13 @@
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "http://swiftmailer.org",
+            "homepage": "http://swiftmailer.symfony.com",
             "keywords": [
                 "email",
                 "mail",
                 "mailer"
             ],
-            "time": "2017-08-10 12:25:50"
+            "time": "2017-08-22 22:04:30"
         },
         {
             "name": "yiisoft/yii2",
@@ -2027,12 +2027,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "56460647d7715dc36f318e5cee24f6b1d78aa8ab"
+                "reference": "3fc9a13f81f4c8ef4b713d8b34be38e9fc12cb98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/56460647d7715dc36f318e5cee24f6b1d78aa8ab",
-                "reference": "56460647d7715dc36f318e5cee24f6b1d78aa8ab",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/3fc9a13f81f4c8ef4b713d8b34be38e9fc12cb98",
+                "reference": "3fc9a13f81f4c8ef4b713d8b34be38e9fc12cb98",
                 "shasum": ""
             },
             "require": {
@@ -2119,7 +2119,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-08-21 14:37:01"
+            "time": "2017-08-22 21:38:39"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2446,7 +2446,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2017-08-10 20:41:08"
+            "time": "2017-08-10T20:41:08+00:00"
         },
         {
             "name": "codeception/specify",
@@ -2576,7 +2576,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14 21:17:01"
+            "time": "2015-06-14T21:17:01+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -2626,7 +2626,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-08-15 16:48:10"
+            "time": "2017-08-15T16:48:10+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3229,7 +3229,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2017-03-07 08:21:50"
+            "time": "2017-03-07T08:21:50+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -3311,7 +3311,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-08-18 07:34:02"
+            "time": "2017-08-18T07:34:02+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4082,7 +4082,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-03 09:34:20"
+            "time": "2017-08-03T09:34:20+00:00"
         },
         {
             "name": "symfony/console",
@@ -4151,7 +4151,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-15 13:32:22"
+            "time": "2017-08-15T13:32:22+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -4204,7 +4204,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-03 09:34:20"
+            "time": "2017-08-03T09:34:20+00:00"
         },
         {
             "name": "symfony/debug",
@@ -4260,7 +4260,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-10 07:07:17"
+            "time": "2017-08-10T07:07:17+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -4316,7 +4316,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-15 13:32:22"
+            "time": "2017-08-15T13:32:22+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -4379,7 +4379,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-03 09:34:20"
+            "time": "2017-08-03T09:34:20+00:00"
         },
         {
             "name": "symfony/finder",
@@ -4428,7 +4428,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-03 09:34:20"
+            "time": "2017-08-03T09:34:20+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4542,7 +4542,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-04 13:29:48"
+            "time": "2017-08-04T13:29:48+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -4639,7 +4639,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-08-20 16:59:36"
+            "time": "2017-08-20T16:59:36+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -4686,7 +4686,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2017-08-02 13:01:06"
+            "time": "2017-08-02T13:01:06+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -4739,7 +4739,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2017-08-02 13:12:51"
+            "time": "2017-08-02T13:12:51+00:00"
         }
     ],
     "aliases": [],
