@@ -43,8 +43,8 @@ class PaymentSearch extends ALL_PAYMENTS
 		// add conditions that should always apply here
 
 		//$query->groupBy('SERVICE_NAME');
-		//$query->where(['OWNER_ID' => $owner]);
-		//$query->orderBy(['SERVICE_ID' => SORT_DESC]);
+		$query->where(['OWNER_ID' => $owner]);
+		$query->orderBy(['DATE_PAID' => SORT_DESC]);
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
@@ -73,7 +73,7 @@ class PaymentSearch extends ALL_PAYMENTS
 		]);
 
 		//$query->andFilterWhere(['like', 'PAYMENT_REF', $this->PAYMENT_REF]);
-		//$query->andFilterWhere(['between', 'DATE_PAID', $this->START_DATE, $this->END_DATE]);
+		$query->andFilterWhere(['between', 'DATE_PAID', $this->START_DATE, $this->END_DATE]);
 
 		return $dataProvider;
 	}
