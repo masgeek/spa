@@ -18,8 +18,8 @@ use Yii;
  * @property string $MPESA_REF
  * @property string $COMMENTS
  *
- * @property PaymentStatus $pAYMENTSTATUS
  * @property Reservations $rESERVATION
+ * @property PaymentStatus $pAYMENTSTATUS
  */
 class Payments extends \yii\db\ActiveRecord
 {
@@ -44,8 +44,8 @@ class Payments extends \yii\db\ActiveRecord
             [['COMMENTS'], 'string'],
             [['PAYMENT_REF'], 'string', 'max' => 50],
             [['MPESA_REF'], 'string', 'max' => 25],
-            [['PAYMENT_STATUS'], 'exist', 'skipOnError' => true, 'targetClass' => PaymentStatus::className(), 'targetAttribute' => ['PAYMENT_STATUS' => 'PAYMENT_STATUS_ID']],
             [['RESERVATION_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Reservations::className(), 'targetAttribute' => ['RESERVATION_ID' => 'RESERVATION_ID']],
+            [['PAYMENT_STATUS'], 'exist', 'skipOnError' => true, 'targetClass' => PaymentStatus::className(), 'targetAttribute' => ['PAYMENT_STATUS' => 'PAYMENT_STATUS_ID']],
         ];
     }
 
@@ -71,16 +71,16 @@ class Payments extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPAYMENTSTATUS()
+    public function getRESERVATION()
     {
-        return $this->hasOne(PaymentStatus::className(), ['PAYMENT_STATUS_ID' => 'PAYMENT_STATUS']);
+        return $this->hasOne(Reservations::className(), ['RESERVATION_ID' => 'RESERVATION_ID']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRESERVATION()
+    public function getPAYMENTSTATUS()
     {
-        return $this->hasOne(Reservations::className(), ['RESERVATION_ID' => 'RESERVATION_ID']);
+        return $this->hasOne(PaymentStatus::className(), ['PAYMENT_STATUS_ID' => 'PAYMENT_STATUS']);
     }
 }
