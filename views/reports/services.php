@@ -18,7 +18,7 @@ $gridColumns = [
 
     [
         'attribute' => 'SALON_NAME',
-        'width' => '5%',
+        //'width' => '5%',
         'value' => function ($model, $key, $index, $widget) {
             ///$data = \app\model_extended\ALL_SERVICES::findOne($model->SERVICE_ID)->SERVICE_NAME;
             //$data = $model->sERVICE->SERVICE_NAME;
