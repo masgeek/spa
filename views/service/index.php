@@ -24,8 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
             //'SERVICE_ID',
             'SERVICE_NAME',
             'DESCRIPTION:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}{view}',
+            ],
         ],
     ]); ?>
 </div>
