@@ -42,7 +42,7 @@ AppAsset::register($this);
 		'items' => [
 			[
 				'label' => 'Salon',
-				//'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN,
+				'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN,
 				'items' => [
 					//'<li class="divider"></li>',
 					//'<li class="dropdown-header">Salon Management</li>',
@@ -53,7 +53,7 @@ AppAsset::register($this);
 			],
 			[
 				'label' => 'Reports',
-				//'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::ADMIN_ACCOUNT,
+				'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN,
 				'items' => [
 					['label' => 'Revenue Reports', 'url' => ['/reports/payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
 					'<li class="divider"></li>',
@@ -64,7 +64,7 @@ AppAsset::register($this);
 			],
 			[
 				'label' => 'Payments',
-				//'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::ADMIN_ACCOUNT,
+				'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN,
 				'items' => [
 					['label' => 'Pending Payments', 'url' => ['/pending-payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
 					'<li class="divider"></li>',
