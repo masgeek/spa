@@ -12,7 +12,7 @@ use Yii;
  * @property string $SALON_NAME
  * @property int $OWNER_ID
  * @property int $OFFERED_SERVICE_ID
- * @property string $RESERVATIONS
+ * @property int $RESERVATIONS
  * @property int $SERVICE_ID
  */
 class VwAllServices extends \yii\db\ActiveRecord

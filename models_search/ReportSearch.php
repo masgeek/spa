@@ -68,7 +68,7 @@ class ReportSearch extends ALL_RESERVATIONS
 			$this->START_DATE = trim($date[0]);
 			$this->END_DATE = trim($date[1]);
 		} else {
-			$this->START_DATE = '2017-07-01';; //date('Y-m-d');
+			$this->START_DATE = date('Y-m-d');
 			$this->END_DATE = date('Y-m-d');
 		}
 

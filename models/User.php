@@ -41,7 +41,7 @@ class User extends \yii\db\ActiveRecord
             [['ACCOUNT_STATUS', 'ACCOUNT_TYPE_ID'], 'integer'],
             [['SURNAME', 'EMAIL'], 'string', 'max' => 70],
             [['OTHER_NAMES'], 'string', 'max' => 255],
-            [['MOBILE_NO'], 'string', 'max' => 50],
+            [['MOBILE_NO'], 'string', 'max' => 30],
             [['PASSWORD'], 'string', 'max' => 300],
             [['ACCOUNT_TYPE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => AccountType::className(), 'targetAttribute' => ['ACCOUNT_TYPE_ID' => 'ACCOUNT_TYPE_ID']],
             [['ACCOUNT_STATUS'], 'exist', 'skipOnError' => true, 'targetClass' => AccountStatus::className(), 'targetAttribute' => ['ACCOUNT_STATUS' => 'ACCOUNT_STATUS_ID']],
