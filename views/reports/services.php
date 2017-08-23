@@ -49,16 +49,22 @@ $gridColumns = [
 <h1><?= Html::encode($this->title) ?></h1>
 <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
-
+<!--?= kartik\export\ExportMenu::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => $gridColumns,
+    'fontAwesome' => true,
+]);?-->
+<hr/>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'autoXlFormat' => true,
+    /*'autoXlFormat' => true,
     'export' => [
         'fontAwesome' => true,
         'showConfirmAlert' => true,
+        'asDropdown'=>true,
         'target' => GridView::TARGET_BLANK
-    ],
+    ],*/
     'columns' => $gridColumns,
     'responsive' => true,
     'hover' => true,
