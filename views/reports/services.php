@@ -8,7 +8,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models_search\ReportSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Salons Services Activity';
+$this->title = 'Salons Services Reservations';
 $this->params['breadcrumbs'][] = $this->title;
 
 $gridColumns = [
