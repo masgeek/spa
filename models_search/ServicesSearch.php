@@ -8,22 +8,26 @@
 
 namespace app\models_search;
 
+use app\model_extended\ALL_RESERVATIONS;
+use app\model_extended\RESERVED_SERVICES;
+use app\model_extended\SERVICES_COUNT_MODEL;
 use Yii;
 use app\model_extended\ALL_SERVICES;
 use app\models\VwAllServices;
 use yii\data\ActiveDataProvider;
 
-class ServicesSearch extends VwAllServices
+class ServicesSearch extends SERVICES_COUNT_MODEL
 {
     public $START_DATE;
     public $END_DATE;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['SALON_ID'], 'safe'],
+            //['SALON_ID', 'SALON_NAME'], 'safe'],
         ];
     }
 
@@ -42,10 +46,11 @@ class ServicesSearch extends VwAllServices
         // add conditions that should always apply here
         //$query->groupBy('SERVICE_NAME');
         $query->where(['OWNER_ID' => $owner]);
-        $query->orderBy(['RESERVATIONS' => SORT_DESC]);
+        //$query->orderBy(['RESERVATIONS' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            //'sort' =>false
         ]);
 
         $this->load($params);
@@ -57,6 +62,7 @@ class ServicesSearch extends VwAllServices
 
         $query->andFilterWhere([
             'SALON_ID' => $this->SALON_ID,
+            'SALON_NAME_NAME' => $this->SALON_NAME,
         ]);
 
         return $dataProvider;

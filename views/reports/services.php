@@ -12,13 +12,13 @@ $this->title = 'Salons Services Reservations';
 $this->params['breadcrumbs'][] = $this->title;
 
 $gridColumns = [
-    ['class' => 'kartik\grid\SerialColumn'],
+    //['class' => 'kartik\grid\SerialColumn'],
     //'RESERVATION_DATE',
 
 
     [
         'attribute' => 'SALON_NAME',
-        //'width' => '10%',
+        'width' => '5%',
         'value' => function ($model, $key, $index, $widget) {
             ///$data = \app\model_extended\ALL_SERVICES::findOne($model->SERVICE_ID)->SERVICE_NAME;
             //$data = $model->sERVICE->SERVICE_NAME;
@@ -26,14 +26,23 @@ $gridColumns = [
         },
         'group' => true,  // enable grouping
         'groupedRow' => false,
-        'pageSummaryFunc'=>GridView::F_COUNT,
-        'pageSummary' => true,
+        'pageSummaryFunc' => GridView::F_COUNT,
+        'pageSummary' => false,
 
     ],
     [
         'attribute' => 'SERVICE_NAME',
+        'group' => true,  // enable grouping
+        'subGroupOf'=>1
     ],
-    'RESERVATIONS'
+    [
+        'attribute' => 'RESERVATIONS',
+        'value' => function ($model) {
+            return \app\model_extended\SERVICES_COUNT_MODEL::GetReservationsCount( $model->OFFERED_SERVICE_ID);
+        },
+        'pageSummaryFunc' => GridView::F_SUM,
+        'pageSummary' => true,
+    ],
 ]
 ?>
 
