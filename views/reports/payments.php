@@ -35,14 +35,14 @@ $gridColumns = [
 				'content' => [             // content to show in each summary cell
 					1 => "Summary for booking [{$model->RESERVATION_ID}]",
 					3 => GridView::F_COUNT,
-					//4 => "Total Cost",
+					//5 => GridView::F_AVG,
 					//5 => "Balance",
 					//4=>GridView::F_AVG,
 					//4=>GridView::F_SUM,
 				],
 				'contentFormats' => [      // content reformatting for each summary cell
 					3 => ['format' => 'number', 'decimals' => 0],
-					//4=>['format'=>'number', 'decimals'=>2],
+					//5=>['format'=>'number', 'decimals'=>2],
 					//6=>['format'=>'number', 'decimals'=>2],
 				],
 				'contentOptions' => [      // content html attributes for each summary cell
@@ -90,7 +90,13 @@ $gridColumns = [
 		'pageSummaryFunc'=>GridView::F_SUM,
 		'pageSummary' => true,
 	],
-	'BALANCE',
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'attribute' => 'BALANCE',
+        'format'=>'currency',
+        'pageSummaryFunc'=>GridView::F_SUM,
+        'pageSummary' => true,
+    ],
 	'PAYMENT_REF',
 	'MPESA_REF',
     'PAYMENT_STATUS',
