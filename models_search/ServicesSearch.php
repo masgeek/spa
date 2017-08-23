@@ -42,6 +42,7 @@ class ServicesSearch extends VwAllServices
         // add conditions that should always apply here
         //$query->groupBy('SERVICE_NAME');
         $query->where(['OWNER_ID' => $owner]);
+        $query->orderBy(['RESERVATIONS' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

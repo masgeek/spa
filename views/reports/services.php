@@ -17,7 +17,7 @@ $gridColumns = [
 
 
     [
-        'attribute' => 'SALON_ID',
+        'attribute' => 'SALON_NAME',
         //'width' => '10%',
         'value' => function ($model, $key, $index, $widget) {
             ///$data = \app\model_extended\ALL_SERVICES::findOne($model->SERVICE_ID)->SERVICE_NAME;
@@ -28,35 +28,6 @@ $gridColumns = [
         'groupedRow' => false,
         'pageSummaryFunc'=>GridView::F_COUNT,
         'pageSummary' => true,
-        'groupFooter' => function ($model, $key, $index, $widget) { // Closure method
-
-            return [
-                //'mergeColumns'=>[[2,2]], // columns to merge in summary
-                'content' => [             // content to show in each summary cell
-                    1 => "Summary for booking [{$model->SALON_NAME}]",
-                    3 => GridView::F_COUNT,
-                    //5 => GridView::F_AVG,
-                    //5 => "Balance",
-                    //4=>GridView::F_AVG,
-                    //4=>GridView::F_SUM,
-                ],
-                'contentFormats' => [      // content reformatting for each summary cell
-                    3 => ['format' => 'number', 'decimals' => 0],
-                    //5=>['format'=>'number', 'decimals'=>2],
-                    //6=>['format'=>'number', 'decimals'=>2],
-                ],
-                'contentOptions' => [      // content html attributes for each summary cell
-                    1 => ['style' => 'font-variant:small-caps'],
-                    2 => ['style' => 'text-align:right'],
-                    3 => ['style' => 'text-align:right'],
-                    4 => ['style' => 'font-variant:small-caps'],
-                    5 => ['style' => 'font-variant:small-caps'],
-                    //6=>['style'=>'text-align:right'],
-                ],
-                // html attributes for group summary row
-                'options' => ['class' => 'success', 'style' => 'font-weight:bold;']
-            ];
-        }
 
     ],
     [
