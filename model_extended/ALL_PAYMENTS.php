@@ -13,5 +13,13 @@ use app\models\VwSalonPayments;
 
 class ALL_PAYMENTS extends VwSalonPayments
 {
+public function attributeLabels()
+{
+    $labels =  parent::attributeLabels();
 
+    $labels['BOOKING_AMOUNT'] = 'Amount Collected';
+    $labels['BALANCE'] = 'Amount To Be Paid';
+    $labels['FINAL_AMOUNT'] = 'Projected Revenue';
+    return $labels;
+}
 }
