@@ -24,7 +24,7 @@ class PaymentSearch extends ALL_PAYMENTS
 	public function rules()
 	{
 		return [
-			[['DATE_PAID','PAYMENT_STATUS'], 'safe'],
+			[['DATE_PAID'], 'safe'],
 		];
 	}
 
@@ -44,6 +44,7 @@ class PaymentSearch extends ALL_PAYMENTS
 
 		//$query->groupBy('SERVICE_NAME');
 		$query->where(['OWNER_ID' => $owner]);
+		$query->andWhere(['PAYMENT_STATUS' => 1]);
 		$query->orderBy(['DATE_PAID' => SORT_DESC]);
 
 		$dataProvider = new ActiveDataProvider([
