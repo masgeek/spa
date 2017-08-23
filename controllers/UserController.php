@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models_search\UserSearch;
 use Yii;
 use app\model_extended\USERS_MODEL;
 use yii\data\ActiveDataProvider;
@@ -49,13 +50,13 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => USERS_MODEL::find(),
-        ]);
+	    $searchModel = new UserSearch();
+	    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+	    return $this->render('index', [
+		    'searchModel' => $searchModel,
+		    'dataProvider' => $dataProvider,
+	    ]);
     }
 
     public function actionUserStatus()

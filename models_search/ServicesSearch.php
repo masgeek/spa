@@ -62,9 +62,11 @@ class ServicesSearch extends SERVICES_COUNT_MODEL
 
         $query->andFilterWhere([
             'SALON_ID' => $this->SALON_ID,
-            'SALON_NAME_NAME' => $this->SALON_NAME,
+            'SALON_NAME' => $this->SALON_NAME,
         ]);
 
+	    $query->andFilterWhere(['like', 'SALON_NAME', $this->SALON_NAME])
+		    ->andFilterWhere(['like', 'SALON_ID', $this->SALON_ID]);
         return $dataProvider;
     }
 }

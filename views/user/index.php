@@ -64,7 +64,7 @@ $gridColumns = [
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
-    //'filterModel' => $searchModel,
+    'filterModel' => $searchModel,
     'export' => false,
     'columns' => $gridColumns,
     'responsive' => true,
