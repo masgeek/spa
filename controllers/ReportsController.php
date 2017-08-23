@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\model_extended\ALL_RESERVATIONS;
 use app\models_search\PaymentSearch;
+use app\models_search\ServicesSearch;
 use Yii;
 use app\models_search\ReportSearch;
 use yii\web\Controller;
@@ -54,6 +55,12 @@ class ReportsController extends Controller
 
 	public function actionAllServices()
 	{
-		return $this->render('services');
+        $searchModel = new ServicesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('services', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
 	}
 }

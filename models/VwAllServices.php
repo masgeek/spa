@@ -12,6 +12,8 @@ use Yii;
  * @property string $SALON_NAME
  * @property int $OWNER_ID
  * @property int $OFFERED_SERVICE_ID
+ * @property string $RESERVATIONS
+ * @property string $STATUS_NAME
  */
 class VwAllServices extends \yii\db\ActiveRecord
 {
@@ -30,8 +32,8 @@ class VwAllServices extends \yii\db\ActiveRecord
     {
         return [
             [['SERVICE_NAME', 'SALON_ID', 'SALON_NAME', 'OWNER_ID'], 'required'],
-            [['SALON_ID', 'OWNER_ID', 'OFFERED_SERVICE_ID'], 'integer'],
-            [['SERVICE_NAME', 'SALON_NAME'], 'string', 'max' => 255],
+            [['SALON_ID', 'OWNER_ID', 'OFFERED_SERVICE_ID', 'RESERVATIONS'], 'integer'],
+            [['SERVICE_NAME', 'SALON_NAME', 'STATUS_NAME'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,6 +48,8 @@ class VwAllServices extends \yii\db\ActiveRecord
             'SALON_NAME' => 'Salon  Name',
             'OWNER_ID' => 'Owner  ID',
             'OFFERED_SERVICE_ID' => 'Offered  Service  ID',
+            'RESERVATIONS' => 'Reservations',
+            'STATUS_NAME' => 'Status  Name',
         ];
     }
 }
