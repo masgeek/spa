@@ -200,8 +200,9 @@ class ReservationController extends ActiveController
 		return $provider;
 	}
 
-	public function actionReservations($id, $status = 1)
+	public function actionConfirmedReservations($id)
 	{
+		$status = 1;
 		//get reservations made by the user
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
