@@ -53,11 +53,10 @@ $gridColumns = [
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    //'export' => false,
     'autoXlFormat' => true,
     'export' => [
         'fontAwesome' => true,
-        'showConfirmAlert' => false,
+        'showConfirmAlert' => true,
         'target' => GridView::TARGET_BLANK
     ],
     'columns' => $gridColumns,
