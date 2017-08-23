@@ -37,44 +37,46 @@ class ReservationController extends ActiveController
 		return $actions;
 	}
 
-	public function actionAddService($id){
+	public function actionAddService($id)
+	{
 
-        $message = [];
+		$message = [];
 
-        if (!Yii::$app->request->isPost) {
-            throw new BadRequestHttpException('Please use POST');
-        }
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
 
-        $reservation = RESERVATION_MODEL::findOne($id); //check to see if the reservation exists
-        $reserved_service = new RESERVED_SERVICE_MODEL();
-        $request = Yii::$app->request->post();
+		$reservation = RESERVATION_MODEL::findOne($id); //check to see if the reservation exists
+		$reserved_service = new RESERVED_SERVICE_MODEL();
+		$request = Yii::$app->request->post();
 
-        $add_post = ['RESERVED_SERVICE_MODEL'=>$request];
-        $services =  Yii::$app->request->post('SELECTED_SERVICES');//isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
+		$add_post = ['RESERVED_SERVICE_MODEL' => $request];
+		$services = Yii::$app->request->post('SELECTED_SERVICES');//isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
 
-        foreach ($services as $key => $offered_service_id) {
-            $reserved_service->isNewRecord = true;
-            if ($reserved_service->load($add_post)) {
-                $reserved_service->SERVICE_AMOUNT = Yii::$app->request->post('SERVICE_COST');
-                $reserved_service->RESERVATION_ID = $id;
-                $reserved_service->OFFERED_SERVICE_ID = $offered_service_id;
+		foreach ($services as $key => $offered_service_id) {
+			$reserved_service->isNewRecord = true;
+			if ($reserved_service->load($add_post)) {
+				$reserved_service->SERVICE_AMOUNT = Yii::$app->request->post('SERVICE_COST');
+				$reserved_service->RESERVATION_ID = $id;
+				$reserved_service->OFFERED_SERVICE_ID = $offered_service_id;
 
-                if ($reserved_service->validate() && $reserved_service->save()) {
-                    $message = [$reserved_service];
-                    $this->UpdateTotalCost($reserved_service->RESERVATION_ID); //update the total
-                } else {
-                    foreach ( $reserved_service->getErrors() as $key => $error) {
-                        $message[] = [
-                            'field' => $key,
-                            'message' => $error[0]
-                        ];
-                    }
-                }
-            }
-        }
-        return $message;
+				if ($reserved_service->validate() && $reserved_service->save()) {
+					$message = [$reserved_service];
+					$this->UpdateTotalCost($reserved_service->RESERVATION_ID); //update the total
+				} else {
+					foreach ($reserved_service->getErrors() as $key => $error) {
+						$message[] = [
+							'field' => $key,
+							'message' => $error[0]
+						];
+					}
+				}
+			}
+		}
+		return $message;
 
-    }
+	}
+
 	public function actionReserve()
 	{
 		/* @var $request RESERVATION_MODEL */
@@ -198,13 +200,15 @@ class ReservationController extends ActiveController
 		return $provider;
 	}
 
-	public function actionConfirmedReservations($id)
+	public function actionReservations($id, $status = 1)
 	{
 		//get reservations made by the user
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
 		}
-		$query = MY_RESERVATIONS::find()->where(['USER_ID' => $id]);
+		$query = MY_RESERVATIONS::find()
+			->where(['USER_ID' => $id])
+			->andWhere(['STATUS_ID' => $status]);
 
 		$provider = new ActiveDataProvider([
 			'query' => $query,
