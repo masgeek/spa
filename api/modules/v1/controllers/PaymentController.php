@@ -13,6 +13,8 @@ use app\api\modules\v1\models\PAYMENT_MODEL;
 use app\api\modules\v1\models\RESERVATION_MODEL;
 use app\api\modules\v1\models\SERVICE_MODEL;
 use app\api\modules\v1\models\SERVICE_PAYMENTS;
+use app\model_extended\ALL_PAYMENTS;
+use app\model_extended\MY_PAYMENTS_MODEL;
 use function GuzzleHttp\Promise\all;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -98,6 +100,23 @@ class PaymentController extends ActiveController
 		}
 
 		$query = SERVICE_PAYMENTS::find()->where(['RESERVATION_ID' => $id]);
+
+		$provider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => [
+				'pageSize' => 100,
+			]
+		]);
+
+		return $provider;
+	}
+
+	public function actionReceipts($id){
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+
+		$query = MY_PAYMENTS_MODEL::find()->where(['RESERVATION_ID' => $id]);
 
 		$provider = new ActiveDataProvider([
 			'query' => $query,
