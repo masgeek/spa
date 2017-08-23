@@ -10,6 +10,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 use app\api\modules\v1\models\PAYMENT_MODEL;
+use app\api\modules\v1\models\RECEIPTS_MODEL;
 use app\api\modules\v1\models\RESERVATION_MODEL;
 use app\api\modules\v1\models\SERVICE_MODEL;
 use app\api\modules\v1\models\SERVICE_PAYMENTS;
@@ -116,7 +117,7 @@ class PaymentController extends ActiveController
 			throw new BadRequestHttpException('Please use GET');
 		}
 
-		$query = MY_PAYMENTS_MODEL::find()->where(['RESERVATION_ID' => $id]);
+		$query = RECEIPTS_MODEL::find()->where(['RESERVATION_ID' => $id]);
 
 		$provider = new ActiveDataProvider([
 			'query' => $query,

@@ -198,6 +198,25 @@ class ReservationController extends ActiveController
 		return $provider;
 	}
 
+	public function actionConfirmedReservations($id)
+	{
+		//get reservations made by the user
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+		$query = MY_RESERVATIONS::find()->where(['USER_ID' => $id]);
+
+		$provider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => [
+				'pageSize' => 100,
+			]
+		]);
+
+		return $provider;
+	}
+
+
 	public function actionMyServices($id)
 	{
 		//get reservations made by the user
