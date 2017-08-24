@@ -44,19 +44,21 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 
 	public function getBalance($total_cost = false)
 	{
-		$total = RESERVED_SERVICE_MODEL::find()
+		/*$total = RESERVED_SERVICE_MODEL::find()
 			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
-			->sum('SERVICE_AMOUNT');
+			->sum('SERVICE_AMOUNT');*/
+		$total = MY_RESERVATIONS::find()
+			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+			->sum('TOTAL_COST');
 
 		$amount_paid = MY_PAYMENTS_MODEL::find()
 			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
-			//->andWhere(['<>','PAYMENT_STATUS',0])
 			->sum('BOOKING_AMOUNT');
 
 		if ($total_cost) {
 			return $total;
 		} else {
-			return (float)(($total) - ($amount_paid));
+			return (($total) - ($amount_paid));
 		}
 	}
 

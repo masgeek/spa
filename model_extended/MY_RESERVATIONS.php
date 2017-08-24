@@ -71,7 +71,7 @@ class MY_RESERVATIONS extends Reservations
 		], "RESERVATION_ID={$reservation_id}");*/
 		$connection = self::getDb();
 		$command = $connection->createCommand("
-		UPDATE payments SET BOOKING_AMOUNT = (-1*BOOKING_AMOUNT), FINAL_AMOUNT = (-1*FINAL_AMOUNT),BALANCE = 0,PAYMENT_STATUS = 2
+		UPDATE payments SET BOOKING_AMOUNT = (-1*BOOKING_AMOUNT), FINAL_AMOUNT = (-1*FINAL_AMOUNT),PAYMENT_STATUS = 2
     WHERE  RESERVATION_ID=:reservation_id AND BOOKING_AMOUNT > 0 AND FINAL_AMOUNT >0", [':reservation_id' => $reservation_id])->execute();
 	}
 

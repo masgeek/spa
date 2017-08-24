@@ -50,6 +50,7 @@ $gridColumns = [
 	[
 		//'header' => 'Amount Paid',
 		'attribute' => 'TOTAL_COST',
+        'visible'=>false,
 		'format' => 'currency',
 		'value' => function ($model, $key, $index) {
 			/* @var $model \app\model_extended\MY_RESERVATIONS_VIEW */
