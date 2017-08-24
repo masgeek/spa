@@ -65,7 +65,7 @@ class PaymentController extends ActiveController
 			$booking = (float)Yii::$app->request->post('BOOKING_AMOUNT', 0);
 			$mpesaref = Yii::$app->request->post('MPESA_REF', null);
 			$total = (float)$reservation->TOTAL_COST;
-			$balance = ($total - $booking);
+			$balance = ($total) - ($booking);
 
 
 			$model = new PAYMENT_MODEL();
