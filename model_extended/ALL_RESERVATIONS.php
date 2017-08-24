@@ -19,6 +19,7 @@ use app\models\VwAllReservations;
  */
 class ALL_RESERVATIONS extends VwAllReservations
 {
+	public $CUSTOMER_NAMES;
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */

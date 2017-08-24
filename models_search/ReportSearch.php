@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 
 class ReportSearch extends ALL_RESERVATIONS
 {
+	public $CUSTOMER_NAMES;
 	public $START_DATE;
 	public $END_DATE;
 

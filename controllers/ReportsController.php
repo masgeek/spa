@@ -27,16 +27,11 @@ class ReportsController extends Controller
         $searchModel = new ReportSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('all-reservations', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-	public function actionAllReservationsB()
-	{
-		return $this->render('all-reservations');
-	}
-
 	public function actionCustomers()
 	{
 		return $this->render('customers');

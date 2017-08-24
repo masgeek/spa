@@ -13,9 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $gridColumns = [
 	['class' => 'kartik\grid\SerialColumn'],
-	//'RESERVATION_DATE',
-
-
 	[
 		'attribute' => 'RESERVATION_ID',
 		//'width' => '10%',
@@ -26,7 +23,7 @@ $gridColumns = [
 		},
 		'group' => true,  // enable grouping
 		'groupedRow' => false,
-		'pageSummaryFunc'=>GridView::F_COUNT,
+		'pageSummaryFunc' => GridView::F_COUNT,
 		'pageSummary' => true,
 		'groupFooter' => function ($model, $key, $index, $widget) { // Closure method
 
@@ -60,6 +57,14 @@ $gridColumns = [
 
 	],
 	[
+		'attribute' => 'CUSTOMER_NAMES',
+		'value' => function ($model) {
+			$customer = \app\model_extended\MY_RESERVATIONS::GetCustomerInfo($model->RESERVATION_ID);
+			return "{$customer->SURNAME} {$customer->OTHER_NAMES}";
+		}
+
+	],
+	[
 		'attribute' => 'SALON_NAME',
 
 	],
@@ -86,25 +91,25 @@ $gridColumns = [
 	[
 		'class' => '\kartik\grid\DataColumn',
 		'attribute' => 'FINAL_AMOUNT',
-		'format'=>'currency',
-		'pageSummaryFunc'=>GridView::F_SUM,
+		'format' => 'currency',
+		'pageSummaryFunc' => GridView::F_SUM,
 		'pageSummary' => true,
 	],
-    [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'BALANCE',
-        'format'=>'currency',
-        'pageSummaryFunc'=>GridView::F_SUM,
-        'pageSummary' => true,
-    ],
+	[
+		'class' => '\kartik\grid\DataColumn',
+		'attribute' => 'BALANCE',
+		'format' => 'currency',
+		'pageSummaryFunc' => GridView::F_SUM,
+		'pageSummary' => true,
+	],
 	'PAYMENT_REF',
 	'MPESA_REF',
-    'PAYMENT_STATUS',
+	'PAYMENT_STATUS',
 	[
 		'class' => '\kartik\grid\DataColumn',
 		'attribute' => 'BOOKING_AMOUNT',
-		'format'=>'currency',
-		'pageSummaryFunc'=>GridView::F_SUM,
+		'format' => 'currency',
+		'pageSummaryFunc' => GridView::F_SUM,
 		'pageSummary' => true,
 	]
 ]

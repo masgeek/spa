@@ -40,4 +40,12 @@ class MY_RESERVATIONS extends Reservations
 
 		return $labels;
 	}
+
+	/**
+	 * @param $reservation_id
+	 * @return \app\models\User
+	 */
+	public static function GetCustomerInfo($reservation_id){
+		return self::findOne($reservation_id)->uSER;
+	}
 }
