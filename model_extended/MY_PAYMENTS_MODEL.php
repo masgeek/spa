@@ -21,6 +21,7 @@ class MY_PAYMENTS_MODEL extends Payments
 		$labels['BOOKING_AMOUNT'] = 'Amount Paid';
 		$labels['FINAL_AMOUNT'] = 'Total Cost';
 		$labels['ACCOUNT_REF'] = 'Account Reference';
+		$labels['MPESA_REF'] = 'Mpesa Reference';
 
 		return $labels;
 	}

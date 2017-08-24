@@ -50,12 +50,13 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 
 		$amount_paid = MY_PAYMENTS_MODEL::find()
 			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+			//->andWhere(['<>','PAYMENT_STATUS',0])
 			->sum('BOOKING_AMOUNT');
 
 		if ($total_cost) {
 			return $total;
 		} else {
-			return (float)($total - $amount_paid);
+			return (float)(($total) - ($amount_paid));
 		}
 	}
 
