@@ -20,6 +20,15 @@ use app\models\VwAllReservations;
 class ALL_RESERVATIONS extends VwAllReservations
 {
 	public $CUSTOMER_NAMES;
+
+	public function attributeLabels()
+	{
+		$labels = parent::attributeLabels();
+		$labels['MPESA_REF'] = 'Mpesa Reference';
+		$labels['PAYMENT_REF'] = 'Payment Reference';
+		return $labels;
+	}
+
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
