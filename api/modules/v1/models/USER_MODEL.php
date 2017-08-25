@@ -33,6 +33,7 @@ class USER_MODEL extends User
         $rules = parent::rules();
 
         $rules[] = [['EMAIL'], 'unique', 'on' => [self::SCENARIO_CREATE, self::SCENARIO_UPDATE]];
+        $rules[] = [['PASSWORD'], 'string', 'min' => 1,'on' => [self::SCENARIO_CREATE, self::SCENARIO_UPDATE]];
         //$rules[] = [['EMAIL'], 'email', 'on' => [self::SCENARIO_CREATE, self::SCENARIO_UPDATE]];
         return $rules;
     }
