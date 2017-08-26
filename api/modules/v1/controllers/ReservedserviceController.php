@@ -77,10 +77,13 @@ class ReservedserviceController extends ActiveController
 		$staff_id = $request->STAFF_ID;
 
 		$model = RESERVED_SERVICE_MODEL::findOne($reservation_id);
-		return $model;
-		$model->STAFF_ID = $staff_id;
-		if (!$model->save() && !$model->validate()) {
-			$model = ['message' => 'Unable to assign staff please contact the Adminstrator'];
+		if ($model != null) {
+			$model->STAFF_ID = $staff_id;
+			if (!$model->save() && !$model->validate()) {
+				$model = ['message' => 'Unable to assign staff please contact the Adminstrator'];
+			}
+		} else {
+			$model = ['message' => 'Reservation Not Found'];
 		}
 		return $model;
 	}
