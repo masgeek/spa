@@ -146,7 +146,7 @@ class SalonController extends ActiveController
 	{
 		//get the staff of the salon
 		$staff = STAFF_MODEL::find()
-			->where(['STAFF_ID' => $id])
+			->where(['SALON_ID' => $id])
 			->orderBy(['STAFF_NAME' => SORT_ASC])
 			->all();
 
