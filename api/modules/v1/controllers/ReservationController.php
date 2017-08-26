@@ -38,12 +38,19 @@ class ReservationController extends ActiveController
 		return $actions;
 	}
 
-	public function actionSalonReservations($id)
+	public function actionPending($id)
 	{
-		$reservations = MY_RESERVATIONS_VIEW::find()
-			->where(['SALON_ID' => $id])
-			->all(); //we will iterate to get the customer name
-		return $reservations;
+		return $this->GetFilteredReservations($id, null);
+	}
+
+	public function actionConfirmed($id)
+	{
+		return $this->GetFilteredReservations($id, 1);
+	}
+
+	public function actionCancelled($id)
+	{
+		return $this->GetFilteredReservations($id, 2);
 	}
 
 	public function actionAddService($id)
@@ -265,5 +272,14 @@ class ReservationController extends ActiveController
 			'TOTAL_COST' => $sum_total,
 			'BOOKING_AMOUNT' => $booking_total
 		], "RESERVATION_ID = $reservation_id");
+	}
+
+	private function GetFilteredReservations($salon_id, $status_id)
+	{
+		$reservations = MY_RESERVATIONS_VIEW::find()
+			->where(['SALON_ID' => $salon_id])
+			->andWhere(['STATUS_ID' => $status_id])
+			->all(); //we will iterate to get the customer name
+		return $reservations;
 	}
 }
