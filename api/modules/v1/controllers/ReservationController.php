@@ -273,12 +273,10 @@ class ReservationController extends ActiveController
 		$reservation_id = $request->RESERVATION_ID;
 
 		$model = RESERVATION_MODEL::findOne($reservation_id);
-		$model->STATUS_ID = 1;  //flag as confirmed
-		//if (!$model->save() && !$model->validate()) {
-		//	return $model;
-		//} else {
-			$model = ['message' => 'not saved'];
-		//}
+		$model->STATUS_ID = 199;  //flag as confirmed
+		if (!$model->save() && !$model->validate()) {
+			$model = ['message' => 'Unable to confirm reservation please contact the Adminstrator'];
+		}
 		return $model;
 	}
 
