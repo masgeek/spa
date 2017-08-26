@@ -91,6 +91,7 @@ $config = [
 						'GET {id}/my-salons' => 'my-salons',
 						'GET {id}/my-services' => 'my-services',
 						'GET {id}/my-reservations' => 'my-reservations',
+						'GET {id}/reserved-services' => 'reserved-services',
 						'GET {id}/pending' => 'pending',
 						'GET {id}/confirmed' => 'confirmed',
 						'GET {id}/cancelled' => 'cancelled',

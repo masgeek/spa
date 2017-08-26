@@ -216,6 +216,19 @@ class ReservationController extends ActiveController
 		return $provider;
 	}
 
+	public function actionReservedServices($id)
+	{
+		//get reservations made by the user
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+		$query = RESERVED_SERVICE_MODEL::find()
+			->where(['RESERVATION_ID' => $id])
+			->all();
+
+		return $query;
+	}
+
 	public function actionConfirmedReservations($id)
 	{
 		$status = 1;
