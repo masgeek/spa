@@ -13,5 +13,18 @@ use app\models\Staff;
 
 class STAFF_MODEL extends Staff
 {
+	public function fields()
+	{
+		$fields = parent::fields();
+		$fields['STAFF_NAME'] = function ($model) {
+			/* @var $model $this */
+			return "{$model->STAFF_NAME} - {$model->STAFF_TEL}";
+		};
 
+		$fields['SALON_NAME'] = function ($model) {
+			/* @var $model $this */
+			return $model->sALON->SALON_NAME;
+		};
+		return $fields;
+	}
 }
