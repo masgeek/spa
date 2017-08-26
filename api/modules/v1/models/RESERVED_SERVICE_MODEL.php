@@ -31,28 +31,18 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 
 			$fields['SALON_NAME'] = function ($model) {
 				/* @var $model RESERVED_SERVICE_MODEL */
-				if ($model->oFFEREDSERVICE != null) {
-					return $model->oFFEREDSERVICE->sALON->SALON_NAME;
-				}
+				return $model->oFFEREDSERVICE != null ? $model->oFFEREDSERVICE->sALON->SALON_NAME : 'N/A';
 			};
 
 			$fields['STAFF'] = function ($model) {
 				/* @var $model RESERVED_SERVICE_MODEL */
-				$staff = 'Not Assigned';
-				if ($model->sTAFF != null) {
-					$staff = $model->sTAFF->STAFF_NAME;
-				}
-
-				return $staff;
+				return $model->sTAFF != null ? $staff = $model->sTAFF->STAFF_NAME : 'Not Assigned';
 			};
 
 			$fields['STATUS'] = function ($model) {
 				/* @var $model RESERVED_SERVICE_MODEL */
-				$status = 'Pending';
-				if ($model->sTATUS != null) {
-					$status = $model->sTATUS->STATUS_NAME;
-				}
-				return $status;
+				return $model->sTATUS != null ? $model->sTATUS->STATUS_NAME : 'Pending';
+
 			};
 			unset($fields['STAFF_ID']);
 			unset($fields['STATUS_ID']);
