@@ -33,6 +33,12 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 			return "{$data->SURNAME} {$data->OTHER_NAMES}";
 		};
 
+		$fields['STATUS'] = function ($model) {
+			$data = STATUS_MODEL::findOne($model->STATUS_ID);
+
+			return $data == null ? 'PENDING' : strtoupper($data->STATUS_NAME);
+		};
+
 		return $fields;
 	}
 
