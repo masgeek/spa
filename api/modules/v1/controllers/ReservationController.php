@@ -272,13 +272,19 @@ class ReservationController extends ActiveController
 
 		$reservation_id = $request->RESERVATION_ID;
 
-		$data = RESERVATION_MODEL::findOne($reservation_id);
-
-		return $data;
+		$model = RESERVATION_MODEL::findOne($reservation_id);
+		$model->STATUS_ID = 1;  //flag as confirmed
+		if (!$model->save() && !$model->validate()) {
+			return $model;
+		} else {
+			$model = ['message' => 'not saved'];
+		}
+		return $model;
 	}
 
 	public function actionCancel()
 	{
+		//2 cancelled
 	}
 
 	public function actionAssignStaff()
