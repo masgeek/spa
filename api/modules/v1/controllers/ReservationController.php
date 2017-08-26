@@ -282,7 +282,20 @@ class ReservationController extends ActiveController
 
 	public function actionCancel()
 	{
-		//2 cancelled
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
+
+		$request = (object)Yii::$app->request->post();
+
+		$reservation_id = $request->RESERVATION_ID;
+
+		$model = RESERVATION_MODEL::findOne($reservation_id);
+		$model->STATUS_ID = 2;  //flag as confirmed
+		if (!$model->save() && !$model->validate()) {
+			$model = ['message' => 'Unable to cancel reservation please contact the Adminstrator'];
+		}
+		return $model;
 	}
 
 	public function actionAssignStaff()
