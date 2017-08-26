@@ -9,7 +9,9 @@
 namespace app\model_extended;
 
 
+use app\api\modules\v1\models\RESERVATION_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
+use app\api\modules\v1\models\USER_MODEL;
 use app\models\VwMyReservations;
 
 class MY_RESERVATIONS_VIEW extends VwMyReservations
@@ -22,6 +24,19 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 		return 'RESERVATION_ID';
 	}
 
+	public function fields()
+	{
+		$fields = parent::fields();
+
+		$fields['CUSTOMER'] = function ($model) {
+			$data = USER_MODEL::findOne($model->RESERVER_ID);
+			return "{$data->SURNAME} {$data->OTHER_NAMES}";
+		};
+
+		return $fields;
+	}
+
+	//////
 	public function attributeLabels()
 	{
 		$labels = parent::attributeLabels();

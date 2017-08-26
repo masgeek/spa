@@ -11,6 +11,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\api\modules\v1\models\SALON_MODEL;
 use app\components\CUSTOM_HELPER;
+use app\model_extended\MY_RESERVATIONS_VIEW;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
@@ -35,6 +36,14 @@ class ReservationController extends ActiveController
 		$actions = parent::actions();
 		unset($actions['update']);
 		return $actions;
+	}
+
+	public function actionSalonReservations($id)
+	{
+		$reservations = MY_RESERVATIONS_VIEW::find()
+			->where(['SALON_ID' => $id])
+			->all(); //we will iterate to get the customer name
+		return $reservations;
 	}
 
 	public function actionAddService($id)
