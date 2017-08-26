@@ -28,6 +28,10 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 	{
 		$fields = parent::fields();
 
+		$fields['COMMENTS'] = function ($model) {
+			return $model->COMMENTS == null ? '' : $model->COMMENTS;
+		};
+
 		$fields['CUSTOMER'] = function ($model) {
 			$data = USER_MODEL::findOne($model->RESERVER_ID);
 			return "{$data->SURNAME} {$data->OTHER_NAMES}";
