@@ -274,11 +274,11 @@ class ReservationController extends ActiveController
 
 		$model = RESERVATION_MODEL::findOne($reservation_id);
 		$model->STATUS_ID = 1;  //flag as confirmed
-		if (!$model->save() && !$model->validate()) {
-			return $model;
-		} else {
+		//if (!$model->save() && !$model->validate()) {
+		//	return $model;
+		//} else {
 			$model = ['message' => 'not saved'];
-		}
+		//}
 		return $model;
 	}
 
