@@ -29,7 +29,7 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 		$fields = parent::fields();
 
 		$fields['COMMENTS'] = function ($model) {
-			return $model->COMMENTS == null ? '' : $model->COMMENTS;
+			return $model->COMMENTS == null ? 'NONE' : $model->COMMENTS;
 		};
 
 		$fields['CUSTOMER'] = function ($model) {
