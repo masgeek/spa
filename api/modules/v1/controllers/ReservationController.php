@@ -237,7 +237,6 @@ class ReservationController extends ActiveController
 		return $provider;
 	}
 
-
 	public function actionMyServices($id)
 	{
 		//get reservations made by the user
@@ -254,6 +253,25 @@ class ReservationController extends ActiveController
 		]);
 
 		return $provider;
+	}
+
+	/*
+	 * 			'POST reserve' => 'reserve',
+						'POST reserve' => 'confirm',
+						'POST reserve' => 'cancel',
+						'POST reserve' => 'assign-staff',
+	 */
+
+	public function actionConfirm()
+	{
+	}
+
+	public function actionCancel()
+	{
+	}
+
+	public function actionAssignStaff()
+	{
 	}
 
 	/**

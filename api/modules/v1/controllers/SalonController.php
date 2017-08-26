@@ -12,6 +12,7 @@ use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
 
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\SALON_MODEL;
+use app\api\modules\v1\models\STAFF_MODEL;
 use http\Exception\BadConversionException;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -87,7 +88,7 @@ class SalonController extends ActiveController
 			$offered_service = new OFFERED_SERVICE_MODEL();
 
 			if ($offered_service->load($post_arr)) {
-				
+
 				if ($offered_service->validate() && $offered_service->save()) {
 					$message = [$offered_service];
 				} else {
@@ -140,4 +141,16 @@ class SalonController extends ActiveController
 
 		return $mysalons;
 	}
+
+	public function actionStaff($id)
+	{
+		//get the staff of the salon
+		$staff = STAFF_MODEL::find()
+			->where(['STAFF_ID' => $id])
+			->orderBy(['STAFF_NAME' => SORT_ASC])
+			->all();
+
+		return $staff;
+	}
+
 }
