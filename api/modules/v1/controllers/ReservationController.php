@@ -311,10 +311,6 @@ class ReservationController extends ActiveController
 		return $model;
 	}
 
-	public function actionAssignStaff()
-	{
-	}
-
 	/**
 	 * Update the final cost
 	 * @param $reservation_id
