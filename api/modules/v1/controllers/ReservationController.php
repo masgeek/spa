@@ -264,6 +264,17 @@ class ReservationController extends ActiveController
 
 	public function actionConfirm()
 	{
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
+
+		$request = (object)Yii::$app->request->post();
+
+		$reservation_id = $request->RESERVATION_ID;
+
+		$data = RESERVATION_MODEL::findOne($reservation_id);
+
+		return $data;
 	}
 
 	public function actionCancel()
