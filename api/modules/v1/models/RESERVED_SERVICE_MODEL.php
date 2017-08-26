@@ -29,6 +29,11 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 				return OFFERED_SERVICE_MODEL::findOne($model->OFFERED_SERVICE_ID)->sERVICE->SERVICE_NAME;
 			};
 
+			$fields['SALON_ID'] = function ($model) {
+				/* @var $model RESERVED_SERVICE_MODEL */
+				return $model->oFFEREDSERVICE != null ? $model->oFFEREDSERVICE->sALON->SALON_ID : 0;
+			};
+
 			$fields['SALON_NAME'] = function ($model) {
 				/* @var $model RESERVED_SERVICE_MODEL */
 				return $model->oFFEREDSERVICE != null ? $model->oFFEREDSERVICE->sALON->SALON_NAME : 'N/A';
