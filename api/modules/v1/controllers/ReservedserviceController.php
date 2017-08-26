@@ -77,7 +77,6 @@ class ReservedserviceController extends ActiveController
 		$staff_id = $request->STAFF_ID;
 
 		$model = RESERVED_SERVICE_MODEL::findOne($reservation_id);
-
 		return $model;
 		$model->STAFF_ID = $staff_id;
 		if (!$model->save() && !$model->validate()) {
