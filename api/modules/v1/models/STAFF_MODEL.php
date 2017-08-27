@@ -13,6 +13,14 @@ use app\models\Staff;
 
 class STAFF_MODEL extends Staff
 {
+	public function rules()
+	{
+		$rules = parent::rules();
+		$rules[] = [['STAFF_TEL', 'STAFF_NAME'], 'required'];
+
+		return $rules;
+	}
+
 	public function fields()
 	{
 		$fields = parent::fields();
