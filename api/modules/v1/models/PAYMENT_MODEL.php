@@ -13,6 +13,24 @@ use app\models\Payments;
 
 class PAYMENT_MODEL extends Payments
 {
+	/*
+	 * /*
+			"ACCOUNT_REF": "86FB5",
+			"PAYMENT_ID": 34,
+			"RESERVATION_ID": 73,
+			"BOOKING_AMOUNT": "174.00",
+			"FINAL_AMOUNT": "580.00",
+			"DATE_PAID": "2017-08-23",
+			"PAYMENT_REF": "86FB5",
+			"BALANCE": "406.00",
+			"MPESA_REF": "hfjdjejejeje",
+			"COMMENTS": "N/A",
+			"STATUS": "CONFIRMED",
+			"SALON_TEL": "0713196504",
+			"OWNER_ID": 2,
+			"PAYMENT_STATUS": 1,
+			"SALON_NAME": "Sammy Spa"
+	 */
 	public function fields()
 	{
 		$fields = parent::fields();
@@ -24,13 +42,30 @@ class PAYMENT_MODEL extends Payments
 			return $model->COMMENTS;
 		};
 
+		$fields['CUSTOMER_NAME'] = function ($model) {
+			/* @var $model $this */
+			$data = $model->rESERVATION->uSER;
+			return "{$data->SURNAME} {$data->OTHER_NAMES} ({$data->MOBILE_NO})";
+		};
+
+		$fields['STATUS'] = function ($model) {
+			/* @var $model $this */
+			return $model->pAYMENTSTATUS != null ? $model->pAYMENTSTATUS->STATUS: 'PENDING';
+		};
+
+		$fields['SALON_TEL'] = function () {
+			return '';
+		};
+		$fields['OWNER_ID'] = function () {
+			return 0;
+		};
 		return $fields;
 	}
 
 	public function attributeLabels()
 	{
-		$labels =  parent::attributeLabels();
-		$labels['MPESA_REF'] = 'MPesa Reference Number';
+		$labels = parent::attributeLabels();
+		$labels['MPESA_REF'] = 'M-Pesa Reference Number';
 		return $labels;
 	}
 

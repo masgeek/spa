@@ -17,12 +17,11 @@ class SERVICE_PAYMENTS extends VwSalonPayments
 	{
 		$fields = parent::fields();
 		$fields['COMMENTS'] = function ($model) {
-			if ($model->COMMENTS == null || strlen($model->COMMENTS) <= 2) {
+			if ($model->COMMENTS == null || strlen($model->COMMENTS) <= 0) {
 				return 'N/A';
 			}
 			return $model->COMMENTS;
 		};
-
 		return $fields;;
 	}
 }

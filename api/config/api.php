@@ -100,6 +100,7 @@ $config = [
 						'GET {id}/cancelled' => 'cancelled',
 						'GET {id}/confirmed-reservations' => 'confirmed-reservations',
 						'GET {id}/my-payments' => 'my-payments',
+						'GET {id}/reservation-payments' => 'reservation-payments',
 						'GET {id}/receipts' => 'receipts',
 						//'GET all/{id}' => 'all',
 						//'GET summary/{id}' => 'summary',

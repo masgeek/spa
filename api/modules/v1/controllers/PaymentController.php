@@ -112,7 +112,8 @@ class PaymentController extends ActiveController
 		return $provider;
 	}
 
-	public function actionReceipts($id){
+	public function actionReceipts($id)
+	{
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
 		}
@@ -127,5 +128,18 @@ class PaymentController extends ActiveController
 		]);
 
 		return $provider;
+	}
+
+	public function actionReservationPayments($id)
+	{
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+
+		$query = PAYMENT_MODEL::find()
+			//->where(['RESERVATION_ID' => $id])
+			->orderBy(['DATE_PAID' => SORT_DESC])
+			->all();
+		return $query;
 	}
 }
