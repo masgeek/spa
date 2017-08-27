@@ -41,6 +41,12 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 				}
 			};
 
+			$fields['SALON_IMAGE'] = function ($model) {
+				/* @var $model OFFERED_SERVICE_MODEL */
+				if ($model->sALON->SALON_NAME) {
+					return $model->sALON->SALON_IMAGE;
+				}
+			};
 			$fields['SERVICE_STATUS'] = function ($model) {
 				return $model->STATUS == 1 ? 'ACTIVE' : 'INACTIVE';
 			};
