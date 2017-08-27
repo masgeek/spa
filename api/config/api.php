@@ -86,6 +86,7 @@ $config = [
 						'PUT {id}/update' => 'update',
 						'GET {id}/salons' => 'salons',
 						'GET {id}/salon-services' => 'salon-services',
+						'GET {id}/all-services' => 'all-services',
 						'GET {id}/service-list' => 'service-list',
 						'GET {id}/staff' => 'staff',
 						'GET account-type' => 'account-type',

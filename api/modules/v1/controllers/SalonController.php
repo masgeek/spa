@@ -116,29 +116,32 @@ class SalonController extends ActiveController
 		return $request;
 	}
 
-	public
-	function actionSalonServices($id)
+	public function actionAllServices($id)
 	{
-		$message = [];
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
 		}
 
-		$query = OFFERED_SERVICE_MODEL::find()->where(['SALON_ID' => $id]);
+		$query = OFFERED_SERVICE_MODEL::find()
+			->where(['SALON_ID' => $id])
+			->orderBy(['STATUS' => SORT_ASC])
+			->all();
 
-		$provider = new ActiveDataProvider([
-			'query' => $query,
-			'pagination' => [
-				'pageSize' => 100,
-			],
-			'sort' => [
-				'defaultOrder' => [
-					'SALON_ID' => SORT_DESC,
-				]
-			],
-		]);
+		return $query;
+	}
 
-		return $provider;
+	public function actionSalonServices($id)
+	{
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+
+		$query = OFFERED_SERVICE_MODEL::find()
+			->where(['SALON_ID' => $id])
+			->andWhere(['STATUS' => 1])
+			->all();
+
+		return $query;
 	}
 
 	public
