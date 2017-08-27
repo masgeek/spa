@@ -40,9 +40,11 @@ class ReservedserviceController extends ActiveController
 		$request = (object)Yii::$app->request->post();
 
 		$reserved_service_id = $request->RESERVED_SERVICE_ID;
+		$comments = $request->COMMENTS;
 
 		$model = RESERVED_SERVICE_MODEL::findOne($reserved_service_id);
 		$model->STATUS_ID = 1;  //flag as confirmed
+		$model->COMMENTS = $comments;
 		if (!$model->save() && !$model->validate()) {
 			$model = ['message' => 'Unable to confirm reservation please contact the Adminstrator'];
 		}
