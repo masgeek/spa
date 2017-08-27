@@ -137,7 +137,7 @@ class PaymentController extends ActiveController
 		}
 
 		$query = PAYMENT_MODEL::find()
-			//->where(['RESERVATION_ID' => $id])
+			->where(['RESERVATION_ID' => $id])
 			->orderBy(['DATE_PAID' => SORT_DESC])
 			->all();
 		return $query;
