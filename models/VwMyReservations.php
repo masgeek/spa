@@ -18,6 +18,7 @@ use Yii;
  * @property int $OWNER_ID
  * @property int $RESERVER_ID
  * @property string $COMMENTS
+ * @property int $SALON_ID
  */
 class VwMyReservations extends \yii\db\ActiveRecord
 {
@@ -35,7 +36,7 @@ class VwMyReservations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['RESERVATION_ID', 'STATUS_ID', 'OWNER_ID', 'RESERVER_ID'], 'integer'],
+            [['RESERVATION_ID', 'STATUS_ID', 'OWNER_ID', 'RESERVER_ID', 'SALON_ID'], 'integer'],
             [['RESERVATION_DATE', 'TOTAL_COST', 'ACCOUNT_REF', 'SALON_NAME', 'SURNAME', 'RESERVER_ID'], 'required'],
             [['RESERVATION_DATE'], 'safe'],
             [['TOTAL_COST', 'BOOKING_AMOUNT'], 'number'],
@@ -63,6 +64,7 @@ class VwMyReservations extends \yii\db\ActiveRecord
             'OWNER_ID' => 'Owner  ID',
             'RESERVER_ID' => 'Reserver  ID',
             'COMMENTS' => 'Comments',
+            'SALON_ID' => 'Salon  ID',
         ];
     }
 }

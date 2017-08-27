@@ -11,6 +11,7 @@ use Yii;
  * @property int $SERVICE_ID
  * @property int $SALON_ID
  * @property string $SERVICE_COST
+ * @property int $STATUS 1 for active, 0 for Inactive
  *
  * @property Services $sERVICE
  * @property Salon $sALON
@@ -33,7 +34,7 @@ class OfferedServices extends \yii\db\ActiveRecord
     {
         return [
             [['SERVICE_ID', 'SALON_ID', 'SERVICE_COST'], 'required'],
-            [['SERVICE_ID', 'SALON_ID'], 'integer'],
+            [['SERVICE_ID', 'SALON_ID', 'STATUS'], 'integer'],
             [['SERVICE_COST'], 'number'],
             [['SERVICE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Services::className(), 'targetAttribute' => ['SERVICE_ID' => 'SERVICE_ID']],
             [['SALON_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Salon::className(), 'targetAttribute' => ['SALON_ID' => 'SALON_ID']],
@@ -50,6 +51,7 @@ class OfferedServices extends \yii\db\ActiveRecord
             'SERVICE_ID' => 'Service  ID',
             'SALON_ID' => 'Salon  ID',
             'SERVICE_COST' => 'Service  Cost',
+            'STATUS' => '1 for active, 0 for Inactive',
         ];
     }
 
