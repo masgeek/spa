@@ -15,6 +15,7 @@ use Yii;
  * @property string $RESERVATION_TIME
  * @property string $SERVICE_AMOUNT
  * @property int $STATUS_ID
+ * @property string $COMMENTS
  *
  * @property Reservations $rESERVATION
  * @property OfferedServices $oFFEREDSERVICE
@@ -41,6 +42,7 @@ class ReservedServices extends \yii\db\ActiveRecord
             [['OFFERED_SERVICE_ID', 'STAFF_ID', 'RESERVATION_ID', 'STATUS_ID'], 'integer'],
             [['RESERVATION_DATE', 'RESERVATION_TIME'], 'safe'],
             [['SERVICE_AMOUNT'], 'number'],
+            [['COMMENTS'], 'string', 'max' => 255],
             [['RESERVATION_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Reservations::className(), 'targetAttribute' => ['RESERVATION_ID' => 'RESERVATION_ID']],
             [['OFFERED_SERVICE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => OfferedServices::className(), 'targetAttribute' => ['OFFERED_SERVICE_ID' => 'OFFERED_SERVICE_ID']],
             [['STAFF_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Staff::className(), 'targetAttribute' => ['STAFF_ID' => 'STAFF_ID']],
@@ -62,6 +64,7 @@ class ReservedServices extends \yii\db\ActiveRecord
             'RESERVATION_TIME' => 'Reservation  Time',
             'SERVICE_AMOUNT' => 'Service  Amount',
             'STATUS_ID' => 'Status  ID',
+            'COMMENTS' => 'Comments',
         ];
     }
 

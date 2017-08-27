@@ -268,13 +268,6 @@ class ReservationController extends ActiveController
 		return $provider;
 	}
 
-	/*
-	 * 			'POST reserve' => 'reserve',
-						'POST reserve' => 'confirm',
-						'POST reserve' => 'cancel',
-						'POST reserve' => 'assign-staff',
-	 */
-
 	public function actionConfirm()
 	{
 		if (!Yii::$app->request->isPost) {
@@ -284,8 +277,11 @@ class ReservationController extends ActiveController
 		$request = (object)Yii::$app->request->post();
 
 		$reservation_id = $request->RESERVATION_ID;
+		$comments = $request->COMMENTS;
 
 		$model = RESERVATION_MODEL::findOne($reservation_id);
+		$model->COMMENTS = $comments;
+
 		$model->STATUS_ID = 1;  //flag as confirmed
 		if (!$model->save() && !$model->validate()) {
 			$model = ['message' => 'Unable to confirm reservation please contact the Adminstrator'];
@@ -302,9 +298,12 @@ class ReservationController extends ActiveController
 		$request = (object)Yii::$app->request->post();
 
 		$reservation_id = $request->RESERVATION_ID;
+		$comments = $request->COMMENTS;
 
 		$model = RESERVATION_MODEL::findOne($reservation_id);
+		$model->COMMENTS = $comments;
 		$model->STATUS_ID = 2;  //flag as confirmed
+
 		if (!$model->save() && !$model->validate()) {
 			$model = ['message' => 'Unable to cancel reservation please contact the Adminstrator'];
 		}
