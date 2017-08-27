@@ -88,7 +88,7 @@ class SalonController extends ActiveController
 			$offered_service = new OFFERED_SERVICE_MODEL();
 
 			if ($offered_service->load($post_arr)) {
-
+				$offered_service->STATUS = 1; //set to active aas the default
 				if ($offered_service->validate() && $offered_service->save()) {
 					$message = [$offered_service];
 				} else {
