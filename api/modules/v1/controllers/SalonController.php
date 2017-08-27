@@ -105,6 +105,17 @@ class SalonController extends ActiveController
 		}
 	}
 
+	public function actionRemoveServices()
+	{
+		if (!Yii::$app->request->isPost) {
+			throw new BadRequestHttpException('Please use POST');
+		}
+
+		$request = Yii::$app->request->post();
+
+		return $request;
+	}
+
 	public
 	function actionSalonServices($id)
 	{

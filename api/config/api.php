@@ -81,6 +81,7 @@ $config = [
 						'POST cancel' => 'cancel',
 						'POST assign-staff' => 'assign-staff',
 						'POST {id}/add-service' => 'add-service',
+						'POST add-service' => 'remove-service',
 						'POST {id}/pay' => 'pay',
 						'PUT {id}/update' => 'update',
 						'GET {id}/salons' => 'salons',
