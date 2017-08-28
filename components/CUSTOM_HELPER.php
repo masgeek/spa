@@ -11,7 +11,7 @@ namespace app\components;
 class CUSTOM_HELPER
 {
     const ADMIN_ACCOUNT = 'ADMIN';
-    const SALON_ADMIN = 'BUSINESS';
+    const SALON_ADMIN = 'BUSINESS DISABLED';
 
 	public static function GenerateRandomRef()
 	{

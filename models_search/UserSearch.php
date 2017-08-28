@@ -39,7 +39,7 @@ class UserSearch extends USERS_MODEL
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function searchActiveUsers($params)
     {
         $query = USERS_MODEL::find();
 
@@ -53,7 +53,6 @@ class UserSearch extends USERS_MODEL
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
