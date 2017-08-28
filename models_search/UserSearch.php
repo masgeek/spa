@@ -39,7 +39,7 @@ class UserSearch extends USERS_MODEL
      *
      * @return ActiveDataProvider
      */
-    public function searchActiveUsers($params)
+    public function search($params)
     {
         $query = USERS_MODEL::find();
 
