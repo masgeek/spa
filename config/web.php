@@ -73,7 +73,8 @@ $config = [
 
                 'active-users' => 'user/active-users',
                 'pending-users' => 'user/pending-users',
-                'inactive-users' => 'user/inactive-users',
+                'suspended-users' => 'user/suspended-users',
+                'deactivated-users' => 'user/deactivated-users',
                 'user-status' => 'user/user-status',
             ],
         ],

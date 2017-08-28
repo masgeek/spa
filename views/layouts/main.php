@@ -41,38 +41,19 @@ AppAsset::register($this);
 		//'options' => ['class' =>'nav navbar-nav'],
 		'items' => [
 			[
-				'label' => 'Salon',
-				'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN,
+				'label' => 'Manage Users',
+				'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::ADMIN_ACCOUNT,
 				'items' => [
-					//'<li class="divider"></li>',
-					//'<li class="dropdown-header">Salon Management</li>',
-					['label' => 'Manage Salons', 'url' => ['/my-salons'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
+                    ['label' => 'Pending Users', 'url' => ['/pending-users']],
+                    '<li class="divider"></li>',
+                    ['label' => 'Active Users', 'url' => ['/active-users']],
+                    '<li class="divider"></li>',
+                    ['label' => 'Suspended Users', 'url' => ['/suspended-users']],
+                    '<li class="divider"></li>',
+                    ['label' => 'Deactivated Users', 'url' => ['/deactivated-users']],
 					'<li class="divider"></li>',
-					['label' => 'Manage Staff', 'url' => ['/my-staff'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
 				],
 			],
-			[
-				'label' => 'Reports',
-				'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN,
-				'items' => [
-					['label' => 'Revenue Reports', 'url' => ['/reports/payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-					'<li class="divider"></li>',
-					['label' => 'Reservation Report', 'url' => ['/reports/all-reservations'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-					'<li class="divider"></li>',
-					['label' => 'Services Report', 'url' => ['/reports/all-services'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-				],
-			],
-			[
-				'label' => 'Payments',
-				'visible'=>Yii::$app->user->identity->usertype===\app\components\CUSTOM_HELPER::SALON_ADMIN,
-				'items' => [
-					['label' => 'Pending Payments', 'url' => ['/pending-payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-					'<li class="divider"></li>',
-					['label' => 'Finalized Payments', 'url' => ['/finalized-payments'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-				],
-			],
-			['label' => 'Reservations', 'url' => ['/my-bookings'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-			['label' => 'Active Users', 'url' => ['/active-users'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
 			['label' => 'Manage Services', 'url' => ['/services'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
 			Yii::$app->user->isGuest ? (
 			['label' => 'Login', 'url' => ['/site/login']]
