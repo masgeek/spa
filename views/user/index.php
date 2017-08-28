@@ -25,6 +25,19 @@ $gridColumns = [
     //'ACCOUNT_TYPE_ID',
     //'PASSWORD',
     [
+        'attribute' => 'ACCOUNT_STATUS',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model \app\model_extended\USERS_MODEL */
+            return $model->aCCOUNTSTATUS->STATUS_NAME;
+        },
+        'filterType'=>GridView::FILTER_SELECT2,
+        'filter'=>false,//$accountStatus,
+        'filterInputOptions'=>['placeholder'=>'--Account Status--'],
+        'filterWidgetOptions'=>[
+            'pluginOptions'=>['allowClear'=>true],
+        ],
+    ],
+    [
         'class' => 'kartik\grid\EditableColumn',
         'attribute' => 'ACCOUNT_TYPE_ID',
         'value' => function ($model, $key, $index, $widget) {
@@ -44,28 +57,6 @@ $gridColumns = [
             'format' => \kartik\editable\Editable::FORMAT_BUTTON,
             'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
             'data' => $accountType,
-        ]
-    ],
-    [
-        'class' => 'kartik\grid\EditableColumn',
-        'attribute' => 'ACCOUNT_STATUS',
-        'value' => function ($model, $key, $index, $widget) {
-            /* @var $model \app\model_extended\USERS_MODEL */
-            return $model->aCCOUNTSTATUS->STATUS_NAME;
-        },
-        'filterType'=>GridView::FILTER_SELECT2,
-        'filter'=>$accountStatus,
-        'filterInputOptions'=>['placeholder'=>'--Account Status--'],
-        'filterWidgetOptions'=>[
-            'pluginOptions'=>['allowClear'=>true],
-        ],
-        'pageSummary' => true,
-        'editableOptions' => [
-            'header' => 'Select Status',
-            'formOptions' => ['action' => ['/user-status']],
-            'format' => \kartik\editable\Editable::FORMAT_BUTTON,
-            'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-            'data' => $accountStatus,
         ]
     ],
 ];

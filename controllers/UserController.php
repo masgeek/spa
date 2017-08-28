@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\CUSTOM_HELPER;
 use app\models_search\UserSearch;
 use Yii;
 use app\model_extended\USERS_MODEL;
@@ -46,17 +47,39 @@ class UserController extends Controller
 
     /**
      * Lists all USERS_MODEL models.
+     * @param string $user_status
      * @return mixed
      */
-    public function actionIndex()
+    private function GetUsers($user_status)
     {
-	    $searchModel = new UserSearch();
-	    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new UserSearch($user_status);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-	    return $this->render('index', [
-		    'searchModel' => $searchModel,
-		    'dataProvider' => $dataProvider,
-	    ]);
+        return [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ];
+    }
+
+    public function actionPendingUsers()
+    {
+        $dataProvider = $this->GetUsers(CUSTOM_HELPER::ACCOUNT_PENDING);
+
+        return $this->render('index', $dataProvider);
+    }
+
+    public function actionActiveUsers()
+    {
+        $dataProvider = $this->GetUsers(CUSTOM_HELPER::ACCOUNT_ACTIVE);
+
+        return $this->render('index', $dataProvider);
+    }
+
+    public function actionInactiveUsers()
+    {
+        $dataProvider = $this->GetUsers(CUSTOM_HELPER::ACCOUNT_SUSPENDED);
+
+        return $this->render('index', $dataProvider);
     }
 
     public function actionUserStatus()

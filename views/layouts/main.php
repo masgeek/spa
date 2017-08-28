@@ -72,7 +72,7 @@ AppAsset::register($this);
 				],
 			],
 			['label' => 'Reservations', 'url' => ['/my-bookings'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::SALON_ADMIN],
-			['label' => 'Manage Users', 'url' => ['/manage-users'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
+			['label' => 'Active Users', 'url' => ['/active-users'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
 			['label' => 'Manage Services', 'url' => ['/services'], 'visible' => Yii::$app->user->identity->usertype === \app\components\CUSTOM_HELPER::ADMIN_ACCOUNT],
 			Yii::$app->user->isGuest ? (
 			['label' => 'Login', 'url' => ['/site/login']]

@@ -12,6 +12,13 @@ use app\model_extended\USERS_MODEL;
  */
 class UserSearch extends USERS_MODEL
 {
+    //public $ACC_STATUS;
+
+    public function __construct($account_status)
+    {
+        $this->ACCOUNT_STATUS = $account_status;
+    }
+
     /**
      * @inheritdoc
      */

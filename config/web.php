@@ -70,7 +70,10 @@ $config = [
                 'process-reservation' => 'reservation/process-reservation',
                 'confirm' => 'reservation/confirm',
                 'services' => 'service/index',
-                'manage-users' => 'user/index',
+
+                'active-users' => 'user/active-users',
+                'pending-users' => 'user/pending-users',
+                'inactive-users' => 'user/inactive-users',
                 'user-status' => 'user/user-status',
             ],
         ],
