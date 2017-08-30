@@ -122,7 +122,7 @@ class ReservationController extends ActiveController
 
 		$services = isset($request->SELECTED_SERVICES) ? $request->SELECTED_SERVICES : [];
 		$transaction = $db->beginTransaction();
-		$servicesTotal = [];
+
 		if ($reservation->validate() && $reservation->save()) {
 			//next save the selected services
 			foreach ($services as $key => $offered_service_id) {
