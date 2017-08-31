@@ -15,13 +15,13 @@ $config = [
         ]
     ],
     'components' => [
-        'pdf' => [
+        /*'pdf' => [
             'class' => \kartik\mpdf\Pdf::classname(),
             'format' => \kartik\mpdf\Pdf::FORMAT_A4,
             'orientation' => \kartik\mpdf\Pdf::ORIENT_PORTRAIT,
             'destination' => \kartik\mpdf\Pdf::DEST_BROWSER,
             // refer settings section for all configuration options
-        ],
+        ],*/
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'IAyw-vu_u-ruH_LfDNEFS-LEQR88cAdM',
