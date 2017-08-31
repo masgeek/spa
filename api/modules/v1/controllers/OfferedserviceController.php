@@ -22,43 +22,34 @@ use yii\web\Response;
 
 class OfferedserviceController extends ActiveController
 {
-	/**
-	 * @var object
-	 */
-	public $modelClass = 'app\api\modules\v1\models\OFFERED_SERVICE_MODEL';
+    /**
+     * @var object
+     */
+    public $modelClass = 'app\api\modules\v1\models\OFFERED_SERVICE_MODEL';
 
-	public function behaviors()
-	{
-		$behaviors = parent::behaviors();
-		$behaviors['rateLimiter']['enableRateLimitHeaders'] = false;
-		return $behaviors;
-	}
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['rateLimiter']['enableRateLimitHeaders'] = false;
+        return $behaviors;
+    }
 
 
-	public function actionSalons($id)
-	{
-		//get the services associated with a salon
-		$message = [];
-		if (!Yii::$app->request->isGet) {
-			throw new BadRequestHttpException('Please use GET');
-		}
-		/*$data = OFFERED_SERVICE_MODEL::findOne(['SERVICE_ID' => $id]);
+    public function actionSalons($id)
+    {
+        //get the services associated with a salon
+        $message = [];
+        if (!Yii::$app->request->isGet) {
+            throw new BadRequestHttpException('Please use GET');
+        }
+        /*$data = OFFERED_SERVICE_MODEL::findOne(['SERVICE_ID' => $id]);
 
-		return $data;*/
-		$query = OFFERED_SERVICE_MODEL::find()->where(['SERVICE_ID' => $id]);
+        return $data;*/
+        $query = OFFERED_SERVICE_MODEL::find()
+            ->where(['SERVICE_ID' => $id])
+            ->andWhere(['STATUS'=>1])
+            ->all();
 
-		$provider = new ActiveDataProvider([
-			'query' => $query,
-			'pagination' => [
-				'pageSize' => 20,
-			],
-			'sort' => [
-				'defaultOrder' => [
-					'SALON_ID' => SORT_DESC,
-				]
-			],
-		]);
-
-		return $provider;
-	}
+        return $query;
+    }
 }
