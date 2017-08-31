@@ -49,7 +49,7 @@ class ReportSearch extends ALL_RESERVATIONS
 		// add conditions that should always apply here
 
 		//$query->groupBy('SERVICE_NAME');
-		$query->where(['OWNER_ID' => $owner]);
+		//$query->where(['OWNER_ID' => $owner]);
 		$query->orderBy(['SERVICE_ID' => SORT_DESC]);
 
 		$dataProvider = new ActiveDataProvider([

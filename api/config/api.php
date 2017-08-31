@@ -15,6 +15,13 @@ $config = [
 		],
 	],
 	'components' => [
+        'pdf' => [
+            'class' => \kartik\mpdf\Pdf::classname(),
+            'format' => \kartik\mpdf\Pdf::FORMAT_A4,
+            'orientation' => \kartik\mpdf\Pdf::ORIENT_PORTRAIT,
+            'destination' => \kartik\mpdf\Pdf::DEST_BROWSER,
+            // refer settings section for all configuration options
+        ],
 		'response' => [
 			'class' => 'yii\web\Response',
 			'on beforeSend' => function ($event) {
