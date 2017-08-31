@@ -18,6 +18,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\rest\Controller;
+use yii\web\BadRequestHttpException;
 use yii\web\Response;
 
 class OfferedserviceController extends ActiveController
@@ -27,18 +28,10 @@ class OfferedserviceController extends ActiveController
      */
     public $modelClass = 'app\api\modules\v1\models\OFFERED_SERVICE_MODEL';
 
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['rateLimiter']['enableRateLimitHeaders'] = false;
-        return $behaviors;
-    }
-
 
     public function actionSalons($id)
     {
         //get the services associated with a salon
-        $message = [];
         if (!Yii::$app->request->isGet) {
             throw new BadRequestHttpException('Please use GET');
         }
