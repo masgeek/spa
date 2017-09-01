@@ -16,6 +16,7 @@ use Yii;
  * @property int $ACCOUNT_TYPE_ID
  * @property string $PASSWORD
  *
+ * @property Reports[] $reports
  * @property Reservations[] $reservations
  * @property Salon[] $salons
  * @property AccountType $aCCOUNTTYPE
@@ -63,6 +64,14 @@ class User extends \yii\db\ActiveRecord
             'ACCOUNT_TYPE_ID' => 'Account  Type  ID',
             'PASSWORD' => 'Password',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReports()
+    {
+        return $this->hasMany(Reports::className(), ['SALON_OWNER_ID' => 'USER_ID']);
     }
 
     /**
