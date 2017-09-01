@@ -9,11 +9,20 @@ $config = [
 	// Need to get one level up:
 	'basePath' => dirname(__DIR__) . '/..',
 	'bootstrap' => ['log'],
+    'aliases' => [
+        '@bower' => '../vendor/bower-asset',
+    ],
 	'modules' => [
 		'v1' => [
 			'class' => 'app\api\modules\v1\module',
 		],
+        'gridview' => [
+            'class' => 'kartik\grid\Module'
+        ]
 	],
+    /*'assetManager' => [
+        'basePath' => '@webroot/assets',
+    ],*/
 	'components' => [
         'pdf' => [
             'class' => \kartik\mpdf\Pdf::classname(),
@@ -36,10 +45,9 @@ $config = [
 			},
 		],
 		'request' => [
-			//'cookieValidationKey' => 'Qq0fIK5vB6mseTKoYXX-dVdwHQFYrEXC',
-			// Enable JSON Input:
+			'cookieValidationKey' => 'Qq0fIK5vB6mseTKoYXX-dVdwHQFYrEXC',
 			'parsers' => [
-				'application/json' => 'yii\web\JsonParser',
+				//'application/json' => 'yii\web\JsonParser',
 			]
 		],
 		'log' => [
@@ -78,6 +86,7 @@ $config = [
 					//'GET,HEAD <id:\d+>/booth' => 'booth/all-booths',
 					'tokens' => [
 						'{id}' => '<id:\\w+>',
+						'{userid}' => '<userid:\\w+>',
 					],
 					'extraPatterns' => [
 						'GET,POST all' => 'all',
@@ -110,6 +119,7 @@ $config = [
 						'GET {id}/my-payments' => 'my-payments',
 						'GET {id}/reservation-payments' => 'reservation-payments',
 						'GET {id}/receipts' => 'receipts',
+						'GET {userid}/generate' => 'generate',
 						//'GET all/{id}' => 'all',
 						//'GET summary/{id}' => 'summary',
 						//post actions
