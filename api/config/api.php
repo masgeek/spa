@@ -108,6 +108,8 @@ $config = [
 						'GET {id}/staff' => 'staff',
 						'GET account-type' => 'account-type',
 
+                        'POST all-reservations' => 'all-reservations',
+
 						'GET {id}/my-salons' => 'my-salons',
 						'GET {id}/my-services' => 'my-services',
 						'GET {id}/my-reservations' => 'my-reservations',
