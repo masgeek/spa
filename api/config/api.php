@@ -86,7 +86,7 @@ $config = [
 					//'GET,HEAD <id:\d+>/booth' => 'booth/all-booths',
 					'tokens' => [
 						'{id}' => '<id:\\w+>',
-						'{userid}' => '<userid:\\w+>',
+						'{user_id}' => '<user_id:\\w+>',
 					],
 					'extraPatterns' => [
 						'GET,POST all' => 'all',
@@ -119,7 +119,7 @@ $config = [
 						'GET {id}/my-payments' => 'my-payments',
 						'GET {id}/reservation-payments' => 'reservation-payments',
 						'GET {id}/receipts' => 'receipts',
-						'GET {userid}/generate' => 'generate',
+						'GET {user_id}/generate' => 'generate',
 						//'GET all/{id}' => 'all',
 						//'GET summary/{id}' => 'summary',
 						//post actions

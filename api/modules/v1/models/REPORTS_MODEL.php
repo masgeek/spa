@@ -10,8 +10,26 @@ namespace app\api\modules\v1\models;
 
 
 use app\models\Reports;
+use yii\db\Expression;
 
 class REPORTS_MODEL extends Reports
 {
+    public static function SaveReport($user_id, $file_name)
+    {
+        $resp = [
+            0
+        ];
+        $model = new REPORTS_MODEL();
+        $model->isNewRecord = true;
 
+        $model->SALON_OWNER_ID = $user_id;
+        $model->REPORT_URL = $file_name;
+        $model->DATE_GENERATED = new Expression('NOW()');
+        $model->STATUS = 'READY';
+
+        if ($model->save()) {
+            $resp = $model;
+        }
+        return $resp;
+    }
 }

@@ -24,7 +24,11 @@ class ReportController extends ActiveController
      */
     public $modelClass = 'app\api\modules\v1\models\REPORTS_MODEL';
 
-    public function actionGenerate($userid)
+    /**
+     * @param $user_id
+     * @return mixed
+     */
+    public function actionGenerate($user_id)
     {
         //generate the report file
         $query = ALL_RESERVATIONS::find()->orderBy(['SALON_NAME' => SORT_DESC]); //$searchModel->search(\Yii::$app->request->queryParams);
@@ -40,36 +44,9 @@ class ReportController extends ActiveController
         $file_ref = CUSTOM_HELPER::GenerateRandomRef();
         $file_name = "pdf/reports_{$file_ref}.pdf";
         // setup kartik\mpdf\Pdf component
-        $pdf = new Pdf([
-            // set to use core fonts only
-            'mode' => Pdf::MODE_CORE,
-            // A4 paper format
-            'format' => Pdf::FORMAT_A4,
-            // portrait orientation
-            'orientation' => Pdf::ORIENT_LANDSCAPE,
-            // stream to browser inline
-            'destination' => Pdf::DEST_FILE,
-            'filename' => $file_name,
-            // your html content input
-            'content' => $content,
-            // format content from your own css file if needed or use the
-            // enhanced bootstrap css built by Krajee for mPDF formatting
-            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            // any css to be embedded if required
-            'cssInline' => '.kv-heading-1{font-size:18px}',
-            // set mPDF properties on the fly
-            'options' => ['title' => 'Reservations Report'],
-            // call mPDF methods on the fly
-            'methods' => [
-                'SetHeader' => ['Reservations Report'],
-                'SetFooter' => ['{PAGENO}'],
-            ]
-        ]);
 
-        // return the pdf output as per the destination setting
-        $pdf->render();
 
-        return $file_name;
+        return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name);
 
     }
 
