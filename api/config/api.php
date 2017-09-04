@@ -8,6 +8,7 @@ $config = [
 	'name' => 'SPA API',
 	// Need to get one level up:
 	'basePath' => dirname(__DIR__) . '/..',
+    'timeZone' => 'Africa/Nairobi',
 	'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '../vendor/bower-asset',
