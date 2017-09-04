@@ -36,7 +36,7 @@ $gridColumns = [
 		'format' => 'currency',
 		'value' => function ($model, $key, $index) {
 			/* @var $model \app\model_extended\MY_RESERVATIONS_VIEW */
-			return $model->getAmountToPay();
+			return $model->getAmountPaid();
 		}
 	],
 	[

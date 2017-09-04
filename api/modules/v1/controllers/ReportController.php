@@ -9,6 +9,8 @@
 namespace app\api\modules\v1\controllers;
 
 
+use app\api\modules\v1\models\PAYMENT_MODEL;
+use app\model_extended\MY_RESERVATIONS_VIEW;
 use Yii;
 use app\api\modules\v1\models\ALL_RESERVATIONS;
 use app\api\modules\v1\models\REPORTS_MODEL;
@@ -28,7 +30,7 @@ class ReportController extends ActiveController
     {
         $data = REPORTS_MODEL::find()
             ->where(['SALON_OWNER_ID' => $user_id])
-            ->orderBy(['DATE_GENERATED'=>SORT_DESC])
+            ->orderBy(['DATE_GENERATED' => SORT_DESC])
             ->all();
 
         return $data;
@@ -88,7 +90,18 @@ class ReportController extends ActiveController
 
     public function Payments($user_id, $report_type)
     {
-        return [];
+        $myReservationsArr = MY_RESERVATIONS_VIEW::MyReservationsArr($user_id);
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => PAYMENT_MODEL::find()
+                //->where(['RESERVATION_ID' => $myReservationsArr])
+                //->andWhere(['PAYMENT_STATUS' => 0]),
+        ]);
+
+        $content = REPORTS_MODEL::BuildPaymentsTable($dataProvider);
+
+        return $content;
     }
 
     public function Services($user_id, $report_type)

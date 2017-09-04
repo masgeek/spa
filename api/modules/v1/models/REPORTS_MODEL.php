@@ -9,6 +9,7 @@
 namespace app\api\modules\v1\models;
 
 
+use app\model_extended\MY_RESERVATIONS_VIEW;
 use app\models\Reports;
 use yii\db\Expression;
 use yii\helpers\Url;
@@ -96,6 +97,114 @@ class REPORTS_MODEL extends Reports
                 $html .= '<td>' . $obj->mpesa_ref . '</td>';
                 $html .= '</tr>';
             }
+        }
+        $html .= '</table>';
+
+
+        return $html;
+    }
+
+    public static function BuildPaymentsTable($dataProvider)
+    {
+        /** @var $model PAYMENT_MODEL */
+
+        /**
+         *          "PAYMENT_ID": 51,
+         * "RESERVATION_ID": 127,
+         * "BOOKING_AMOUNT": "5400.00",
+         * "FINAL_AMOUNT": "5400.00",
+         * "DATE_PAID": "2017-09-01",
+         * "TIME_PAID": "00:33:08",
+         * "PAYMENT_REF": "392B6",
+         * "PAYMENT_STATUS": 0,
+         * "BALANCE": "0.00",
+         * "MPESA_REF": "56hghhghij",
+         * "COMMENTS": null
+         */
+        $data = [];
+        foreach ($dataProvider->models as $model) {
+
+
+            $status = $model->pAYMENTSTATUS == null ? 'PENDING' : $model->pAYMENTSTATUS->STATUS;
+
+
+            $customer = USER_MODEL::findOne($model->rESERVATION->USER_ID);
+
+
+            $customer_names = "{$customer->SURNAME} {$customer->OTHER_NAMES}";
+            $reservation_id = $model->RESERVATION_ID;
+
+
+            $res = MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $model->RESERVATION_ID]);
+
+
+            $data[$reservation_id][] = [
+                'customer' => $customer_names,
+                'reservation_id' => $model->RESERVATION_ID,
+                'payment_ref' => $model->PAYMENT_REF,
+                'mpesa_ref' => $model->MPESA_REF,
+                'booking_amount' => (float)$model->BOOKING_AMOUNT,
+                'date_paid' => "{$model->DATE_PAID} {$model->TIME_PAID}",
+                'total_cost' => $res->getBalance(true),
+                'paid' => $res->getAmountPaid(),
+                'balance' => $res->getBalance(),
+                'payment_status' => $status,
+            ];
+
+        }
+
+        //array_multisort($data, SORT_ASC);
+        $html = '<table class="table table-bordered" border="1">';
+        $html .= '<tr>';
+        //$html .= '<th>Reservation ID</th>';;
+        $html .= '<th>Customer Names</th>';
+        $html .= '<th>Payment Ref</th>';
+        $html .= '<th>Mpesa Ref</th>';
+        $html .= '<th>Total Cost</th>';
+        $html .= '<th>Amount Paid</th>';
+        $html .= '<th>Balance</th>';
+        $html .= '<th>Date Paid</th>';
+        $html .= '<th>Payment Status</th>';
+        $html .= '</tr>';
+        foreach ($data as $reservation_id => $reservation) {
+            //loop the arrays withing the service name
+            $html .= '<tr>';
+            $html .= '<th>' . $reservation_id . '</th>';
+            $html .= '</tr>';
+            $total_amount = 0;
+            $total_paid = 0;
+            $balance= 0;
+            foreach ($reservation as $key => $value) {
+
+                $obj = (object)$value;
+                $html .= '<tr>';
+                //$html .= '<td>&nbsp;</td>';
+                $html .= '<td>' . $obj->customer . '</td>';
+                $html .= '<td>' . $obj->payment_ref . '</td>';
+                $html .= '<td>' . $obj->mpesa_ref . '</td>';
+                $html .= '<td>-</td>';
+                $html .= '<td>' . $obj->booking_amount . '</td>';
+                $html .= '<td>-</td>';
+                $html .= '<td>' . $obj->date_paid . '</td>';
+                $html .= '<td>' . $obj->payment_status . '</td>';
+                $html .= '</tr>';
+
+                $total_amount = $obj->total_cost;
+                $total_paid = $obj->paid;
+                $balance = $obj->balance;
+            }
+            //Totals Row
+            $html .= '<tr>';
+            //$html .= '<td>&nbsp;</td>';
+            $html .= '<td>&nbsp;</td>';
+            $html .= '<td>&nbsp;</td>';
+            $html .= '<td>&nbsp;</td>';
+            $html .= '<td>' . $total_amount . '</td>';
+            $html .= '<td>' . $total_paid. '</td>';
+            $html .= '<td>' . $balance. '</td>';
+            $html .= '<td>&nbsp;</td>';
+            $html .= '<td>&nbsp;</td>';
+            $html .= '</tr>';
         }
         $html .= '</table>';
 

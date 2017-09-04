@@ -58,7 +58,7 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 		return $labels;
 	}
 
-	public function getAmountToPay()
+	public function getAmountPaid()
 	{
 		$amount_paid = MY_PAYMENTS_MODEL::find()
 			->where(['RESERVATION_ID' => $this->RESERVATION_ID])

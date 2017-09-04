@@ -31,7 +31,7 @@ class PAYMENT_MODEL extends Payments
 			"PAYMENT_STATUS": 1,
 			"SALON_NAME": "Sammy Spa"
 	 */
-	public function fields()
+	public function field()
 	{
 		$fields = parent::fields();
 

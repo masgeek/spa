@@ -82,7 +82,7 @@ $gridColumns = [
 		'value' => function ($paymentmodel, $key, $index) {
 			/* @var $model \app\model_extended\MY_RESERVATIONS_VIEW */
 			$model = \app\model_extended\MY_RESERVATIONS_VIEW::findOne(['RESERVATION_ID' => $paymentmodel->RESERVATION_ID]);
-			return $model->getAmountToPay();
+			return $model->getAmountPaid();
 		}
 	],
 	'PAYMENT_REF',
