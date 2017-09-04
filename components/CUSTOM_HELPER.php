@@ -45,7 +45,6 @@ class CUSTOM_HELPER
             'format' => Pdf::FORMAT_A4,
             // portrait orientation
             'orientation' => Pdf::ORIENT_LANDSCAPE,
-            // stream to browser inline
             'destination' => Pdf::DEST_FILE,
             'filename' => $file_name,
             // your html content input
@@ -59,7 +58,7 @@ class CUSTOM_HELPER
             'options' => ['title' => 'Reservations Report'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader' => ["{$report_type} Report"],
+                'SetHeader' => [Date('Y-m-d') . " {$report_type} Report"],
                 'SetFooter' => ['{PAGENO}'],
             ]
         ]);
