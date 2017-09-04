@@ -82,6 +82,7 @@ $gridColumns = [
 	'export' => [
 		'fontAwesome' => true,
 		'showConfirmAlert' => true,
+		//'fileName' => 'user_reports',
 		'target' => GridView::TARGET_BLANK
 	],
 	'columns' => $gridColumns,
