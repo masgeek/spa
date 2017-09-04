@@ -27,6 +27,10 @@ class ReportController extends ActiveController
      */
     public $modelClass = 'app\api\modules\v1\models\REPORTS_MODEL';
 
+	/**
+	 * @param $user_id
+	 * @return array|\yii\db\ActiveRecord[]
+	 */
     public function actionList($user_id)
     {
         $data = REPORTS_MODEL::find()
@@ -66,6 +70,11 @@ class ReportController extends ActiveController
         return $resp;
     }
 
+	/***
+	 * @param $user_id
+	 * @param $report_type
+	 * @return array|mixed
+	 */
     public function Reservations($user_id, $report_type)
     {
         //generate the report file
@@ -89,6 +98,11 @@ class ReportController extends ActiveController
         return [''];
     }
 
+	/**
+	 * @param $user_id
+	 * @param $report_type
+	 * @return array|mixed
+	 */
     public function Payments($user_id, $report_type)
     {
         $myReservationsArr = MY_RESERVATIONS_VIEW::MyReservationsArr($user_id);

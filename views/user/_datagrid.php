@@ -75,11 +75,23 @@ $gridColumns = [
 ?>
 
 <?= GridView::widget([
-    'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
-    'export' => false,
-    'columns' => $gridColumns,
-    'responsive' => true,
-    'hover' => true,
-    'toggleData' => true,
+	'dataProvider' => $dataProvider,
+	'filterModel' => $searchModel,
+	//'export' => false,
+	'autoXlFormat' => true,
+	'export' => [
+		'fontAwesome' => true,
+		'showConfirmAlert' => false,
+		'target' => GridView::TARGET_BLANK
+	],
+	'columns' => $gridColumns,
+	'responsive' => true,
+	'hover' => true,
+	'toggleData' => true,
+	'pjax' => false,
+	'showPageSummary' => true,
+	'panel' => [
+		'type' => 'primary',
+		//'heading'=>'Products'
+	]
 ]); ?>
