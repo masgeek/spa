@@ -34,7 +34,6 @@ class REPORTS_MODEL extends Reports
     {
         /** @var $model ALL_RESERVATIONS $data */
 
-        $hasData = false;
         $data = [];
         foreach ($dataProvider->models as $model) {
             $service_id = (int)$model->SERVICE_ID; //we will use this to group
@@ -54,10 +53,10 @@ class REPORTS_MODEL extends Reports
                 'mpesa_ref' => $model->MPESA_REF,
                 'booking_amount' => (float)$model->BOOKING_AMOUNT
             ];
-            $hasData = true;
+
         }
 
-        if ($hasData) {
+
             //array_multisort($data, SORT_ASC);
             $html = '<table class="table table-bordered">';
             $html .= '<tr>';
@@ -93,11 +92,8 @@ class REPORTS_MODEL extends Reports
             }
             $html .= '</table>';
 
-            return $html;
-        } else {
-            return 0;
-        }
 
+        return $html;
     }
 
     public static function SaveReport($user_id, $file_name, $report_type)

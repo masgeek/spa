@@ -49,7 +49,7 @@ class ReportController extends ActiveController
 
         $content = REPORTS_MODEL::BuildReservationsTable($dataProvider);
 
-        if (!$content == 0) {
+        if (strlen($content) > 0) {
             $file_ref = CUSTOM_HELPER::GenerateRandomRef();
             $file_name = "pdf/reports_{$file_ref}.pdf";
             // setup kartik\mpdf\Pdf component
