@@ -111,9 +111,8 @@ class REPORTS_MODEL extends Reports
         $model->REPORT_TYPE = $report_type;
         $model->STATUS = 'ACTIVE';
 
-        $model->validate();
-        return $model->getErrors();
-        if ($model->save()) {
+
+        if ($model->save() && $model->validate()) {
             $resp = $model;
         } else {
             $model->getErrors();

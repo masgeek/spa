@@ -28,7 +28,7 @@ class ReportController extends ActiveController
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionAllReservations()
+    public function actionGenerate()
     {
         $user_id = '';
         if (!Yii::$app->request->isPost) {
@@ -36,6 +36,7 @@ class ReportController extends ActiveController
         }
 
         $user_id = Yii::$app->request->post('USER_ID');
+        $report_type = Yii::$app->request->post('REPORT_TYPE');
 
         //generate the report file
         $query = ALL_RESERVATIONS::find()
@@ -54,9 +55,19 @@ class ReportController extends ActiveController
             $file_name = "pdf/reports_{$file_ref}.pdf";
             // setup kartik\mpdf\Pdf component
 
-            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name,'ALL RESERVATIONS');
+            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type);
         }
 
-        return [];
+        return [''];
+    }
+
+    public function actionPayments()
+    {
+
+    }
+
+    public function actionServices()
+    {
+
     }
 }
