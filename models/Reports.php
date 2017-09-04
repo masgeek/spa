@@ -37,7 +37,8 @@ class Reports extends \yii\db\ActiveRecord
             [['SALON_OWNER_ID'], 'integer'],
             [['DATE_GENERATED', 'EXPIRY_DATE'], 'safe'],
             [['REPORT_URL'], 'string', 'max' => 255],
-            [['REPORT_TYPE', 'STATUS'], 'string', 'max' => 10],
+            [['REPORT_TYPE'], 'string', 'max' => 30],
+            [['STATUS'], 'string', 'max' => 10],
             [['SALON_OWNER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['SALON_OWNER_ID' => 'USER_ID']],
         ];
     }
