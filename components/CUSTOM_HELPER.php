@@ -30,6 +30,7 @@ class CUSTOM_HELPER
 
     /**
      * Generate pdf based
+     * @param $user_id
      * @param $content
      * @param $file_name
      * @param $report_type
