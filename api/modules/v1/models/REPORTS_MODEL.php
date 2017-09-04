@@ -154,7 +154,7 @@ class REPORTS_MODEL extends Reports
         }
 
         //array_multisort($data, SORT_ASC);
-        $html = '<table class="table table-bordered" border="1">';
+        $html = '<table class="table table-bordered table-condensed">';
         $html .= '<tr>';
         //$html .= '<th>Reservation ID</th>';;
         $html .= '<th>Customer Names</th>';

@@ -101,7 +101,13 @@ class ReportController extends ActiveController
 
         $content = REPORTS_MODEL::BuildPaymentsTable($dataProvider);
 
-        return $content;
+        if (strlen($content) > 0) {
+            $file_ref = CUSTOM_HELPER::GetTimeStamp();
+            $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";
+            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type);
+        }
+
+        return [''];
     }
 
     public function Services($user_id, $report_type)

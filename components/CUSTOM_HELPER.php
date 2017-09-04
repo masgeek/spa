@@ -58,7 +58,7 @@ class CUSTOM_HELPER
             'options' => ['title' => 'Reservations Report'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader' => [Date('Y-m-d') . " {$report_type} Report"],
+                'SetHeader' => [Date('M d Y H:i:s') . " {$report_type} Report"],
                 'SetFooter' => ['{PAGENO}'],
             ]
         ]);
