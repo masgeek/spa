@@ -59,7 +59,7 @@ class CUSTOM_HELPER
             'options' => ['title' => 'Reservations Report'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader' => ['Reservations Report'],
+                'SetHeader' => ["{$report_type} Report"],
                 'SetFooter' => ['{PAGENO}'],
             ]
         ]);
@@ -71,5 +71,10 @@ class CUSTOM_HELPER
         return REPORTS_MODEL::SaveReport($user_id, $file_name, $report_type);
     }
 
+    public static function GetTimeStamp()
+    {
+        $date = new \DateTime();
+        return $date->getTimestamp();
+    }
 
 }
