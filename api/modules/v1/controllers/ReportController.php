@@ -47,6 +47,21 @@ class ReportController extends ActiveController
         $user_id = Yii::$app->request->post('USER_ID');
         $report_type = Yii::$app->request->post('REPORT_TYPE');
 
+        switch (strtoupper($report_type)) {
+            case REPORTS_MODEL::RESERVATIONS:
+                $this->Reservations($user_id, $report_type);
+                break;
+            case REPORTS_MODEL::SERVICES:
+                $this->Services($user_id, $report_type);
+                break;
+            case REPORTS_MODEL::PAYMENTS:
+                $this->Payments($user_id, $report_type);
+                break;
+        }
+    }
+
+    public function Reservations($user_id, $report_type)
+    {
         //generate the report file
         $query = ALL_RESERVATIONS::find()
             ->where(['OWNER_ID' => $user_id])
@@ -70,13 +85,13 @@ class ReportController extends ActiveController
         return [''];
     }
 
-    public function actionPayments()
+    public function Payments($user_id, $report_type)
     {
-
+        return [];
     }
 
-    public function actionServices()
+    public function Services($user_id, $report_type)
     {
-
+        return [];
     }
 }

@@ -16,6 +16,10 @@ use yii\helpers\Url;
 class REPORTS_MODEL extends Reports
 {
 
+    const RESERVATIONS = 'RESERVATIONS';
+    const SERVICES = 'SERVICES';
+    const PAYMENTS = 'PAYMENTS';
+
     public function fields()
     {
         $fields = parent::fields();
