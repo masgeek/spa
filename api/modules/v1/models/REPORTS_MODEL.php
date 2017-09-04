@@ -113,7 +113,7 @@ class REPORTS_MODEL extends Reports
         $model->DATE_GENERATED = new Expression('NOW()');
         $model->EXPIRY_DATE = new Expression('NOW()');
         $model->REPORT_TYPE = $report_type;
-        $model->STATUS = 'ACTIVE';
+        $model->STATUS = 'READY';
 
 
         if ($model->save() && $model->validate()) {
