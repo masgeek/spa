@@ -9,6 +9,7 @@
 namespace app\api\modules\v1\controllers;
 
 
+use app\api\modules\v1\models\ALL_SERVICES_VIEW;
 use app\api\modules\v1\models\PAYMENT_MODEL;
 use app\model_extended\MY_RESERVATIONS_VIEW;
 use Yii;
@@ -95,7 +96,7 @@ class ReportController extends ActiveController
 
         $dataProvider = new ActiveDataProvider([
             'query' => PAYMENT_MODEL::find()
-                //->where(['RESERVATION_ID' => $myReservationsArr])
+                ->where(['RESERVATION_ID' => $myReservationsArr])
                 //->andWhere(['PAYMENT_STATUS' => 0]),
         ]);
 
@@ -112,6 +113,24 @@ class ReportController extends ActiveController
 
     public function Services($user_id, $report_type)
     {
-        return [];
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => ALL_SERVICES_VIEW::find()
+            //->where(['OWNER_ID' => $user_id])
+            //->andWhere(['PAYMENT_STATUS' => 0]),
+        ]);
+
+
+        $content = REPORTS_MODEL::BuildServicesTable($dataProvider);
+
+        return$content;
+        /*if (strlen($content) > 0) {
+            $file_ref = CUSTOM_HELPER::GetTimeStamp();
+            $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";
+            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type);
+        }*/
+
+        //return [''];
     }
 }

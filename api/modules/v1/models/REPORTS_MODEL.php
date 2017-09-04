@@ -173,7 +173,7 @@ class REPORTS_MODEL extends Reports
             $html .= '</tr>';
             $total_amount = 0;
             $total_paid = 0;
-            $balance= 0;
+            $balance = 0;
             foreach ($reservation as $key => $value) {
 
                 $obj = (object)$value;
@@ -200,11 +200,59 @@ class REPORTS_MODEL extends Reports
             $html .= '<td>&nbsp;</td>';
             $html .= '<td>&nbsp;</td>';
             $html .= '<td>' . $total_amount . '</td>';
-            $html .= '<td>' . $total_paid. '</td>';
-            $html .= '<td>' . $balance. '</td>';
+            $html .= '<td>' . $total_paid . '</td>';
+            $html .= '<td>' . $balance . '</td>';
             $html .= '<td>&nbsp;</td>';
             $html .= '<td>&nbsp;</td>';
             $html .= '</tr>';
+        }
+        $html .= '</table>';
+
+
+        return $html;
+    }
+
+    public static function BuildServicesTable($dataProvider)
+    {
+        /** @var $model ALL_SERVICES_VIEW */
+        $data = [];
+        foreach ($dataProvider->models as $model) {
+
+            $salon_name = $model->SALON_NAME;
+
+
+            $data[$salon_name][] = [
+                'offered_service_id' => $model->OFFERED_SERVICE_ID,
+                'reservations' => $model->RESERVATIONS,
+                'service_name' => $model->SERVICE_NAME,
+                'salon_name' => $model->SALON_NAME,
+                'owner' => $model->OWNER_ID
+            ];
+
+        }
+
+        //array_multisort($data, SORT_ASC);
+        $html = '<table class="table table-bordered table-condensed" border="1">';
+        $html .= '<tr>';
+        //$html .= '<th>Reservation ID</th>';;
+        $html .= '<th>Service Name</th>';
+        $html .= '<th>Salon Name</th>';
+        $html .= '<th>No of Reservations</th>';
+        $html .= '</tr>';
+        foreach ($data as $salon_name => $reservation) {
+            //loop the arrays withing the service name
+            $html .= '<tr>';
+            $html .= '<th>' . $salon_name . '</th>';
+            $html .= '</tr>';
+            foreach ($reservation as $key => $value) {
+
+                $obj = (object)$value;
+                $html .= '<tr>';
+                //$html .= '<td>&nbsp;</td>';
+                $html .= '<td>' . $obj->service_name . '</td>';
+                $html .= '<td>' . $obj->salon_name . '</td>';
+                $html .= '<td>' . $obj->reservations . '</td>';
+            }
         }
         $html .= '</table>';
 
