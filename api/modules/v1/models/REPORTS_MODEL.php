@@ -24,6 +24,9 @@ class REPORTS_MODEL extends Reports
     {
         $fields = parent::fields();
 
+        $fields['REPORT_TYPE'] = function ($model) {
+            return ucfirst(strtolower($model->REPORT_TYPE));
+        };
         $fields['FILE_LINK'] = function ($model) {
             $absoluteBaseUrl = Url::base(true);
             $file_link = "{$absoluteBaseUrl}/{$model->REPORT_URL}";

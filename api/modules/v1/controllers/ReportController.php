@@ -28,6 +28,7 @@ class ReportController extends ActiveController
     {
         $data = REPORTS_MODEL::find()
             ->where(['SALON_OWNER_ID' => $user_id])
+            ->orderBy(['DATE_GENERATED'=>SORT_DESC])
             ->all();
 
         return $data;
@@ -39,7 +40,7 @@ class ReportController extends ActiveController
      */
     public function actionGenerate()
     {
-        $user_id = '';
+        $resp = '';
         if (!Yii::$app->request->isPost) {
             throw new BadRequestHttpException('Please use POST');
         }
@@ -49,15 +50,17 @@ class ReportController extends ActiveController
 
         switch (strtoupper($report_type)) {
             case REPORTS_MODEL::RESERVATIONS:
-                $this->Reservations($user_id, $report_type);
+                $resp = $this->Reservations($user_id, $report_type);
                 break;
             case REPORTS_MODEL::SERVICES:
-                $this->Services($user_id, $report_type);
+                $resp = $this->Services($user_id, $report_type);
                 break;
             case REPORTS_MODEL::PAYMENTS:
-                $this->Payments($user_id, $report_type);
+                $resp = $this->Payments($user_id, $report_type);
                 break;
         }
+
+        return $resp;
     }
 
     public function Reservations($user_id, $report_type)
