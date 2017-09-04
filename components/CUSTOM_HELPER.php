@@ -32,9 +32,10 @@ class CUSTOM_HELPER
      * Generate pdf based
      * @param $content
      * @param $file_name
+     * @param $report_type
      * @return mixed
      */
-    public static function GeneratePdf($user_id, $content, $file_name)
+    public static function GeneratePdf($user_id, $content, $file_name, $report_type)
     {
         $pdf = new Pdf([
             // set to use core fonts only
@@ -66,7 +67,7 @@ class CUSTOM_HELPER
         $pdf->render();
 
         //next save to the reports table
-        return REPORTS_MODEL::SaveReport($user_id, $file_name);
+        return REPORTS_MODEL::SaveReport($user_id, $file_name, $report_type);
     }
 
 

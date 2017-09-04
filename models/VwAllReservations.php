@@ -16,13 +16,13 @@ use Yii;
  * @property string $AMOUNT_PAID
  * @property string $BALANCE
  * @property string $DATE_PAID
- * @property string $PAYMENT_REF
  * @property string $MPESA_REF
  * @property int $OWNER_ID
  * @property string $RESERVATION_DATE
  * @property string $COMMENTS
  * @property int $SERVICE_ID
  * @property int $RESERVATION_ID
+ * @property string $PAYMENT_REF
  */
 class VwAllReservations extends \yii\db\ActiveRecord
 {
@@ -46,8 +46,8 @@ class VwAllReservations extends \yii\db\ActiveRecord
             [['DATE_PAID', 'RESERVATION_DATE'], 'safe'],
             [['COMMENTS'], 'string'],
             [['SALON_NAME', 'SERVICE_NAME'], 'string', 'max' => 255],
-            [['PAYMENT_REF'], 'string', 'max' => 50],
             [['MPESA_REF'], 'string', 'max' => 25],
+            [['PAYMENT_REF'], 'string', 'max' => 50],
         ];
     }
 
@@ -66,13 +66,13 @@ class VwAllReservations extends \yii\db\ActiveRecord
             'AMOUNT_PAID' => 'Amount  Paid',
             'BALANCE' => 'Balance',
             'DATE_PAID' => 'Date  Paid',
-            'PAYMENT_REF' => 'Payment  Ref',
             'MPESA_REF' => 'Mpesa  Ref',
             'OWNER_ID' => 'Owner  ID',
             'RESERVATION_DATE' => 'Reservation  Date',
             'COMMENTS' => 'Comments',
             'SERVICE_ID' => 'Service  ID',
             'RESERVATION_ID' => 'Reservation  ID',
+            'PAYMENT_REF' => 'Payment  Ref',
         ];
     }
 }

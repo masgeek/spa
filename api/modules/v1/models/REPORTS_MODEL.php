@@ -100,7 +100,7 @@ class REPORTS_MODEL extends Reports
 
     }
 
-    public static function SaveReport($user_id, $file_name)
+    public static function SaveReport($user_id, $file_name, $report_type)
     {
         $resp = [
             0
@@ -111,7 +111,9 @@ class REPORTS_MODEL extends Reports
         $model->SALON_OWNER_ID = $user_id;
         $model->REPORT_URL = $file_name;
         $model->DATE_GENERATED = new Expression('NOW()');
-        $model->STATUS = 'READY';
+        $model->EXPIRY_DATE = new Expression('NOW()');
+        $model->REPORT_TYPE = $report_type;
+        $model->STATUS = 'ACTIVE';
 
         if ($model->save()) {
             $resp = $model;

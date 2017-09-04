@@ -54,7 +54,7 @@ class ReportController extends ActiveController
             $file_name = "pdf/reports_{$file_ref}.pdf";
             // setup kartik\mpdf\Pdf component
 
-            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name);
+            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name,'ALL RESERVATIONS');
         }
 
         return [];

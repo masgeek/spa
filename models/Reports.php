@@ -10,7 +10,9 @@ use Yii;
  * @property int $REPORT_ID
  * @property int $SALON_OWNER_ID
  * @property string $REPORT_URL
+ * @property string $REPORT_TYPE
  * @property string $DATE_GENERATED
+ * @property string $EXPIRY_DATE
  * @property string $STATUS
  *
  * @property User $sALONOWNER
@@ -31,10 +33,11 @@ class Reports extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['SALON_OWNER_ID', 'REPORT_URL', 'DATE_GENERATED'], 'required'],
+            [['SALON_OWNER_ID', 'REPORT_URL', 'REPORT_TYPE', 'DATE_GENERATED', 'EXPIRY_DATE'], 'required'],
             [['SALON_OWNER_ID'], 'integer'],
-            [['DATE_GENERATED'], 'safe'],
-            [['REPORT_URL', 'STATUS'], 'string', 'max' => 255],
+            [['DATE_GENERATED', 'EXPIRY_DATE'], 'safe'],
+            [['REPORT_URL'], 'string', 'max' => 255],
+            [['REPORT_TYPE', 'STATUS'], 'string', 'max' => 10],
             [['SALON_OWNER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['SALON_OWNER_ID' => 'USER_ID']],
         ];
     }
@@ -48,7 +51,9 @@ class Reports extends \yii\db\ActiveRecord
             'REPORT_ID' => 'Report  ID',
             'SALON_OWNER_ID' => 'Salon  Owner  ID',
             'REPORT_URL' => 'Report  Url',
+            'REPORT_TYPE' => 'Report  Type',
             'DATE_GENERATED' => 'Date  Generated',
+            'EXPIRY_DATE' => 'Expiry  Date',
             'STATUS' => 'Status',
         ];
     }
