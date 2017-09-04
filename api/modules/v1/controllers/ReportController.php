@@ -41,6 +41,7 @@ class ReportController extends ActiveController
         ]);
 
         $content = $this->BuildTable($dataProvider);
+        //Yii::$app->getAlias('@app/runtime/mpdf').
         $file_ref = CUSTOM_HELPER::GenerateRandomRef();
         $file_name = "pdf/reports_{$file_ref}.pdf";
         // setup kartik\mpdf\Pdf component

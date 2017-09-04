@@ -11,9 +11,24 @@ namespace app\api\modules\v1\models;
 
 use app\models\Reports;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 class REPORTS_MODEL extends Reports
 {
+
+    public function fields()
+    {
+        $fields =  parent::fields();
+
+        $fields['FILE_LINK'] = function($model){
+            $absoluteBaseUrl = Url::base(true);
+            $file_link = "{$absoluteBaseUrl}/{$model->REPORT_URL}";
+            return $file_link;
+        };
+
+        return $fields;
+    }
+
     public static function SaveReport($user_id, $file_name)
     {
         $resp = [
