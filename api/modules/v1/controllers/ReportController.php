@@ -24,6 +24,15 @@ class ReportController extends ActiveController
      */
     public $modelClass = 'app\api\modules\v1\models\REPORTS_MODEL';
 
+    public function actionList($user_id)
+    {
+        $data = REPORTS_MODEL::find()
+            ->where(['SALON_OWNER_ID' => $user_id])
+            ->all();
+
+        return $data;
+    }
+
     /**
      * @return mixed
      * @throws BadRequestHttpException

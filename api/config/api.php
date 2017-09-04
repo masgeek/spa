@@ -121,7 +121,7 @@ $config = [
 						'GET {id}/my-payments' => 'my-payments',
 						'GET {id}/reservation-payments' => 'reservation-payments',
 						'GET {id}/receipts' => 'receipts',
-						'GET {user_id}/generate' => 'generate',
+						'GET {user_id}/list' => 'list',
 						//'GET all/{id}' => 'all',
 						//'GET summary/{id}' => 'summary',
 						//post actions
