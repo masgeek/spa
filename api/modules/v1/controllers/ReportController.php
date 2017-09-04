@@ -10,8 +10,10 @@ namespace app\api\modules\v1\controllers;
 
 
 use app\api\modules\v1\models\ALL_RESERVATIONS;
+use app\components\CUSTOM_HELPER;
 use app\model_extended\MY_RESERVATIONS;
 use app\models_search\ReportSearch;
+use kartik\mpdf\Pdf;
 use yii\data\ActiveDataProvider;
 use yii\rest\ActiveController;
 
@@ -25,7 +27,6 @@ class ReportController extends ActiveController
     public function actionGenerate($userid)
     {
         //generate the report file
-        $searchModel = new ReportSearch();
         $query = ALL_RESERVATIONS::find()->orderBy(['SALON_NAME' => SORT_DESC]); //$searchModel->search(\Yii::$app->request->queryParams);
 
         $dataProvider = new ActiveDataProvider([
@@ -35,17 +36,40 @@ class ReportController extends ActiveController
             ],*/
         ]);
 
-        return $this->BuildTable($dataProvider);
-        //return $dataProvider;
-        $content = $this->renderPartial('all-reservations', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        $content = $this->BuildTable($dataProvider);
+        $file_ref = CUSTOM_HELPER::GenerateRandomRef();
+        $file_name = "pdf/reports_{$file_ref}.pdf";
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE,
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_LANDSCAPE,
+            // stream to browser inline
+            'destination' => Pdf::DEST_FILE,
+            'filename' => $file_name,
+            // your html content input
+            'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}',
+            // set mPDF properties on the fly
+            'options' => ['title' => 'Reservations Report'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader' => ['Reservations Report'],
+                'SetFooter' => ['{PAGENO}'],
+            ]
         ]);
 
-        return $content;
-        $pdf = \Yii::$app->pdf;
-        $pdf->content = $content;
-        return $pdf->render();
+        // return the pdf output as per the destination setting
+        $pdf->render();
+
+        return $file_name;
 
     }
 
@@ -74,21 +98,81 @@ class ReportController extends ActiveController
             ];
         }
 
-        $html = '';
-        $sharingGroup = $data;
-        //now let us generate the table based on the array
-        $transpose = array();
-        if (count($sharingGroup) > 0) {
-            $output = "<table>";
-            foreach ($transpose as $groupNo => $group) {
-                $output .= "<tr><td>$groupNo</td><td>";
-                foreach ($group as $name) {
-                    $output .= "$name<br />";
+        //array_multisort($data, SORT_ASC);
+        /*
+         *         {
+                    "customer": "Kimani Susan",
+                    "salon_name": "Sammy Spa",
+                    "reservation_id": 134,
+                    "reservation_date": "2017-09-02",
+                    "total_cost": 800,
+                    "reservation_status": "Confirmed",
+                    "payment_ref": "20FC0",
+                    "mpesa_ref": "CH I chug 123",
+                    "booking_amount": 400
                 }
-                $output .= "</td></tr>";
+         */
+        $html = '<table class="table table-bordered">';
+        $html .= '<tr>';
+        $html .= '<th>Service Name</th>';
+        $html .= '<th>Customer Name</th>';
+        $html .= '<th>Salon Name</th>';
+        $html .= '<th>Reservation Date</th>';
+        $html .= '<th>Reservation Status</th>';
+        $html .= '<th>Total Service Cost</th>';
+        $html .= '<th>Booking Amount</th>';
+        $html .= '<th>Payment Reference</th>';
+        $html .= '<th>Mpesa Reference</th>';
+        $html .= '</tr>';
+        foreach ($data as $service_name => $reservation) {
+            //loop the arrays withing the service name
+            $html .= '<tr>';
+            $html .= '<th>' . $service_name . '</th>';
+            $html .= '</tr>';
+            foreach ($reservation as $key => $value) {
+                $obj = (object)$value;
+                $html .= '<tr>';
+                $html .= '<td>&nbsp;</td>';
+                $html .= '<td>' . $obj->customer . '</td>';
+                $html .= '<td>' . $obj->salon_name . '</td>';
+                $html .= '<td>' . $obj->reservation_date . '</td>';
+                $html .= '<td>' . $obj->reservation_status . '</td>';
+                $html .= '<td>' . $obj->total_cost . '</td>';
+                $html .= '<td>' . $obj->booking_amount . '</td>';
+                $html .= '<td>' . $obj->payment_ref . '</td>';
+                $html .= '<td>' . $obj->mpesa_ref . '</td>';
+                $html .= '</tr>';
             }
-            $output .= "</table>";
         }
-        return $output;
+        $html .= '</table>';
+
+        return $html;
+
+    }
+
+    function build_table($array)
+    {
+        // start table
+        $html = '<table>';
+        // header row
+        $html .= '<tr>';
+        foreach ($array[0] as $key => $value) {
+            $html .= '<th>' . htmlspecialchars($key) . '</th>';
+        }
+        $html .= '</tr>';
+
+        // data rows
+        foreach ($array as $key => $value) {
+            $html .= '<tr>';
+            foreach ($value as $key2 => $value2) {
+                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
+            }
+            $html .= '</tr>';
+        }
+
+        // finish table and return it
+
+        $html .= '</table>';
+        return $html;
     }
 }
