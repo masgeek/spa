@@ -17,27 +17,31 @@ use yii\web\Linkable;
 class SALON_MODEL extends \app\models\Salon
 {
 
-	const SCENARIO_CREATE = 'create';
+    const SCENARIO_CREATE = 'create';
 
-	public function rules()
-	{
-		$rules = parent::rules();
-		return $rules;
-	}
+    public function rules()
+    {
+        $rules = parent::rules();
+        return $rules;
+    }
 
-	public function scenarios()
-	{
-		$scenarios = parent::scenarios();
-		//$scenarios[self::SCENARIO_CREATE] = ['Name', 'Last_Name', 'Email'];
-		return $scenarios;
-	}
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        //$scenarios[self::SCENARIO_CREATE] = ['Name', 'Last_Name', 'Email'];
+        return $scenarios;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function fields()
-	{
-		$fields = parent::fields();
-		return $fields;
-	}
+    /**
+     * @return array
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['RESERVATIONS'] = function ($model) {
+            return 1;
+        };
+        return $fields;
+    }
 }
