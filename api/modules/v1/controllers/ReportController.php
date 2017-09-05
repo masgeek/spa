@@ -111,7 +111,7 @@ class ReportController extends ActiveController
         $dataProvider = new ActiveDataProvider([
             'query' => PAYMENT_MODEL::find()
                 ->where(['RESERVATION_ID' => $myReservationsArr])
-                ->andWhere(['PAYMENT_STATUS' => 0]),
+                //->andWhere(['PAYMENT_STATUS' => 0]),
         ]);
 
         $content = REPORTS_MODEL::BuildPaymentsTable($dataProvider);
