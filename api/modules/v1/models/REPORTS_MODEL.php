@@ -230,7 +230,7 @@ class REPORTS_MODEL extends Reports
             ];
 
         }
-return $data;
+
         //array_multisort($data, SORT_ASC);
         $html = '<table class="table table-bordered table-condensed" border="1">';
         $html .= '<tr>';

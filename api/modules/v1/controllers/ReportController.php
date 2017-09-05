@@ -129,13 +129,13 @@ class ReportController extends ActiveController
     {
         $dataProvider = new ActiveDataProvider([
             'query' => ALL_SERVICES_VIEW::find()
-            //->where(['OWNER_ID' => $user_id])
+            ->where(['OWNER_ID' => $user_id])
             //->andWhere(['PAYMENT_STATUS' => 0]),
         ]);
 
 
         $content = REPORTS_MODEL::BuildServicesTable($dataProvider);
-return $content;
+
         if (strlen($content) > 0) {
             $file_ref = CUSTOM_HELPER::GetTimeStamp();
             $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";
