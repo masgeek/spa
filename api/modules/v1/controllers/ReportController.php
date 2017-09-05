@@ -135,7 +135,7 @@ class ReportController extends ActiveController
 
 
         $content = REPORTS_MODEL::BuildServicesTable($dataProvider);
-
+return $content;
         if (strlen($content) > 0) {
             $file_ref = CUSTOM_HELPER::GetTimeStamp();
             $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";

@@ -223,14 +223,14 @@ class REPORTS_MODEL extends Reports
 
             $data[$salon_name][] = [
                 'offered_service_id' => $model->OFFERED_SERVICE_ID,
-                'reservations' => $model->RESERVATIONS,
+                'reservations' => RESERVED_SERVICE_MODEL::ServicesReservedCount($model->OFFERED_SERVICE_ID)/*$model->RESERVATIONS*/,
                 'service_name' => $model->SERVICE_NAME,
                 'salon_name' => $model->SALON_NAME,
                 'owner' => $model->OWNER_ID
             ];
 
         }
-
+return $data;
         //array_multisort($data, SORT_ASC);
         $html = '<table class="table table-bordered table-condensed" border="1">';
         $html .= '<tr>';
