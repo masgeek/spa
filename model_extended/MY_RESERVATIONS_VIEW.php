@@ -9,6 +9,7 @@
 namespace app\model_extended;
 
 
+use app\api\modules\v1\models\PAYMENT_MODEL;
 use app\api\modules\v1\models\RESERVATION_MODEL;
 use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
@@ -16,90 +17,97 @@ use app\models\VwMyReservations;
 
 class MY_RESERVATIONS_VIEW extends VwMyReservations
 {
-	public $USER_ID;
-	public $REMAINING_AMOUNT;
+    public $USER_ID;
+    public $REMAINING_AMOUNT;
 
-	public function getPrimaryKey($asArray = false)
-	{
-		return 'RESERVATION_ID';
-	}
+    public function getPrimaryKey($asArray = false)
+    {
+        return 'RESERVATION_ID';
+    }
 
-	public function fields()
-	{
-		$fields = parent::fields();
+    public function fields()
+    {
+        $fields = parent::fields();
 
-		$fields['COMMENTS'] = function ($model) {
-			return $model->COMMENTS == null ? 'NONE' : $model->COMMENTS;
-		};
+        $fields['COMMENTS'] = function ($model) {
+            return $model->COMMENTS == null ? 'NONE' : $model->COMMENTS;
+        };
 
-		$fields['CUSTOMER'] = function ($model) {
-			$data = USER_MODEL::findOne($model->RESERVER_ID);
-			return "{$data->SURNAME} {$data->OTHER_NAMES}";
-		};
+        $fields['CUSTOMER'] = function ($model) {
+            $data = USER_MODEL::findOne($model->RESERVER_ID);
+            return "{$data->SURNAME} {$data->OTHER_NAMES}";
+        };
 
-		$fields['STATUS'] = function ($model) {
-			$data = STATUS_MODEL::findOne($model->STATUS_ID);
+        $fields['STATUS'] = function ($model) {
+            $data = STATUS_MODEL::findOne($model->STATUS_ID);
 
-			return $data == null ? 'PENDING' : strtoupper($data->STATUS_NAME);
-		};
+            return $data == null ? 'PENDING' : strtoupper($data->STATUS_NAME);
+        };
 
-		return $fields;
-	}
+        $fields['AMOUNT_PAID'] = function ($model) {
+            return PAYMENT_MODEL::getAmountPaid($model->RESERVATION_ID);
+        };
 
-	//////
-	public function attributeLabels()
-	{
-		$labels = parent::attributeLabels();
-		$labels['STATUS_ID'] = 'Reservation Status';
-		$labels['RESERVER_ID'] = 'Reserved By';
-		$labels['BOOKING_AMOUNT'] = 'Amount Paid';
-		$labels['ACCOUNT_REF'] = 'Account Reference';
+        $fields['BALANCE'] = function ($model) {
+            return PAYMENT_MODEL::GetBalance($model->RESERVATION_ID);
+        };
+        return $fields;
+    }
 
-		return $labels;
-	}
+    //////
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels['STATUS_ID'] = 'Reservation Status';
+        $labels['RESERVER_ID'] = 'Reserved By';
+        $labels['BOOKING_AMOUNT'] = 'Amount Paid';
+        $labels['ACCOUNT_REF'] = 'Account Reference';
 
-	public function getAmountPaid()
-	{
-		$amount_paid = MY_PAYMENTS_MODEL::find()
-			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
-			->sum('BOOKING_AMOUNT');
+        return $labels;
+    }
 
-		return $amount_paid;
-	}
+    public function getAmountPaid()
+    {
+        $amount_paid = MY_PAYMENTS_MODEL::find()
+            ->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+            ->sum('BOOKING_AMOUNT');
 
-	public function getBalance($total_cost = false)
-	{
-		/*$total = RESERVED_SERVICE_MODEL::find()
-			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
-			->sum('SERVICE_AMOUNT');*/
-		$total = MY_RESERVATIONS::find()
-			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
-			->sum('TOTAL_COST');
+        return $amount_paid;
+    }
 
-		$amount_paid = MY_PAYMENTS_MODEL::find()
-			->where(['RESERVATION_ID' => $this->RESERVATION_ID])
-			->sum('BOOKING_AMOUNT');
+    public function getBalance($total_cost = false)
+    {
+        /*$total = RESERVED_SERVICE_MODEL::find()
+            ->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+            ->sum('SERVICE_AMOUNT');*/
+        $total = MY_RESERVATIONS::find()
+            ->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+            ->sum('TOTAL_COST');
 
-		if ($total_cost) {
-			return $total;
-		} else {
-			return (($total) - ($amount_paid));
-		}
-	}
+        $amount_paid = MY_PAYMENTS_MODEL::find()
+            ->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+            ->sum('BOOKING_AMOUNT');
 
-	public static function MyReservationsArr($owner_id)
-	{
-		$data = self::find()
-			->select('RESERVATION_ID')
-			->where(['OWNER_ID' => $owner_id])
-			->asArray()
-			->all();
+        if ($total_cost) {
+            return $total;
+        } else {
+            return (($total) - ($amount_paid));
+        }
+    }
+
+    public static function MyReservationsArr($owner_id)
+    {
+        $data = self::find()
+            ->select('RESERVATION_ID')
+            ->where(['OWNER_ID' => $owner_id])
+            ->asArray()
+            ->all();
 
 
-		$reservations = [];
-		foreach ($data as $k => $v) {
-			$reservations[] = $v['RESERVATION_ID'];
-		}
-		return $reservations;
-	}
+        $reservations = [];
+        foreach ($data as $k => $v) {
+            $reservations[] = $v['RESERVATION_ID'];
+        }
+        return $reservations;
+    }
 }

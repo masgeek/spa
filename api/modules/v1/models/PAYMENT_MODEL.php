@@ -78,4 +78,34 @@ class PAYMENT_MODEL extends Payments
 		//$rules[] = [['RESERVATION_ID'], 'unique', 'message' => 'Payment for reservation {value}  has already been made, please update balance'];
 		return $rules;
 	}
+
+    public static function getAmountPaid($reservation_id)
+    {
+
+        $amount_paid = self::find()
+            ->where(['RESERVATION_ID' => $reservation_id])
+            ->sum('BOOKING_AMOUNT');
+
+        return $amount_paid;
+    }
+
+    public static function GetBalance($reservation_id,$total_cost = false)
+    {
+        /*$total = RESERVED_SERVICE_MODEL::find()
+            ->where(['RESERVATION_ID' => $this->RESERVATION_ID])
+            ->sum('SERVICE_AMOUNT');*/
+        $total = MY_RESERVATIONS::find()
+            ->where(['RESERVATION_ID' => $reservation_id])
+            ->sum('TOTAL_COST');
+
+        $amount_paid = self::find()
+            ->where(['RESERVATION_ID' => $reservation_id])
+            ->sum('BOOKING_AMOUNT');
+
+        if ($total_cost) {
+            return $total;
+        } else {
+            return (($total) - ($amount_paid));
+        }
+    }
 }

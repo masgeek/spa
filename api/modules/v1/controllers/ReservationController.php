@@ -331,8 +331,8 @@ class ReservationController extends ActiveController
 	private function GetFilteredReservations($salon_id, $status_id)
 	{
 		$reservations = MY_RESERVATIONS_VIEW::find()
-			->where(['SALON_ID' => $salon_id])
-			->andWhere(['STATUS_ID' => $status_id])
+			//->where(['SALON_ID' => $salon_id])
+			//->andWhere(['STATUS_ID' => $status_id])
 			->all(); //we will iterate to get the customer name
 		return $reservations;
 	}
