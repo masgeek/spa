@@ -8,26 +8,22 @@
 
 namespace app\api\modules\v1\controllers;
 
-use app\api\modules\v1\models\OFFERED_SERVICE_MODEL;
+
+
+
 use app\api\modules\v1\models\PAYMENT_MODEL;
-use app\api\modules\v1\models\RECEIPTS_MODEL;
-use app\api\modules\v1\models\RESERVATION_MODEL;
-use app\api\modules\v1\models\SERVICE_MODEL;
-use app\api\modules\v1\models\SERVICE_PAYMENTS;
-use app\model_extended\ALL_PAYMENTS;
-use app\model_extended\MY_PAYMENTS_MODEL;
-use function GuzzleHttp\Promise\all;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
-use yii\filters\AccessControl;
 use yii\rest\ActiveController;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
-use yii\rest\Controller;
+
 use yii\web\BadRequestHttpException;
-use yii\web\Response;
+
+use app\api\modules\v1\models\RECEIPTS_MODEL;
+use app\api\modules\v1\models\RESERVATION_MODEL;
+
+use app\api\modules\v1\models\SERVICE_PAYMENTS;
+
 
 class PaymentController extends ActiveController
 {
