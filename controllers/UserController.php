@@ -63,7 +63,7 @@ class UserController extends Controller
 
     public function actionPendingUsers()
     {
-        $this->view->title = 'Pending Users';
+        $this->view->title = 'Pending Users Report';
         $dataProvider = $this->GetUsers(CUSTOM_HELPER::ACCOUNT_PENDING);
 
         return $this->render('index', $dataProvider);
@@ -71,7 +71,7 @@ class UserController extends Controller
 
     public function actionActiveUsers()
     {
-        $this->view->title = 'Active Users';
+        $this->view->title = 'Active Users Report';
         $dataProvider = $this->GetUsers(CUSTOM_HELPER::ACCOUNT_ACTIVE);
 
         return $this->render('index', $dataProvider);
@@ -79,7 +79,7 @@ class UserController extends Controller
 
     public function actionSuspendedUsers()
     {
-        $this->view->title = 'Suspended Users';
+        $this->view->title = 'Suspended Users Report';
         $dataProvider = $this->GetUsers(CUSTOM_HELPER::ACCOUNT_SUSPENDED);
 
         return $this->render('index', $dataProvider);
@@ -87,7 +87,7 @@ class UserController extends Controller
 
     public function actionDeactivatedUsers()
     {
-        $this->view->title = 'Deactivated Users';
+        $this->view->title = 'Deactivated Users Report';
         $dataProvider = $this->GetUsers(CUSTOM_HELPER::ACCOUNT_DEACTIVATED);
 
         return $this->render('index', $dataProvider);
