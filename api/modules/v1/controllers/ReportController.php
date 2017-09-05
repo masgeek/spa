@@ -127,8 +127,6 @@ class ReportController extends ActiveController
 
     public function Services($user_id, $report_type)
     {
-
-
         $dataProvider = new ActiveDataProvider([
             'query' => ALL_SERVICES_VIEW::find()
             //->where(['OWNER_ID' => $user_id])
