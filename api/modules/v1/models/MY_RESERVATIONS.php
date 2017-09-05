@@ -38,6 +38,13 @@ class MY_RESERVATIONS extends VwMyReservedServices
             return "{$data->SURNAME} {$data->OTHER_NAMES}";
         };
 
+        $fields['AMOUNT_PAID'] = function ($model) {
+            return PAYMENT_MODEL::getAmountPaid($model->RESERVATION_ID);
+        };
+
+        $fields['BALANCE'] = function ($model) {
+            return PAYMENT_MODEL::GetBalance($model->RESERVATION_ID);
+        };
 
         $fields['SERVICES_RESERVED'] = function ($model) {
 			/* @var $model RESERVED_SERVICE_MODEL */
