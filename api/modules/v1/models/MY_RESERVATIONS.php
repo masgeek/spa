@@ -33,7 +33,13 @@ class MY_RESERVATIONS extends VwMyReservedServices
 			return $model->COMMENTS;
 		};
 
-		$fields['SERVICES_RESERVED'] = function ($model) {
+        $fields['CUSTOMER'] = function ($model) {
+            $data = USER_MODEL::findOne($model->USER_ID);
+            return "{$data->SURNAME} {$data->OTHER_NAMES}";
+        };
+
+
+        $fields['SERVICES_RESERVED'] = function ($model) {
 			/* @var $model RESERVED_SERVICE_MODEL */
 			return RESERVED_SERVICE_MODEL::find()->where(['RESERVATION_ID' => $model->RESERVATION_ID])->count();
 		};
