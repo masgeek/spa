@@ -131,7 +131,7 @@ class ReportController extends ActiveController
 
         $dataProvider = new ActiveDataProvider([
             'query' => ALL_SERVICES_VIEW::find()
-            ->where(['OWNER_ID' => $user_id])
+            //->where(['OWNER_ID' => $user_id])
             //->andWhere(['PAYMENT_STATUS' => 0]),
         ]);
 
