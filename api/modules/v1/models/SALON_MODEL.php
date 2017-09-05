@@ -37,10 +37,16 @@ class SALON_MODEL extends \app\models\Salon
      */
     public function fields()
     {
+        /* @var $model SALON_MODEL*/
         $fields = parent::fields();
 
         $fields['RESERVATIONS'] = function ($model) {
-            return 1;
+            $reservationcount =  SALON_RESERVATIONS::find()
+                ->select(['SALON_RESERVATONS'])
+                ->where(['SALON_ID'=>$model->SALON_ID])
+                ->one();
+
+            return $reservationcount->SALON_RESERVATONS;
         };
         return $fields;
     }
