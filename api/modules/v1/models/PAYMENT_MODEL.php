@@ -86,7 +86,7 @@ class PAYMENT_MODEL extends Payments
             ->where(['RESERVATION_ID' => $reservation_id])
             ->sum('BOOKING_AMOUNT');
 
-        return $amount_paid;
+        return $amount_paid != null ? $amount_paid : 0;
     }
 
     public static function GetBalance($reservation_id,$total_cost = false)
