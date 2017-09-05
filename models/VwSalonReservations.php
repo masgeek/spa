@@ -7,9 +7,10 @@ use Yii;
 /**
  * This is the model class for table "vw_salon_reservations".
  *
- * @property string $SALON_NAME
+ * @property int $RESERVATION_ID
  * @property int $SALON_ID
- * @property string $SALON_RESERVATONS
+ * @property string $SALON_NAME
+ * @property int $SALON_OWNER_ID
  */
 class VwSalonReservations extends \yii\db\ActiveRecord
 {
@@ -27,8 +28,8 @@ class VwSalonReservations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['SALON_NAME'], 'required'],
-            [['SALON_ID', 'SALON_RESERVATONS'], 'integer'],
+            [['RESERVATION_ID', 'SALON_NAME', 'SALON_OWNER_ID'], 'required'],
+            [['RESERVATION_ID', 'SALON_ID', 'SALON_OWNER_ID'], 'integer'],
             [['SALON_NAME'], 'string', 'max' => 255],
         ];
     }
@@ -39,9 +40,10 @@ class VwSalonReservations extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'SALON_NAME' => 'Salon  Name',
+            'RESERVATION_ID' => 'Reservation  ID',
             'SALON_ID' => 'Salon  ID',
-            'SALON_RESERVATONS' => 'Salon  Reservatons',
+            'SALON_NAME' => 'Salon  Name',
+            'SALON_OWNER_ID' => 'Salon  Owner  ID',
         ];
     }
 }

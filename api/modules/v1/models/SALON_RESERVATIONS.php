@@ -13,5 +13,12 @@ use app\models\VwSalonReservations;
 
 class SALON_RESERVATIONS extends VwSalonReservations
 {
+    public static function GetReservationsCount($salon_id)
+    {
+        $count = self::find()
+            ->where(['SALON_ID' => $salon_id])
+            ->count('RESERVATION_ID');
 
+        return $count != null ? $count : 0;
+    }
 }

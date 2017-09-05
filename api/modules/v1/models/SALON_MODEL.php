@@ -41,12 +41,7 @@ class SALON_MODEL extends \app\models\Salon
         $fields = parent::fields();
 
         $fields['RESERVATIONS'] = function ($model) {
-            $reservationcount = SALON_RESERVATIONS::find()
-                ->select(['SALON_RESERVATONS'])
-                ->where(['SALON_ID' => $model->SALON_ID])
-                ->one();
-
-            return $reservationcount != null ? $reservationcount->SALON_RESERVATONS : 0;
+            return SALON_RESERVATIONS::GetReservationsCount($model->SALON_ID);
         };
         return $fields;
     }
