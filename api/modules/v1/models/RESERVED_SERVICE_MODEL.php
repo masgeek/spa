@@ -58,6 +58,6 @@ class RESERVED_SERVICE_MODEL extends ReservedServices
 	public static function ServicesReservedCount($offered_service_id)
 	{
 		$data = self::find()->where(['OFFERED_SERVICE_ID' => $offered_service_id])->count('OFFERED_SERVICE_ID');
-		return $data;
+		return $data != null ? $data : 0;
 	}
 }
