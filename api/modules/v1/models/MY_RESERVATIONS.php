@@ -9,6 +9,7 @@
 namespace app\api\modules\v1\models;
 
 
+use app\model_extended\STATUS_MODEL;
 use app\models\Status;
 use app\models\VwMyReservedServices;
 
@@ -17,14 +18,12 @@ class MY_RESERVATIONS extends VwMyReservedServices
 	public function fields()
 	{
 		$fields = parent::fields();
-		unset($fields['STATUS_ID']);
 
-		$fields['STATUS_ID'] = function ($model) {
-			if ($model->STATUS_ID == null) {
-				return 'Pending';
-			}
-			return Status::findOne($model->STATUS_ID)->STATUS_NAME;
-		};
+        $fields['STATUS'] = function ($model) {
+            $data = STATUS_MODEL::findOne($model->STATUS_ID);
+
+            return $data == null ? 'PENDING' : strtoupper($data->STATUS_NAME);
+        };
 
 		$fields['COMMENTS'] = function ($model) {
 			if ($model->COMMENTS == null || strlen($model->COMMENTS) <= 2) {
