@@ -34,7 +34,7 @@ class PAYMENT_MODEL extends Payments
         $fields['CUSTOMER_PHONE'] = function ($model) {
             /* @var $model $this */
             $data = $model->rESERVATION->uSER;
-            return $data->MOBILE;
+            return $data->MOBILE_NO;
         };
 
 		$fields['STATUS'] = function ($model) {
