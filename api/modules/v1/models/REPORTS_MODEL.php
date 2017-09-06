@@ -68,19 +68,19 @@ class REPORTS_MODEL extends Reports
 
         //array_multisort($data, SORT_ASC);
         $html = '<table class="table table-bordered">';
+        $html .= '<tr>';
+        $html .= '<th>Service Name</th>';
+        $html .= '<th>Customer Name</th>';
+        $html .= '<th>Salon Name</th>';
+        $html .= '<th>Reservation Date</th>';
+        $html .= '<th>Reservation Status</th>';
+        $html .= '<th>Total Service Cost</th>';
+        $html .= '<th>Booking Amount</th>';
+        $html .= '<th>Payment Reference</th>';
+        //$html .= '<th>Mpesa Reference</th>';
+        $html .= '</tr>';
         foreach ($data as $service_name => $reservation) {
             //loop the arrays withing the service name
-            $html .= '<tr>';
-            $html .= '<th>Service Name</th>';
-            $html .= '<th>Customer Name</th>';
-            $html .= '<th>Salon Name</th>';
-            $html .= '<th>Reservation Date</th>';
-            $html .= '<th>Reservation Status</th>';
-            $html .= '<th>Total Service Cost</th>';
-            $html .= '<th>Booking Amount</th>';
-            $html .= '<th>Payment Reference</th>';
-            $html .= '<th>Mpesa Reference</th>';
-            $html .= '</tr>';
             foreach ($reservation as $key => $value) {
                 $obj = (object)$value;
                 $html .= '<tr>';
@@ -92,7 +92,7 @@ class REPORTS_MODEL extends Reports
                 $html .= '<td>' . $obj->total_cost . '</td>';
                 $html .= '<td>' . $obj->booking_amount . '</td>';
                 $html .= '<td>' . $obj->payment_ref . '</td>';
-                $html .= '<td>' . $obj->mpesa_ref . '</td>';
+                //$html .= '<td>' . $obj->mpesa_ref . '</td>';
                 $html .= '</tr>';
             }
         }
