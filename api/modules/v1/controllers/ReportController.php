@@ -65,10 +65,10 @@ class ReportController extends ActiveController
 
         switch (strtoupper($report_type)) {
             case REPORTS_MODEL::RESERVATIONS:
-                $resp = $this->Reservations($user_id, $report_type);
+                $resp = $this->Reservations($user_id, $report_type,$from_date, $to_date);
                 break;
             case REPORTS_MODEL::SERVICES:
-                $resp = $this->Services($user_id, $report_type);
+                $resp = $this->Services($user_id, $report_type,$from_date, $to_date);
                 break;
             case REPORTS_MODEL::PAYMENTS:
                 $resp = $this->Payments($user_id, $report_type, $from_date, $to_date);
@@ -81,19 +81,23 @@ class ReportController extends ActiveController
     /***
      * @param $user_id
      * @param $report_type
+     * @param $from_date
+     * @param $to_date
      * @return array|mixed
      */
-    private function Reservations($user_id, $report_type, $from_date = null, $to_date = null)
+    private function Reservations($user_id, $report_type, $from_date, $to_date)
     {
         //generate the report file
         $query = ALL_RESERVATIONS::find()
             ->where(['OWNER_ID' => $user_id])
+            ->andWhere(['between', 'RESERVATION_DATE', $from_date, $to_date])
             ->orderBy(['SALON_NAME' => SORT_DESC]); //$searchModel->search(\Yii::$app->request->queryParams);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => false
         ]);
+
 
         $content = REPORTS_MODEL::BuildReservationsTable($dataProvider);
 
@@ -109,6 +113,8 @@ class ReportController extends ActiveController
     /**
      * @param $user_id
      * @param $report_type
+     * @param $from_date
+     * @param $to_date
      * @return array|mixed
      */
     private function Payments($user_id, $report_type, $from_date, $to_date)
@@ -125,7 +131,7 @@ class ReportController extends ActiveController
 
 
         $content = REPORTS_MODEL::BuildPaymentsTable($dataProvider);
-        return $content;
+
         if (strlen($content) > 0) {
             $file_ref = CUSTOM_HELPER::GetTimeStamp();
             $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";
@@ -135,12 +141,20 @@ class ReportController extends ActiveController
         return [''];
     }
 
-    private function Services($user_id, $report_type, $from_date = null, $to_date = null)
+    /**
+     * @param $user_id
+     * @param $report_type
+     * @param $from_date
+     * @param $to_date
+     * @return mixed|string|ActiveDataProvider
+     */
+    private function Services($user_id, $report_type, $from_date, $to_date)
     {
+        //RESERVATION_DATE
         $dataProvider = new ActiveDataProvider([
             'query' => ALL_SERVICES_VIEW::find()
                 ->where(['OWNER_ID' => $user_id])
-            //->andWhere(['PAYMENT_STATUS' => 0]),
+                ->andWhere(['between', 'RESERVATION_DATE', $from_date, $to_date])
         ]);
 
 

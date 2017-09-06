@@ -67,21 +67,18 @@ class REPORTS_MODEL extends Reports
 
         //array_multisort($data, SORT_ASC);
         $html = '<table class="table table-bordered">';
-        $html .= '<tr>';
-        $html .= '<th>Service Name</th>';
-        $html .= '<th>Customer Name</th>';
-        $html .= '<th>Salon Name</th>';
-        $html .= '<th>Reservation Date</th>';
-        $html .= '<th>Reservation Status</th>';
-        $html .= '<th>Total Service Cost</th>';
-        $html .= '<th>Booking Amount</th>';
-        $html .= '<th>Payment Reference</th>';
-        $html .= '<th>Mpesa Reference</th>';
-        $html .= '</tr>';
         foreach ($data as $service_name => $reservation) {
             //loop the arrays withing the service name
             $html .= '<tr>';
-            $html .= '<th>' . $service_name . '</th>';
+            $html .= '<th>Service Name</th>';
+            $html .= '<th>Customer Name</th>';
+            $html .= '<th>Salon Name</th>';
+            $html .= '<th>Reservation Date</th>';
+            $html .= '<th>Reservation Status</th>';
+            $html .= '<th>Total Service Cost</th>';
+            $html .= '<th>Booking Amount</th>';
+            $html .= '<th>Payment Reference</th>';
+            $html .= '<th>Mpesa Reference</th>';
             $html .= '</tr>';
             foreach ($reservation as $key => $value) {
                 $obj = (object)$value;
@@ -213,23 +210,20 @@ class REPORTS_MODEL extends Reports
                 'reservations' => RESERVED_SERVICE_MODEL::ServicesReservedCount($model->OFFERED_SERVICE_ID)/*$model->RESERVATIONS*/,
                 'service_name' => $model->SERVICE_NAME,
                 'salon_name' => $model->SALON_NAME,
-                'owner' => $model->OWNER_ID
+                'owner' => $model->OWNER_ID,
+                'reservation_date' => $model->RESERVATION_DATE,
             ];
 
         }
 
         //array_multisort($data, SORT_ASC);
         $html = '<table class="table table-bordered table-condensed" border="1">';
-        $html .= '<tr>';
-        //$html .= '<th>Reservation ID</th>';;
-        $html .= '<th>Service Name</th>';
-        $html .= '<th>Salon Name</th>';
-        $html .= '<th>No of Reservations</th>';
-        $html .= '</tr>';
         foreach ($data as $salon_name => $reservation) {
-            //loop the arrays withing the service name
             $html .= '<tr>';
-            $html .= '<th>' . $salon_name . '</th>';
+            $html .= '<th>Service Name</th>';
+            $html .= '<th>Salon Name</th>';
+            $html .= '<th>No of Reservations</th>';
+            $html .= '<th>Filter Date</th>';
             $html .= '</tr>';
             foreach ($reservation as $key => $value) {
 
@@ -239,6 +233,7 @@ class REPORTS_MODEL extends Reports
                 $html .= '<td>' . $obj->service_name . '</td>';
                 $html .= '<td>' . $obj->salon_name . '</td>';
                 $html .= '<td>' . $obj->reservations . '</td>';
+                $html .= '<td>' . $obj->reservation_date . '</td>';
             }
         }
         $html .= '</table>';
