@@ -92,7 +92,6 @@ class REPORTS_MODEL extends Reports
                 $html .= '<td>' . $obj->total_cost . '</td>';
                 $html .= '<td>' . $obj->booking_amount . '</td>';
                 $html .= '<td>' . $obj->payment_ref . '</td>';
-                //$html .= '<td>' . $obj->mpesa_ref . '</td>';
                 $html .= '</tr>';
             }
         }
@@ -104,14 +103,10 @@ class REPORTS_MODEL extends Reports
 
     public static function BuildPaymentsTable($dataProvider)
     {
-
         $data = [];
         foreach ($dataProvider->models as $model) {
-
             /** @var $model SERVICE_PAYMENTS */
             $status = $model->STATUS == null ? 'PENDING' : $model->STATUS;
-
-
             $customer = USER_MODEL::findOne($model->USER_ID);
 
 
