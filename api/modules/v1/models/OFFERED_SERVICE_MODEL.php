@@ -55,4 +55,5 @@ class OFFERED_SERVICE_MODEL extends OfferedServices
 		//unset($fields['SERVICE_COST']);
 		return $fields;
 	}
+
 }
