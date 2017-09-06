@@ -69,6 +69,7 @@ class REPORTS_MODEL extends Reports
         //array_multisort($data, SORT_ASC);
         $html = '<table class="table table-bordered">';
         $html .= '<tr>';
+        $html .= '<th>Reservation ID</th>';
         $html .= '<th>Service Name</th>';
         $html .= '<th>Customer Name</th>';
         $html .= '<th>Salon Name</th>';
