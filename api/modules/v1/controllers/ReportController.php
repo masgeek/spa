@@ -100,7 +100,7 @@ class ReportController extends ActiveController
         if (strlen($content) > 0) {
             $file_ref = CUSTOM_HELPER::GetTimeStamp();
             $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";
-            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type);
+            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type, $from_date, $to_date);
         }
 
         return [''];
@@ -123,7 +123,7 @@ class ReportController extends ActiveController
                 ->andWhere(['between', 'DATE_PAID', $from_date, $to_date])
         ]);
 
-        return $dataProvider;
+
         $content = REPORTS_MODEL::BuildPaymentsTable($dataProvider);
         return $content;
         if (strlen($content) > 0) {
@@ -149,7 +149,7 @@ class ReportController extends ActiveController
         if (strlen($content) > 0) {
             $file_ref = CUSTOM_HELPER::GetTimeStamp();
             $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";
-            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type);
+            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type, $from_date, $to_date);
         }
 
         //return [''];

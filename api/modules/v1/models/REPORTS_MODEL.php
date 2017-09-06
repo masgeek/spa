@@ -104,7 +104,7 @@ class REPORTS_MODEL extends Reports
         return $html;
     }
 
-    public static function BuildPaymentsTable($dataProvider,$from_date,$to_date)
+    public static function BuildPaymentsTable($dataProvider)
     {
 
         $data = [];
