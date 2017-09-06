@@ -244,9 +244,7 @@ class REPORTS_MODEL extends Reports
 
     public static function SaveReport($user_id, $file_name, $report_type)
     {
-        $resp = [
-            0
-        ];
+        $resp = null;
         $model = new REPORTS_MODEL();
         $model->isNewRecord = true;
 
@@ -259,9 +257,7 @@ class REPORTS_MODEL extends Reports
 
 
         if ($model->save() && $model->validate()) {
-            $resp = $model;
-        } else {
-            $model->getErrors();
+            $resp = REPORTS_MODEL::findOne($model->REPORT_ID);
         }
         return $resp;
     }
