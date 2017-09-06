@@ -125,7 +125,7 @@ class ReportController extends ActiveController
         $dataProvider = new ActiveDataProvider([
             'query' => SERVICE_PAYMENTS::find()
                 ->where(['RESERVATION_ID' => $myReservationsArr])
-                ->andWhere(['PAYMENT_STATUS' => 1])
+                //->andWhere(['PAYMENT_STATUS' => 1])
                 ->andWhere(['between', 'DATE_PAID', $from_date, $to_date])
         ]);
 
