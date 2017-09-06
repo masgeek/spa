@@ -70,7 +70,6 @@ class REPORTS_MODEL extends Reports
         $html = '<table class="table table-bordered">';
         $html .= '<tr>';
         $html .= '<th>Reservation ID</th>';
-        $html .= '<th>Service Name</th>';
         $html .= '<th>Customer Name</th>';
         $html .= '<th>Salon Name</th>';
         $html .= '<th>Reservation Date</th>';
