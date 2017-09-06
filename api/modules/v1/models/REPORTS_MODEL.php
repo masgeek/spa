@@ -84,7 +84,7 @@ class REPORTS_MODEL extends Reports
             foreach ($reservation as $key => $value) {
                 $obj = (object)$value;
                 $html .= '<tr>';
-                $html .= '<td>&nbsp;</td>';
+                $html .= '<td>' . $obj->reservation_id . '</td>';
                 $html .= '<td>' . $obj->customer . '</td>';
                 $html .= '<td>' . $obj->salon_name . '</td>';
                 $html .= '<td>' . $obj->reservation_date . '</td>';
