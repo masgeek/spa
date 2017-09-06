@@ -10,8 +10,6 @@ namespace app\model_extended;
 
 
 use app\api\modules\v1\models\PAYMENT_MODEL;
-use app\api\modules\v1\models\RESERVATION_MODEL;
-use app\api\modules\v1\models\RESERVED_SERVICE_MODEL;
 use app\api\modules\v1\models\USER_MODEL;
 use app\models\VwMyReservations;
 
@@ -99,7 +97,7 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
     {
         $data = self::find()
             ->select('RESERVATION_ID')
-            ->where(['OWNER_ID' => $owner_id])
+           // ->where(['OWNER_ID' => $owner_id])
             ->asArray()
             ->all();
 

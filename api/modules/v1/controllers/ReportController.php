@@ -11,6 +11,7 @@ namespace app\api\modules\v1\controllers;
 
 use app\api\modules\v1\models\ALL_SERVICES_VIEW;
 use app\api\modules\v1\models\PAYMENT_MODEL;
+use app\api\modules\v1\models\SERVICE_PAYMENTS;
 use app\model_extended\MY_RESERVATIONS_VIEW;
 use Yii;
 use app\api\modules\v1\models\ALL_RESERVATIONS;
@@ -27,10 +28,10 @@ class ReportController extends ActiveController
      */
     public $modelClass = 'app\api\modules\v1\models\REPORTS_MODEL';
 
-	/**
-	 * @param $user_id
-	 * @return array|\yii\db\ActiveRecord[]
-	 */
+    /**
+     * @param $user_id
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function actionList($user_id)
     {
         $data = REPORTS_MODEL::find()
@@ -54,6 +55,13 @@ class ReportController extends ActiveController
 
         $user_id = Yii::$app->request->post('USER_ID');
         $report_type = Yii::$app->request->post('REPORT_TYPE');
+        $from_date_raw = Yii::$app->request->post('FROM_DATE');
+        $to_date_raw = Yii::$app->request->post('TO_DATE');
+
+
+        $from_date = date('Y-m-d', strtotime($from_date_raw));
+        $to_date = date('Y-m-d', strtotime($to_date_raw));
+
 
         switch (strtoupper($report_type)) {
             case REPORTS_MODEL::RESERVATIONS:
@@ -63,19 +71,19 @@ class ReportController extends ActiveController
                 $resp = $this->Services($user_id, $report_type);
                 break;
             case REPORTS_MODEL::PAYMENTS:
-                $resp = $this->Payments($user_id, $report_type);
+                $resp = $this->Payments($user_id, $report_type, $from_date, $to_date);
                 break;
         }
 
         return $resp;
     }
 
-	/***
-	 * @param $user_id
-	 * @param $report_type
-	 * @return array|mixed
-	 */
-    public function Reservations($user_id, $report_type)
+    /***
+     * @param $user_id
+     * @param $report_type
+     * @return array|mixed
+     */
+    private function Reservations($user_id, $report_type, $from_date = null, $to_date = null)
     {
         //generate the report file
         $query = ALL_RESERVATIONS::find()
@@ -98,38 +106,40 @@ class ReportController extends ActiveController
         return [''];
     }
 
-	/**
-	 * @param $user_id
-	 * @param $report_type
-	 * @return array|mixed
-	 */
-    public function Payments($user_id, $report_type)
+    /**
+     * @param $user_id
+     * @param $report_type
+     * @return array|mixed
+     */
+    private function Payments($user_id, $report_type, $from_date, $to_date)
     {
         $myReservationsArr = MY_RESERVATIONS_VIEW::MyReservationsArr($user_id);
 
 
         $dataProvider = new ActiveDataProvider([
-            'query' => PAYMENT_MODEL::find()
+            'query' => SERVICE_PAYMENTS::find()
                 ->where(['RESERVATION_ID' => $myReservationsArr])
-                //->andWhere(['PAYMENT_STATUS' => 0]),
+                ->andWhere(['PAYMENT_STATUS' => 1])
+                ->andWhere(['between', 'DATE_PAID', $from_date, $to_date])
         ]);
 
+        return $dataProvider;
         $content = REPORTS_MODEL::BuildPaymentsTable($dataProvider);
-
+        return $content;
         if (strlen($content) > 0) {
             $file_ref = CUSTOM_HELPER::GetTimeStamp();
             $file_name = "pdf/{$report_type}_{$file_ref}_report.pdf";
-            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type);
+            return CUSTOM_HELPER::GeneratePdf($user_id, $content, $file_name, $report_type, $from_date, $to_date);
         }
 
         return [''];
     }
 
-    public function Services($user_id, $report_type)
+    private function Services($user_id, $report_type, $from_date = null, $to_date = null)
     {
         $dataProvider = new ActiveDataProvider([
             'query' => ALL_SERVICES_VIEW::find()
-            ->where(['OWNER_ID' => $user_id])
+                ->where(['OWNER_ID' => $user_id])
             //->andWhere(['PAYMENT_STATUS' => 0]),
         ]);
 

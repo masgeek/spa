@@ -22,6 +22,8 @@ use Yii;
  * @property int $OWNER_ID
  * @property int $PAYMENT_STATUS
  * @property string $SALON_NAME
+ * @property int $USER_ID
+ * @property string $TIME_PAID
  */
 class VwSalonPayments extends \yii\db\ActiveRecord
 {
@@ -39,10 +41,10 @@ class VwSalonPayments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ACCOUNT_REF', 'RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE', 'MPESA_REF', 'SALON_TEL', 'OWNER_ID', 'SALON_NAME'], 'required'],
-            [['PAYMENT_ID', 'RESERVATION_ID', 'OWNER_ID', 'PAYMENT_STATUS'], 'integer'],
+            [['ACCOUNT_REF', 'RESERVATION_ID', 'BOOKING_AMOUNT', 'DATE_PAID', 'PAYMENT_REF', 'BALANCE', 'MPESA_REF', 'SALON_TEL', 'OWNER_ID', 'SALON_NAME', 'USER_ID'], 'required'],
+            [['PAYMENT_ID', 'RESERVATION_ID', 'OWNER_ID', 'PAYMENT_STATUS', 'USER_ID'], 'integer'],
             [['BOOKING_AMOUNT', 'FINAL_AMOUNT', 'BALANCE'], 'number'],
-            [['DATE_PAID'], 'safe'],
+            [['DATE_PAID', 'TIME_PAID'], 'safe'],
             [['COMMENTS'], 'string'],
             [['ACCOUNT_REF', 'PAYMENT_REF'], 'string', 'max' => 50],
             [['MPESA_REF'], 'string', 'max' => 25],
@@ -72,6 +74,8 @@ class VwSalonPayments extends \yii\db\ActiveRecord
             'OWNER_ID' => 'Owner  ID',
             'PAYMENT_STATUS' => 'Payment  Status',
             'SALON_NAME' => 'Salon  Name',
+            'USER_ID' => 'User  ID',
+            'TIME_PAID' => 'Time  Paid',
         ];
     }
 }
