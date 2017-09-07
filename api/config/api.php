@@ -25,6 +25,10 @@ $config = [
         'basePath' => '@webroot/assets',
     ],*/
 	'components' => [
+        'fcm' => [
+            'class' => 'understeam\fcm\Client',
+            'apiKey' => 'your API key', // Server API Key (you can get it here: https://firebase.google.com/docs/server/setup#prerequisites)
+        ],
         'pdf' => [
             'class' => \kartik\mpdf\Pdf::classname(),
             'format' => \kartik\mpdf\Pdf::FORMAT_A4,
@@ -83,6 +87,7 @@ $config = [
 						'v1/account',
 						'v1/status',
 						'v1/report',
+						'v1/notification',
 					],
 					//'GET,HEAD <id:\d+>/booth' => 'booth/all-booths',
 					'tokens' => [
@@ -91,6 +96,7 @@ $config = [
 					],
 					'extraPatterns' => [
 						'GET,POST all' => 'all',
+						'GET,POST,PUT,DELETE push' => 'push',
 						'POST login' => 'login',
 						'POST register' => 'register',
 						'POST add' => 'add',
