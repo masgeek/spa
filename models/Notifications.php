@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "notifications".
  *
- * @property int $NOTIFICATION_ID
+ * @property string $DEVICE_ID
  * @property int $USER_ID
  * @property string $DEVICE_TOKENS
  *
@@ -29,9 +29,11 @@ class Notifications extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['USER_ID', 'DEVICE_TOKENS'], 'required'],
+            [['DEVICE_ID', 'USER_ID', 'DEVICE_TOKENS'], 'required'],
             [['USER_ID'], 'integer'],
             [['DEVICE_TOKENS'], 'string'],
+            [['DEVICE_ID'], 'string', 'max' => 50],
+            [['DEVICE_ID'], 'unique'],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
         ];
     }
@@ -42,7 +44,7 @@ class Notifications extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'NOTIFICATION_ID' => 'Notification  ID',
+            'DEVICE_ID' => 'Device  ID',
             'USER_ID' => 'User  ID',
             'DEVICE_TOKENS' => 'Device  Tokens',
         ];

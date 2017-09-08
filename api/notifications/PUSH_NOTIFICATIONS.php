@@ -33,8 +33,8 @@ class PUSH_NOTIFICATIONS
         $message = $push->createMessage();
         $message->addRecipient(new Device($deviceToken));
         // $message->addRecipient(new Topic('SPA'));
-        $message->setNotification($note)
-            ->setData(['someId' => 111]);
+        $message->setNotification($note);
+            //->setData(['someId' => 111]);
 
         $response = Yii::$app->fcm->send($message);
 
