@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd833a960861496389dd87941572b329",
+    "content-hash": "521c810364e0733ebe1d6cc13ae5bf39",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -261,49 +261,6 @@
             ]
         },
         {
-            "name": "bryglen/yii2-apns-gcm",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bryglen/yii2-apns-gcm.git",
-                "reference": "e39da48d11e16ae5bcb35ea9e72ee3f32a19fc7f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bryglen/yii2-apns-gcm/zipball/e39da48d11e16ae5bcb35ea9e72ee3f32a19fc7f",
-                "reference": "e39da48d11e16ae5bcb35ea9e72ee3f32a19fc7f",
-                "shasum": ""
-            },
-            "require": {
-                "duccio/apns-php": "1.0.1",
-                "php-gcm/php-gcm": "^1.1.1"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "bryglen\\apnsgcm\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bryan Jayson Tan",
-                    "email": "bryantan16@gmail.com"
-                }
-            ],
-            "description": "Yii 2 Apns and Gcm together",
-            "keywords": [
-                " apns",
-                " extension",
-                " gcm",
-                "yii2"
-            ],
-            "time": "2017-04-25T12:05:11+00:00"
-        },
-        {
             "name": "cebe/markdown",
             "version": "dev-master",
             "source": {
@@ -362,44 +319,6 @@
                 "markdown-extra"
             ],
             "time": "2017-08-22T10:13:04+00:00"
-        },
-        {
-            "name": "duccio/apns-php",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/immobiliare/ApnsPHP.git",
-                "reference": "43e706e82236da2ece6e4932f63268298e5a7e83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/immobiliare/ApnsPHP/zipball/43e706e82236da2ece6e4932f63268298e5a7e83",
-                "reference": "43e706e82236da2ece6e4932f63268298e5a7e83",
-                "shasum": ""
-            },
-            "require": {
-                "lib-openssl": "*",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "ApnsPHP/Autoload.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Apple Push Notification & Feedback Provider",
-            "homepage": "https://github.com/immobiliare/ApnsPHP",
-            "keywords": [
-                "apns",
-                "apple",
-                "notification",
-                "push"
-            ],
-            "time": "2016-02-07T21:17:51+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -736,12 +655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-popover-x.git",
-                "reference": "d7b6b125ad4195b609ed2ca303608b4ad09d35c3"
+                "reference": "c3a8212131170a3fbcab83ec479cb60dd5aa43b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-popover-x/zipball/d7b6b125ad4195b609ed2ca303608b4ad09d35c3",
-                "reference": "d7b6b125ad4195b609ed2ca303608b4ad09d35c3",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-popover-x/zipball/c3a8212131170a3fbcab83ec479cb60dd5aa43b3",
+                "reference": "c3a8212131170a3fbcab83ec479cb60dd5aa43b3",
                 "shasum": ""
             },
             "type": "library",
@@ -777,7 +696,7 @@
                 "popover",
                 "popover-x"
             ],
-            "time": "2017-06-29T07:30:52+00:00"
+            "time": "2017-09-08T05:54:44+00:00"
         },
         {
             "name": "kartik-v/bootstrap-star-rating",
@@ -785,12 +704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-star-rating.git",
-                "reference": "599c10e2456bc2215da7c6337d6b1c65892bff72"
+                "reference": "ca43ee3316b268e1853613c7dbf0b1458ffe734f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-star-rating/zipball/599c10e2456bc2215da7c6337d6b1c65892bff72",
-                "reference": "599c10e2456bc2215da7c6337d6b1c65892bff72",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-star-rating/zipball/ca43ee3316b268e1853613c7dbf0b1458ffe734f",
+                "reference": "ca43ee3316b268e1853613c7dbf0b1458ffe734f",
                 "shasum": ""
             },
             "type": "library",
@@ -821,7 +740,7 @@
                 "star",
                 "svg"
             ],
-            "time": "2017-08-27T08:23:59+00:00"
+            "time": "2017-09-06T17:23:12+00:00"
         },
         {
             "name": "kartik-v/dependent-dropdown",
@@ -1414,16 +1333,16 @@
         },
         {
             "name": "kartik-v/yii2-popover-x",
-            "version": "v1.3.3",
+            "version": "v1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-popover-x.git",
-                "reference": "38f2208cf92f8c4a7758f485575a881cade1970c"
+                "reference": "58837d63e65caa41f0c13e671d1e2abeec17887d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-popover-x/zipball/38f2208cf92f8c4a7758f485575a881cade1970c",
-                "reference": "38f2208cf92f8c4a7758f485575a881cade1970c",
+                "url": "https://api.github.com/repos/kartik-v/yii2-popover-x/zipball/58837d63e65caa41f0c13e671d1e2abeec17887d",
+                "reference": "58837d63e65caa41f0c13e671d1e2abeec17887d",
                 "shasum": ""
             },
             "require": {
@@ -1458,7 +1377,7 @@
                 "popover",
                 "popover-x"
             ],
-            "time": "2016-01-12T16:59:09+00:00"
+            "time": "2017-09-08T04:30:42+00:00"
         },
         {
             "name": "kartik-v/yii2-sortable",
@@ -1723,12 +1642,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "4a0c0fcc866b4493148fcfb58f9c704b30527548"
+                "reference": "eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/4a0c0fcc866b4493148fcfb58f9c704b30527548",
-                "reference": "4a0c0fcc866b4493148fcfb58f9c704b30527548",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550",
+                "reference": "eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550",
                 "shasum": ""
             },
             "require": {
@@ -1769,7 +1688,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-09-04T15:29:57+00:00"
+            "time": "2017-09-06T06:18:08+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -2503,19 +2422,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpdf/mpdf.git",
-                "reference": "2a92aaacad2968c879df7c566951543788516288"
+                "reference": "0c29908967e359768f733ec11004c9226f35c3db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/2a92aaacad2968c879df7c566951543788516288",
-                "reference": "2a92aaacad2968c879df7c566951543788516288",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/0c29908967e359768f733ec11004c9226f35c3db",
+                "reference": "0c29908967e359768f733ec11004c9226f35c3db",
                 "shasum": ""
             },
             "require": {
                 "ext-gd": "*",
                 "ext-mbstring": "*",
                 "paragonie/random_compat": "^2.0",
-                "php": "^5.6 || ~7.0.0 || ~7.1.0",
+                "php": "^5.6 || ~7.0.0 || ~7.1.0 || ~7.2.0",
                 "psr/log": "^1.0",
                 "setasign/fpdi": "1.6.*"
             },
@@ -2565,7 +2484,7 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2017-09-01T08:50:11+00:00"
+            "time": "2017-09-06T08:49:53+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2672,50 +2591,6 @@
                 "php"
             ],
             "time": "2016-08-18T11:47:56+00:00"
-        },
-        {
-            "name": "php-gcm/php-gcm",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lkorth/php-gcm.git",
-                "reference": "fdd57ec3f79fd5a7f0936d695a977c27b22ea67a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lkorth/php-gcm/zipball/fdd57ec3f79fd5a7f0936d695a977c27b22ea67a",
-                "reference": "fdd57ec3f79fd5a7f0936d695a977c27b22ea67a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.3.10"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PHP_GCM": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Luke Korth",
-                    "email": "luke@lukekorth.com"
-                }
-            ],
-            "description": "A PHP library for sending GCM messages",
-            "homepage": "https://github.com/lkorth/php-gcm",
-            "keywords": [
-                "android",
-                "gcm",
-                "library",
-                "php"
-            ],
-            "time": "2015-05-06T13:25:45+00:00"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -3074,12 +2949,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a407a75d927ec2060bb012ced9ec98c4177f56e3"
+                "reference": "f3e75ae4f8113ed1a653e87802f2b5944202ffe5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a407a75d927ec2060bb012ced9ec98c4177f56e3",
-                "reference": "a407a75d927ec2060bb012ced9ec98c4177f56e3",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f3e75ae4f8113ed1a653e87802f2b5944202ffe5",
+                "reference": "f3e75ae4f8113ed1a653e87802f2b5944202ffe5",
                 "shasum": ""
             },
             "require": {
@@ -3166,7 +3041,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-09-01T21:49:53+00:00"
+            "time": "2017-09-07T19:32:07+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -3631,12 +3506,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "633549c771ae745af3e0e4ea26665b29ec01b7b9"
+                "reference": "d35b1165f34f09ffefef77a3344e84705cde4077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/633549c771ae745af3e0e4ea26665b29ec01b7b9",
-                "reference": "633549c771ae745af3e0e4ea26665b29ec01b7b9",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d35b1165f34f09ffefef77a3344e84705cde4077",
+                "reference": "d35b1165f34f09ffefef77a3344e84705cde4077",
                 "shasum": ""
             },
             "require": {
@@ -3673,7 +3548,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-09-04T07:21:24+00:00"
+            "time": "2017-09-06T07:11:10+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4975,12 +4850,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "78d1370ad8d26a3f1bc117a2ac3af419aaf5c37e"
+                "reference": "bb89acb86c4079c8628b406cb1f7ae47ee4406bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/78d1370ad8d26a3f1bc117a2ac3af419aaf5c37e",
-                "reference": "78d1370ad8d26a3f1bc117a2ac3af419aaf5c37e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/bb89acb86c4079c8628b406cb1f7ae47ee4406bd",
+                "reference": "bb89acb86c4079c8628b406cb1f7ae47ee4406bd",
                 "shasum": ""
             },
             "require": {
@@ -5036,7 +4911,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-09-03T15:31:40+00:00"
+            "time": "2017-09-07T15:50:16+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -5380,12 +5255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "bd9dcffc3eb2984afd4c534864f2802eccd3435a"
+                "reference": "c076a2d6f809130a84f99616b425b9665b3ce0a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/bd9dcffc3eb2984afd4c534864f2802eccd3435a",
-                "reference": "bd9dcffc3eb2984afd4c534864f2802eccd3435a",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/c076a2d6f809130a84f99616b425b9665b3ce0a5",
+                "reference": "c076a2d6f809130a84f99616b425b9665b3ce0a5",
                 "shasum": ""
             },
             "require": {
@@ -5430,7 +5305,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-30T06:19:03+00:00"
+            "time": "2017-09-04T13:18:59+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -5488,12 +5363,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "8cc10206d1633d2b2288135841a9f232f2b78d33"
+                "reference": "c2680ad85f16871c330398aaf08dfa09427b3351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/8cc10206d1633d2b2288135841a9f232f2b78d33",
-                "reference": "8cc10206d1633d2b2288135841a9f232f2b78d33",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/c2680ad85f16871c330398aaf08dfa09427b3351",
+                "reference": "c2680ad85f16871c330398aaf08dfa09427b3351",
                 "shasum": ""
             },
             "require": {
@@ -5527,7 +5402,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-09-04T09:43:21+00:00"
+            "time": "2017-09-05T23:21:31+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -5632,9 +5507,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "bryglen/yii2-apns-gcm": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

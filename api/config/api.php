@@ -27,7 +27,7 @@ $config = [
 	'components' => [
         'fcm' => [
             'class' => 'understeam\fcm\Client',
-            'apiKey' => 'AIzaSyA7Vb1ATkhZlb0FecmEO8h14U3mTb03Hgo', // Server API Key (you can get it here: https://firebase.google.com/docs/server/setup#prerequisites)
+            'apiKey' => 'AAAAXpcrdvY:APA91bEiTv8Gn7yDGy3wADsBLvRElhagkpuPJO6RKZRoCwUHrNQGN_g7TOm3eeYIPaN_MUulsYd93sqCEcC7KTFSWd8LwKsQ9c4tRchIUNN3CriQ0cIEVZgSAQceXuilgmiKrnRq1kS0', // Server API Key (you can get it here: https://firebase.google.com/docs/server/setup#prerequisites)
         ],
         'pdf' => [
             'class' => \kartik\mpdf\Pdf::classname(),

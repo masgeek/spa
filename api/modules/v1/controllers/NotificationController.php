@@ -20,6 +20,7 @@ class NotificationController extends ActiveController
     public function actionPush()
     {
         $deviceToken = 'ed3Y-Vbz2-U:APA91bHAh0KkhWYdRlzl2ORBbihzBUITao5iJ-RUGwzns2bmRYumjTSYVauJq9ine31lMMDqxbdEGC9AZymLEWj0HEIPeaIf7MojbhMkIN63a8oURrNoQ63ldDcnz-wd9rrz-cCq02Gs';
+
         $note = Yii::$app->fcm->createNotification("test title", "testing body");
         $note->setIcon('notification_icon_resource_name')
             ->setColor('#ffffff')
