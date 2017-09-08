@@ -9,6 +9,7 @@
 namespace app\api\modules\v1\controllers;
 
 
+use app\api\notifications\PUSH_NOTIFICATIONS;
 use paragraph1\phpFCM\Recipient\Device;
 use Yii;
 use yii\rest\ActiveController;
@@ -19,22 +20,10 @@ class NotificationController extends ActiveController
 
     public function actionPush()
     {
+        $push = new PUSH_NOTIFICATIONS();
         $deviceToken = 'ed3Y-Vbz2-U:APA91bHAh0KkhWYdRlzl2ORBbihzBUITao5iJ-RUGwzns2bmRYumjTSYVauJq9ine31lMMDqxbdEGC9AZymLEWj0HEIPeaIf7MojbhMkIN63a8oURrNoQ63ldDcnz-wd9rrz-cCq02Gs';
 
-        $note = Yii::$app->fcm->createNotification("test title", "testing body");
-        $note->setIcon('notification_icon_resource_name')
-            ->setColor('#ffffff')
-            ->setBadge(1);
-
-        $message = Yii::$app->fcm->createMessage();
-        $message->addRecipient(new Device($deviceToken));
-       // $message->addRecipient(new Topic('SPA'));
-        $message->setNotification($note)
-            ->setData(['someId' => 111]);
-
-        $response = Yii::$app->fcm->send($message);
-
-       return $response->getStatusCode();
+        return $push->NotifyUser("Account Activated", 'Dear me your account has been activated', $deviceToken);
     }
 
 }
