@@ -8,7 +8,10 @@ use Yii;
  * This is the model class for table "notifications".
  *
  * @property int $NOTIFICATION_ID
- * @property string $RECIPIENT
+ * @property int $USER_ID
+ * @property string $DEVICE_TOKENS
+ *
+ * @property User $uSER
  */
 class Notifications extends \yii\db\ActiveRecord
 {
@@ -26,8 +29,10 @@ class Notifications extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['RECIPIENT'], 'required'],
-            [['RECIPIENT'], 'string', 'max' => 40],
+            [['USER_ID', 'DEVICE_TOKENS'], 'required'],
+            [['USER_ID'], 'integer'],
+            [['DEVICE_TOKENS'], 'string'],
+            [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
         ];
     }
 
@@ -38,7 +43,16 @@ class Notifications extends \yii\db\ActiveRecord
     {
         return [
             'NOTIFICATION_ID' => 'Notification  ID',
-            'RECIPIENT' => 'Recipient',
+            'USER_ID' => 'User  ID',
+            'DEVICE_TOKENS' => 'Device  Tokens',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUSER()
+    {
+        return $this->hasOne(User::className(), ['USER_ID' => 'USER_ID']);
     }
 }

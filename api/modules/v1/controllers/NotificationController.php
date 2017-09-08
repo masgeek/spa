@@ -19,7 +19,7 @@ class NotificationController extends ActiveController
 
     public function actionPush()
     {
-        $deviceToken = 'cRH_Kd1Mn-4:APA91bGMOcRt35HFB05g37064EtZVYBMm1xNKTPiWq1naM-6uSJ0d-ScHdSgazddujGO78z3Tf--CFoKvVCgLL8X_XdyXyQYpsZ7MWh-jt1oTtzn_ImV5EIU_3jEE8v4UcDGG0oRjwl3';
+        $deviceToken = 'ed3Y-Vbz2-U:APA91bHAh0KkhWYdRlzl2ORBbihzBUITao5iJ-RUGwzns2bmRYumjTSYVauJq9ine31lMMDqxbdEGC9AZymLEWj0HEIPeaIf7MojbhMkIN63a8oURrNoQ63ldDcnz-wd9rrz-cCq02Gs';
         $note = Yii::$app->fcm->createNotification("test title", "testing body");
         $note->setIcon('notification_icon_resource_name')
             ->setColor('#ffffff')
@@ -33,7 +33,7 @@ class NotificationController extends ActiveController
 
         $response = Yii::$app->fcm->send($message);
 
-        var_dump($response->getStatusCode());
+       return $response->getStatusCode();
     }
 
 }
