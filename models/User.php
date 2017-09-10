@@ -16,6 +16,7 @@ use Yii;
  * @property int $ACCOUNT_TYPE_ID
  * @property string $PASSWORD
  *
+ * @property Notifications[] $notifications
  * @property Reports[] $reports
  * @property Reservations[] $reservations
  * @property Salon[] $salons
@@ -64,6 +65,14 @@ class User extends \yii\db\ActiveRecord
             'ACCOUNT_TYPE_ID' => 'Account  Type  ID',
             'PASSWORD' => 'Password',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNotifications()
+    {
+        return $this->hasMany(Notifications::className(), ['USER_ID' => 'USER_ID']);
     }
 
     /**

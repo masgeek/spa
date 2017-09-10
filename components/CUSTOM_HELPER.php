@@ -34,9 +34,11 @@ class CUSTOM_HELPER
      * @param $content
      * @param $file_name
      * @param $report_type
+     * @param $from_date
+     * @param $to_date
      * @return mixed
      */
-    public static function GeneratePdf($user_id, $content, $file_name, $report_type)
+    public static function GeneratePdf($user_id, $content, $file_name, $report_type, $from_date, $to_date)
     {
         $pdf = new Pdf([
             // set to use core fonts only
@@ -58,7 +60,7 @@ class CUSTOM_HELPER
             'options' => ['title' => 'Reservations Report'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader' => [Date('M d Y H:i:s') . " {$report_type} Report"],
+                'SetHeader' => [Date('M d Y H:i:s') . " {$report_type} Report from {$from_date} TO {$to_date}"],
                 'SetFooter' => ['{PAGENO}'],
             ]
         ]);
