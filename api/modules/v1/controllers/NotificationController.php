@@ -23,8 +23,9 @@ class NotificationController extends ActiveController
 	public function actionPush()
 	{
 		$push = new PUSH_NOTIFICATIONS();
-		$deviceToken = 'ed3Y-Vbz2-U:APA91bHAh0KkhWYdRlzl2ORBbihzBUITao5iJ-RUGwzns2bmRYumjTSYVauJq9ine31lMMDqxbdEGC9AZymLEWj0HEIPeaIf7MojbhMkIN63a8oURrNoQ63ldDcnz-wd9rrz-cCq02Gs';
-
+		$deviceToken = [
+			'DEVICE_TOKENS' => 'c7sfgEC_xBI:APA91bGGmtfTg6ay_D7KCFrUXCv32FsNNF57gxUhtASxP4RlzEEdPxO4Il7g2jzbRdUmse_YNfADP2PnLAlCfSD-a30KEX42aMQ5sE_gjLyjM45-CsMgN5ryq4BkThwBAz5dJDHc9_F0'
+		];
 		return $push->NotifyUser("Account Activated", 'Dear me your account has been activated', $deviceToken);
 	}
 

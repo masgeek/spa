@@ -49,8 +49,6 @@ class PUSH_NOTIFICATIONS
 
 			$response = Yii::$app->fcm->send($message);
 
-			var_dump($response->getStatusCode());
-			die;
 			return $response->getStatusCode();
 		}
 		return false;
