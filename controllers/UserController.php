@@ -119,7 +119,7 @@ class UserController extends Controller
 					//let us send the push notifications
 					$deviceTokens = NOTIFICATIONS_MODEL::find()
 						->select(['DEVICE_TOKENS'])
-						->where(['USER_ID' => 2/*$model->USER_ID*/])
+						->where(['USER_ID' => $model->USER_ID])
 						->asArray()
 						->all();
 
