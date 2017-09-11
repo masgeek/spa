@@ -123,12 +123,13 @@ class UserController extends Controller
 						->asArray()
 						->all();
 
-					$title = "Account is {$model->aCCOUNTSTATUS->STATUS_NAME}";
-					$message = "Your account is now {$model->aCCOUNTSTATUS->STATUS_NAME}";
+					$return_val = isset($services['ACCOUNT_TYPE_ID']) ? $model->aCCOUNTTYPE->ACCOUNT_NAME : $model->aCCOUNTSTATUS->STATUS_NAME;
+					$title = "Account is {$return_val}";
+					$message = "Your account is now {$return_val}";
 
 					$push->NotifyUser($title, $message, $deviceTokens);
 
-					$return_val = isset($services['ACCOUNT_TYPE_ID']) ? $model->aCCOUNTTYPE->ACCOUNT_NAME : $model->aCCOUNTSTATUS->STATUS_NAME;
+
 					$out = ['output' => $return_val, 'message' => ''];
 				} else {
 					$out = ['output' => '', 'message' => 'Unable to save'];
