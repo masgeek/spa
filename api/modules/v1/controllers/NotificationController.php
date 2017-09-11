@@ -40,7 +40,11 @@ class NotificationController extends ActiveController
 		$device_tokens = $request->DEVICE_TOKENS;
 
 		//first check if the record exists
-		$record_exists = NOTIFICATIONS_MODEL::findOne($device_id);
+		$record_exists = NOTIFICATIONS_MODEL::find()
+			->where(['DEVICE_ID' => $device_id])
+			->andWhere(['USER_ID' => $user_id])
+			->one();
+
 		if ($record_exists == null) {
 			$model = new NOTIFICATIONS_MODEL();
 			$model->DEVICE_ID = $device_id;
