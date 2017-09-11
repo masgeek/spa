@@ -33,7 +33,7 @@ class Notifications extends \yii\db\ActiveRecord
             [['USER_ID'], 'integer'],
             [['DEVICE_TOKENS'], 'string'],
             [['DEVICE_ID'], 'string', 'max' => 50],
-            [['DEVICE_ID'], 'unique'],
+            [['DEVICE_ID', 'USER_ID'], 'unique', 'targetAttribute' => ['DEVICE_ID', 'USER_ID']],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
         ];
     }
