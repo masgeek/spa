@@ -62,9 +62,9 @@ class ReportController extends ActiveController
         $from_date = date('Y-m-d', strtotime($from_date_raw));
         $to_date = date('Y-m-d', strtotime($to_date_raw));
 
-
         switch (strtoupper($report_type)) {
             case REPORTS_MODEL::RESERVATIONS:
+            case REPORTS_MODEL::RESERVATION:
                 $resp = $this->Reservations($user_id, $report_type,$from_date, $to_date);
                 break;
             case REPORTS_MODEL::SERVICES:
@@ -89,8 +89,8 @@ class ReportController extends ActiveController
     {
         //generate the report file
         $query = ALL_RESERVATIONS::find()
-            ->where(['OWNER_ID' => $user_id])
-            ->andWhere(['between', 'RESERVATION_DATE', $from_date, $to_date])
+            //->where(['OWNER_ID' => $user_id])
+            //->andWhere(['between', 'RESERVATION_DATE', $from_date, $to_date])
             ->orderBy(['SALON_NAME' => SORT_DESC]); //$searchModel->search(\Yii::$app->request->queryParams);
 
         $dataProvider = new ActiveDataProvider([

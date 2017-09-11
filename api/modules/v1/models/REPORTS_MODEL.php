@@ -18,6 +18,7 @@ class REPORTS_MODEL extends Reports
 {
 
     const RESERVATIONS = 'RESERVATIONS';
+    const RESERVATION = 'RESERVATION';
     const SERVICES = 'SERVICES';
     const PAYMENTS = 'PAYMENTS';
 
@@ -54,6 +55,7 @@ class REPORTS_MODEL extends Reports
             $data[$service_name][] = [
                 'customer' => $customer_names,
                 'salon_name' => $model->SALON_NAME,
+                'service_name' => $model->SERVICE_NAME,
                 'reservation_id' => $model->RESERVATION_ID,
                 'reservation_date' => $model->RESERVATION_DATE,
                 'total_cost' => (float)$model->TOTAL_COST,
@@ -72,6 +74,7 @@ class REPORTS_MODEL extends Reports
         $html .= '<th>Reservation ID</th>';
         $html .= '<th>Customer Name</th>';
         $html .= '<th>Salon Name</th>';
+        $html .= '<th>Service Name</th>';
         $html .= '<th>Reservation Date</th>';
         $html .= '<th>Reservation Status</th>';
         $html .= '<th>Total Service Cost</th>';
@@ -87,6 +90,8 @@ class REPORTS_MODEL extends Reports
                 $html .= '<td>' . $obj->reservation_id . '</td>';
                 $html .= '<td>' . $obj->customer . '</td>';
                 $html .= '<td>' . $obj->salon_name . '</td>';
+                $html .= '<td>' . $obj->salon_name . '</td>';
+                $html .= '<td>' . $obj->service_name . '</td>';
                 $html .= '<td>' . $obj->reservation_date . '</td>';
                 $html .= '<td>' . $obj->reservation_status . '</td>';
                 $html .= '<td>' . $obj->total_cost . '</td>';

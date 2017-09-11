@@ -10,6 +10,7 @@ namespace app\api\modules\v1\controllers;
 
 
 use app\api\modules\v1\models\SALON_MODEL;
+use app\api\notifications\PUSH_NOTIFICATIONS;
 use app\components\CUSTOM_HELPER;
 use app\model_extended\MY_RESERVATIONS_VIEW;
 use Yii;
@@ -307,6 +308,7 @@ class ReservationController extends ActiveController
 		if (!$model->save() && !$model->validate()) {
 			$model = ['message' => 'Unable to cancel reservation please contact the Adminstrator'];
 		}
+		$this->SendPush('Reservation Cancelled', 'Reservation Cancel', $model->uSER->USER_ID);
 		return $model;
 	}
 
@@ -335,5 +337,18 @@ class ReservationController extends ActiveController
 			->andWhere(['STATUS_ID' => $status_id])
 			->all(); //we will iterate to get the customer name
 		return $reservations;
+	}
+
+	private function SendPush($message, $title, $user_id)
+	{
+		$push = new PUSH_NOTIFICATIONS();
+		//let us send the push notifications
+		$deviceTokens = NOTIFICATIONS_MODEL::find()
+			->select(['DEVICE_TOKENS'])
+			->where(['USER_ID' => $user_id])
+			->asArray()
+			->all();
+
+		$push->NotifyUser($title, $message, $deviceTokens);
 	}
 }

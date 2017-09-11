@@ -115,6 +115,7 @@ class UserController extends Controller
 
 
 				if ($model->save()) {
+					$return_val = isset($services['ACCOUNT_TYPE_ID']) ? $model->aCCOUNTTYPE->ACCOUNT_NAME : $model->aCCOUNTSTATUS->STATUS_NAME;
 
 					//let us send the push notifications
 					$deviceTokens = NOTIFICATIONS_MODEL::find()
@@ -122,11 +123,8 @@ class UserController extends Controller
 						->where(['USER_ID' => $model->USER_ID])
 						->asArray()
 						->all();
-
-					$return_val = isset($services['ACCOUNT_TYPE_ID']) ? $model->aCCOUNTTYPE->ACCOUNT_NAME : $model->aCCOUNTSTATUS->STATUS_NAME;
 					$title = "Account is {$return_val}";
 					$message = "Your account is now {$return_val}";
-
 					$push->NotifyUser($title, $message, $deviceTokens);
 
 
