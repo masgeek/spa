@@ -7,6 +7,7 @@ use Yii;
 /**
  * This is the model class for table "notifications".
  *
+ * @property int $ID
  * @property string $DEVICE_ID
  * @property int $USER_ID
  * @property string $DEVICE_TOKENS
@@ -44,6 +45,7 @@ class Notifications extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'ID' => 'ID',
             'DEVICE_ID' => 'Device  ID',
             'USER_ID' => 'User  ID',
             'DEVICE_TOKENS' => 'Device  Tokens',
