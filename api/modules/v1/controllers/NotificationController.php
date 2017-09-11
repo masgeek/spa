@@ -29,7 +29,7 @@ class NotificationController extends ActiveController
 			->asArray()
 			->all();
 
-		return $push->NotifyUser("Account Activated", 'Dear me your account has been activated', $deviceTokens);
+		return $push->NotifyUser("Account Activated", 'Your account has been activated', $deviceTokens);
 	}
 
 	public function actionToken()
