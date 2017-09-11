@@ -26,4 +26,7 @@ class NotificationController extends ActiveController
         return $push->NotifyUser("Account Activated", 'Dear me your account has been activated', $deviceToken);
     }
 
+    public function actionToken(){
+
+    }
 }

@@ -97,6 +97,7 @@ $config = [
 					'extraPatterns' => [
 						'GET,POST all' => 'all',
 						'GET,POST,PUT,DELETE push' => 'push',
+						'GET,POST,PUT,DELETE token' => 'token',
 						'POST login' => 'login',
 						'POST register' => 'register',
 						'POST add' => 'add',
