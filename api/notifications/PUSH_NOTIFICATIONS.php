@@ -15,6 +15,12 @@ use Yii;
 
 class PUSH_NOTIFICATIONS
 {
+	/**
+	 * @param string $msgTitle
+	 * @param string $msgBody
+	 * @param array  $deviceToken
+	 * @return bool|int
+	 */
 	public function NotifyUser($msgTitle, $msgBody, array $deviceToken)
 	{
 		/* @var $push Client */
@@ -25,10 +31,10 @@ class PUSH_NOTIFICATIONS
 		if (is_array($deviceToken)) {
 			$push = Yii::$app->fcm;
 
-			foreach ($deviceToken as $key => $token){
-				var_dump($token);
+			foreach ($deviceToken as $key => $tokens) {
+				$token = $tokens['DEVICE_TOKENS'];
+
 			}
-			return 1;
 			$note = $push->createNotification($msgTitle, $msgBody);
 			$note->setIcon('notification_icon_resource_name')
 				->setColor('#ff4081')
@@ -36,13 +42,15 @@ class PUSH_NOTIFICATIONS
 
 
 			$message = $push->createMessage();
-			$message->addRecipient(new Device($deviceToken));
+			$message->addRecipient(new Device($token));
 			// $message->addRecipient(new Topic('SPA'));
 			$message->setNotification($note);
 			//->setData(['someId' => 111]);
 
 			$response = Yii::$app->fcm->send($message);
 
+			var_dump($response->getStatusCode());
+			die;
 			return $response->getStatusCode();
 		}
 		return false;

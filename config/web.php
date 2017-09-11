@@ -1,6 +1,7 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
+$fcm = require(__DIR__ . '/fcm.php');
 
 $config = [
 	'id' => 'basic',
