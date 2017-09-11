@@ -1,6 +1,7 @@
 <?php
 
 $db = require(__DIR__ . '/../../config/db.php');
+$fcm = require(__DIR__ . '/../../config/fcm.php');
 $params = require(__DIR__ . '/params.php');
 
 $config = [
@@ -25,10 +26,7 @@ $config = [
         'basePath' => '@webroot/assets',
     ],*/
 	'components' => [
-        'fcm' => [
-            'class' => 'understeam\fcm\Client',
-            'apiKey' => 'AAAAXpcrdvY:APA91bEiTv8Gn7yDGy3wADsBLvRElhagkpuPJO6RKZRoCwUHrNQGN_g7TOm3eeYIPaN_MUulsYd93sqCEcC7KTFSWd8LwKsQ9c4tRchIUNN3CriQ0cIEVZgSAQceXuilgmiKrnRq1kS0', // Server API Key (you can get it here: https://firebase.google.com/docs/server/setup#prerequisites)
-        ],
+        'fcm' => $fcm,
         'pdf' => [
             'class' => \kartik\mpdf\Pdf::classname(),
             'format' => \kartik\mpdf\Pdf::FORMAT_A4,

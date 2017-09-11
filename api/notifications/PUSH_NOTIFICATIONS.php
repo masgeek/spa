@@ -15,29 +15,36 @@ use Yii;
 
 class PUSH_NOTIFICATIONS
 {
-    public function NotifyUser($msgTitle, $msgBody, $deviceToken)
-    {
-        /* @var $push Client*/
-        if ($deviceToken == null) {
-            return false;
-        }
+	public function NotifyUser($msgTitle, $msgBody, array $deviceToken)
+	{
+		/* @var $push Client */
+		if ($deviceToken == null) {
+			return false;
+		}
 
-        $push = Yii::$app->fcm;
+		if (is_array($deviceToken)) {
+			$push = Yii::$app->fcm;
 
-        $note =$push->createNotification($msgTitle, $msgBody);
-        $note->setIcon('notification_icon_resource_name')
-            ->setColor('#ff4081')
-            ->setBadge(1);
+			foreach ($deviceToken as $key => $token){
+				var_dump($token);
+			}
+			return 1;
+			$note = $push->createNotification($msgTitle, $msgBody);
+			$note->setIcon('notification_icon_resource_name')
+				->setColor('#ff4081')
+				->setBadge(1);
 
 
-        $message = $push->createMessage();
-        $message->addRecipient(new Device($deviceToken));
-        // $message->addRecipient(new Topic('SPA'));
-        $message->setNotification($note);
-            //->setData(['someId' => 111]);
+			$message = $push->createMessage();
+			$message->addRecipient(new Device($deviceToken));
+			// $message->addRecipient(new Topic('SPA'));
+			$message->setNotification($note);
+			//->setData(['someId' => 111]);
 
-        $response = Yii::$app->fcm->send($message);
+			$response = Yii::$app->fcm->send($message);
 
-        return $response->getStatusCode();
-    }
+			return $response->getStatusCode();
+		}
+		return false;
+	}
 }
