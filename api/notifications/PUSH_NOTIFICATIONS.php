@@ -8,21 +8,32 @@
 
 namespace app\api\notifications;
 
-use paragraph1\phpFCM\Message;
-use paragraph1\phpFCM\Recipient\Device;
+use app\api\modules\v1\models\NOTIFICATIONS_MODEL;
 use understeam\fcm\Client;
 use Yii;
 
 class PUSH_NOTIFICATIONS
 {
+    private function GetUserDeviceTokens($user_id)
+    {
+        $deviceTokens = NOTIFICATIONS_MODEL::find()
+            ->select(['DEVICE_TOKENS'])
+            ->where(['USER_ID' => $user_id])
+            ->asArray()
+            ->all();
+
+        return $deviceTokens;
+    }
+
     /**
      * @param string $msgTitle
      * @param string $msgBody
-     * @param array $deviceToken
+     * @param int $userID
      * @return bool|int
      */
-    public function NotifyUser($msgTitle, $msgBody, array $deviceToken)
+    public function NotifyUser($msgTitle, $msgBody, $userID)
     {
+        /* @var $push Client */
         $deviceTokens = [];
         $push = Yii::$app->fcm;
 
@@ -31,12 +42,10 @@ class PUSH_NOTIFICATIONS
             ->setColor('#ff4081')
             ->setBadge(1);
 
-        /* @var $push Client */
-        if ($deviceToken == null) {
-            return false;
-        }
+        $deviceToken = $this->GetUserDeviceTokens($userID);
 
-       $deviceToken = 'ctHXIFy0J7s:APA91bFtaaSUCiN1UhCXX436cDJQz21S7wb7vnL48UDjmxSfQbvaTquIjM0us7CBcqT2QB1R_lLtHTFpVlVmmGLjqKzHjQi_xmyjaD4axOj4jqyblppnwQGtiEw7KsHk0fkyuh-yKv8Y';
+
+        $deviceToken = 'ctHXIFy0J7s:APA91bFtaaSUCiN1UhCXX436cDJQz21S7wb7vnL48UDjmxSfQbvaTquIjM0us7CBcqT2QB1R_lLtHTFpVlVmmGLjqKzHjQi_xmyjaD4axOj4jqyblppnwQGtiEw7KsHk0fkyuh-yKv8Y';
         if (is_array($deviceToken)) {
             foreach ($deviceToken as $key => $tokens) {
                 $deviceTokens[] = $tokens['DEVICE_TOKENS'];
