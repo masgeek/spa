@@ -50,17 +50,16 @@ class PUSH_NOTIFICATIONS
             foreach ($deviceToken as $key => $tokens) {
                 $deviceTokens[] = $tokens['DEVICE_TOKENS'];
             }
-        } else {
-            $deviceTokens = [$deviceToken];
+
+
+            $message = $push->createMessage($deviceTokens);
+
+            //$message->addRecipient(new Device($token));
+            $message->setNotification($note);
+            $response = $push->send($message);
+
+            return $response->getStatusCode();
         }
-
-
-        $message = $push->createMessage($deviceTokens);
-
-        //$message->addRecipient(new Device($token));
-        $message->setNotification($note);
-        $response = $push->send($message);
-
-        return $response->getStatusCode();
+        return false;
     }
 }

@@ -286,7 +286,7 @@ class ReservationController extends ActiveController
 
         $model->STATUS_ID = 1;  //flag as confirmed
         if (!$model->save() && !$model->validate()) {
-            $model = ['message' => 'Unable to confirm reservation please contact the Adminstrator'];
+            $model = ['message' => 'Unable to confirm reservation please contact the Administrator'];
         }else {
             $this->SendPush("Dear {$model->uSER->SURNAME}. Your Reservation has been Confirmed", 'Reservation Confirmed', $model->uSER->USER_ID);
         }
@@ -309,7 +309,7 @@ class ReservationController extends ActiveController
         $model->STATUS_ID = 2;  //flag as confirmed
 
         if (!$model->save() && !$model->validate()) {
-            $model = ['message' => 'Unable to cancel reservation please contact the Adminstrator'];
+            $model = ['message' => 'Unable to cancel reservation please contact the Administrator'];
         }else {
             $this->SendPush("Dear {$model->uSER->SURNAME}. Your Reservation has been Cancelled", 'Reservation Cancelled', $model->uSER->USER_ID);
         }
