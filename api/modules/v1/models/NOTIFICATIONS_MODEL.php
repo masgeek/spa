@@ -11,7 +11,6 @@ namespace app\api\modules\v1\models;
 
 use app\models\Notifications;
 use yii\db\Expression;
-
 class NOTIFICATIONS_MODEL extends Notifications
 {
     public function beforeValidate()
