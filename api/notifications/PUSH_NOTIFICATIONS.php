@@ -36,7 +36,7 @@ class PUSH_NOTIFICATIONS
             return false;
         }
 
-        $deviceToken = 'ctHXIFy0J7s:APA91bFtaaSUCiN1UhCXX436cDJQz21S7wb7vnL48UDjmxSfQbvaTquIjM0us7CBcqT2QB1R_lLtHTFpVlVmmGLjqKzHjQi_xmyjaD4axOj4jqyblppnwQGtiEw7KsHk0fkyuh-yKv8Y';
+       $deviceToken = 'ctHXIFy0J7s:APA91bFtaaSUCiN1UhCXX436cDJQz21S7wb7vnL48UDjmxSfQbvaTquIjM0us7CBcqT2QB1R_lLtHTFpVlVmmGLjqKzHjQi_xmyjaD4axOj4jqyblppnwQGtiEw7KsHk0fkyuh-yKv8Y';
         if (is_array($deviceToken)) {
             foreach ($deviceToken as $key => $tokens) {
                 $deviceTokens[] = $tokens['DEVICE_TOKENS'];
@@ -44,7 +44,10 @@ class PUSH_NOTIFICATIONS
         } else {
             $deviceTokens = [$deviceToken];
         }
+
+
         $message = $push->createMessage($deviceTokens);
+
         //$message->addRecipient(new Device($token));
         $message->setNotification($note);
         $response = $push->send($message);
