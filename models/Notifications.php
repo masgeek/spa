@@ -11,6 +11,7 @@ use Yii;
  * @property string $DEVICE_ID
  * @property int $USER_ID
  * @property string $DEVICE_TOKENS
+ * @property string $LAST_UPDATE
  *
  * @property User $uSER
  */
@@ -33,6 +34,7 @@ class Notifications extends \yii\db\ActiveRecord
             [['DEVICE_ID', 'USER_ID', 'DEVICE_TOKENS'], 'required'],
             [['USER_ID'], 'integer'],
             [['DEVICE_TOKENS'], 'string'],
+            [['LAST_UPDATE'], 'safe'],
             [['DEVICE_ID'], 'string', 'max' => 50],
             [['DEVICE_ID', 'USER_ID'], 'unique', 'targetAttribute' => ['DEVICE_ID', 'USER_ID']],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
@@ -49,6 +51,7 @@ class Notifications extends \yii\db\ActiveRecord
             'DEVICE_ID' => 'Device  ID',
             'USER_ID' => 'User  ID',
             'DEVICE_TOKENS' => 'Device  Tokens',
+            'LAST_UPDATE' => 'Last  Update',
         ];
     }
 

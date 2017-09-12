@@ -18,7 +18,6 @@ use Yii;
  * @property string $BOOKING_AMOUNT
  * @property string $COMMENTS
  * @property string $RESERVATION_TIME
- * @property string $SERVICE_AMOUNT
  */
 class VwMyReservedServices extends \yii\db\ActiveRecord
 {
@@ -37,9 +36,9 @@ class VwMyReservedServices extends \yii\db\ActiveRecord
     {
         return [
             [['RESERVATION_ID', 'USER_ID', 'STATUS_ID', 'SALON_ID'], 'integer'],
-            [['USER_ID', 'RESERVATION_DATE', 'TOTAL_COST', 'SALON_NAME', 'ACCOUNT_REF', 'RESERVATION_TIME', 'SERVICE_AMOUNT'], 'required'],
+            [['USER_ID', 'RESERVATION_DATE', 'TOTAL_COST', 'SALON_NAME', 'ACCOUNT_REF', 'RESERVATION_TIME'], 'required'],
             [['RESERVATION_DATE', 'RESERVATION_TIME'], 'safe'],
-            [['TOTAL_COST', 'BOOKING_AMOUNT', 'SERVICE_AMOUNT'], 'number'],
+            [['TOTAL_COST', 'BOOKING_AMOUNT'], 'number'],
             [['COMMENTS'], 'string'],
             [['SALON_NAME'], 'string', 'max' => 255],
             [['ACCOUNT_REF'], 'string', 'max' => 50],
@@ -63,7 +62,6 @@ class VwMyReservedServices extends \yii\db\ActiveRecord
             'BOOKING_AMOUNT' => 'Booking  Amount',
             'COMMENTS' => 'Comments',
             'RESERVATION_TIME' => 'Reservation  Time',
-            'SERVICE_AMOUNT' => 'Service  Amount',
         ];
     }
 }
