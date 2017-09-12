@@ -14,13 +14,12 @@ use yii\db\Expression;
 
 class NOTIFICATIONS_MODEL extends Notifications
 {
-public function beforeSave($insert)
-{
-    if(parent::beforeSave($insert))
+    public function beforeValidate()
     {
-        $this->LAST_UPDATE = new Expression('NOW');
-        return true;
+        if (parent::beforeValidate()) {
+            $this->LAST_UPDATE = new Expression('NOW');
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 }

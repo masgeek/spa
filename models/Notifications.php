@@ -12,6 +12,7 @@ use Yii;
  * @property int $USER_ID
  * @property string $DEVICE_TOKENS
  * @property string $LAST_UPDATE
+ * @property string $DATE_CREATED
  *
  * @property User $uSER
  */
@@ -31,10 +32,10 @@ class Notifications extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['DEVICE_ID', 'USER_ID', 'DEVICE_TOKENS'], 'required'],
+            [['DEVICE_ID', 'USER_ID', 'DEVICE_TOKENS', 'LAST_UPDATE', 'DATE_CREATED'], 'required'],
             [['USER_ID'], 'integer'],
             [['DEVICE_TOKENS'], 'string'],
-            [['LAST_UPDATE'], 'safe'],
+            [['LAST_UPDATE', 'DATE_CREATED'], 'safe'],
             [['DEVICE_ID'], 'string', 'max' => 50],
             [['DEVICE_ID', 'USER_ID'], 'unique', 'targetAttribute' => ['DEVICE_ID', 'USER_ID']],
             [['USER_ID'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['USER_ID' => 'USER_ID']],
@@ -52,6 +53,7 @@ class Notifications extends \yii\db\ActiveRecord
             'USER_ID' => 'User  ID',
             'DEVICE_TOKENS' => 'Device  Tokens',
             'LAST_UPDATE' => 'Last  Update',
+            'DATE_CREATED' => 'Date  Created',
         ];
     }
 
