@@ -16,9 +16,9 @@ class NOTIFICATIONS_MODEL extends Notifications
     public function beforeValidate()
     {
         if (parent::beforeValidate()) {
-            $this->LAST_UPDATE = new Expression('NOW');
+            $this->LAST_UPDATE = new Expression('NOW()');
             if ($this->isNewRecord) {
-                $this->DATE_CREATED = new Expression('NOW');
+                $this->DATE_CREATED = new Expression('NOW()');
             }
             return true;
         }
