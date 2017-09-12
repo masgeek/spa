@@ -15,42 +15,40 @@ use Yii;
 
 class PUSH_NOTIFICATIONS
 {
-	/**
-	 * @param string $msgTitle
-	 * @param string $msgBody
-	 * @param array  $deviceToken
-	 * @return bool|int
-	 */
-	public function NotifyUser($msgTitle, $msgBody, array $deviceToken)
-	{
-		/* @var $push Client */
-		if ($deviceToken == null) {
-			return false;
-		}
+    /**
+     * @param string $msgTitle
+     * @param string $msgBody
+     * @param array $deviceToken
+     * @return bool|int
+     */
+    public function NotifyUser($msgTitle, $msgBody, array $deviceToken)
+    {
+        $deviceTokens = [];
+        $push = Yii::$app->fcm;
 
-		if (is_array($deviceToken)) {
-			$push = Yii::$app->fcm;
+        $note = $push->createNotification($msgTitle, $msgBody);
+        $note->setIcon('notification_icon_resource_name')
+            ->setColor('#ff4081')
+            ->setBadge(1);
 
-			foreach ($deviceToken as $key => $tokens) {
-				$token = $tokens['DEVICE_TOKENS'];
+        /* @var $push Client */
+        if ($deviceToken == null) {
+            return false;
+        }
 
-			}
-			$note = $push->createNotification($msgTitle, $msgBody);
-			$note->setIcon('notification_icon_resource_name')
-				->setColor('#ff4081')
-				->setBadge(1);
+        $deviceToken = 'ctHXIFy0J7s:APA91bFtaaSUCiN1UhCXX436cDJQz21S7wb7vnL48UDjmxSfQbvaTquIjM0us7CBcqT2QB1R_lLtHTFpVlVmmGLjqKzHjQi_xmyjaD4axOj4jqyblppnwQGtiEw7KsHk0fkyuh-yKv8Y';
+        if (is_array($deviceToken)) {
+            foreach ($deviceToken as $key => $tokens) {
+                $deviceTokens[] = $tokens['DEVICE_TOKENS'];
+            }
+        } else {
+            $deviceTokens = [$deviceToken];
+        }
+        $message = $push->createMessage($deviceTokens);
+        //$message->addRecipient(new Device($token));
+        $message->setNotification($note);
+        $response = $push->send($message);
 
-
-			$message = $push->createMessage();
-			$message->addRecipient(new Device($token));
-			// $message->addRecipient(new Topic('SPA'));
-			$message->setNotification($note);
-			//->setData(['someId' => 111]);
-
-			$response = Yii::$app->fcm->send($message);
-
-			return $response->getStatusCode();
-		}
-		return false;
-	}
+        return $response->getStatusCode();
+    }
 }
