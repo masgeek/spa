@@ -74,7 +74,7 @@ class REPORTS_MODEL extends Reports
         $html .= '<th>Reservation ID</th>';
         $html .= '<th>Customer Name</th>';
         $html .= '<th>Salon Name</th>';
-        $html .= '<th>Service Name</th>';
+        //$html .= '<th>Service Name</th>';
         $html .= '<th>Reservation Date</th>';
         $html .= '<th>Reservation Status</th>';
         $html .= '<th>Total Service Cost</th>';
@@ -90,7 +90,7 @@ class REPORTS_MODEL extends Reports
                 $html .= '<td>' . $obj->reservation_id . '</td>';
                 $html .= '<td>' . $obj->customer . '</td>';
                 $html .= '<td>' . $obj->salon_name . '</td>';
-                $html .= '<td>' . $obj->service_name . '</td>';
+                //$html .= '<td>' . $obj->service_name . '</td>';
                 $html .= '<td>' . $obj->reservation_date . '</td>';
                 $html .= '<td>' . $obj->reservation_status . '</td>';
                 $html .= '<td>' . $obj->total_cost . '</td>';
