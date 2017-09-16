@@ -90,7 +90,6 @@ class REPORTS_MODEL extends Reports
                 $html .= '<td>' . $obj->reservation_id . '</td>';
                 $html .= '<td>' . $obj->customer . '</td>';
                 $html .= '<td>' . $obj->salon_name . '</td>';
-                $html .= '<td>' . $obj->salon_name . '</td>';
                 $html .= '<td>' . $obj->service_name . '</td>';
                 $html .= '<td>' . $obj->reservation_date . '</td>';
                 $html .= '<td>' . $obj->reservation_status . '</td>';
