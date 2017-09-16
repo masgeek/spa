@@ -89,8 +89,8 @@ class ReportController extends ActiveController
     {
         //generate the report file
         $query = ALL_RESERVATIONS::find()
-            //->where(['OWNER_ID' => $user_id])
-            //->andWhere(['between', 'RESERVATION_DATE', $from_date, $to_date])
+            ->where(['OWNER_ID' => $user_id])
+            ->andWhere(['between', 'RESERVATION_DATE', $from_date, $to_date])
             ->orderBy(['SALON_NAME' => SORT_DESC]); //$searchModel->search(\Yii::$app->request->queryParams);
 
         $dataProvider = new ActiveDataProvider([
@@ -125,7 +125,7 @@ class ReportController extends ActiveController
         $dataProvider = new ActiveDataProvider([
             'query' => SERVICE_PAYMENTS::find()
                 ->where(['RESERVATION_ID' => $myReservationsArr])
-                //->andWhere(['PAYMENT_STATUS' => 1])
+                ->andWhere(['PAYMENT_STATUS' => 1])
                 ->andWhere(['between', 'DATE_PAID', $from_date, $to_date])
         ]);
 
