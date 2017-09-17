@@ -202,14 +202,14 @@ class ReservationController extends ActiveController
 
 	/**
 	 * @param int  $id
-	 * @param bool $expired Indicate whether to include expired reservations
+	 * @param bool $showExpired Indicate whether to include expired reservations
 	 * @return ActiveDataProvider
 	 * @throws BadRequestHttpException
 	 */
-	public function actionMyReservations($id, $expired = false)
+	public function actionMyReservations($id, $showExpired = true)
 	{
 
-		$currentDate = $expired ? '1990-01-01' : date('Y-m-d');
+		$currentDate = $showExpired ? '1990-01-01' : date('Y-m-d');
 
 		//get reservations made by the user
 		if (!Yii::$app->request->isGet) {
