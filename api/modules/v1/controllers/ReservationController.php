@@ -199,9 +199,13 @@ class ReservationController extends ActiveController
 		return $message;
 	}
 
-	public function actionMyReservations($id)
+	public function actionMyReservations($id,$filter = false)
 	{
-		$currentDate = date('Y-m-d');
+		if($filter) {
+			$currentDate = date('Y-m-d');
+		}else{
+			$currentDate = '1990-01-01';
+		}
 		//get reservations made by the user
 		if (!Yii::$app->request->isGet) {
 			throw new BadRequestHttpException('Please use GET');
