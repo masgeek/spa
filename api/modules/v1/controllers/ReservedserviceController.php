@@ -46,7 +46,7 @@ class ReservedserviceController extends ActiveController
 		$model->STATUS_ID = 1;  //flag as confirmed
 		$model->COMMENTS = $comments;
 		if (!$model->save() && !$model->validate()) {
-			$model = ['message' => 'Unable to confirm reservation please contact the Adminstrator'];
+			$model = ['message' => 'Unable to confirm reservation please contact the Administrator'];
 		}
 		return $model;
 	}
@@ -67,7 +67,7 @@ class ReservedserviceController extends ActiveController
 		$model->COMMENTS = $comments;
 
 		if (!$model->save() && !$model->validate()) {
-			$model = ['message' => 'Unable to cancel reservation please contact the Adminstrator'];
+			$model = ['message' => 'Unable to cancel reservation please contact the Administrator'];
 		}
 		return $model;
 	}
@@ -85,7 +85,7 @@ class ReservedserviceController extends ActiveController
 		if ($model != null) {
 			$model->STAFF_ID = $staff_id;
 			if (!$model->save() && !$model->validate()) {
-				$model = ['message' => 'Unable to assign staff please contact the Adminstrator'];
+				$model = ['message' => 'Unable to assign staff please contact the Administrator'];
 			}
 		} else {
 			$model = ['message' => 'Reservation Not Found'];
