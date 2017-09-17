@@ -13,6 +13,7 @@ use app\api\modules\v1\models\SALON_MODEL;
 use app\api\notifications\PUSH_NOTIFICATIONS;
 use app\components\CUSTOM_HELPER;
 use app\model_extended\MY_RESERVATIONS_VIEW;
+use phpDocumentor\Reflection\Types\Boolean;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
@@ -199,6 +200,12 @@ class ReservationController extends ActiveController
 		return $message;
 	}
 
+	/**
+	 * @param int     $id
+	 * @param bool $expired Indicate whether to include expired reservations
+	 * @return ActiveDataProvider
+	 * @throws BadRequestHttpException
+	 */
 	public function actionMyReservations($id, $expired = false)
 	{
 
