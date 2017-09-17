@@ -64,6 +64,7 @@ class ReservedserviceController extends ActiveController
 
 		$model = RESERVED_SERVICE_MODEL::findOne($reserved_service_id);
 		$model->STATUS_ID = 2;  //flag as confirmed
+		$model->COMMENTS = $comments;
 
 		if (!$model->save() && !$model->validate()) {
 			$model = ['message' => 'Unable to cancel reservation please contact the Adminstrator'];
