@@ -199,10 +199,10 @@ class ReservationController extends ActiveController
 		return $message;
 	}
 
-	public function actionMyReservations($id, $showExpired = false)
+	public function actionMyReservations($id, $expired = false)
 	{
 
-		$currentDate = $showExpired ? date('Y-m-d') : '1990-01-01';
+		$currentDate = $expired ? date('Y-m-d') : '1990-01-01';
 
 		//get reservations made by the user
 		if (!Yii::$app->request->isGet) {
