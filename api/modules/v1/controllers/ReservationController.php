@@ -219,7 +219,7 @@ class ReservationController extends ActiveController
 		}
 		$query = MY_RESERVATIONS::find()
 			->where(['USER_ID' => $id])
-			->andWhere(['>=', 'RESERVATION_DATE', $currentDate])
+			//->andWhere(['>=', 'RESERVATION_DATE', $currentDate])
 			->orderBy(['RESERVATION_DATE' => SORT_DESC]);
 
 		$provider = new ActiveDataProvider([
