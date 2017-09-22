@@ -210,7 +210,6 @@ class ReservationController extends ActiveController
 	{
 		$showExpiredFlag = $showExpired == 'true' ? true : false;
 
-
 		$currentDate = $showExpiredFlag ? '1990-01-01' : date('Y-m-d');
 
 		//get reservations made by the user
