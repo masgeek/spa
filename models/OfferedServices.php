@@ -13,8 +13,8 @@ use Yii;
  * @property string $SERVICE_COST
  * @property int $STATUS 1 for active, 0 for Inactive
  *
- * @property Services $sERVICE
  * @property Salon $sALON
+ * @property Services $sERVICE
  * @property ReservedServices[] $reservedServices
  */
 class OfferedServices extends \yii\db\ActiveRecord
@@ -36,8 +36,8 @@ class OfferedServices extends \yii\db\ActiveRecord
             [['SERVICE_ID', 'SALON_ID', 'SERVICE_COST'], 'required'],
             [['SERVICE_ID', 'SALON_ID', 'STATUS'], 'integer'],
             [['SERVICE_COST'], 'number'],
-            [['SERVICE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Services::className(), 'targetAttribute' => ['SERVICE_ID' => 'SERVICE_ID']],
             [['SALON_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Salon::className(), 'targetAttribute' => ['SALON_ID' => 'SALON_ID']],
+            [['SERVICE_ID'], 'exist', 'skipOnError' => true, 'targetClass' => Services::className(), 'targetAttribute' => ['SERVICE_ID' => 'SERVICE_ID']],
         ];
     }
 
@@ -58,17 +58,17 @@ class OfferedServices extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSERVICE()
+    public function getSALON()
     {
-        return $this->hasOne(Services::className(), ['SERVICE_ID' => 'SERVICE_ID']);
+        return $this->hasOne(Salon::className(), ['SALON_ID' => 'SALON_ID']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSALON()
+    public function getSERVICE()
     {
-        return $this->hasOne(Salon::className(), ['SALON_ID' => 'SALON_ID']);
+        return $this->hasOne(Services::className(), ['SERVICE_ID' => 'SERVICE_ID']);
     }
 
     /**
