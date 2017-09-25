@@ -24,7 +24,7 @@ class ALL_SALON_PAYMENTS extends MY_RESERVATIONS_VIEW
 			return $query;
 		};
 
-		unset($fields['SERVICES']);
+		//unset($fields['SERVICES']);
 		return $fields;
 	}
 }
