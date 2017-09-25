@@ -9,9 +9,9 @@
 namespace app\api\modules\v1\models;
 
 
-use app\models\Salon;
+use app\model_extended\MY_RESERVATIONS_VIEW;
 
-class ALL_SALON_PAYMENTS extends ALL_RESERVATIONS
+class ALL_SALON_PAYMENTS extends MY_RESERVATIONS_VIEW
 {
 	public function fields()
 	{
