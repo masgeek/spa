@@ -67,7 +67,7 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 				->where(['RESERVATION_ID' => $model->RESERVATION_ID])
 				->all();
 
-			return 1;//$query;
+			return $query;
 		};
 		return $fields;
 	}
