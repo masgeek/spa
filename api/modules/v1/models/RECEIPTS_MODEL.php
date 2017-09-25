@@ -13,5 +13,10 @@ use app\models\VwPaymentReceipts;
 
 class RECEIPTS_MODEL extends VwPaymentReceipts
 {
+	public function fields()
+	{
+		$fields = parent::fields();
 
+		return $fields;
+	}
 }
