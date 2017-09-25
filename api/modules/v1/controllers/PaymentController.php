@@ -11,6 +11,7 @@ namespace app\api\modules\v1\controllers;
 
 
 
+use app\api\modules\v1\models\ALL_SALON_PAYMENTS;
 use app\api\modules\v1\models\PAYMENT_MODEL;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -135,6 +136,18 @@ class PaymentController extends ActiveController
 		$query = PAYMENT_MODEL::find()
 			->where(['RESERVATION_ID' => $id])
 			->orderBy(['DATE_PAID' => SORT_DESC])
+			->all();
+		return $query;
+	}
+
+	public function actionSalonPayments($id){
+		if (!Yii::$app->request->isGet) {
+			throw new BadRequestHttpException('Please use GET');
+		}
+
+		$query = ALL_SALON_PAYMENTS::find()
+			->where(['SALON_ID' => $id])
+			->orderBy(['RESERVATION_DATE' => SORT_DESC])
 			->all();
 		return $query;
 	}

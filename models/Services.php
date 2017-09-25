@@ -10,7 +10,7 @@ use Yii;
  * @property int $SERVICE_ID
  * @property string $SERVICE_NAME
  * @property string $DESCRIPTION
- * @property string $SERVICE_IIMAGE
+ * @property string $SERVICE_IMAGE
  *
  * @property OfferedServices[] $offeredServices
  */
@@ -33,7 +33,7 @@ class Services extends \yii\db\ActiveRecord
             [['SERVICE_NAME'], 'required'],
             [['DESCRIPTION'], 'string'],
             [['SERVICE_NAME'], 'string', 'max' => 255],
-            [['SERVICE_IIMAGE'], 'string', 'max' => 300],
+            [['SERVICE_IMAGE'], 'string', 'max' => 300],
         ];
     }
 
@@ -46,7 +46,7 @@ class Services extends \yii\db\ActiveRecord
             'SERVICE_ID' => 'Service  ID',
             'SERVICE_NAME' => 'Service  Name',
             'DESCRIPTION' => 'Description',
-            'SERVICE_IIMAGE' => 'Service  Iimage',
+            'SERVICE_IMAGE' => 'Service  Image',
         ];
     }
 

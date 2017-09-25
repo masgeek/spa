@@ -23,6 +23,7 @@ use Yii;
  * @property int $SERVICE_ID
  * @property int $RESERVATION_ID
  * @property string $PAYMENT_REF
+ * @property int $SALON_ID
  */
 class VwAllReservations extends \yii\db\ActiveRecord
 {
@@ -42,7 +43,7 @@ class VwAllReservations extends \yii\db\ActiveRecord
         return [
             [['SALON_NAME', 'SERVICE_NAME', 'SERVICE_COST', 'OWNER_ID'], 'required'],
             [['SERVICE_COST', 'BOOKING_AMOUNT', 'TOTAL_COST', 'AMOUNT_PAID', 'BALANCE'], 'number'],
-            [['STATUS_ID', 'OWNER_ID', 'SERVICE_ID', 'RESERVATION_ID'], 'integer'],
+            [['STATUS_ID', 'OWNER_ID', 'SERVICE_ID', 'RESERVATION_ID', 'SALON_ID'], 'integer'],
             [['DATE_PAID', 'RESERVATION_DATE'], 'safe'],
             [['COMMENTS'], 'string'],
             [['SALON_NAME', 'SERVICE_NAME'], 'string', 'max' => 255],
@@ -73,6 +74,7 @@ class VwAllReservations extends \yii\db\ActiveRecord
             'SERVICE_ID' => 'Service  ID',
             'RESERVATION_ID' => 'Reservation  ID',
             'PAYMENT_REF' => 'Payment  Ref',
+            'SALON_ID' => 'Salon  ID',
         ];
     }
 }
