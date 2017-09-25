@@ -47,6 +47,17 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 			return PAYMENT_MODEL::getAmountPaid($model->RESERVATION_ID);
 		};
 
+		$fields['PERCENTAGE_PAID'] = function ($model) {
+			$percentage_paid = 0;
+			$total = (float)$model->TOTAL_COST;
+			$paid = (float)PAYMENT_MODEL::getAmountPaid($model->RESERVATION_ID);
+
+			if ($paid >= ($total / 2)) {
+				$percentage_paid = 50;
+			}
+
+			return $percentage_paid;
+		};
 		$fields['BALANCE'] = function ($model) {
 			return PAYMENT_MODEL::GetBalance($model->RESERVATION_ID);
 		};
@@ -56,7 +67,7 @@ class MY_RESERVATIONS_VIEW extends VwMyReservations
 				->where(['RESERVATION_ID' => $model->RESERVATION_ID])
 				->all();
 
-			return $query;
+			return 1;//$query;
 		};
 		return $fields;
 	}
