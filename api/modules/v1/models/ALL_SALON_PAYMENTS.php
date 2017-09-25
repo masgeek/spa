@@ -21,7 +21,6 @@ class ALL_SALON_PAYMENTS extends MY_RESERVATIONS_VIEW
 			$query = MY_PAYMENTS_MODEL::find()
 				->where(['RESERVATION_ID' => $model->RESERVATION_ID])
 				->all();
-
 			return $query;
 		};
 
